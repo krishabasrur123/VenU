@@ -1,60 +1,41 @@
-<<<<<<< HEAD
-# Welcome to your Expo app 👋
+# VenU
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Find your next event. Volunteer. Connect. An Expo / React Native app for iOS, Android and web.
 
-## Get started
+## Setup
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Needs Node 22 (see `.nvmrc`). No global installs: every tool runs from `node_modules`.
 
 ```bash
-npm run reset-project
+npm ci          # install exactly what package-lock.json says
+npm start       # dev server; press i / a / w for iOS, Android, web
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Scripts
 
-### Other setup steps
+| Command | What it does |
+| --- | --- |
+| `npm start` | Start the Expo dev server |
+| `npm run lint` | ESLint, fails on any warning |
+| `npm run typecheck` | Generate typed routes, then `tsc --noEmit` |
+| `npm run check` | Lint, typecheck and `expo-doctor`; run before opening a PR (CI runs the same) |
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Adding packages
 
-## Learn more
+```bash
+npx expo install <package>   # picks the version that matches our Expo SDK
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Use `npm install` only for packages unrelated to Expo / React Native (e.g. a dev tool).
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Layout
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-=======
-# VenU
->>>>>>> f9cc3920a6767acd4b157f4f929733df5278dd56
+```
+src/app/          routes (Expo Router): every file is a screen
+  (tabs)/         venue, volunteer, profile + floating nav bar
+  sign-in.tsx
+src/components/   shared UI (nav bar, icons)
+src/constants/    design tokens from Figma
+assets/           app icon, splash, favicon
+.kiro/figma/      Figma export the screens were built from
+```
