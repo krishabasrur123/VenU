@@ -24,8 +24,7 @@ export default function SignInScreen() {
 
   function handleContinue() {
     // Skip real auth — go straight into the app
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    router.replace('/(tabs)/venue' as any);
+    router.replace('/venue');
   }
 
   return (

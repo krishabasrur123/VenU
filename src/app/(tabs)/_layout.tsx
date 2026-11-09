@@ -1,12 +1,12 @@
-import { router, Slot, usePathname } from 'expo-router';
+import { Href, router, Slot, usePathname } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { XrNavigationBar, XrTab } from '@/components/xr-navigation-bar';
 
-const TAB_ROUTES: Record<XrTab, string> = {
-  venue:     '/(tabs)/venue',
-  volunteer: '/(tabs)/volunteer',
-  profile:   '/(tabs)/profile',
+const TAB_ROUTES: Record<XrTab, Href> = {
+  venue:     '/venue',
+  volunteer: '/volunteer',
+  profile:   '/profile',
 };
 
 function pathnameToTab(pathname: string): XrTab {
@@ -20,8 +20,7 @@ export default function TabsLayout() {
   const activeTab = pathnameToTab(pathname);
 
   function handleTabPress(tab: XrTab) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    router.replace(TAB_ROUTES[tab] as any);
+    router.replace(TAB_ROUTES[tab]);
   }
 
   return (
