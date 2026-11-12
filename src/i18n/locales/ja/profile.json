@@ -1,0 +1,232 @@
+{
+  "tab": {
+    "title": "プロフィール",
+    "visitor": "来場者",
+    "volunteer": "ボランティア",
+    "verified": "✓ LA28 認証済み",
+    "unverified": "未認証",
+    "sharedVisitor": "サポーターに共有される情報",
+    "sharedVolunteer": "来場者に表示される情報",
+    "account": "アカウント",
+    "support": "サポート",
+    "editProfile": "プロフィールを編集",
+    "notifications": "通知",
+    "privacy": "プライバシーとデータ",
+    "help": "ヘルプとご意見",
+    "terms": "利用規約",
+    "signOutFailed": "ログアウトできませんでした。{{reason}}",
+    "deleteWarning": "プロフィールと写真が完全に削除されます。あとで新しく作成できます。",
+    "deleteFailed": "データをすべて削除できませんでした。{{reason}}",
+    "deleteData": "データを削除"
+  },
+  "edit": {
+    "title": "プロフィールを編集",
+    "subtitle": "変更は次回のサポート依頼から反映されます。",
+    "submit": "変更を保存"
+  },
+  "form": {
+    "aboutYou": "あなたについて",
+    "firstName": "名前（ファーストネーム）",
+    "firstNamePlaceholderVisitor": "例：Rosa",
+    "firstNamePlaceholderVolunteer": "例：Daniel",
+    "firstNameHint": "会う相手にはファーストネームだけが表示されます。",
+    "languagesVisitor": "話せる言語",
+    "languagesVolunteer": "流暢に話せる言語",
+    "accessNeeds": "知っておくべきことはありますか？",
+    "accessNeedsLabel": "アクセシビリティのニーズ",
+    "otherNeedsPlaceholder": "例：介助犬を連れています",
+    "otherNeedsLabel": "その他のアクセシビリティのニーズ",
+    "communication": "どの方法でやりとりしたいですか？",
+    "communicationHint": "サポーターが到着する前に確認します。",
+    "communicationLabel": "コミュニケーション",
+    "helperPref": "希望するサポーター",
+    "gender": "性別",
+    "age": "年齢",
+    "helperGenderLabel": "サポーターの性別",
+    "helperAgeLabel": "サポーターの年齢",
+    "training": "研修",
+    "trainingHint": "LA28 が認証時に確認します。",
+    "yourGender": "あなたの性別",
+    "yourGenderHint": "来場者が女性または男性のサポーターを希望したときだけ使います。表示されません。",
+    "yourAge": "あなたの年齢層",
+    "yourAgeHint": "マッチングのみに使い、表示されません。",
+    "privacyAgree": "VenU が<a>プライバシーポリシー</a>に沿って私の情報を使うことに同意します。",
+    "privacyAgreeLabel": "VenU がプライバシーポリシーに沿って私の情報を使うことに同意します",
+    "fixAbove": "上の回答に修正が必要なものがあります（赤で表示）。"
+  },
+  "validate": {
+    "firstName": "名前を入力してください。",
+    "tooLong": "{{max}} 文字以内で入力してください。",
+    "noLanguage": "言語を1つ以上追加してください。",
+    "mainLanguage": "メインの言語を選んでください。",
+    "otherNote": "必要なことを簡単に教えてください。",
+    "pickOne": "1つ選んでください（または「回答しない」）。",
+    "privacy": "続けるにはプライバシーポリシーに同意してください。"
+  },
+  "options": {
+    "accessNeeds": {
+      "wheelchair": "車いす利用",
+      "hard_of_hearing": "難聴",
+      "low_vision": "弱視",
+      "walking_aid": "歩行補助具",
+      "other": "その他"
+    },
+    "communication": {
+      "speaking": "会話",
+      "text": "文字 / 筆談",
+      "sign_language": "手話"
+    },
+    "helperGender": {
+      "none": "希望なし",
+      "man": "男性",
+      "woman": "女性"
+    },
+    "helperAge": {
+      "any": "年齢不問",
+      "under_40": "40歳未満",
+      "40_plus": "40歳以上"
+    },
+    "training": {
+      "wheelchair": "車いす介助研修",
+      "asl": "ASL",
+      "first_aid": "応急手当",
+      "sighted_guide": "視覚障害者の誘導",
+      "mental_health": "メンタルヘルス応急手当"
+    },
+    "gender": {
+      "woman": "女性",
+      "man": "男性",
+      "nonbinary": "ノンバイナリー",
+      "prefer_not": "回答しない"
+    },
+    "ageBand": {
+      "under_40": "40歳未満",
+      "40_plus": "40歳以上",
+      "prefer_not": "回答しない"
+    }
+  },
+  "summary": {
+    "speaks": "話せる言語：{{languages}}",
+    "listSeparator": "、",
+    "otherNeeds": "その他のニーズ（メモ参照）",
+    "prefers": {
+      "speaking": "会話を希望",
+      "text": "文字 / 筆談を希望",
+      "sign_language": "手話を希望"
+    }
+  },
+  "languageNames": {
+    "en": "英語",
+    "es": "スペイン語",
+    "zh": "中国語",
+    "ko": "韓国語",
+    "tl": "タガログ語",
+    "vi": "ベトナム語",
+    "hy": "アルメニア語",
+    "fa": "ペルシャ語",
+    "ja": "日本語",
+    "ru": "ロシア語",
+    "ar": "アラビア語",
+    "fr": "フランス語",
+    "pt": "ポルトガル語",
+    "de": "ドイツ語",
+    "it": "イタリア語",
+    "hi": "ヒンディー語",
+    "pa": "パンジャブ語",
+    "th": "タイ語",
+    "km": "クメール語",
+    "he": "ヘブライ語",
+    "ase": "アメリカ手話"
+  },
+  "privacy": {
+    "title": "プライバシー",
+    "summary": "適切なサポーターとおつなぎするのに必要な情報だけをお聞きします。いつでも変更・削除できます。",
+    "englishNotice": "このポリシーは英語で表示されます。",
+    "version": "バージョン {{version}}。チーム確認用の草案です。",
+    "sections": {
+      "collect": "収集する情報",
+      "why": "収集する理由",
+      "who": "閲覧できる人",
+      "where": "保存場所",
+      "keep": "保存期間",
+      "choices": "あなたの選択"
+    }
+  },
+  "terms": {
+    "title": "利用規約",
+    "subtitle": "VenU を使うときのルールの要約です。",
+    "englishNotice": "この規約は英語で表示されます。",
+    "privacyLink": "情報の使い方は<a>プライバシーポリシー</a>をご覧ください。",
+    "version": "バージョン {{version}}。チーム確認用の草案です。",
+    "sections": {
+      "what": "VenU とは",
+      "emergencies": "緊急時には使えません",
+      "kind": "親切で誠実に",
+      "remove": "削除できるもの",
+      "guarantees": "保証しないこと"
+    }
+  },
+  "help": {
+    "title": "ヘルプとご意見",
+    "subtitle": "よくある質問の答えと、改善してほしい点を伝える窓口です。",
+    "commonQuestions": "よくある質問",
+    "faq": {
+      "matching": {
+        "q": "マッチングはどう行われますか？",
+        "a": "サポートを依頼すると、会場内の近くにいて、あなたの言語を話し、必要な研修を受けたボランティアを探します。例：スペイン語を話す、車いす介助研修を受けたボランティア。"
+      },
+      "volunteers": {
+        "q": "ボランティアは何を手伝えますか？",
+        "a": "座席・ゲート・トイレ・エレベーター探し、会場内の移動、通訳です。医療行為はできません。"
+      },
+      "emergency": {
+        "q": "緊急のときは？",
+        "a": "911 に電話するか、近くの会場スタッフに伝えてください。VenU のボランティアは救急隊員ではありません。"
+      },
+      "languages": {
+        "q": "どの言語に対応していますか？",
+        "a": "ASL を含む 21 言語から選べます。「プロフィールを編集」で話せる言語をすべて追加すると、より多くのサポーターが見つかります。"
+      },
+      "privacy": {
+        "q": "私の情報は誰が見ますか？",
+        "a": "サポート中の相手だけが、サポートの間だけ見られます。対象はファーストネーム、写真、言語、共有を選んだニーズです。詳しくは「プライバシーとデータ」をご覧ください。"
+      },
+      "report": {
+        "q": "設備の問題はどう報告しますか？",
+        "a": "「会場」タブで設備（例：エレベーターやトイレ）をタップし、「レポートを追加」を選びます。その設備を開いた全員に表示されます。"
+      }
+    },
+    "sendFeedback": "ご意見を送る",
+    "feedbackHint": "わかりにくい、壊れている、足りないところはありますか？教えてください。",
+    "thanksTitle": "ありがとうございます！",
+    "thanksBody": "いただいたご意見はすべて読み、VenU の改善に役立てます。",
+    "sendMore": "さらにご意見を送る",
+    "placeholder": "例：日差しの下で地図が見づらかった",
+    "feedbackLabel": "ご意見",
+    "send": "ご意見を送る",
+    "empty": "まず何か書いてください。"
+  },
+  "notifications": {
+    "title": "通知",
+    "subtitle": "VenU から受け取る通知を選びます。",
+    "note": "VenU の通知が設定されると、お知らせが届くようになります。",
+    "options": {
+      "volunteer": {
+        "label": "ボランティアの状況",
+        "hint": "例：Daniel が承諾し、向かっています"
+      },
+      "chat": {
+        "label": "チャットのメッセージ",
+        "hint": "サポーターや来場者からの新着メッセージ"
+      },
+      "venue": {
+        "label": "会場のお知らせ",
+        "hint": "例：SoFi Stadium のゲート C が閉鎖中"
+      },
+      "reports": {
+        "label": "レポートへの返信",
+        "hint": "スタッフが設備レポートに返信したとき"
+      }
+    }
+  }
+}

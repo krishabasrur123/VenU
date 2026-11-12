@@ -1,0 +1,5 @@
+# Frame 2105 (184:18541)
+FRAME "Frame 2105" 200x81 @0,0 auto:col gap=10 pad=0/0/0/0 align=/
+  FRAME "Frame 2104" 200x81 @0,0 auto:col gap=15 pad=0/0/0/0 align=/CENTER
+    TEXT "OR sign up using" 200x16 @0,0 font=Alexandria 400 13/16 ls=0 align=CENTER color=#868683 text="OR sign up using "
+    GROUP "Group 35" 200x50 @0,31 [ICON svg/group-35-265b5a.svg]

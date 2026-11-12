@@ -1,0 +1,6 @@
+# msft_TextInput (181:18344)
+COMPONENT_SET "msft_TextInput" 440x150 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 400x45 @20,20 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10
+    TEXT "Enter name" 368x15 @36,35 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter name"
+  COMPONENT "Property 1=filled in name" 400x45 @20,85 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10
+    TEXT "Alina Wang" 368x15 @36,100 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#333333 text="Alina Wang"

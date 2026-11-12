@@ -1,0 +1,10 @@
+# Notification (276:28618)
+INSTANCE "Notification" 300x125 @0,0 auto:row gap=12 pad=16/16/16/16 align=/CENTER fill=#ffffff stroke=#757575/1 r=10 props={"Icon":"276:28451","Has Button":true,"Dismissible":true,"Has Icon":false,"Title":"Report Submitted","Body":"Thank you for submitting a facility report.","Title2":{"guid":{"sessionID":276,"localID":28646}},"Variant":"Message"}
+  SLOT "Title2" 268x93 @16,16 auto:row gap=12 pad=0/0/0/0 align=/
+    FRAME "Stack" 268x93 @16,16 auto:col gap=16 pad=0/0/0/0 align=/
+      FRAME "Content" 268x48 @16,16 auto:col gap=4 pad=0/0/0/0 align=/
+        TEXT "Report Submitted" 268x28 @16,16 font=Alexandria 400 23/28 ls=0 align=LEFT color=#1e1e1e text="Report Submitted"
+        TEXT "Thank you for submitting a facility report." 268x16 @16,48 font=Alexandria 400 13/16 ls=0 align=LEFT color=#1e1e1e text="Thank you for submitting a facility report."
+      INSTANCE "Button" 128x29 @16,80 auto:row gap=8 pad=8/8/8/8 align=CENTER/CENTER fill=#2c2c2c stroke=#2c2c2c/1 r=8 props={"Icon End":"169:17105","Has Icon Start":false,"Has Icon End":false,"Icon Start":"169:17107","Label":"Submit another report","Variant":"Primary","State":"Default","Size":"Small"}
+        TEXT "Button" 112x13 @24,88 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#f5f5f5 text="Submit another report"
+    INSTANCE "Icon Button" 36x36 @256,8 auto:row gap=0 pad=8/8/8/8 align=CENTER/CENTER r=32 props={"Icon":"169:17105","Variant":"Subtle","State":"Default","Size":"Small"} [ICON svg/icon-button-c1cfb2.svg]

@@ -1,0 +1,101 @@
+{
+  "tabs": {
+    "volunteer": "Boluntaryo",
+    "venue": "Lugar",
+    "profile": "Profile"
+  },
+  "actions": {
+    "save": "I-save",
+    "cancel": "Kanselahin",
+    "continue": "Magpatuloy",
+    "back": "Bumalik",
+    "close": "Isara",
+    "done": "Tapos na",
+    "edit": "I-edit",
+    "delete": "Burahin",
+    "send": "Ipadala",
+    "tryAgain": "Subukan muli",
+    "signIn": "Mag-sign in",
+    "signOut": "Mag-sign out",
+    "ok": "OK"
+  },
+  "status": {
+    "loading": "Naglo-load…",
+    "comingSoon": "Malapit na",
+    "optional": "Opsyonal"
+  },
+  "field": {
+    "showPassword": "Ipakita ang password",
+    "hidePassword": "Itago ang password"
+  },
+  "errors": {
+    "offline": "Hindi maabot ang VenU. Tingnan ang iyong koneksyon at subukan muli.",
+    "wrongLogin": "Mali ang email o password.",
+    "confirmEmail": "Kumpirmahin muna ang iyong email. Hanapin ang link sa iyong inbox.",
+    "alreadyRegistered": "May account na ang email na iyan. Subukang mag-sign in.",
+    "rateLimit": "Napakaraming pagsubok. Maghintay ng isang minuto at subukan muli.",
+    "sessionExpired": "Nag-expire ang iyong session. Mag-sign in muli.",
+    "cantSave": "Hindi ma-save ng VenU ang pagbabagong iyan. Kung patuloy itong mangyari, mag-sign out at mag-sign in muli.",
+    "photoTooBig": "Lampas sa {{size}} MB ang larawang iyan. Pumili ng mas maliit.",
+    "photoWrongType": "Gumamit ng larawang JPG, PNG, WebP o HEIC.",
+    "generic": "May nangyaring mali. Subukan muli."
+  },
+  "direction": {
+    "restartTitle": "I-restart para matapos",
+    "restartBody": "Kailangang i-restart ang VenU para palitan ang layout sa kanan-pakaliwa o kaliwa-pakanan.",
+    "restartNow": "I-restart ngayon",
+    "later": "Mamaya",
+    "ok": "OK"
+  },
+  "count": {
+    "people_one": "{{count}} tao",
+    "people_other": "{{count}} tao"
+  },
+  "media": {
+    "addPicture": "Magdagdag ng larawan",
+    "changePicture": "Palitan ang larawan",
+    "holdToSpeak": "Pindutin at magsalita"
+  },
+  "form": {
+    "optionalTitle": "{{title}} <muted>(opsyonal)</muted>",
+    "step": "Hakbang {{step}} sa {{total}}"
+  },
+  "nav": {
+    "backTo": "Bumalik sa {{label}}"
+  },
+  "chip": {
+    "remove": "Alisin ang {{label}}"
+  },
+  "photo": {
+    "add": "Magdagdag ng larawan",
+    "change": "Palitan ang larawan",
+    "take": "Kumuha ng larawan",
+    "remove": "Alisin",
+    "hint": "Para madali kang makita ng tutulong sa iyo. Opsyonal.",
+    "cameraOff": "Naka-off ang access sa camera. I-on ito sa Settings.",
+    "libraryOff": "Naka-off ang access sa mga larawan. I-on ito sa Settings.",
+    "labelNamed": "Larawan sa profile ni {{name}}",
+    "labelYours": "Ang iyong larawan sa profile",
+    "labelNone": "Walang larawan sa profile"
+  },
+  "language": {
+    "primary": "Pangunahing wika",
+    "secondary": "Pangalawang wika",
+    "another": "Iba pang wika",
+    "add": "Magdagdag ng iba pang wika",
+    "search": "Maghanap ng wika",
+    "fieldLabel": "Maghanap ng wika",
+    "searchFor": "Maghanap ng wika para sa {{field}}",
+    "examples": "hal. Tagalog, Español, ASL",
+    "searchExamples": "Maghanap, hal. Tagalog, Español, ASL",
+    "field": "{{field}}: {{language}}",
+    "fieldEmpty": "{{field}}: wala",
+    "openHint": "Binubuksan ang paghahanap ng wika",
+    "choose": "Pumili ng wika",
+    "closeSearch": "Isara ang paghahanap ng wika",
+    "remove": "Alisin ang {{language}}",
+    "removeField": "Alisin ang field na ito",
+    "noMatch": "Walang tugma. Subukan ang pangalan sa English.",
+    "addTitle": "Magdagdag ng wika"
+  }
+}

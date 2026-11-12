@@ -1,0 +1,140 @@
+# Stadium facilities (131:12137)
+FRAME "Stadium facilities" 440x956 @0,0 fill=#ffffff
+  INSTANCE "XR/XR Navigation bar" 352x60 @44,875 auto:row gap=0 pad=0/8/0/8 align=/CENTER fill=#f5f5f5 r=80 props={"Elevation":"Surface container","Configuration":"Icon & label","Segments":"3"}
+    INSTANCE "Nav item 01" 112x80 @52,865 auto:col gap=3 pad=12/0/16/0 align=CENTER/CENTER props={"Show focus indicator":false,"Label text":"Volunteer","Icon":"91:743","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+      FRAME "Icon container" 64x32 @76,879 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON (not exported)]
+      TEXT "Label" 49x13 @84,914 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#49454f text="Volunteer"
+    INSTANCE "Nav item 02" 112x77 @164,867 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Label text":"Venue","Show focus indicator":false,"Icon":"91:740","Selected":"True","State":"Enabled","Badge":"None","Show label text":"True"}
+      FRAME "Icon container" 64x32 @188,879 fill=#dfebfd r=100 drop_shadow(0,2 blur=5 #00000040) [ICON (not exported)]
+      TEXT "Label" 35x14 @203,914 font=Albert Sans 700 12/14 ls=0 align=CENTER color=#1d1b20 text="Venue"
+    INSTANCE "Nav item 03" 112x76 @276,867 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Show focus indicator":false,"Label text":"Profile","Icon":"91:599","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+      FRAME "Icon container" 64x32 @300,879 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-1073a8.svg]
+      TEXT "Label" 32x13 @316,914 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#49454f text="Profile"
+  INSTANCE "Stadium Map" 440x711 @0,197
+    RECTANGLE "Stadium Map" 440x711 @0,197 fill=image(ece298d0) r=10
+  INSTANCE "Facility Search" 440x755 @0,576 auto:col gap=15 pad=36/19/9/19 align=/
+    FRAME "Frame 83" 440x755 @0,576 auto:col gap=11.129032135009766 pad=14/41.17742156982422/6.677419662475586/41.17742156982422 align=/CENTER fill=#ffffff r=20/20/0/0 drop_shadow(0,-1 blur=12.600000381469727 #00000040)
+      RECTANGLE "Rectangle 11" 102x4 @169,590 fill=#b9b9b9 r=15
+    FRAME "Frame 144" 391x28 @19,612 auto:col gap=16 pad=0/0/0/0 align=/CENTER
+      FRAME "Frame 2205" 391x28 @19,612 auto:col gap=6 pad=0/0/0/0 align=/
+        FRAME "friends + close" 391x28 @19,612 auto:row gap=301 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+          TEXT "Facilities Near You" 210x28 @19,612 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facilities Near You"
+          GROUP "close" 24x24 @386,614
+            RECTANGLE "Bounding box" 24x24 @386,614 fill=#d9d9d9
+    INSTANCE "Search Field" 400x24 @19,655 auto:row gap=0 pad=0/0/0/0 align=/
+      INSTANCE "Search Field" 400x24 @19,655 auto:row gap=2 pad=0/4/0/8 align=/CENTER props={"Value":"Search","Text":"False","State":"Idle"}
+        INSTANCE "BG" 400x24 @19,655 r=6 props={"State":"Idle","Context":"Content Area"}
+          FRAME "Border" 400x24 @19,655 fill=#ffffff r=1000 drop_shadow(0,0 blur=0 #00000014)
+          FRAME "Fill" 400x24 @19,655 fill=#ffffff r=1000
+        INSTANCE "Magnifying Glass" 16x15 @27,660
+          TEXT "􀊫" 16x15 @27,660 font=SF Pro Rounded 500 13/15 ls=0 align=CENTER color=#242222 text="􀊫"
+        TEXT "Search" 352x16 @45,659 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="Search"
+        INSTANCE "Clear" 16x15 @399,660 props={"State":"Idle"} [ICON (not exported)]
+    INSTANCE "Frame 2209" 400x57 @19,694 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,694 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,701 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,727 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,705 auto:row gap=0 pad=2/5/2/5 align=/ [ICON (not exported)]
+      INSTANCE "Group 2" 35x35 @367,705 [ICON (not exported)]
+    INSTANCE "Frame 2210" 400x57 @19,766 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,766 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,773 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,799 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,777 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,777 [ICON svg/group-2-af556f.svg]
+    INSTANCE "Frame 2211" 400x57 @19,838 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,838 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,845 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,871 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,849 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,849 [ICON svg/group-2-af556f.svg]
+    INSTANCE "Frame 2212" 400x57 @19,910 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,910 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,917 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,943 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,921 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,921 [ICON svg/group-2-af556f.svg]
+    INSTANCE "Frame 2213" 400x57 @19,982 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,982 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,989 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,1015 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,993 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,993 [ICON svg/group-2-af556f.svg]
+    INSTANCE "Frame 2214" 400x57 @19,1054 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,1054 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,1061 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,1087 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,1065 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,1065 [ICON svg/group-2-af556f.svg]
+    INSTANCE "Frame 2215" 400x57 @19,1126 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,1126 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,1133 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,1159 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,1137 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,1137 [ICON svg/group-2-af556f.svg]
+    INSTANCE "Frame 2216" 400x57 @19,1198 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,1198 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,1205 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,1231 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,1209 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,1209 [ICON svg/group-2-af556f.svg]
+    INSTANCE "Frame 2217" 400x57 @19,1270 props={"icon":"109:1878","description":"description","Facility":"Facility","Property 1":"Default"}
+      RECTANGLE "Rectangle 12" 400x57 @19,1270 fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,2 blur=4 #00000040)
+      TEXT "Facility" 82x28 @81,1277 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="Facility"
+      TEXT "description" 57x13 @87,1303 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="description"
+      INSTANCE "iconixto/solid/door" 33x35 @35,1281 auto:row gap=0 pad=2/5/2/5 align=/ [ICON svg/iconixto-solid-door-1eccc0.svg]
+      INSTANCE "Group 2" 35x35 @367,1281 [ICON svg/group-2-af556f.svg]
+  INSTANCE "XR/XR Navigation bar" 352x64 @44,875 auto:row gap=0 pad=2/0/2/0 align=/ drop_shadow(0,4 blur=4 #00000040)
+    INSTANCE "XR/XR Navigation bar" 352x60 @44,877 auto:row gap=0 pad=0/8/0/8 align=/CENTER fill=#ffffff r=80 props={"Elevation":"Surface container","Configuration":"Icon & label","Segments":"3"}
+      INSTANCE "Nav item 01" 112x80 @52,867 auto:col gap=3 pad=12/0/16/0 align=CENTER/CENTER props={"Show focus indicator":false,"Label text":"Volunteer","Icon":"91:743","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+        FRAME "Icon container" 64x32 @76,881 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-1073a8.svg]
+        TEXT "Label" 49x13 @84,916 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#242222 text="Volunteer"
+      INSTANCE "Nav item 02" 112x77 @164,869 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Label text":"Venue","Show focus indicator":false,"Icon":"91:740","Selected":"True","State":"Enabled","Badge":"None","Show label text":"True"}
+        FRAME "Icon container" 64x32 @188,881 fill=#dfebfd r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-5979c0.svg]
+        TEXT "Label" 35x14 @203,916 font=Albert Sans 700 12/14 ls=0 align=CENTER color=#242222 text="Venue"
+      INSTANCE "Nav item 03" 112x76 @276,869 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Show focus indicator":false,"Label text":"Profile","Icon":"91:599","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+        FRAME "Icon container" 64x32 @300,881 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-1073a8.svg]
+        TEXT "Label" 32x13 @316,916 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#242222 text="Profile"
+  INSTANCE "Frame 15" 440x149 @0,48
+    FRAME "Frame 2208" 440x149 @0,48 auto:col gap=10 pad=20/20/0/20 align=/ fill=#ffffff
+      GROUP "Group 4" 400x115 @20,68
+        INSTANCE "Chip groups" 394x48 @26,135 auto:row gap=8 pad=8/0/8/0 align=/CENTER
+          INSTANCE "Chip 01" 42x32 @26,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"All","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 42x28 @26,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 18x16 @38,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="All"
+          INSTANCE "Chip 02" 61x32 @76,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Gates","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 61x28 @76,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 37x16 @88,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Gates"
+          INSTANCE "Chip 03" 94x32 @145,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Restrooms","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 94x28 @145,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 70x16 @157,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Restrooms"
+          INSTANCE "Chip 04" 114x32 @247,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Food & Drinks","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 114x28 @247,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 90x16 @259,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Food & Drinks"
+          INSTANCE "Chip 05" 108x32 @369,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Lost & Found","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 108x28 @369,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 84x16 @381,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Lost & Found"
+          INSTANCE "Chip 06" 85x32 @485,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Info Desk","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 85x28 @485,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 61x16 @497,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Info Desk"
+          INSTANCE "Chip 07" 125x32 @578,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Water Fountain","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 125x28 @578,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 101x16 @590,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Water Fountain"
+          INSTANCE "Chip 08" 74x32 @711,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Seating","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 74x28 @711,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 50x16 @723,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Seating"
+          INSTANCE "Chip 09" 59x32 @793,143 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Label","Configuration":"Label only","State":"Enabled","Selected":"True","Show closing icon":"false"}
+            FRAME "state-layer" 59x28 @793,145 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+              TEXT "label-text" 35x16 @805,151 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Label"
+        TEXT "XXX Stadium" 153x28 @67,68 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="XXX Stadium"
+        TEXT "Address" 42x13 @68,106 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="Address"
+        INSTANCE "Arrow left" 40x40 @20,74 [ICON (not exported)]
+  INSTANCE "Bars/Status Bars/iPhone/Light" 390x48 @25,0 fill=#ffffff
+    GROUP "Battery" 24x11 @372,19 r=0/0/0/0
+      RECTANGLE "Border" 22x11 @372,19 stroke=#000000/1 r=2.6666667461395264 opacity=0.3499999940395355
+      VECTOR "Cap" 1x4 @395,23 fill=#000000 opacity=0.4000000059604645 [ICON (not exported)]
+      RECTANGLE "Capacity" 18x7 @374,21 fill=#000000 r=1.3333333730697632
+    BOOLEAN_OPERATION "Wifi" 15x11 @350,20 fill=#000000 [ICON (not exported)]
+    BOOLEAN_OPERATION "Cellular Connection" 17x11 @327,20 fill=#000000 [ICON (not exported)]
+    INSTANCE "Time Style" 54x21 @46,12
+      TEXT "Time" 54x18 @46,15 font=SF Pro 590 15/18 ls=0 align=CENTER color=#000000 text="9:41"

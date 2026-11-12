@@ -1,0 +1,221 @@
+{
+  "search": {
+    "placeholder": "Maghanap",
+    "clear": "I-clear ang paghahanap"
+  },
+  "back": {
+    "venues": "Bumalik sa mga lugar",
+    "facilities": "Bumalik sa mga pasilidad",
+    "facility": "Bumalik sa pasilidad"
+  },
+  "choose": {
+    "title": "Piliin ang Iyong Lugar",
+    "subtitle": "Piliin kung saan mo gustong makita ang mapa at mga pasilidad",
+    "searchLabel": "Maghanap ng lugar",
+    "languageLabel": "Wika ng app: {{language}}",
+    "languageHint": "Binabago ang wika ng buong app",
+    "languageTitle": "Wika ng app",
+    "languageConsent": "Suriin muna ang na-update na patakaran sa privacy sa Profile, saka palitan ang wika.",
+    "assistTitle": "Kailangan ng Tulong?",
+    "assistBody": "Kumonekta sa isang boluntaryo",
+    "assistLabel": "Kailangan ng tulong? Kumonekta sa isang boluntaryo",
+    "empty": "Walang lugar na tugma sa “{{query}}”. Subukan ang isang lungsod, gaya ng Inglewood.",
+    "cardHint": "Binubuksan ang mapa at mga pasilidad"
+  },
+  "events": {
+    "opening_ceremony": "Seremonya ng Pagbubukas",
+    "swimming": "Paglangoy",
+    "athletics": "Athletics",
+    "football": "American football",
+    "gymnastics": "Gymnastics",
+    "basketball": "Basketball"
+  },
+  "category": {
+    "all": "Lahat",
+    "groupLabel": "Uri ng pasilidad",
+    "gate": "Mga Gate",
+    "restroom": "Mga CR",
+    "food": "Pagkain at Inumin",
+    "first_aid": "First Aid",
+    "lost_found": "Lost & Found",
+    "info": "Info Desk",
+    "accessible": "Accessibility",
+    "parking": "Paradahan"
+  },
+  "emptyMatch": {
+    "all": "Walang pasilidad na tugma sa “{{query}}”",
+    "gate": "Walang gate na tugma sa “{{query}}”",
+    "restroom": "Walang CR na tugma sa “{{query}}”",
+    "food": "Walang tindahan ng pagkain o inumin na tugma sa “{{query}}”",
+    "first_aid": "Walang first aid station na tugma sa “{{query}}”",
+    "lost_found": "Walang lost & found desk na tugma sa “{{query}}”",
+    "info": "Walang info desk na tugma sa “{{query}}”",
+    "accessible": "Walang accessible na pasilidad na tugma sa “{{query}}”",
+    "parking": "Walang paradahan na tugma sa “{{query}}”"
+  },
+  "emptyNone": {
+    "all": "Wala pang pasilidad sa {{venue}}",
+    "gate": "Wala pang gate sa {{venue}}",
+    "restroom": "Wala pang CR sa {{venue}}",
+    "food": "Wala pang tindahan ng pagkain o inumin sa {{venue}}",
+    "first_aid": "Wala pang first aid station sa {{venue}}",
+    "lost_found": "Wala pang lost & found desk sa {{venue}}",
+    "info": "Wala pang info desk sa {{venue}}",
+    "accessible": "Wala pang accessible na pasilidad sa {{venue}}",
+    "parking": "Wala pang paradahan sa {{venue}}"
+  },
+  "list": {
+    "title": "Mga Pasilidad na Malapit sa Iyo",
+    "searchLabel": "Maghanap ng pasilidad",
+    "showing": "Ipinapakita: {{category}}",
+    "showAll": "Ipakita lahat",
+    "showAllHint": "Ipinapakita ulit ang lahat ng pasilidad"
+  },
+  "sheet": {
+    "down": "Panel ng pasilidad, nakababa",
+    "mid": "Panel ng pasilidad, kalahating bukas",
+    "up": "Panel ng pasilidad, nakataas",
+    "hint": "I-tap para baguhin ang laki, o i-drag pataas at pababa"
+  },
+  "map": {
+    "pin": "{{name}} sa mapa",
+    "north": "H"
+  },
+  "walk_one": "{{count}} minutong lakad",
+  "walk_other": "{{count}} minutong lakad",
+  "wait": {
+    "none": "Walang pila",
+    "short": "Maikling pila",
+    "long": "Mahabang pila"
+  },
+  "row": {
+    "label": "{{name}}, {{meta}}",
+    "labelAccessible": "{{name}}, {{meta}}, accessible"
+  },
+  "tags": {
+    "label": "Mga tag:",
+    "accessible": "Accessible",
+    "stairs": "May hagdan",
+    "busy_before_events": "Siksikan bago ang event",
+    "ramp": "Rampa",
+    "bag_check": "Inspeksyon ng bag",
+    "rideshare": "Rideshare",
+    "escalators": "Escalator",
+    "sensory_kits": "Sensory kit",
+    "quiet_room": "Tahimik na kuwarto",
+    "family_room": "Family room",
+    "long_lines_halftime": "Mahabang pila sa halftime",
+    "wheelchair_loans": "Pahiram ng wheelchair",
+    "permit_needed": "Kailangan ng permit"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "Hilagang pasukan, pinakamalapit sa hintuan ng Metro shuttle.",
+      "location": "Hilagang bahagi, sa hintuan ng shuttle"
+    },
+    "gate-2": {
+      "description": "Silangang pasukan na may rampa, katabi ng accessible na paradahan sa Lot C.",
+      "location": "Silangang bahagi, malapit sa Lot C"
+    },
+    "gate-3": {
+      "description": "Timog na pasukan para sa pagbaba at pagsakay sa rideshare.",
+      "location": "Timog na bahagi, sa rideshare zone"
+    },
+    "gate-4": {
+      "description": "Kanlurang pasukan para sa may tiket sa mga seksyon 200 hanggang 240.",
+      "location": "Kanlurang bahagi, malapit sa pangunahing plaza"
+    },
+    "info-desk": {
+      "description": "Mga tanong, nawawalang tiket, sensory kit at ear defender.",
+      "location": "Concourse, seksyon 105"
+    },
+    "first-aid": {
+      "description": "May nurse at EMT mula pagbukas ng gate hanggang makaalis ang lahat.",
+      "location": "Concourse, seksyon 112"
+    },
+    "restroom-east": {
+      "description": "CR ng lalaki, babae, at all-gender na family room na may changing table.",
+      "location": "Concourse, seksyon 118"
+    },
+    "food-south": {
+      "description": "Tacos, burrito at agua fresca. May vegetarian na pagpipilian.",
+      "location": "Concourse, seksyon 124"
+    },
+    "lost-found": {
+      "description": "Mag-iwan o kumuha ng nawawalang gamit. Dito rin dinadala ang mga batang nawawala.",
+      "location": "Concourse, seksyon 131"
+    },
+    "accessible-seating": {
+      "description": "Pahiram ng wheelchair, upuan para sa kasama, at assistive listening device.",
+      "location": "Concourse, seksyon 136"
+    },
+    "food-west": {
+      "description": "Burger, fries at soft drinks. May halal na patty.",
+      "location": "Concourse, seksyon 140"
+    },
+    "restroom-west": {
+      "description": "CR ng lalaki at babae. Nasa kaliwa ang accessible na cubicle.",
+      "location": "Concourse, seksyon 145"
+    },
+    "parking-c": {
+      "description": "Accessible na paradahan na may maikli at patag na daan papuntang Gate 2.",
+      "location": "Timog-silangang lote"
+    }
+  },
+  "facility": {
+    "notFound": "Hindi nakita ang pasilidad",
+    "wheelchair": "Accessible sa wheelchair",
+    "directions": "Direksyon",
+    "directionsSoon": "Malapit na ang sunud-sunod na direksyon. {{name}}: {{location}}.",
+    "reports": "Mga Ulat",
+    "results_one": "{{count}} resulta",
+    "results_other": "{{count}} resulta",
+    "noReports": "Wala pang ulat. Ikaw na ang unang magbahagi ng nakita mo.",
+    "addReport": "Magdagdag ng Ulat"
+  },
+  "submitted": {
+    "title": "Naipadala ang Ulat",
+    "body": "Salamat sa pagpapadala ng ulat tungkol sa pasilidad.",
+    "again": "Magpadala ng isa pang ulat"
+  },
+  "card": {
+    "label": "Ulat: {{title}}, ni {{author}}",
+    "hint": "Binubuksan ang buong ulat",
+    "new": "Bago",
+    "by": "Ni {{author}}",
+    "seeMore": "tingnan pa →"
+  },
+  "topic": {
+    "accessibility": "Accessibility",
+    "directions": "Direksyon",
+    "facility_condition": "Kondisyon ng pasilidad",
+    "security": "Seguridad",
+    "crowds": "Dami ng tao",
+    "other": "Iba pa"
+  },
+  "report": {
+    "notFound": "Hindi nakita ang ulat",
+    "kind": "Ulat",
+    "submitted": "Ipinadala noong {{date}}",
+    "noBody": "Walang idinagdag na detalye."
+  },
+  "form": {
+    "title": "Magdagdag ng ulat",
+    "subtitleAt": "Ibahagi ang nakita mo sa {{facility}} para matulungan ang susunod na bisita",
+    "subtitle": "Ibahagi ang nakita mo para matulungan ang susunod na bisita",
+    "titleLabel": "Pamagat ng ulat",
+    "titlePlaceholder": "Ano ang dapat malaman ng mga tao?",
+    "bodyLabel": "Ang iyong ulat",
+    "bodyPlaceholder": "Ilagay ang teksto",
+    "bodyHint": "Opsyonal. Ano ang nangyari, saan, at kailan?",
+    "pictureSoon": "Malapit nang makapagdagdag ng larawan.",
+    "speakSoon": "Malapit na ang ulat gamit ang boses. I-type muna ang iyong ulat.",
+    "topic": "Paksa",
+    "submit": "Ipadala ang Ulat",
+    "sendFailed": "Hindi naipadala ang ulat. Tingnan ang koneksyon at subukan ulit.",
+    "titleRequired": "Maglagay ng pamagat, hal. “May bitak ang rampa sa Gate 2”.",
+    "titleTooLong": "Dapat wala pang {{max}} character ang pamagat.",
+    "topicRequired": "Piliin ang pinakaangkop na paksa.",
+    "bodyTooLong": "Dapat wala pang {{max}} character ang ulat."
+  }
+}

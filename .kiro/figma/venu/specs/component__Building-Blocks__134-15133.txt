@@ -1,0 +1,10 @@
+# Building Blocks (134:15133)
+COMPONENT_SET "Building Blocks" 242x248 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Button group, Property 2=Connected segments, Property 3=Medium" 202x60 @20,20 auto:col gap=2 pad=0/0/0/0 align=CENTER/CENTER fill=#242222 r=8
+    INSTANCE "State-layer" 202x60 @20,20 auto:row gap=8 pad=16/24/16/24 align=CENTER/CENTER
+      INSTANCE "Icon" 24x24 @47,38 [ICON svg/icon-28465a.svg]
+      TEXT "Directions" 117x28 @79,36 font=Alexandria 400 23/28 ls=0 align=LEFT color=#ffffff text="Directions"
+  COMPONENT "Property 1=Button group, Property 2=Connected segments, Property 3=Clicked" 202x60 @20,172 auto:col gap=2 pad=0/0/0/0 align=CENTER/CENTER fill=#242222 r=8 drop_shadow(0,4 blur=4 #00000040)
+    INSTANCE "State-layer" 202x60 @20,172 auto:row gap=8 pad=16/24/16/24 align=CENTER/CENTER
+      INSTANCE "Icon" 24x24 @47,190 [ICON svg/icon-28465a.svg]
+      TEXT "Directions" 117x28 @79,188 font=Alexandria 400 23/28 ls=0 align=LEFT color=#ffffff text="Directions"

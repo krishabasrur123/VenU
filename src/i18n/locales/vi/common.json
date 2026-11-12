@@ -1,0 +1,100 @@
+{
+  "tabs": {
+    "volunteer": "Tình nguyện",
+    "venue": "Địa điểm",
+    "profile": "Hồ sơ"
+  },
+  "actions": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "continue": "Tiếp tục",
+    "back": "Quay lại",
+    "close": "Đóng",
+    "done": "Xong",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "send": "Gửi",
+    "tryAgain": "Thử lại",
+    "signIn": "Đăng nhập",
+    "signOut": "Đăng xuất",
+    "ok": "OK"
+  },
+  "status": {
+    "loading": "Đang tải…",
+    "comingSoon": "Sắp ra mắt",
+    "optional": "Không bắt buộc"
+  },
+  "field": {
+    "showPassword": "Hiện mật khẩu",
+    "hidePassword": "Ẩn mật khẩu"
+  },
+  "errors": {
+    "offline": "Không thể kết nối VenU. Hãy kiểm tra kết nối và thử lại.",
+    "wrongLogin": "Sai email hoặc mật khẩu.",
+    "confirmEmail": "Hãy xác nhận email trước. Kiểm tra hộp thư để lấy liên kết.",
+    "alreadyRegistered": "Email này đã có tài khoản. Hãy thử đăng nhập.",
+    "rateLimit": "Thử quá nhiều lần. Đợi một phút rồi thử lại.",
+    "sessionExpired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+    "cantSave": "VenU không lưu được thay đổi này. Nếu vẫn xảy ra, hãy đăng xuất rồi đăng nhập lại.",
+    "photoTooBig": "Ảnh lớn hơn {{size}} MB. Hãy chọn ảnh nhỏ hơn.",
+    "photoWrongType": "Hãy dùng ảnh JPG, PNG, WebP hoặc HEIC.",
+    "generic": "Đã xảy ra lỗi. Hãy thử lại."
+  },
+  "direction": {
+    "restartTitle": "Khởi động lại để hoàn tất",
+    "restartBody": "VenU cần khởi động lại để đổi bố cục giữa phải sang trái và trái sang phải.",
+    "restartNow": "Khởi động lại",
+    "later": "Để sau",
+    "ok": "OK"
+  },
+  "count": {
+    "people_other": "{{count}} người"
+  },
+  "media": {
+    "addPicture": "Thêm ảnh",
+    "changePicture": "Đổi ảnh",
+    "holdToSpeak": "Hoặc giữ để nói"
+  },
+  "form": {
+    "optionalTitle": "{{title}} <muted>(không bắt buộc)</muted>",
+    "step": "Bước {{step}}/{{total}}"
+  },
+  "nav": {
+    "backTo": "Quay lại {{label}}"
+  },
+  "chip": {
+    "remove": "Xóa {{label}}"
+  },
+  "photo": {
+    "add": "Thêm ảnh",
+    "change": "Đổi ảnh",
+    "take": "Chụp ảnh",
+    "remove": "Xóa",
+    "hint": "Giúp người hỗ trợ nhận ra bạn. Không bắt buộc.",
+    "cameraOff": "Quyền truy cập máy ảnh đang tắt. Hãy bật trong Cài đặt.",
+    "libraryOff": "Quyền truy cập ảnh đang tắt. Hãy bật trong Cài đặt.",
+    "labelNamed": "Ảnh hồ sơ của {{name}}",
+    "labelYours": "Ảnh hồ sơ của bạn",
+    "labelNone": "Không có ảnh hồ sơ"
+  },
+  "language": {
+    "primary": "Ngôn ngữ chính",
+    "secondary": "Ngôn ngữ thứ hai",
+    "another": "Ngôn ngữ khác",
+    "add": "Thêm ngôn ngữ khác",
+    "search": "Tìm ngôn ngữ",
+    "fieldLabel": "Tìm ngôn ngữ",
+    "searchFor": "Tìm ngôn ngữ cho {{field}}",
+    "examples": "vd. Tiếng Việt, Español, ASL",
+    "searchExamples": "Tìm, vd. Tiếng Việt, Español, ASL",
+    "field": "{{field}}: {{language}}",
+    "fieldEmpty": "{{field}}: chưa chọn",
+    "openHint": "Mở tìm kiếm ngôn ngữ",
+    "choose": "Chọn một ngôn ngữ",
+    "closeSearch": "Đóng tìm kiếm ngôn ngữ",
+    "remove": "Xóa {{language}}",
+    "removeField": "Xóa ô ngôn ngữ này",
+    "noMatch": "Không có kết quả. Hãy thử tên tiếng Anh.",
+    "addTitle": "Thêm ngôn ngữ"
+  }
+}

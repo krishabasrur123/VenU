@@ -14,6 +14,10 @@ import { pathToFileURL } from 'node:url';
 
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
 
+// Below 49152 on purpose: Windows (Hyper-V, WSL, Docker) reserves blocks of 49152-65535 that move
+// between reboots, and a reserved port fails with EACCES. 54330 was inside one of those blocks.
+export const MOCK_SUPABASE_PORT = 47330;
+
 /**
  * @param {{ port: number, confirmEmail?: boolean, stateFile?: string, log?: (line: string) => void }} options
  *   confirmEmail: sign-up sends a (printed) confirmation link instead of signing straight in.
@@ -260,7 +264,7 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
 
 // Run on its own: node scripts/mock-supabase.mjs [port] [--confirm-email]
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const port = Number(process.argv.find(a => /^\d+$/.test(a)) ?? 54330);
+  const port = Number(process.argv.find(a => /^\d+$/.test(a)) ?? MOCK_SUPABASE_PORT);
   await startMockSupabase({ port, confirmEmail: process.argv.includes('--confirm-email') });
   console.log(`mock supabase on http://localhost:${port}`);
 }

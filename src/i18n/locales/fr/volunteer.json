@@ -1,0 +1,187 @@
+{
+  "role": "Bénévole LA28",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "Aide en {{language}}",
+  "quoted": "« {{text}} »",
+  "cancelRequest": "Annuler la demande",
+  "dismiss": "Fermer",
+  "distance": {
+    "feet": "{{value}} pi",
+    "miles": "{{value}} mi"
+  },
+  "helpTypes": {
+    "physical": "Aide physique",
+    "directions": "Itinéraire",
+    "language": "Aide linguistique",
+    "quiet": "Espace calme",
+    "lost": "Objets trouvés",
+    "other": "Autre chose"
+  },
+  "skills": {
+    "wheelchair": "Formation fauteuil roulant",
+    "first_aid": "Premiers secours",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "Trouver un bénévole",
+    "subtitle": "Nous vous mettons en relation avec quelqu’un à proximité",
+    "languageLabel": "Aide en {{language}}. Changer de langue",
+    "locationLabel": "Votre position : {{spot}}, {{venue}}",
+    "question": "De quelle aide avez-vous besoin ?",
+    "notePlaceholder": "ex. : J’ai besoin d’aide près de la rampe 2",
+    "photoOff": "L’accès aux photos est désactivé. Activez-le dans Réglages.",
+    "voiceSoon": "Les notes vocales arrivent bientôt. Écrivez une note pour l’instant.",
+    "pickOne": "Choisissez au moins un type d’aide.",
+    "send": "Envoyer la demande"
+  },
+  "note": {
+    "label": "Ajouter une note <muted>(facultatif)</muted>",
+    "labelPlain": "Ajouter une note (facultatif)",
+    "placeholder": "Saisissez du texte",
+    "attached": "Photo jointe",
+    "remove": "Retirer la photo"
+  },
+  "emergency": {
+    "title": "Urgence ?",
+    "call": "Appelez le 911",
+    "label": "Urgence ? Appelez le 911",
+    "hint": "Ouvre le téléphone pour appeler le 911"
+  },
+  "notice": {
+    "searchFailed": "Impossible de joindre un bénévole. Vérifiez votre connexion et réessayez.",
+    "thanks": "Merci ! Votre avis aide {{name}} et l’équipe LA28."
+  },
+  "searching": {
+    "title": "Recherche d’un bénévole",
+    "subtitle": "En général moins d’une minute · Restez où vous êtes",
+    "askedFor": "Vous avez demandé"
+  },
+  "match": {
+    "title": "Bénévole trouvé",
+    "onTheWay": {
+      "his": "{{name}} est en route",
+      "her": "{{name}} est en route",
+      "their": "{{name}} est en route"
+    },
+    "stay": "Restez où vous êtes.",
+    "rated": "Noté {{rating}} sur 5",
+    "skills": "Compétences et langues",
+    "etaMain": "{{minutes}} min",
+    "etaSub": "avant l’arrivée",
+    "etaLabel": "Arrivée dans {{minutes}} min",
+    "awaySub": "de vous",
+    "awayLabel": "À {{distance}} de vous",
+    "message": "Écrire au bénévole",
+    "done": "Marquer l’aide comme terminée",
+    "doneHint": "Termine la demande et vous invite à noter {{name}}",
+    "confirmCancel": "Annuler votre demande ? {{name}} ne viendra plus vers vous.",
+    "keep": "Garder la demande",
+    "yesCancel": "Oui, annuler"
+  },
+  "map": {
+    "label": "Carte : {{name}} est à {{distance}} et vient vers vous à la porte 2.",
+    "gate": "Porte 2",
+    "you": "Vous"
+  },
+  "messages": {
+    "label": "Messages",
+    "unread_one": "Messages, {{count}} non lu",
+    "unread_many": "Messages, {{count}} non lus",
+    "unread_other": "Messages, {{count}} non lus"
+  },
+  "chat": {
+    "away": "À {{minutes}} min",
+    "call": "Appeler {{name}}",
+    "callSoon": "Les appels ne sont pas encore disponibles. Envoyez plutôt un message à {{name}}.",
+    "messages": "Messages",
+    "empty": "Dites bonjour à {{name}}. Votre position est visible.",
+    "typing": "{{name}} écrit…",
+    "today": "Aujourd’hui {{time}}",
+    "yesterday": "Hier {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "La lecture à voix haute arrive bientôt.",
+    "attach": "Joindre une photo",
+    "attachSoon": "L’envoi de photos arrive bientôt.",
+    "placeholder": "Message",
+    "messageTo": "Message à {{name}}",
+    "stickers": "Autocollants",
+    "stickersSoon": "Les autocollants arrivent bientôt.",
+    "record": "Enregistrer un message vocal",
+    "voiceSoon": "Les messages vocaux arrivent bientôt."
+  },
+  "bubble": {
+    "mine": "Vous, {{time}} : {{text}}",
+    "theirs": "Bénévole, {{time}} : {{text}}",
+    "listen": "écouter",
+    "listenLabel": "Écouter ce message"
+  },
+  "feedback": {
+    "skip": "Passer",
+    "skipLabel": "Passer l’avis",
+    "question": "Comment s’est passée l’aide ?",
+    "wentWell": "Qu’est-ce qui s’est bien passé ?",
+    "tags": {
+      "language": "Parlait ma langue",
+      "venue": "Connaissait le site",
+      "patient": "Patience",
+      "fast": "Arrivée rapide",
+      "helpful": "Serviable",
+      "other": "Autre"
+    },
+    "placeholder": "ex. : {{name}} m’a trouvé une place à l’ombre",
+    "pickStar": "Touchez une étoile pour noter l’aide de {{name}}.",
+    "sendFailed": "Impossible d’envoyer votre avis. {{reason}}",
+    "submit": "Envoyer"
+  },
+  "rating": {
+    "label": "Note",
+    "star_one": "{{count}} étoile, {{word}}",
+    "star_many": "{{count}} d’étoiles, {{word}}",
+    "star_other": "{{count}} étoiles, {{word}}",
+    "words": {
+      "poor": "Mauvais",
+      "notGreat": "Pas terrible",
+      "ok": "Correct",
+      "good": "Bien",
+      "excellent": "Excellent"
+    }
+  },
+  "report": {
+    "title": "Signaler un problème",
+    "kindLabel": "Qu’est-ce qui n’a pas été ?",
+    "kinds": {
+      "no_show": "Personne n’est venu",
+      "unsafe": "Je ne me sentais pas en sécurité",
+      "rude": "Comportement impoli",
+      "other": "Autre chose"
+    },
+    "notePlaceholder": "Que s’est-il passé ? (facultatif)",
+    "pickKind": "Choisissez ce qui n’a pas été.",
+    "sendFailed": "Impossible d’envoyer le signalement. {{reason}}",
+    "notNow": "Pas maintenant",
+    "send": "Envoyer",
+    "sent": "Signalement envoyé",
+    "sentBody": "L’équipe LA28 s’en occupe aujourd’hui. En danger maintenant ? Appelez le 911."
+  },
+  "incoming": {
+    "title": "Demandes reçues",
+    "subtitle": "Visiteurs proches qui ont demandé de l’aide",
+    "preview": "Aperçu : la mise en relation n’est pas encore active, ce sont des exemples.",
+    "who": "{{help}} · {{name}}",
+    "meta": "À {{distance}} · il y a {{minutes}} min · {{language}}",
+    "accept": "Accepter",
+    "acceptSoon": "Vous pourrez accepter des demandes quand la mise en relation sera active."
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "Près de la rampe de la porte 2",
+      "section214": "Coursive de la section 214",
+      "mainPlaza": "Esplanade de l’entrée principale"
+    },
+    "greeting": "Bonjour {{name}} ! Je suis {{volunteer}}, bénévole LA28. J’arrive. Point de rendez-vous : {{spot}}.",
+    "greetingNoName": "Bonjour ! Je suis {{volunteer}}, bénévole LA28. J’arrive. Point de rendez-vous : {{spot}}.",
+    "reply1": "Bien reçu, merci ! J’arrive dans deux minutes.",
+    "reply2": "Je vois la porte 2. Je porte un gilet LA28 rose.",
+    "reply3": "Pas de souci, prenez votre temps. Je reste avec vous."
+  }
+}

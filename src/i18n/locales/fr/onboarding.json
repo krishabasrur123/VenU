@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "Créer un compte",
+    "or": "ou",
+    "signIn": "Se connecter",
+    "socialTitle": "OU s'inscrire avec",
+    "socialSoon": "La connexion avec Google, Apple et Facebook arrive bientôt.",
+    "languageTitle": "Langue de l'app"
+  },
+  "auth": {
+    "languagePill": "Langue de l'app : {{language}}",
+    "languagePillHint": "Ouvre la liste des langues",
+    "signUpWith": "S'inscrire avec {{provider}}",
+    "devMode": "Mode développement : aucune clé Supabase, la connexion est donc ignorée et les données restent sur cet appareil.",
+    "name": "Prénom",
+    "namePlaceholder": "Saisissez votre prénom",
+    "email": "E-mail",
+    "emailPlaceholder": "Saisissez votre e-mail",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Saisissez votre mot de passe"
+  },
+  "signIn": {
+    "title": "Connexion",
+    "noAccount": "Pas encore de compte ?",
+    "signUp": "S'inscrire",
+    "forgot": "Mot de passe oublié ?",
+    "forgotSoon": "La réinitialisation du mot de passe arrive bientôt.",
+    "confirmNotice": "Consultez vos e-mails pour confirmer votre compte, puis connectez-vous.",
+    "submit": "Se connecter"
+  },
+  "signUp": {
+    "title": "Créer un compte",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "signIn": "Se connecter",
+    "agree": "J'accepte les <a>Conditions générales</a>",
+    "agreeLabel": "J'accepte les Conditions générales",
+    "submit": "Créer un compte"
+  },
+  "validate": {
+    "email": "Saisissez un e-mail valide.",
+    "passwordLength": "Utilisez au moins {{min}} caractères pour votre mot de passe.",
+    "password": "Saisissez votre mot de passe.",
+    "terms": "Acceptez les Conditions générales pour continuer."
+  },
+  "gate": {
+    "offlineTitle": "Impossible de joindre VenU",
+    "errorTitle": "Impossible de charger votre profil",
+    "offlineBody": "Vérifiez votre connexion et réessayez. Vous êtes toujours connecté."
+  },
+  "role": {
+    "title": "Comment utiliserez-vous VenU ?",
+    "subtitle": "Pour vous poser les bonnes questions.",
+    "visitorTitle": "Je suis spectateur",
+    "visitorBody": "Obtenez de l'aide sur le site dans votre langue.",
+    "volunteerTitle": "Je suis bénévole LA28",
+    "volunteerBody": "Aidez les spectateurs près de vous. Vous apparaîtrez comme non vérifié jusqu'à la confirmation de LA28."
+  },
+  "setup": {
+    "visitorTitle": "Créez votre profil",
+    "visitorSubtitle": "Pour trouver la bonne personne pour vous aider. Modifiable à tout moment dans vos réglages.",
+    "volunteerTitle": "Votre profil bénévole",
+    "volunteerSubtitle": "Pour vous envoyer les spectateurs que vous pouvez le mieux aider.",
+    "submit": "Enregistrer et continuer"
+  }
+}

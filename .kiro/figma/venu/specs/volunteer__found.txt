@@ -1,0 +1,89 @@
+# Volunteer found page (214:25058)
+FRAME "Volunteer found page" 440x956 @0,0 fill=#ffffff
+  INSTANCE "XR/XR Navigation bar" 352x60 @44,875 auto:row gap=0 pad=0/8/0/8 align=/CENTER fill=#f5f5f5 r=80 props={"Elevation":"Surface container","Configuration":"Icon & label","Segments":"3"}
+    INSTANCE "Nav item 01" 112x80 @52,865 auto:col gap=3 pad=12/0/16/0 align=CENTER/CENTER props={"Show focus indicator":false,"Label text":"Volunteer","Icon":"91:743","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+      FRAME "Icon container" 64x32 @76,879 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-1073a8.svg]
+      TEXT "Label" 49x13 @84,914 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#49454f text="Volunteer"
+    INSTANCE "Nav item 02" 112x77 @164,867 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Label text":"Venue","Show focus indicator":false,"Icon":"91:740","Selected":"True","State":"Enabled","Badge":"None","Show label text":"True"}
+      FRAME "Icon container" 64x32 @188,879 fill=#dfebfd r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-5979c0.svg]
+      TEXT "Label" 35x14 @203,914 font=Albert Sans 700 12/14 ls=0 align=CENTER color=#1d1b20 text="Venue"
+    INSTANCE "Nav item 03" 112x76 @276,867 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Show focus indicator":false,"Label text":"Profile","Icon":"91:599","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+      FRAME "Icon container" 64x32 @300,879 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-1073a8.svg]
+      TEXT "Label" 32x13 @316,914 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#49454f text="Profile"
+  INSTANCE "Stadium Map" 440x290 @0,204
+    RECTANGLE "Stadium Map" 440x290 @0,204 fill=image(ece298d0) r=10
+  INSTANCE "XR/XR Navigation bar" 352x64 @44,875 auto:row gap=0 pad=2/0/2/0 align=/ drop_shadow(0,4 blur=4 #00000040)
+    INSTANCE "XR/XR Navigation bar" 352x60 @44,877 auto:row gap=0 pad=0/8/0/8 align=/CENTER fill=#ffffff r=80 props={"Elevation":"Surface container","Configuration":"Icon & label","Segments":"3"}
+      INSTANCE "Nav item 01" 112x80 @52,867 auto:col gap=3 pad=12/0/16/0 align=CENTER/CENTER props={"Show focus indicator":false,"Label text":"Volunteer","Icon":"91:743","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+        FRAME "Icon container" 64x32 @76,881 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-1073a8.svg]
+        TEXT "Label" 49x13 @84,916 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#242222 text="Volunteer"
+      INSTANCE "Nav item 02" 112x77 @164,869 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Label text":"Venue","Show focus indicator":false,"Icon":"91:740","Selected":"True","State":"Enabled","Badge":"None","Show label text":"True"}
+        FRAME "Icon container" 64x32 @188,881 fill=#dfebfd r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-5979c0.svg]
+        TEXT "Label" 35x14 @203,916 font=Albert Sans 700 12/14 ls=0 align=CENTER color=#242222 text="Venue"
+      INSTANCE "Nav item 03" 112x76 @276,869 auto:col gap=3 pad=12/0/16/0 align=MAX/CENTER props={"Show focus indicator":false,"Label text":"Profile","Icon":"91:599","Selected":"False","State":"Enabled","Badge":"None","Show label text":"True"}
+        FRAME "Icon container" 64x32 @300,881 r=100 drop_shadow(0,2 blur=5 #00000040) [ICON svg/icon-container-1073a8.svg]
+        TEXT "Label" 32x13 @316,916 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#242222 text="Profile"
+  FRAME "Frame 2270" 440x156 @0,48 fill=#ffffff
+    TEXT "Volunteer found" 400x28 @20,68 font=Alexandria 400 23/28 ls=0 align=LEFT color=#000000 text="Volunteer found"
+    FRAME "Frame 2228" 400x73 @20,111
+      FRAME "Frame 9" 400x73 @20,111 fill=#368847 r=10
+        FRAME "Frame 2244" 217x40 @20,127 auto:row gap=10 pad=0/20/0/20 align=/
+          INSTANCE "Check circle" 40x40 @40,127 [ICON svg/check-circle-febd77.svg]
+          FRAME "Frame 2243" 127x35 @90,127 auto:col gap=6 pad=0/0/0/0 align=/
+            TEXT "Daniel is on his way" 127x16 @90,127 font=Alexandria 400 13/16 ls=0 align=LEFT color=#ffffff text="Daniel is on his way"
+            TEXT "Stay where you are." 127x13 @90,149 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#ffffff text="Stay where you are."
+    INSTANCE "Message 1" 30x30 @390,68 props={"Property 1":"Default"} [ICON svg/message-1-6cfb1c.svg]
+  FRAME "Frame 2268" 440x248 @0,494 auto:col gap=10 pad=39/17/111/30 align=/ fill=#ffffff
+    FRAME "Frame 2267" 387x176 @30,533 auto:col gap=30 pad=0/0/0/0 align=/
+      FRAME "Frame 2265" 387x99 @30,533 auto:col gap=10 pad=0/0/0/0 align=/
+        FRAME "Frame 2266" 387x99 @30,533 auto:col gap=10 pad=0/0/0/0 align=/
+          FRAME "Frame 2264" 387x34 @30,533 auto:row gap=170 pad=0/0/0/0 align=/CENTER
+            FRAME "Frame 2263" 117x34 @30,533 auto:row gap=15 pad=0/0/0/0 align=/CENTER
+              INSTANCE "person" 24x24 @30,538 [ICON svg/person-805974.svg]
+              FRAME "Frame 2262" 78x34 @69,533 auto:col gap=5 pad=0/0/0/0 align=/
+                TEXT "Jayden L." 78x16 @69,533 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Jayden L."
+                FRAME "Frame 2245" 78x13 @69,554 auto:col gap=5 pad=0/0/0/0 align=/
+                  TEXT "LA28 volunteer" 78x13 @69,554 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="LA28 volunteer"
+            FRAME "Frame 2261" 39x16 @317,542
+              FRAME "Frame 2254" 39x16 @317,542 auto:col gap=10 pad=0/0/0/0 align=/
+                FRAME "Frame 2257" 39x16 @317,542 auto:col gap=10 pad=0/0/0/0 align=/
+                  FRAME "Frame 2255" 39x16 @317,542 auto:row gap=6 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+                    INSTANCE "Star" 16x16 @317,542 [ICON svg/star-4acf9d.svg]
+                    TEXT "4.9" 17x13 @339,544 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="4.9"
+          INSTANCE "Frame 2228" 387x55 @30,577
+            TEXT "Tags:" 78x13 @30,579 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="Tags:"
+            INSTANCE "Building Blocks/Button group/Connected segments/Small" 78x22 @30,600 auto:col gap=2 pad=0/0/0/0 align=CENTER/CENTER fill=#368847 r=8 props={"Show label text":true,"Show focus indicator":false,"Show icon":false,"Label text":"Accessible","Icon (selected)":"98:1510","Icon":"134:13430","Selected":"False","State":"Enabled"}
+              FRAME "State-layer" 78x33 @30,595 auto:row gap=8 pad=10/16/10/16 align=CENTER/CENTER r=4
+                TEXT "Label" 55x13 @42,605 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="Accessible"
+            INSTANCE "Building Blocks/Button group/Connected segments/Small" 78x22 @118,600 auto:col gap=2 pad=0/0/0/0 align=CENTER/CENTER fill=#ff9f4b r=8 props={"Show label text":true,"Show focus indicator":false,"Show icon":false,"Label text":"Label","Icon (selected)":"98:1510","Icon":"134:13430","Selected":"False","State":"Enabled"}
+              FRAME "State-layer" 78x33 @118,595 auto:row gap=8 pad=10/16/10/16 align=CENTER/CENTER r=4
+                TEXT "Label" 27x13 @144,605 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="Label"
+            INSTANCE "Building Blocks/Button group/Connected segments/Small" 78x22 @206,600 auto:col gap=2 pad=0/0/0/0 align=CENTER/CENTER fill=#ff9f4b r=8 props={"Show label text":true,"Show focus indicator":false,"Show icon":false,"Label text":"Label","Icon (selected)":"98:1510","Icon":"134:13430","Selected":"False","State":"Enabled"}
+              FRAME "State-layer" 78x33 @206,595 auto:row gap=8 pad=10/16/10/16 align=CENTER/CENTER r=4
+                TEXT "Label" 27x13 @232,605 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="Label"
+      FRAME "Frame 2253" 387x47 @30,662 auto:row gap=9 pad=0/0/0/0 align=CENTER/CENTER
+        FRAME "Frame 2258" 318x47 @65,662 auto:row gap=40 pad=0/0/0/0 align=/CENTER
+          INSTANCE "Frame 2250" 139x47 @65,662 auto:col gap=10 pad=7/39/11/10 align=/ fill=#f5f5f5 r=10 props={"icon":"215:25253","sub text":"until arrival","main text":"2 min"}
+            FRAME "Frame 2248" 86x29 @75,669 auto:row gap=10 pad=0/0/0/0 align=/CENTER
+              INSTANCE "Clock" 20x20 @75,674 [ICON (not exported)]
+              FRAME "Frame 2247" 56x29 @105,669 auto:col gap=0 pad=0/0/0/0 align=/
+                TEXT "2 min" 56x16 @105,669 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="2 min"
+                TEXT "until arrival" 56x13 @105,685 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="until arrival"
+          INSTANCE "Frame 2251" 139x47 @244,662 auto:col gap=10 pad=7/39/11/10 align=/ fill=#f5f5f5 r=10 props={"icon":"215:25253","sub text":"away from you","main text":"180 ft"}
+            FRAME "Frame 2248" 104x29 @254,669 auto:row gap=10 pad=0/0/0/0 align=/CENTER
+              INSTANCE "Map pin" 20x20 @254,674 props={"Size":"20"} [ICON svg/map-pin-44065e.svg]
+              FRAME "Frame 2247" 74x29 @284,669 auto:col gap=0 pad=0/0/0/0 align=/
+                TEXT "2 min" 74x16 @284,669 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="180 ft"
+                TEXT "until arrival" 74x13 @284,685 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="away from you"
+  INSTANCE "Frame 2225" 400x47 @20,742 auto:row gap=20 pad=13/138/12/121 align=CENTER/CENTER fill=#1d5dbc stroke=#1d5dbc/2 r=10 props={"Property 1":"Default"}
+    TEXT "Send Request" 217x28 @103,752 font=Alexandria 400 23/28 ls=0 align=CENTER color=#ffffff text="Message Volunteer"
+  TEXT "Cancel request" 97x16 @173,805 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Cancel request"
+  INSTANCE "Bars/Status Bars/iPhone/Light" 390x48 @25,0 fill=#ffffff
+    GROUP "Battery" 24x11 @372,19 r=0/0/0/0
+      RECTANGLE "Border" 22x11 @372,19 stroke=#000000/1 r=2.6666667461395264 opacity=0.3499999940395355
+      VECTOR "Cap" 1x4 @395,23 fill=#000000 opacity=0.4000000059604645 [ICON (not exported)]
+      RECTANGLE "Capacity" 18x7 @374,21 fill=#000000 r=1.3333333730697632
+    BOOLEAN_OPERATION "Wifi" 15x11 @350,20 fill=#000000 [ICON (not exported)]
+    BOOLEAN_OPERATION "Cellular Connection" 17x11 @327,20 fill=#000000 [ICON (not exported)]
+    INSTANCE "Time Style" 54x21 @46,12
+      TEXT "Time" 54x18 @46,15 font=SF Pro 590 15/18 ls=0 align=CENTER color=#000000 text="9:41"

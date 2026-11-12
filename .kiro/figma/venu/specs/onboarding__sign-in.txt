@@ -1,0 +1,20 @@
+# Venue Selection (181:18452)
+FRAME "Venue Selection" 440x956 @0,0 fill=#ffffff
+  TEXT "Sign In" 80x28 @180,220 font=Alexandria 400 23/28 ls=0 align=LEFT color=#000000 text="Sign In"
+  RECTANGLE "Rectangle 14" 130x130 @155,67 fill=#d9d9d9
+  FRAME "Frame 2233" 400x190 @20,305 auto:col gap=15 pad=0/0/0/0 align=/
+    FRAME "Frame 2232" 400x159 @20,305 auto:col gap=27 pad=0/0/0/0 align=/
+      FRAME "Frame 2230" 400x66 @20,305 auto:col gap=5 pad=0/0/0/0 align=/
+        TEXT "Username" 400x16 @20,305 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Username"
+        INSTANCE "msft_TextInput" 400x45 @20,326 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10 props={"Property 1":"Default"}
+          TEXT "Enter username" 368x15 @36,341 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter username"
+      FRAME "Frame 2231" 400x66 @20,398 auto:col gap=5 pad=0/0/0/0 align=/
+        TEXT "Password" 400x16 @20,398 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Password"
+        INSTANCE "msft_TextInput" 400x45 @20,419 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10 props={"Property 1":"Default"}
+          TEXT "Enter password" 341x15 @36,434 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter password"
+          VECTOR "Vector" 17x16 @387,434 fill=#242222 [ICON svg/vector-f55089.svg]
+    FRAME "Frame 5" 114x16 @20,479 auto:row gap=10 pad=0/0/0/0 align=/CENTER
+      TEXT "Forgot Password?" 114x16 @20,479 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Forgot Password?"
+  INSTANCE "Frame 2226" 202x36 @119,536 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#242222 stroke=#242222/2 r=10 props={"Property 1":"Default"}
+    TEXT "Sign In" 45x16 @198,547 font=Alexandria 400 13/16 ls=0 align=CENTER color=#ffffff text="Sign In"
+  TEXT "Don’t have an account? Sign Up" 205x16 @117,822 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Don’t have an account? Sign Up "

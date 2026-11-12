@@ -1,0 +1,39 @@
+# Venue Selection (179:17357)
+FRAME "Venue Selection" 440x956 @0,0 fill=#ffffff
+  TEXT "Create Account" 177x28 @131,218 font=Alexandria 400 23/28 ls=0 align=LEFT color=#000000 text="Create Account"
+  RECTANGLE "Rectangle 14" 130x130 @155,67 fill=#d9d9d9
+  FRAME "Frame 2234" 400x384 @20,267 auto:col gap=36 pad=0/0/0/0 align=/CENTER
+    FRAME "Frame 2233" 400x384 @20,267 auto:col gap=15 pad=0/0/0/0 align=/
+      FRAME "Frame 2232" 400x345 @20,267 auto:col gap=27 pad=0/0/0/0 align=/
+        FRAME "Frame 2228" 400x66 @20,267 auto:col gap=5 pad=0/0/0/0 align=/
+          TEXT "Name" 400x16 @20,267 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Name"
+          INSTANCE "msft_TextInput" 400x45 @20,288 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10 props={"Property 1":"Default"}
+            TEXT "Enter name" 368x15 @36,303 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter name"
+        FRAME "Frame 2229" 400x66 @20,360 auto:col gap=5 pad=0/0/0/0 align=/
+          TEXT "Email" 400x16 @20,360 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Email"
+          INSTANCE "msft_TextInput" 400x45 @20,381 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10 props={"Property 1":"Default"}
+            TEXT "Enter email" 368x15 @36,396 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter email"
+        FRAME "Frame 2230" 400x66 @20,453 auto:col gap=5 pad=0/0/0/0 align=/
+          TEXT "Username" 400x16 @20,453 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Username"
+          INSTANCE "msft_TextInput" 400x45 @20,474 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10 props={"Property 1":"Default"}
+            TEXT "Enter username" 368x15 @36,489 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter username"
+        FRAME "Frame 2231" 400x66 @20,546 auto:col gap=5 pad=0/0/0/0 align=/
+          TEXT "Password" 400x16 @20,546 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Password"
+          INSTANCE "msft_TextInput" 400x45 @20,567 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10 props={"Property 1":"Default"}
+            TEXT "Enter password" 341x15 @36,582 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter password"
+            VECTOR "Vector" 17x16 @387,582 fill=#242222 [ICON (not exported)]
+      FRAME "Frame 5" 233x24 @20,627 auto:row gap=10 pad=0/0/0/0 align=/CENTER
+        INSTANCE "check_box_outline_blank" 24x24 @20,627 props={"Property 1":"Default","checked":"Default"} [ICON svg/check-box-outline-blank-1ffe1b.svg]
+        TEXT "Agree with Terms & Conditions" 199x16 @54,631 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Agree with Terms & Conditions"
+  TEXT "Already have an account? Sign In" 213x16 @113,822 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Already have an account? Sign In "
+  INSTANCE "Frame 2227" 202x36 @119,674 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#242222 stroke=#242222/2 r=10 props={"Property 1":"Default"}
+    TEXT "Create Account" 100x16 @170,685 font=Alexandria 400 13/16 ls=0 align=CENTER color=#ffffff text="Create Account"
+  INSTANCE "Bars/Status Bars/iPhone/Light" 390x48 @25,0 fill=#ffffff
+    GROUP "Battery" 24x11 @372,19 r=0/0/0/0
+      RECTANGLE "Border" 22x11 @372,19 stroke=#000000/1 r=2.6666667461395264 opacity=0.3499999940395355
+      VECTOR "Cap" 1x4 @395,23 fill=#000000 opacity=0.4000000059604645 [ICON (not exported)]
+      RECTANGLE "Capacity" 18x7 @374,21 fill=#000000 r=1.3333333730697632
+    BOOLEAN_OPERATION "Wifi" 15x11 @350,20 fill=#000000 [ICON (not exported)]
+    BOOLEAN_OPERATION "Cellular Connection" 17x11 @327,20 fill=#000000 [ICON (not exported)]
+    INSTANCE "Time Style" 54x21 @46,12
+      TEXT "Time" 54x18 @46,15 font=SF Pro 590 15/18 ls=0 align=CENTER color=#000000 text="9:41"

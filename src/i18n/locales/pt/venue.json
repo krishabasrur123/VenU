@@ -1,0 +1,223 @@
+{
+  "search": {
+    "placeholder": "Buscar",
+    "clear": "Limpar busca"
+  },
+  "back": {
+    "venues": "Voltar aos locais",
+    "facilities": "Voltar aos serviços",
+    "facility": "Voltar ao serviço"
+  },
+  "choose": {
+    "title": "Escolha seu local",
+    "subtitle": "Escolha onde quer ver o mapa e os serviços",
+    "searchLabel": "Buscar locais",
+    "languageLabel": "Idioma do app: {{language}}",
+    "languageHint": "Muda o idioma de todo o app",
+    "languageTitle": "Idioma do app",
+    "languageConsent": "Primeiro revise a política de privacidade atualizada em Perfil e depois mude o idioma.",
+    "assistTitle": "Precisa de ajuda?",
+    "assistBody": "Fale com um voluntário",
+    "assistLabel": "Precisa de ajuda? Fale com um voluntário",
+    "empty": "Nenhum local corresponde a “{{query}}”. Tente uma cidade, como Inglewood.",
+    "cardHint": "Abre o mapa e os serviços"
+  },
+  "events": {
+    "opening_ceremony": "Cerimônia de abertura",
+    "swimming": "Natação",
+    "athletics": "Atletismo",
+    "football": "Futebol americano",
+    "gymnastics": "Ginástica",
+    "basketball": "Basquete"
+  },
+  "category": {
+    "all": "Tudo",
+    "groupLabel": "Tipo de serviço",
+    "gate": "Portões",
+    "restroom": "Banheiros",
+    "food": "Comida e bebida",
+    "first_aid": "Primeiros socorros",
+    "lost_found": "Achados e perdidos",
+    "info": "Informações",
+    "accessible": "Acessibilidade",
+    "parking": "Estacionamento"
+  },
+  "emptyMatch": {
+    "all": "Nenhum serviço corresponde a “{{query}}”",
+    "gate": "Nenhum portão corresponde a “{{query}}”",
+    "restroom": "Nenhum banheiro corresponde a “{{query}}”",
+    "food": "Nenhuma barraca de comida ou bebida corresponde a “{{query}}”",
+    "first_aid": "Nenhum posto de primeiros socorros corresponde a “{{query}}”",
+    "lost_found": "Nenhum balcão de achados e perdidos corresponde a “{{query}}”",
+    "info": "Nenhum balcão de informações corresponde a “{{query}}”",
+    "accessible": "Nenhum serviço acessível corresponde a “{{query}}”",
+    "parking": "Nenhum estacionamento corresponde a “{{query}}”"
+  },
+  "emptyNone": {
+    "all": "Ainda não há serviços em {{venue}}",
+    "gate": "Ainda não há portões em {{venue}}",
+    "restroom": "Ainda não há banheiros em {{venue}}",
+    "food": "Ainda não há barracas de comida ou bebida em {{venue}}",
+    "first_aid": "Ainda não há postos de primeiros socorros em {{venue}}",
+    "lost_found": "Ainda não há achados e perdidos em {{venue}}",
+    "info": "Ainda não há balcões de informações em {{venue}}",
+    "accessible": "Ainda não há serviços acessíveis em {{venue}}",
+    "parking": "Ainda não há estacionamentos em {{venue}}"
+  },
+  "list": {
+    "title": "Serviços perto de você",
+    "searchLabel": "Buscar serviços",
+    "showing": "Mostrando {{category}}",
+    "showAll": "Ver tudo",
+    "showAllHint": "Mostra todos os serviços de novo"
+  },
+  "sheet": {
+    "down": "Painel de serviços, abaixado",
+    "mid": "Painel de serviços, até a metade",
+    "up": "Painel de serviços, levantado",
+    "hint": "Toque para redimensionar ou arraste para cima e para baixo"
+  },
+  "map": {
+    "pin": "{{name}} no mapa",
+    "north": "N"
+  },
+  "walk_one": "{{count}} min a pé",
+  "walk_many": "{{count}} min a pé",
+  "walk_other": "{{count}} min a pé",
+  "wait": {
+    "none": "Sem fila",
+    "short": "Fila curta",
+    "long": "Fila longa"
+  },
+  "row": {
+    "label": "{{name}}, {{meta}}",
+    "labelAccessible": "{{name}}, {{meta}}, acessível"
+  },
+  "tags": {
+    "label": "Etiquetas:",
+    "accessible": "Acessível",
+    "stairs": "Escadas",
+    "busy_before_events": "Cheio antes dos eventos",
+    "ramp": "Rampa",
+    "bag_check": "Revista de bolsas",
+    "rideshare": "Carro por app",
+    "escalators": "Escadas rolantes",
+    "sensory_kits": "Kits sensoriais",
+    "quiet_room": "Sala silenciosa",
+    "family_room": "Sala família",
+    "long_lines_halftime": "Filas longas no intervalo",
+    "wheelchair_loans": "Empréstimo de cadeiras de rodas",
+    "permit_needed": "Precisa de permissão"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "Entrada norte, a mais próxima do ponto do ônibus do Metro.",
+      "location": "Lado norte, no ponto do ônibus"
+    },
+    "gate-2": {
+      "description": "Entrada leste com rampa, ao lado do estacionamento acessível do Lote C.",
+      "location": "Lado leste, perto do Lote C"
+    },
+    "gate-3": {
+      "description": "Entrada sul para embarque e desembarque de carros por app.",
+      "location": "Lado sul, na área de carros por app"
+    },
+    "gate-4": {
+      "description": "Entrada oeste para ingressos dos setores 200 a 240.",
+      "location": "Lado oeste, junto à praça principal"
+    },
+    "info-desk": {
+      "description": "Dúvidas, ingressos perdidos, kits sensoriais e protetores auriculares.",
+      "location": "Corredor, setor 105"
+    },
+    "first-aid": {
+      "description": "Enfermeiros e socorristas de plantão da abertura dos portões até o local esvaziar.",
+      "location": "Corredor, setor 112"
+    },
+    "restroom-east": {
+      "description": "Banheiros masculino, feminino e uma sala família para todos com trocador.",
+      "location": "Corredor, setor 118"
+    },
+    "food-south": {
+      "description": "Tacos, burritos e agua fresca. Opções vegetarianas.",
+      "location": "Corredor, setor 124"
+    },
+    "lost-found": {
+      "description": "Deixe ou retire objetos perdidos. Crianças perdidas também são trazidas aqui.",
+      "location": "Corredor, setor 131"
+    },
+    "accessible-seating": {
+      "description": "Empréstimo de cadeiras de rodas, assentos para acompanhantes e aparelhos de escuta assistida.",
+      "location": "Corredor, setor 136"
+    },
+    "food-west": {
+      "description": "Hambúrgueres, batata frita e refrigerantes. Há carne halal.",
+      "location": "Corredor, setor 140"
+    },
+    "restroom-west": {
+      "description": "Banheiros masculino e feminino. A cabine acessível fica à esquerda.",
+      "location": "Corredor, setor 145"
+    },
+    "parking-c": {
+      "description": "Estacionamento acessível com um caminho curto e plano até o Gate 2.",
+      "location": "Lote sudeste"
+    }
+  },
+  "facility": {
+    "notFound": "Serviço não encontrado",
+    "wheelchair": "Acessível para cadeira de rodas",
+    "directions": "Como chegar",
+    "directionsSoon": "As rotas passo a passo chegam em breve. {{name}}: {{location}}.",
+    "reports": "Relatos",
+    "results_one": "{{count}} resultado",
+    "results_many": "{{count}} de resultados",
+    "results_other": "{{count}} resultados",
+    "noReports": "Ainda não há relatos. Seja o primeiro a contar o que encontrou.",
+    "addReport": "Adicione seu relato"
+  },
+  "submitted": {
+    "title": "Relato enviado",
+    "body": "Obrigado por enviar um relato sobre o serviço.",
+    "again": "Enviar outro relato"
+  },
+  "card": {
+    "label": "Relato: {{title}}, de {{author}}",
+    "hint": "Abre o relato completo",
+    "new": "Novo",
+    "by": "De {{author}}",
+    "seeMore": "ver mais →"
+  },
+  "topic": {
+    "accessibility": "Acessibilidade",
+    "directions": "Como chegar",
+    "facility_condition": "Estado do local",
+    "security": "Segurança",
+    "crowds": "Lotação",
+    "other": "Outro"
+  },
+  "report": {
+    "notFound": "Relato não encontrado",
+    "kind": "Relato",
+    "submitted": "Enviado em {{date}}",
+    "noBody": "Sem detalhes."
+  },
+  "form": {
+    "title": "Novo relato",
+    "subtitleAt": "Conte o que encontrou em {{facility}} para ajudar o próximo visitante",
+    "subtitle": "Conte o que encontrou para ajudar o próximo visitante",
+    "titleLabel": "Título do relato",
+    "titlePlaceholder": "O que as pessoas devem saber?",
+    "bodyLabel": "Seu relato",
+    "bodyPlaceholder": "Digite aqui",
+    "bodyHint": "Opcional. O que aconteceu, onde e quando?",
+    "pictureSoon": "Em breve você poderá adicionar fotos.",
+    "speakSoon": "Relatos por voz chegam em breve. Por enquanto, digite seu relato.",
+    "topic": "Assunto",
+    "submit": "Enviar relato",
+    "sendFailed": "Não foi possível enviar o relato. Verifique sua conexão e tente de novo.",
+    "titleRequired": "Adicione um título, ex.: “A rampa do Gate 2 está rachada”.",
+    "titleTooLong": "O título deve ter menos de {{max}} caracteres.",
+    "topicRequired": "Escolha o assunto que melhor se encaixa.",
+    "bodyTooLong": "O relato deve ter menos de {{max}} caracteres."
+  }
+}

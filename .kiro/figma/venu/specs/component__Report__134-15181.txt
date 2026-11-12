@@ -1,0 +1,6 @@
+# Report (134:15181)
+COMPONENT "Report" 400x89 @0,0 auto:col gap=23 pad=12/277/7/16 align=/ fill=#f5f5f5 r=10 drop_shadow(0,4 blur=4 #00000040)
+  FRAME "Frame 2221" 105x34 @16,12 auto:col gap=5 pad=0/0/0/0 align=/
+    TEXT "Name" 105x16 @16,12 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Name"
+    TEXT "report description. . ." 105x13 @16,33 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="report description. . . "
+  TEXT "see more →" 62x13 @16,69 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="see more →"

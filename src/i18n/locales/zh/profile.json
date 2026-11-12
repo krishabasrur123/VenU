@@ -1,0 +1,232 @@
+{
+  "tab": {
+    "title": "个人资料",
+    "visitor": "观众",
+    "volunteer": "志愿者",
+    "verified": "✓ 已验证 LA28",
+    "unverified": "未验证",
+    "sharedVisitor": "帮手能看到的信息",
+    "sharedVolunteer": "观众能看到的信息",
+    "account": "账户",
+    "support": "支持",
+    "editProfile": "编辑资料",
+    "notifications": "通知",
+    "privacy": "隐私与数据",
+    "help": "帮助与反馈",
+    "terms": "使用条款",
+    "signOutFailed": "无法退出登录。{{reason}}",
+    "deleteWarning": "这将永久删除你的资料和照片。之后你可以重新创建。",
+    "deleteFailed": "未能删除你的全部数据。{{reason}}",
+    "deleteData": "删除我的数据"
+  },
+  "edit": {
+    "title": "编辑资料",
+    "subtitle": "更改将用于你的下一次求助。",
+    "submit": "保存更改"
+  },
+  "form": {
+    "aboutYou": "关于你",
+    "firstName": "名字",
+    "firstNamePlaceholderVisitor": "例如 Rosa",
+    "firstNamePlaceholderVolunteer": "例如 Daniel",
+    "firstNameHint": "对方只会看到你的名字。",
+    "languagesVisitor": "你会说的语言",
+    "languagesVolunteer": "你流利掌握的语言",
+    "accessNeeds": "有什么需要我们了解的吗？",
+    "accessNeedsLabel": "无障碍需求",
+    "otherNeedsPlaceholder": "例如 我带着服务犬",
+    "otherNeedsLabel": "其他无障碍需求",
+    "communication": "你喜欢怎样沟通？",
+    "communicationHint": "帮手在找到你之前会看到这一项。",
+    "communicationLabel": "沟通方式",
+    "helperPref": "我希望帮手是",
+    "gender": "性别",
+    "age": "年龄",
+    "helperGenderLabel": "帮手性别",
+    "helperAgeLabel": "帮手年龄",
+    "training": "培训",
+    "trainingHint": "LA28 验证你时会核查这些。",
+    "yourGender": "你的性别",
+    "yourGenderHint": "仅在观众要求女性或男性帮手时使用，从不显示。",
+    "yourAge": "你的年龄段",
+    "yourAgeHint": "仅用于匹配，从不显示。",
+    "privacyAgree": "我同意 VenU 按照<a>隐私政策</a>使用我的信息。",
+    "privacyAgreeLabel": "我同意 VenU 按照隐私政策使用我的信息",
+    "fixAbove": "上面有些回答需要修改（已用红色标出）。"
+  },
+  "validate": {
+    "firstName": "请填写你的名字。",
+    "tooLong": "最多 {{max}} 个字符。",
+    "noLanguage": "请至少添加一种语言。",
+    "mainLanguage": "请选择你的主要语言。",
+    "otherNote": "请简单说明你需要什么。",
+    "pickOne": "请选择一项（或“不愿透露”）。",
+    "privacy": "请同意隐私政策后继续。"
+  },
+  "options": {
+    "accessNeeds": {
+      "wheelchair": "轮椅使用者",
+      "hard_of_hearing": "听力障碍",
+      "low_vision": "视力低下",
+      "walking_aid": "助行器",
+      "other": "其他"
+    },
+    "communication": {
+      "speaking": "口语",
+      "text": "文字 / 书写",
+      "sign_language": "手语"
+    },
+    "helperGender": {
+      "none": "无偏好",
+      "man": "男性",
+      "woman": "女性"
+    },
+    "helperAge": {
+      "any": "任何年龄",
+      "under_40": "40 岁以下",
+      "40_plus": "40 岁以上"
+    },
+    "training": {
+      "wheelchair": "轮椅协助培训",
+      "asl": "ASL",
+      "first_aid": "急救",
+      "sighted_guide": "视障引导",
+      "mental_health": "心理健康急救"
+    },
+    "gender": {
+      "woman": "女",
+      "man": "男",
+      "nonbinary": "非二元",
+      "prefer_not": "不愿透露"
+    },
+    "ageBand": {
+      "under_40": "40 岁以下",
+      "40_plus": "40 岁以上",
+      "prefer_not": "不愿透露"
+    }
+  },
+  "summary": {
+    "speaks": "会说{{languages}}",
+    "listSeparator": "、",
+    "otherNeeds": "其他需求（见备注）",
+    "prefers": {
+      "speaking": "偏好口语",
+      "text": "偏好文字 / 书写",
+      "sign_language": "偏好手语"
+    }
+  },
+  "languageNames": {
+    "en": "英语",
+    "es": "西班牙语",
+    "zh": "中文",
+    "ko": "韩语",
+    "tl": "他加禄语",
+    "vi": "越南语",
+    "hy": "亚美尼亚语",
+    "fa": "波斯语",
+    "ja": "日语",
+    "ru": "俄语",
+    "ar": "阿拉伯语",
+    "fr": "法语",
+    "pt": "葡萄牙语",
+    "de": "德语",
+    "it": "意大利语",
+    "hi": "印地语",
+    "pa": "旁遮普语",
+    "th": "泰语",
+    "km": "高棉语",
+    "he": "希伯来语",
+    "ase": "美国手语"
+  },
+  "privacy": {
+    "title": "你的隐私",
+    "summary": "我们只收集为你匹配合适帮手所需的信息，你可以随时修改或删除。",
+    "englishNotice": "本政策以英文显示。",
+    "version": "版本 {{version}}。供团队审阅的草稿。",
+    "sections": {
+      "collect": "我们收集什么",
+      "why": "我们为什么收集",
+      "who": "谁能看到",
+      "where": "存储在哪里",
+      "keep": "保留多久",
+      "choices": "你的选择"
+    }
+  },
+  "terms": {
+    "title": "使用条款",
+    "subtitle": "使用 VenU 的规则简要版。",
+    "englishNotice": "本条款以英文显示。",
+    "privacyLink": "我们如何使用你的信息，请参阅<a>隐私政策</a>。",
+    "version": "版本 {{version}}。供团队审阅的草稿。",
+    "sections": {
+      "what": "VenU 是什么",
+      "emergencies": "不用于紧急情况",
+      "kind": "友善、诚实",
+      "remove": "我们可以删除什么",
+      "guarantees": "不作保证"
+    }
+  },
+  "help": {
+    "title": "帮助与反馈",
+    "subtitle": "常见问题解答，以及告诉我们需要改进之处的方式。",
+    "commonQuestions": "常见问题",
+    "faq": {
+      "matching": {
+        "q": "匹配是如何进行的？",
+        "a": "当你求助时，我们会在你所在的场馆寻找附近会说你的语言、并具备你所需培训的志愿者，例如会说西班牙语、受过轮椅协助培训的志愿者。"
+      },
+      "volunteers": {
+        "q": "志愿者能帮什么忙？",
+        "a": "帮你找座位、入口、洗手间或电梯，在场馆内引路，以及翻译。他们不能提供医疗护理。"
+      },
+      "emergency": {
+        "q": "遇到紧急情况怎么办？",
+        "a": "拨打 911，或告诉最近的场馆工作人员。VenU 志愿者不是急救人员。"
+      },
+      "languages": {
+        "q": "支持哪些语言？",
+        "a": "你可以从 21 种语言中选择，包括 ASL。在“编辑资料”中添加你会说的所有语言，我们就能为你找到更多帮手。"
+      },
+      "privacy": {
+        "q": "谁能看到我的信息？",
+        "a": "只有正在帮助你的人，且仅在帮助期间：你的名字、照片、语言以及你选择分享的需求。其余内容请参阅“隐私与数据”。"
+      },
+      "report": {
+        "q": "如何报告设施问题？",
+        "a": "在“场馆”标签页中点按该设施（例如电梯或洗手间），然后点按“添加你的报告”。打开该设施的每个人都能看到。"
+      }
+    },
+    "sendFeedback": "发送反馈",
+    "feedbackHint": "有令人困惑、损坏或缺失的地方吗？告诉我们。",
+    "thanksTitle": "谢谢！",
+    "thanksBody": "我们会阅读每一条反馈，用来改进 VenU。",
+    "sendMore": "继续发送反馈",
+    "placeholder": "例如 阳光下地图很难看清",
+    "feedbackLabel": "你的反馈",
+    "send": "发送反馈",
+    "empty": "请先写几句话。"
+  },
+  "notifications": {
+    "title": "通知",
+    "subtitle": "选择 VenU 要通知你的内容。",
+    "note": "VenU 的通知功能设置完成后，你就会开始收到提醒。",
+    "options": {
+      "volunteer": {
+        "label": "志愿者动态",
+        "hint": "例如 Daniel 已接受，正在赶来"
+      },
+      "chat": {
+        "label": "聊天消息",
+        "hint": "来自帮手或观众的新消息"
+      },
+      "venue": {
+        "label": "场馆提醒",
+        "hint": "例如 SoFi Stadium 的 C 入口已关闭"
+      },
+      "reports": {
+        "label": "报告回复",
+        "hint": "工作人员回复设施报告时"
+      }
+    }
+  }
+}

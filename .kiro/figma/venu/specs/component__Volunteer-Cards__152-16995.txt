@@ -1,0 +1,8 @@
+# Volunteer Cards (152:16995)
+COMPONENT_SET "Volunteer Cards" 231x238 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 113x90 @20,20 auto:col gap=3 pad=10/10/10/10 align=/ fill=#ffffff stroke=#f5f5f5/1 r=10 drop_shadow(0,4 blur=4 #00000040)
+    INSTANCE "wheelchair" 32x32 @31,31 [ICON svg/wheelchair-6dc801.svg]
+    TEXT "Physical Assistance" 91x32 @31,66 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Physical Assistance"
+  COMPONENT "Property 1=Selected" 113x89 @20,129 auto:col gap=3 pad=10/10/10/10 align=/ fill=#dfebfd stroke=#1d5dbc/1 r=10 drop_shadow(0,4 blur=4 #00000040)
+    INSTANCE "wheelchair" 32x32 @31,140 [ICON svg/wheelchair-6dc801.svg]
+    TEXT "Physical Assistance" 91x32 @31,175 font=Alexandria 400 13/16 ls=0 align=LEFT color=#1d5dbc text="Physical Assistance"

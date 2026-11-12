@@ -1,0 +1,100 @@
+{
+  "tabs": {
+    "volunteer": "志愿者",
+    "venue": "场馆",
+    "profile": "我的"
+  },
+  "actions": {
+    "save": "保存",
+    "cancel": "取消",
+    "continue": "继续",
+    "back": "返回",
+    "close": "关闭",
+    "done": "完成",
+    "edit": "编辑",
+    "delete": "删除",
+    "send": "发送",
+    "tryAgain": "重试",
+    "signIn": "登录",
+    "signOut": "退出登录",
+    "ok": "确定"
+  },
+  "status": {
+    "loading": "加载中…",
+    "comingSoon": "即将推出",
+    "optional": "选填"
+  },
+  "field": {
+    "showPassword": "显示密码",
+    "hidePassword": "隐藏密码"
+  },
+  "errors": {
+    "offline": "无法连接 VenU。请检查网络后重试。",
+    "wrongLogin": "邮箱或密码错误。",
+    "confirmEmail": "请先验证邮箱。请查看收件箱中的链接。",
+    "alreadyRegistered": "该邮箱已注册。请直接登录。",
+    "rateLimit": "尝试次数过多。请等一分钟再试。",
+    "sessionExpired": "登录已过期，请重新登录。",
+    "cantSave": "VenU 无法保存此更改。如果问题持续，请退出后重新登录。",
+    "photoTooBig": "照片超过 {{size}} MB，请选择更小的照片。",
+    "photoWrongType": "请使用 JPG、PNG、WebP 或 HEIC 格式的照片。",
+    "generic": "出了点问题，请重试。"
+  },
+  "direction": {
+    "restartTitle": "需要重启",
+    "restartBody": "VenU 需要重启才能切换从右到左和从左到右的布局。",
+    "restartNow": "立即重启",
+    "later": "稍后",
+    "ok": "确定"
+  },
+  "count": {
+    "people_other": "{{count}} 人"
+  },
+  "media": {
+    "addPicture": "添加图片",
+    "changePicture": "更换图片",
+    "holdToSpeak": "或按住说话"
+  },
+  "form": {
+    "optionalTitle": "{{title}} <muted>（选填）</muted>",
+    "step": "第 {{step}} 步，共 {{total}} 步"
+  },
+  "nav": {
+    "backTo": "返回{{label}}"
+  },
+  "chip": {
+    "remove": "移除{{label}}"
+  },
+  "photo": {
+    "add": "添加照片",
+    "change": "更换照片",
+    "take": "拍照",
+    "remove": "移除",
+    "hint": "方便帮手认出你。选填。",
+    "cameraOff": "相机权限已关闭。请在设置中开启。",
+    "libraryOff": "照片权限已关闭。请在设置中开启。",
+    "labelNamed": "{{name}}的头像",
+    "labelYours": "你的头像",
+    "labelNone": "无头像"
+  },
+  "language": {
+    "primary": "主要语言",
+    "secondary": "第二语言",
+    "another": "其他语言",
+    "add": "添加其他语言",
+    "search": "搜索语言",
+    "fieldLabel": "搜索语言",
+    "searchFor": "为{{field}}搜索语言",
+    "examples": "例如 中文、Español、ASL",
+    "searchExamples": "搜索，例如 中文、Español、ASL",
+    "field": "{{field}}：{{language}}",
+    "fieldEmpty": "{{field}}：未选择",
+    "openHint": "打开语言搜索",
+    "choose": "选择一种语言",
+    "closeSearch": "关闭语言搜索",
+    "remove": "移除{{language}}",
+    "removeField": "移除此语言栏",
+    "noMatch": "没有结果。试试英文名称。",
+    "addTitle": "添加语言"
+  }
+}

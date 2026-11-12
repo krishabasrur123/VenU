@@ -1,0 +1,232 @@
+{
+  "tab": {
+    "title": "Profile",
+    "visitor": "Bisita",
+    "volunteer": "Volunteer",
+    "verified": "✓ Verified ng LA28",
+    "unverified": "Hindi pa verified",
+    "sharedVisitor": "Ibinabahagi sa tutulong sa iyo",
+    "sharedVolunteer": "Nakikita ng mga bisita",
+    "account": "Account",
+    "support": "Suporta",
+    "editProfile": "I-edit ang profile",
+    "notifications": "Mga notification",
+    "privacy": "Privacy at data",
+    "help": "Tulong at feedback",
+    "terms": "Mga tuntunin ng paggamit",
+    "signOutFailed": "Hindi makapag-sign out. {{reason}}",
+    "deleteWarning": "Permanenteng mabubura ang iyong profile at larawan. Puwede kang gumawa ng bago mamaya.",
+    "deleteFailed": "Hindi natapos burahin ang iyong data. {{reason}}",
+    "deleteData": "Burahin ang aking data"
+  },
+  "edit": {
+    "title": "I-edit ang profile",
+    "subtitle": "Gagamitin ang mga pagbabago sa susunod mong paghingi ng tulong.",
+    "submit": "I-save ang mga pagbabago"
+  },
+  "form": {
+    "aboutYou": "Tungkol sa iyo",
+    "firstName": "Pangalan",
+    "firstNamePlaceholderVisitor": "hal. Rosa",
+    "firstNamePlaceholderVolunteer": "hal. Daniel",
+    "firstNameHint": "Pangalan mo lang ang makikita ng mga taong makakasalamuha mo.",
+    "languagesVisitor": "Mga wikang ginagamit mo",
+    "languagesVolunteer": "Mga wikang matatas ka",
+    "accessNeeds": "May dapat ba kaming malaman?",
+    "accessNeedsLabel": "Mga pangangailangan sa accessibility",
+    "otherNeedsPlaceholder": "hal. May kasama akong service dog",
+    "otherNeedsLabel": "Iba pang pangangailangan sa accessibility",
+    "communication": "Paano mo gustong makipag-usap?",
+    "communicationHint": "Makikita ito ng tutulong sa iyo bago ka niya puntahan.",
+    "communicationLabel": "Komunikasyon",
+    "helperPref": "Mas gusto kong tulungan ng",
+    "gender": "Kasarian",
+    "age": "Edad",
+    "helperGenderLabel": "Kasarian ng tutulong",
+    "helperAgeLabel": "Edad ng tutulong",
+    "training": "Pagsasanay",
+    "trainingHint": "Sinusuri ito ng LA28 kapag vine-verify ka.",
+    "yourGender": "Ang iyong kasarian",
+    "yourGenderHint": "Ginagamit lang kapag humingi ang bisita ng babae o lalaking tutulong. Hindi ipinapakita.",
+    "yourAge": "Ang iyong edad",
+    "yourAgeHint": "Para lang sa pagtutugma, hindi ipinapakita.",
+    "privacyAgree": "Sumasang-ayon ako sa paggamit ng VenU sa aking impormasyon, ayon sa <a>patakaran sa privacy</a>.",
+    "privacyAgreeLabel": "Sumasang-ayon ako sa paggamit ng VenU sa aking impormasyon, ayon sa patakaran sa privacy",
+    "fixAbove": "May mga sagot sa itaas na kailangang ayusin (nakapula)."
+  },
+  "validate": {
+    "firstName": "Ilagay ang iyong pangalan.",
+    "tooLong": "Gumamit ng {{max}} character o mas kaunti.",
+    "noLanguage": "Magdagdag ng kahit isang wika.",
+    "mainLanguage": "Piliin ang iyong pangunahing wika.",
+    "otherNote": "Sabihin sa amin nang kaunti kung ano ang kailangan mo.",
+    "pickOne": "Pumili ng isa (o \"Ayokong sabihin\").",
+    "privacy": "Sumang-ayon sa patakaran sa privacy para magpatuloy."
+  },
+  "options": {
+    "accessNeeds": {
+      "wheelchair": "Naka-wheelchair",
+      "hard_of_hearing": "Mahina ang pandinig",
+      "low_vision": "Mahina ang paningin",
+      "walking_aid": "May pantulong sa paglakad",
+      "other": "Iba pa"
+    },
+    "communication": {
+      "speaking": "Pagsasalita",
+      "text": "Text / pagsusulat",
+      "sign_language": "Sign language"
+    },
+    "helperGender": {
+      "none": "Kahit sino",
+      "man": "Lalaki",
+      "woman": "Babae"
+    },
+    "helperAge": {
+      "any": "Kahit anong edad",
+      "under_40": "Wala pang 40",
+      "40_plus": "40+"
+    },
+    "training": {
+      "wheelchair": "Sanay sa wheelchair",
+      "asl": "ASL",
+      "first_aid": "First aid",
+      "sighted_guide": "Sighted guide",
+      "mental_health": "Mental health first aid"
+    },
+    "gender": {
+      "woman": "Babae",
+      "man": "Lalaki",
+      "nonbinary": "Non-binary",
+      "prefer_not": "Ayokong sabihin"
+    },
+    "ageBand": {
+      "under_40": "Wala pang 40",
+      "40_plus": "40+",
+      "prefer_not": "Ayokong sabihin"
+    }
+  },
+  "summary": {
+    "speaks": "Nagsasalita ng {{languages}}",
+    "listSeparator": ", ",
+    "otherNeeds": "Iba pang pangangailangan (tingnan ang tala)",
+    "prefers": {
+      "speaking": "Mas gusto ang pagsasalita",
+      "text": "Mas gusto ang text / pagsusulat",
+      "sign_language": "Mas gusto ang sign language"
+    }
+  },
+  "languageNames": {
+    "en": "English",
+    "es": "Espanyol",
+    "zh": "Chinese",
+    "ko": "Korean",
+    "tl": "Tagalog",
+    "vi": "Vietnamese",
+    "hy": "Armenian",
+    "fa": "Persian",
+    "ja": "Japanese",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "fr": "French",
+    "pt": "Portuguese",
+    "de": "German",
+    "it": "Italian",
+    "hi": "Hindi",
+    "pa": "Punjabi",
+    "th": "Thai",
+    "km": "Khmer",
+    "he": "Hebrew",
+    "ase": "American Sign Language"
+  },
+  "privacy": {
+    "title": "Ang iyong privacy",
+    "summary": "Hinihingi lang namin ang kailangan para maitugma ka sa tamang tutulong, at puwede mo itong baguhin o burahin anumang oras.",
+    "englishNotice": "Ipinapakita ang patakarang ito sa English.",
+    "version": "Bersyon {{version}}. Draft para sa pagsusuri ng team.",
+    "sections": {
+      "collect": "Ano ang kinokolekta namin",
+      "why": "Bakit namin ito kinokolekta",
+      "who": "Sino ang nakakakita",
+      "where": "Saan ito nakatago",
+      "keep": "Gaano katagal namin ito iniingatan",
+      "choices": "Ang iyong mga pagpipilian"
+    }
+  },
+  "terms": {
+    "title": "Mga tuntunin ng paggamit",
+    "subtitle": "Ang maikling bersyon ng mga patakaran sa paggamit ng VenU.",
+    "englishNotice": "Ipinapakita ang mga tuntuning ito sa English.",
+    "privacyLink": "Nasa <a>patakaran sa privacy</a> kung paano namin ginagamit ang iyong impormasyon.",
+    "version": "Bersyon {{version}}. Draft para sa pagsusuri ng team.",
+    "sections": {
+      "what": "Ano ang VenU",
+      "emergencies": "Hindi para sa emergency",
+      "kind": "Maging mabait at tapat",
+      "remove": "Ano ang puwede naming alisin",
+      "guarantees": "Walang garantiya"
+    }
+  },
+  "help": {
+    "title": "Tulong at feedback",
+    "subtitle": "Mga sagot sa karaniwang tanong, at paraan para sabihin sa amin ang dapat ayusin.",
+    "commonQuestions": "Mga karaniwang tanong",
+    "faq": {
+      "matching": {
+        "q": "Paano gumagana ang pagtutugma?",
+        "a": "Kapag humingi ka ng tulong, naghahanap kami ng volunteer na malapit sa iyo sa venue, na nagsasalita ng iyong wika at may pagsasanay na kailangan mo, hal. volunteer na sanay sa wheelchair at nagsasalita ng Espanyol."
+      },
+      "volunteers": {
+        "q": "Saan makakatulong ang mga volunteer?",
+        "a": "Sa paghahanap ng upuan, gate, banyo o elevator, sa paglibot sa venue, at sa pagsasalin. Hindi sila makakapagbigay ng medikal na lunas."
+      },
+      "emergency": {
+        "q": "Paano kung emergency?",
+        "a": "Tumawag sa 911, o sabihan ang pinakamalapit na staff ng venue. Hindi emergency responder ang mga volunteer ng VenU."
+      },
+      "languages": {
+        "q": "Anong mga wika ang suportado?",
+        "a": "Puwede kang pumili sa 21 wika, kasama ang ASL. Idagdag ang lahat ng wikang ginagamit mo sa I-edit ang profile para mas marami kaming mahanap na tutulong sa iyo."
+      },
+      "privacy": {
+        "q": "Sino ang nakakakita ng aking impormasyon?",
+        "a": "Ang taong tumutulong lang sa iyo, at habang tumutulong lang: ang iyong pangalan, larawan, mga wika at ang mga pangangailangang pinili mong ibahagi. Tingnan ang Privacy at data para sa iba pa."
+      },
+      "report": {
+        "q": "Paano ako mag-uulat ng problema sa pasilidad?",
+        "a": "Sa tab na Venue, i-tap ang pasilidad (hal. elevator o banyo), pagkatapos ay Idagdag ang Sariling Ulat. Makikita ito ng lahat ng magbubukas ng pasilidad na iyon."
+      }
+    },
+    "sendFeedback": "Magpadala ng feedback",
+    "feedbackHint": "May nakakalito, sira o kulang? Sabihin sa amin.",
+    "thanksTitle": "Salamat!",
+    "thanksBody": "Binabasa namin ang bawat mensahe at ginagamit ito para pagandahin ang VenU.",
+    "sendMore": "Magpadala pa ng feedback",
+    "placeholder": "hal. Mahirap basahin ang mapa sa ilalim ng araw",
+    "feedbackLabel": "Ang iyong feedback",
+    "send": "Magpadala ng feedback",
+    "empty": "Sumulat muna ng ilang salita."
+  },
+  "notifications": {
+    "title": "Mga notification",
+    "subtitle": "Piliin kung tungkol saan ka aabisuhan ng VenU.",
+    "note": "Magsisimulang dumating ang mga alerto kapag na-set up na ang notifications para sa VenU.",
+    "options": {
+      "volunteer": {
+        "label": "Balita mula sa volunteer",
+        "hint": "hal. Tinanggap ni Daniel at papunta na siya"
+      },
+      "chat": {
+        "label": "Mga mensahe sa chat",
+        "hint": "Mga bagong mensahe mula sa tumutulong o sa bisita"
+      },
+      "venue": {
+        "label": "Mga alerto sa venue",
+        "hint": "hal. Sarado ang Gate C sa SoFi Stadium"
+      },
+      "reports": {
+        "label": "Mga sagot sa ulat",
+        "hint": "Kapag sinagot ng staff ang ulat sa pasilidad"
+      }
+    }
+  }
+}

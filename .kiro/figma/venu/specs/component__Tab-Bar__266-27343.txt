@@ -1,0 +1,26 @@
+# Tab Bar (266:27343)
+COMPONENT_SET "Tab Bar" 416x304 @0,0 auto:col gap=40 pad=10/10/10/10 align=/CENTER stroke=#9747ff/1 r=5
+  COMPONENT "Active=Volunteer" 396x68 @10,10
+    RECTANGLE "Bar" 396x68 @10,10 fill=#ffffff r=120
+    ELLIPSE "Active Circle" 45x45 @70,12 fill=#25282c
+    FRAME "Frame 2275" 260x32 @78,20 auto:row gap=90 pad=0/0/0/0 align=/CENTER [ICON svg/frame-2275-957711.svg]
+    FRAME "Frame 2276" 290x16 @60,55 auto:row gap=72 pad=0/0/0/0 align=/CENTER
+      TEXT "Volunteer" 63x16 @60,55 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Volunteer"
+      TEXT "Venue" 41x16 @195,55 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Venue"
+      TEXT "Profile" 42x16 @308,55 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Profile"
+  COMPONENT "Active=Venue" 396x68 @10,118
+    RECTANGLE "Bar" 396x68 @10,118 fill=#ffffff r=120
+    ELLIPSE "Active Circle" 45x45 @190,120 fill=#25282c
+    FRAME "Frame 2275" 260x32 @77,128 auto:row gap=90 pad=0/0/0/0 align=/CENTER [ICON svg/frame-2275-957711.svg]
+    FRAME "Frame 2276" 290x16 @60,163 auto:row gap=72 pad=0/0/0/0 align=/CENTER
+      TEXT "Volunteer" 63x16 @60,163 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Volunteer"
+      TEXT "Venue" 41x16 @195,163 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Venue"
+      TEXT "Profile" 42x16 @308,163 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Profile"
+  COMPONENT "Active=Profile" 396x68 @10,226
+    RECTANGLE "Bar" 396x68 @10,226 fill=#ffffff r=120
+    ELLIPSE "Active Circle" 45x45 @306,228 fill=#25282c
+    FRAME "Frame 2275" 260x32 @77,236 auto:row gap=90 pad=0/0/0/0 align=/CENTER [ICON svg/frame-2275-957711.svg]
+    FRAME "Frame 2276" 290x16 @60,271 auto:row gap=72 pad=0/0/0/0 align=/CENTER
+      TEXT "Volunteer" 63x16 @60,271 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Volunteer"
+      TEXT "Venue" 41x16 @195,271 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Venue"
+      TEXT "Profile" 42x16 @308,271 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="Profile"

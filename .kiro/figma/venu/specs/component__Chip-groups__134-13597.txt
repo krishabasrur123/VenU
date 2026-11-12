@@ -1,0 +1,29 @@
+# Chip groups (134:13597)
+COMPONENT "Chip groups" 500x48 @0,0 auto:row gap=8 pad=8/0/8/0 align=/CENTER
+  INSTANCE "Chip 01" 42x32 @0,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"All","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 42x28 @0,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 18x16 @12,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="All"
+  INSTANCE "Chip 02" 61x32 @50,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Gates","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 61x28 @50,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 37x16 @62,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Gates"
+  INSTANCE "Chip 03" 94x32 @119,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Restrooms","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 94x28 @119,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 70x16 @131,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Restrooms"
+  INSTANCE "Chip 04" 114x32 @221,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Food & Drinks","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 114x28 @221,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 90x16 @233,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Food & Drinks"
+  INSTANCE "Chip 05" 108x32 @343,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Lost & Found","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 108x28 @343,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 84x16 @355,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Lost & Found"
+  INSTANCE "Chip 06" 85x32 @459,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Info Desk","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 85x28 @459,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 61x16 @471,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Info Desk"
+  INSTANCE "Chip 07" 125x32 @552,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Water Fountain","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 125x28 @552,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 101x16 @564,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Water Fountain"
+  INSTANCE "Chip 08" 74x32 @685,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Seating","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 74x28 @685,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 50x16 @697,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Seating"
+  INSTANCE "Chip 09" 59x32 @767,8 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Label","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+    FRAME "state-layer" 59x28 @767,10 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+      TEXT "label-text" 35x16 @779,16 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Label"

@@ -1,0 +1,185 @@
+{
+  "role": "LA28 volunteer",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "Help in {{language}}",
+  "quoted": "“{{text}}”",
+  "cancelRequest": "Cancel request",
+  "dismiss": "Dismiss",
+  "distance": {
+    "feet": "{{value}} ft",
+    "miles": "{{value}} mi"
+  },
+  "helpTypes": {
+    "physical": "Physical Assistance",
+    "directions": "Directions",
+    "language": "Language Help",
+    "quiet": "Quiet Space",
+    "lost": "Lost & Found",
+    "other": "Something Else"
+  },
+  "skills": {
+    "wheelchair": "Wheelchair trained",
+    "first_aid": "First aid",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "Find a Volunteer",
+    "subtitle": "We’ll match you with someone nearby",
+    "languageLabel": "Help in {{language}}. Change language",
+    "locationLabel": "Your location: {{spot}}, {{venue}}",
+    "question": "What do you need help with?",
+    "notePlaceholder": "e.g. I'm stuck near ramp 2",
+    "photoOff": "Photo access is off. Turn it on in Settings.",
+    "voiceSoon": "Voice notes are coming soon. Type a note for now.",
+    "pickOne": "Pick at least one thing you need help with.",
+    "send": "Send Request"
+  },
+  "note": {
+    "label": "Add a note <muted>(optional)</muted>",
+    "labelPlain": "Add a note (optional)",
+    "placeholder": "Enter text",
+    "attached": "Attached picture",
+    "remove": "Remove picture"
+  },
+  "emergency": {
+    "title": "Emergency?",
+    "call": "Call 911 now",
+    "label": "Emergency? Call 911 now",
+    "hint": "Opens your phone to call 911"
+  },
+  "notice": {
+    "searchFailed": "Couldn't reach a volunteer. Check your connection and try again.",
+    "thanks": "Thanks! Your feedback helps {{name}} and the LA28 team."
+  },
+  "searching": {
+    "title": "Finding a volunteer",
+    "subtitle": "Usually under a minute · Stay where you are",
+    "askedFor": "You asked for"
+  },
+  "match": {
+    "title": "Volunteer found",
+    "onTheWay": {
+      "his": "{{name}} is on his way",
+      "her": "{{name}} is on her way",
+      "their": "{{name}} is on their way"
+    },
+    "stay": "Stay where you are.",
+    "rated": "Rated {{rating}} out of 5",
+    "skills": "Skills and languages",
+    "etaMain": "{{minutes}} min",
+    "etaSub": "until arrival",
+    "etaLabel": "{{minutes}} min until arrival",
+    "awaySub": "away from you",
+    "awayLabel": "{{distance}} away from you",
+    "message": "Message Volunteer",
+    "done": "Mark help as done",
+    "doneHint": "Ends the request and asks you to rate {{name}}",
+    "confirmCancel": "Cancel your request? {{name}} will stop coming to you.",
+    "keep": "Keep request",
+    "yesCancel": "Yes, cancel"
+  },
+  "map": {
+    "label": "Map: {{name}} is {{distance}} away, walking to you at Gate 2.",
+    "gate": "Gate 2",
+    "you": "You"
+  },
+  "messages": {
+    "label": "Messages",
+    "unread_one": "Messages, {{count}} unread",
+    "unread_other": "Messages, {{count}} unread"
+  },
+  "chat": {
+    "away": "{{minutes}} min away",
+    "call": "Call {{name}}",
+    "callSoon": "Calling isn't available yet. Send {{name}} a message instead.",
+    "messages": "Messages",
+    "empty": "Say hello to {{name}}. They can see where you are.",
+    "typing": "{{name}} is typing…",
+    "today": "Today {{time}}",
+    "yesterday": "Yesterday {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "Read aloud is coming soon.",
+    "attach": "Attach a photo",
+    "attachSoon": "Sending photos is coming soon.",
+    "placeholder": "Message",
+    "messageTo": "Message {{name}}",
+    "stickers": "Stickers",
+    "stickersSoon": "Stickers are coming soon.",
+    "record": "Record a voice message",
+    "voiceSoon": "Voice messages are coming soon."
+  },
+  "bubble": {
+    "mine": "You, {{time}}: {{text}}",
+    "theirs": "Volunteer, {{time}}: {{text}}",
+    "listen": "listen",
+    "listenLabel": "Listen to this message"
+  },
+  "feedback": {
+    "skip": "Skip",
+    "skipLabel": "Skip feedback",
+    "question": "How was your help?",
+    "wentWell": "What went well?",
+    "tags": {
+      "language": "Spoke my language",
+      "venue": "Knew the venue",
+      "patient": "Patient",
+      "fast": "Arrived fast",
+      "helpful": "Helpful",
+      "other": "Other"
+    },
+    "placeholder": "e.g. {{name}} found me a seat out of the sun",
+    "pickStar": "Tap a star to rate your help from {{name}}.",
+    "sendFailed": "Couldn't send your feedback. {{reason}}",
+    "submit": "Submit"
+  },
+  "rating": {
+    "label": "Rating",
+    "star_one": "{{count}} star, {{word}}",
+    "star_other": "{{count}} stars, {{word}}",
+    "words": {
+      "poor": "Poor",
+      "notGreat": "Not great",
+      "ok": "OK",
+      "good": "Good",
+      "excellent": "Excellent"
+    }
+  },
+  "report": {
+    "title": "Report a problem",
+    "kindLabel": "What went wrong?",
+    "kinds": {
+      "no_show": "Didn't arrive",
+      "unsafe": "I felt unsafe",
+      "rude": "Rude or unkind",
+      "other": "Something else"
+    },
+    "notePlaceholder": "What happened? (optional)",
+    "pickKind": "Pick what went wrong.",
+    "sendFailed": "Couldn't send the report. {{reason}}",
+    "notNow": "Not now",
+    "send": "Send report",
+    "sent": "Report sent",
+    "sentBody": "LA28 staff will look into it today. In danger right now? Call 911."
+  },
+  "incoming": {
+    "title": "Incoming requests",
+    "subtitle": "Visitors near you who asked for help",
+    "preview": "Preview: matching isn’t live yet, so these are examples.",
+    "who": "{{help}} · {{name}}",
+    "meta": "{{distance}} away · {{minutes}} min ago · {{language}}",
+    "accept": "Accept",
+    "acceptSoon": "Accepting requests opens when matching goes live."
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "Near Gate 2 Ramp",
+      "section214": "Section 214 concourse",
+      "mainPlaza": "Main entrance plaza"
+    },
+    "greeting": "Hi {{name}}! I'm {{volunteer}}, your LA28 volunteer. I'm heading to you now. Meeting point: {{spot}}.",
+    "greetingNoName": "Hi! I'm {{volunteer}}, your LA28 volunteer. I'm heading to you now. Meeting point: {{spot}}.",
+    "reply1": "Got it, thanks! I'll be there in a couple of minutes.",
+    "reply2": "I can see Gate 2 now. I'm wearing a pink LA28 vest.",
+    "reply3": "No problem, take your time. I will wait with you."
+  }
+}

@@ -1,0 +1,36 @@
+# chat-bubble (231:25791)
+COMPONENT_SET "chat-bubble" 442x341 @0,0 auto:col gap=24 pad=32/40/32/40 align=/ fill=#ffffff stroke=#9747ff/1 r=5
+  COMPONENT "Multiple lines=no, Variant=incoming" 171x40 @40,32
+    FRAME "frame" 19x40 @40,32 auto:col gap=-1 pad=0/0/0/0 align=/MAX
+      RECTANGLE "rectangle" 16x25 @43,32 fill=#ffffff stroke=#9ba9b0/1 r=100/0/0/0
+      BOOLEAN_OPERATION "Union" 19x16 @40,56 fill=#ffffff stroke=#9ba9b0/0.5 [ICON svg/union-6a4ae0.svg]
+    FRAME "text" 153x40 @58,32 auto:row gap=8 pad=12/16/12/0 align=/MAX fill=#ffffff stroke=#9ba9b0/1 r=0/24/24/0
+      TEXT "Message here" 89x16 @58,44 font=Alexandria 400 13/16 ls=0 align=LEFT color=#22282b text="Message here"
+      FRAME "frame" 40x13 @155,47 auto:row gap=10 pad=0/0/0/0 align=/CENTER
+        TEXT "2:00pm" 40x13 @155,47 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#7e919a text="2:00pm"
+  COMPONENT "Multiple lines=yes, Variant=incoming" 362x61 @40,96 auto:row gap=-1 pad=0/0/0/0 align=/
+    FRAME "frame" 19x61 @40,96 auto:col gap=-1 pad=0/0/0/0 align=/MAX
+      RECTANGLE "rectangle" 16x46 @43,96 fill=#ffffff stroke=#9ba9b0/1 r=100/0/0/0
+      BOOLEAN_OPERATION "Union" 19x16 @40,141 fill=#ffffff stroke=#9ba9b0/0.5 [ICON svg/union-6a4ae0.svg]
+    FRAME "text" 344x61 @58,96 auto:col gap=8 pad=12/16/12/0 align=/ fill=#ffffff stroke=#9ba9b0/1 r=0/24/24/0
+      TEXT "Message here" 328x16 @58,108 font=Alexandria 400 13/16 ls=0 align=LEFT color=#22282b text="Message here"
+      FRAME "frame" 328x13 @58,132 auto:row gap=10 pad=0/0/0/0 align=MAX/CENTER
+        TEXT "2:00pm" 40x13 @346,132 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#7e919a text="2:00pm"
+  COMPONENT "Multiple lines=no, Variant=outgoing" 191x40 @40,181 auto:row gap=-1 pad=0/0/0/0 align=MAX/
+    FRAME "text" 173x40 @40,181 auto:row gap=8 pad=12/0/12/16 align=/MAX fill=#1d5dbc stroke=#a6a6a6/1 r=24/0/0/24
+      TEXT "Message here" 89x16 @56,193 font=Alexandria 400 13/16 ls=0 align=RIGHT color=#ffffff text="Message here"
+      FRAME "frame" 60x16 @153,193 auto:row gap=4 pad=0/0/0/0 align=MAX/CENTER
+        TEXT "2:00pm" 40x13 @153,195 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#ffffff text="2:00pm"
+        INSTANCE "read" 16x16 @197,193 [ICON svg/read-4b1a0c.svg]
+    FRAME "frame" 19x40 @212,181 auto:col gap=-1 pad=0/0/0/0 align=/MAX
+      RECTANGLE "rectangle" 16x25 @212,181 fill=#1d5dbc stroke=#a6a6a6/1 r=100/0/0/0
+      BOOLEAN_OPERATION "Union" 19x16 @212,205 fill=#1d5dbc stroke=#a6a6a6/0.5 [ICON svg/union-859373.svg]
+  COMPONENT "Multiple lines=yes, Variant=outgoing" 362x64 @40,245 auto:row gap=-1 pad=0/0/0/0 align=MAX/
+    FRAME "text" 344x64 @40,245 auto:col gap=8 pad=12/0/12/16 align=/ fill=#1d5dbc stroke=#a6a6a6/1 r=24/0/0/24
+      TEXT "Message here" 328x16 @56,257 font=Alexandria 400 13/16 ls=0 align=LEFT color=#ffffff text="Message here"
+      FRAME "frame" 328x16 @56,281 auto:row gap=4 pad=0/0/0/0 align=MAX/CENTER
+        TEXT "2:00pm" 40x13 @324,283 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#ffffff text="2:00pm"
+        INSTANCE "read" 16x16 @368,281 [ICON svg/read-4b1a0c.svg]
+    FRAME "frame" 19x64 @383,245 auto:col gap=-1 pad=0/0/0/0 align=/MAX
+      RECTANGLE "rectangle" 16x49 @383,245 fill=#1d5dbc stroke=#a6a6a6/1 r=100/0/0/0
+      BOOLEAN_OPERATION "Union" 19x16 @383,293 fill=#1d5dbc stroke=#a6a6a6/0.5 [ICON svg/union-859373.svg]

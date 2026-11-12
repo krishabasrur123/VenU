@@ -1,0 +1,232 @@
+{
+  "tab": {
+    "title": "프로필",
+    "visitor": "관람객",
+    "volunteer": "자원봉사자",
+    "verified": "✓ LA28 인증됨",
+    "unverified": "미인증",
+    "sharedVisitor": "도우미에게 공유되는 정보",
+    "sharedVolunteer": "관람객에게 보이는 정보",
+    "account": "계정",
+    "support": "지원",
+    "editProfile": "프로필 편집",
+    "notifications": "알림",
+    "privacy": "개인정보 및 데이터",
+    "help": "도움말 및 의견",
+    "terms": "이용 약관",
+    "signOutFailed": "로그아웃하지 못했습니다. {{reason}}",
+    "deleteWarning": "프로필과 사진이 영구 삭제됩니다. 나중에 새로 만들 수 있어요.",
+    "deleteFailed": "데이터를 모두 삭제하지 못했습니다. {{reason}}",
+    "deleteData": "내 데이터 삭제"
+  },
+  "edit": {
+    "title": "프로필 편집",
+    "subtitle": "변경 사항은 다음 도움 요청부터 적용됩니다.",
+    "submit": "변경 사항 저장"
+  },
+  "form": {
+    "aboutYou": "내 정보",
+    "firstName": "이름",
+    "firstNamePlaceholderVisitor": "예: Rosa",
+    "firstNamePlaceholderVolunteer": "예: Daniel",
+    "firstNameHint": "만나는 사람에게는 이름만 보입니다.",
+    "languagesVisitor": "사용하는 언어",
+    "languagesVolunteer": "유창한 언어",
+    "accessNeeds": "알려 주실 것이 있나요?",
+    "accessNeedsLabel": "접근성 요구 사항",
+    "otherNeedsPlaceholder": "예: 보조견과 함께 다녀요",
+    "otherNeedsLabel": "기타 접근성 요구 사항",
+    "communication": "어떻게 소통하고 싶으세요?",
+    "communicationHint": "도우미가 도착하기 전에 확인합니다.",
+    "communicationLabel": "소통 방법",
+    "helperPref": "원하는 도우미",
+    "gender": "성별",
+    "age": "나이",
+    "helperGenderLabel": "도우미 성별",
+    "helperAgeLabel": "도우미 나이",
+    "training": "교육",
+    "trainingHint": "LA28이 인증할 때 확인합니다.",
+    "yourGender": "내 성별",
+    "yourGenderHint": "관람객이 여성 또는 남성 도우미를 요청할 때만 사용하며, 표시되지 않습니다.",
+    "yourAge": "내 연령대",
+    "yourAgeHint": "연결에만 사용하며, 표시되지 않습니다.",
+    "privacyAgree": "VenU가 <a>개인정보 처리방침</a>에 따라 내 정보를 사용하는 데 동의합니다.",
+    "privacyAgreeLabel": "VenU가 개인정보 처리방침에 따라 내 정보를 사용하는 데 동의합니다",
+    "fixAbove": "위의 일부 답변을 수정해야 합니다(빨간색 표시)."
+  },
+  "validate": {
+    "firstName": "이름을 입력하세요.",
+    "tooLong": "{{max}}자 이하로 입력하세요.",
+    "noLanguage": "언어를 하나 이상 추가하세요.",
+    "mainLanguage": "주 언어를 선택하세요.",
+    "otherNote": "필요한 도움을 간단히 알려 주세요.",
+    "pickOne": "하나를 선택하세요(또는 '밝히고 싶지 않음').",
+    "privacy": "계속하려면 개인정보 처리방침에 동의하세요."
+  },
+  "options": {
+    "accessNeeds": {
+      "wheelchair": "휠체어 사용",
+      "hard_of_hearing": "청각 장애",
+      "low_vision": "저시력",
+      "walking_aid": "보행 보조기구",
+      "other": "기타"
+    },
+    "communication": {
+      "speaking": "말하기",
+      "text": "문자 / 글쓰기",
+      "sign_language": "수어"
+    },
+    "helperGender": {
+      "none": "상관없음",
+      "man": "남성",
+      "woman": "여성"
+    },
+    "helperAge": {
+      "any": "나이 무관",
+      "under_40": "40세 미만",
+      "40_plus": "40세 이상"
+    },
+    "training": {
+      "wheelchair": "휠체어 보조 교육",
+      "asl": "ASL",
+      "first_aid": "응급처치",
+      "sighted_guide": "시각장애인 안내",
+      "mental_health": "정신건강 응급처치"
+    },
+    "gender": {
+      "woman": "여성",
+      "man": "남성",
+      "nonbinary": "논바이너리",
+      "prefer_not": "밝히고 싶지 않음"
+    },
+    "ageBand": {
+      "under_40": "40세 미만",
+      "40_plus": "40세 이상",
+      "prefer_not": "밝히고 싶지 않음"
+    }
+  },
+  "summary": {
+    "speaks": "사용 언어: {{languages}}",
+    "listSeparator": ", ",
+    "otherNeeds": "기타 요구 사항(메모 참고)",
+    "prefers": {
+      "speaking": "말하기 선호",
+      "text": "문자 / 글쓰기 선호",
+      "sign_language": "수어 선호"
+    }
+  },
+  "languageNames": {
+    "en": "영어",
+    "es": "스페인어",
+    "zh": "중국어",
+    "ko": "한국어",
+    "tl": "타갈로그어",
+    "vi": "베트남어",
+    "hy": "아르메니아어",
+    "fa": "페르시아어",
+    "ja": "일본어",
+    "ru": "러시아어",
+    "ar": "아랍어",
+    "fr": "프랑스어",
+    "pt": "포르투갈어",
+    "de": "독일어",
+    "it": "이탈리아어",
+    "hi": "힌디어",
+    "pa": "펀자브어",
+    "th": "태국어",
+    "km": "크메르어",
+    "he": "히브리어",
+    "ase": "미국 수어"
+  },
+  "privacy": {
+    "title": "내 개인정보",
+    "summary": "알맞은 도우미를 연결하는 데 필요한 정보만 요청하며, 언제든 수정하거나 삭제할 수 있습니다.",
+    "englishNotice": "이 방침은 영어로 표시됩니다.",
+    "version": "버전 {{version}}. 팀 검토용 초안.",
+    "sections": {
+      "collect": "수집하는 정보",
+      "why": "수집하는 이유",
+      "who": "볼 수 있는 사람",
+      "where": "저장 위치",
+      "keep": "보관 기간",
+      "choices": "나의 선택"
+    }
+  },
+  "terms": {
+    "title": "이용 약관",
+    "subtitle": "VenU 이용 규칙 요약본입니다.",
+    "englishNotice": "이 약관은 영어로 표시됩니다.",
+    "privacyLink": "정보 사용 방법은 <a>개인정보 처리방침</a>에서 확인하세요.",
+    "version": "버전 {{version}}. 팀 검토용 초안.",
+    "sections": {
+      "what": "VenU 소개",
+      "emergencies": "응급 상황용이 아닙니다",
+      "kind": "친절하고 정직하게",
+      "remove": "삭제할 수 있는 항목",
+      "guarantees": "보증하지 않는 사항"
+    }
+  },
+  "help": {
+    "title": "도움말 및 의견",
+    "subtitle": "자주 묻는 질문과 고칠 점을 알려 주실 수 있는 곳입니다.",
+    "commonQuestions": "자주 묻는 질문",
+    "faq": {
+      "matching": {
+        "q": "연결은 어떻게 이루어지나요?",
+        "a": "도움을 요청하면 경기장에서 가까이 있고, 내 언어를 쓰며, 필요한 교육을 받은 자원봉사자를 찾습니다. 예: 스페인어를 쓰는 휠체어 보조 교육 이수 자원봉사자."
+      },
+      "volunteers": {
+        "q": "자원봉사자는 무엇을 도와주나요?",
+        "a": "좌석, 게이트, 화장실, 엘리베이터 찾기, 경기장 안내, 통역을 도와줍니다. 의료 처치는 할 수 없습니다."
+      },
+      "emergency": {
+        "q": "응급 상황이면 어떻게 하나요?",
+        "a": "911에 전화하거나 가장 가까운 경기장 직원에게 알리세요. VenU 자원봉사자는 응급 구조 요원이 아닙니다."
+      },
+      "languages": {
+        "q": "어떤 언어를 지원하나요?",
+        "a": "ASL을 포함해 21개 언어 중에서 고를 수 있습니다. '프로필 편집'에서 사용하는 언어를 모두 추가하면 더 많은 도우미를 찾을 수 있어요."
+      },
+      "privacy": {
+        "q": "내 정보는 누가 보나요?",
+        "a": "나를 돕는 사람만, 돕는 동안에만 봅니다. 이름, 사진, 언어, 공유하기로 한 요구 사항이 해당됩니다. 나머지는 '개인정보 및 데이터'를 참고하세요."
+      },
+      "report": {
+        "q": "시설 문제는 어떻게 신고하나요?",
+        "a": "경기장 탭에서 시설(예: 엘리베이터나 화장실)을 누른 뒤 '내 신고 추가'를 누르세요. 그 시설을 여는 모든 사람이 볼 수 있습니다."
+      }
+    },
+    "sendFeedback": "의견 보내기",
+    "feedbackHint": "헷갈리거나, 고장 났거나, 빠진 것이 있나요? 알려 주세요.",
+    "thanksTitle": "감사합니다!",
+    "thanksBody": "모든 의견을 읽고 VenU를 개선하는 데 활용합니다.",
+    "sendMore": "의견 더 보내기",
+    "placeholder": "예: 햇빛 아래에서 지도가 잘 안 보였어요",
+    "feedbackLabel": "의견",
+    "send": "의견 보내기",
+    "empty": "먼저 몇 마디 적어 주세요."
+  },
+  "notifications": {
+    "title": "알림",
+    "subtitle": "VenU에서 받을 알림을 선택하세요.",
+    "note": "VenU 알림 설정이 완료되면 알림을 받기 시작합니다.",
+    "options": {
+      "volunteer": {
+        "label": "자원봉사자 소식",
+        "hint": "예: Daniel이 수락하고 오는 중입니다"
+      },
+      "chat": {
+        "label": "채팅 메시지",
+        "hint": "도우미나 관람객의 새 메시지"
+      },
+      "venue": {
+        "label": "경기장 알림",
+        "hint": "예: SoFi Stadium C 게이트가 닫혔습니다"
+      },
+      "reports": {
+        "label": "신고 답변",
+        "hint": "직원이 시설 신고에 답변할 때"
+      }
+    }
+  }
+}

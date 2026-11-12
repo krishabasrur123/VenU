@@ -1,0 +1,223 @@
+{
+  "search": {
+    "placeholder": "Rechercher",
+    "clear": "Effacer la recherche"
+  },
+  "back": {
+    "venues": "Retour aux sites",
+    "facilities": "Retour aux services",
+    "facility": "Retour au service"
+  },
+  "choose": {
+    "title": "Choisissez votre site",
+    "subtitle": "Choisissez où voir le plan et les services",
+    "searchLabel": "Rechercher un site",
+    "languageLabel": "Langue de l’app : {{language}}",
+    "languageHint": "Change la langue de toute l’app",
+    "languageTitle": "Langue de l’app",
+    "languageConsent": "Consultez d’abord la politique de confidentialité mise à jour dans Profil, puis changez de langue.",
+    "assistTitle": "Besoin d’aide ?",
+    "assistBody": "Contactez un bénévole",
+    "assistLabel": "Besoin d’aide ? Contactez un bénévole",
+    "empty": "Aucun site ne correspond à « {{query}} ». Essayez une ville, comme Inglewood.",
+    "cardHint": "Ouvre le plan et les services"
+  },
+  "events": {
+    "opening_ceremony": "Cérémonie d’ouverture",
+    "swimming": "Natation",
+    "athletics": "Athlétisme",
+    "football": "Football",
+    "gymnastics": "Gymnastique",
+    "basketball": "Basketball"
+  },
+  "category": {
+    "all": "Tout",
+    "groupLabel": "Type de service",
+    "gate": "Portes",
+    "restroom": "Toilettes",
+    "food": "Restauration",
+    "first_aid": "Premiers secours",
+    "lost_found": "Objets trouvés",
+    "info": "Accueil",
+    "accessible": "Accessibilité",
+    "parking": "Parking"
+  },
+  "emptyMatch": {
+    "all": "Aucun service ne correspond à « {{query}} »",
+    "gate": "Aucune porte ne correspond à « {{query}} »",
+    "restroom": "Aucunes toilettes ne correspondent à « {{query}} »",
+    "food": "Aucun stand de restauration ne correspond à « {{query}} »",
+    "first_aid": "Aucun poste de secours ne correspond à « {{query}} »",
+    "lost_found": "Aucun bureau des objets trouvés ne correspond à « {{query}} »",
+    "info": "Aucun point d’accueil ne correspond à « {{query}} »",
+    "accessible": "Aucun service accessible ne correspond à « {{query}} »",
+    "parking": "Aucun parking ne correspond à « {{query}} »"
+  },
+  "emptyNone": {
+    "all": "Pas encore de services à {{venue}}",
+    "gate": "Pas encore de portes à {{venue}}",
+    "restroom": "Pas encore de toilettes à {{venue}}",
+    "food": "Pas encore de stands de restauration à {{venue}}",
+    "first_aid": "Pas encore de poste de secours à {{venue}}",
+    "lost_found": "Pas encore de bureau des objets trouvés à {{venue}}",
+    "info": "Pas encore de point d’accueil à {{venue}}",
+    "accessible": "Pas encore de services accessibles à {{venue}}",
+    "parking": "Pas encore de parking à {{venue}}"
+  },
+  "list": {
+    "title": "Services à proximité",
+    "searchLabel": "Rechercher un service",
+    "showing": "Affichage : {{category}}",
+    "showAll": "Tout afficher",
+    "showAllHint": "Réaffiche tous les services"
+  },
+  "sheet": {
+    "down": "Panneau des services, abaissé",
+    "mid": "Panneau des services, à mi-hauteur",
+    "up": "Panneau des services, relevé",
+    "hint": "Touchez pour redimensionner, ou faites glisser vers le haut ou le bas"
+  },
+  "map": {
+    "pin": "{{name}} sur le plan",
+    "north": "N"
+  },
+  "walk_one": "{{count}} min à pied",
+  "walk_many": "{{count}} min à pied",
+  "walk_other": "{{count}} min à pied",
+  "wait": {
+    "none": "Pas d’attente",
+    "short": "Attente courte",
+    "long": "Attente longue"
+  },
+  "row": {
+    "label": "{{name}}, {{meta}}",
+    "labelAccessible": "{{name}}, {{meta}}, accessible"
+  },
+  "tags": {
+    "label": "Étiquettes :",
+    "accessible": "Accessible",
+    "stairs": "Escaliers",
+    "busy_before_events": "Affluence avant les épreuves",
+    "ramp": "Rampe",
+    "bag_check": "Contrôle des sacs",
+    "rideshare": "VTC",
+    "escalators": "Escalators",
+    "sensory_kits": "Kits sensoriels",
+    "quiet_room": "Salle calme",
+    "family_room": "Espace famille",
+    "long_lines_halftime": "Longues files à la mi-temps",
+    "wheelchair_loans": "Prêt de fauteuils roulants",
+    "permit_needed": "Permis requis"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "Entrée nord, la plus proche de l’arrêt de la navette Metro.",
+      "location": "Côté nord, à l’arrêt de la navette"
+    },
+    "gate-2": {
+      "description": "Entrée est avec rampe, à côté du parking accessible du parc C.",
+      "location": "Côté est, près du parc C"
+    },
+    "gate-3": {
+      "description": "Entrée sud pour la dépose et la prise en charge en VTC.",
+      "location": "Côté sud, à la zone VTC"
+    },
+    "gate-4": {
+      "description": "Entrée ouest pour les billets des sections 200 à 240.",
+      "location": "Côté ouest, près de la place principale"
+    },
+    "info-desk": {
+      "description": "Questions, billets perdus, kits sensoriels et casques anti-bruit.",
+      "location": "Promenade, section 105"
+    },
+    "first-aid": {
+      "description": "Infirmiers et secouristes présents de l’ouverture des portes jusqu’à l’évacuation du site.",
+      "location": "Promenade, section 112"
+    },
+    "restroom-east": {
+      "description": "Toilettes hommes, femmes et un espace famille mixte avec table à langer.",
+      "location": "Promenade, section 118"
+    },
+    "food-south": {
+      "description": "Tacos, burritos et agua fresca. Options végétariennes.",
+      "location": "Promenade, section 124"
+    },
+    "lost-found": {
+      "description": "Déposez ou récupérez des objets perdus. Les enfants perdus sont aussi accompagnés ici.",
+      "location": "Promenade, section 131"
+    },
+    "accessible-seating": {
+      "description": "Prêt de fauteuils roulants, places accompagnateur et aides à l’écoute.",
+      "location": "Promenade, section 136"
+    },
+    "food-west": {
+      "description": "Burgers, frites et boissons fraîches. Steaks halal disponibles.",
+      "location": "Promenade, section 140"
+    },
+    "restroom-west": {
+      "description": "Toilettes hommes et femmes. La cabine accessible est à gauche.",
+      "location": "Promenade, section 145"
+    },
+    "parking-c": {
+      "description": "Parking accessible avec un chemin court et plat jusqu’à Gate 2.",
+      "location": "Parc sud-est"
+    }
+  },
+  "facility": {
+    "notFound": "Service introuvable",
+    "wheelchair": "Accessible en fauteuil roulant",
+    "directions": "Itinéraire",
+    "directionsSoon": "L’itinéraire pas à pas arrive bientôt. {{name}} : {{location}}.",
+    "reports": "Signalements",
+    "results_one": "{{count}} résultat",
+    "results_many": "{{count}} de résultats",
+    "results_other": "{{count}} résultats",
+    "noReports": "Aucun signalement pour l’instant. Soyez le premier à partager ce que vous avez vu.",
+    "addReport": "Ajouter un signalement"
+  },
+  "submitted": {
+    "title": "Signalement envoyé",
+    "body": "Merci d’avoir signalé l’état de ce service.",
+    "again": "Envoyer un autre signalement"
+  },
+  "card": {
+    "label": "Signalement : {{title}}, par {{author}}",
+    "hint": "Ouvre le signalement complet",
+    "new": "Nouveau",
+    "by": "Par {{author}}",
+    "seeMore": "voir plus →"
+  },
+  "topic": {
+    "accessibility": "Accessibilité",
+    "directions": "Itinéraire",
+    "facility_condition": "État des lieux",
+    "security": "Sécurité",
+    "crowds": "Affluence",
+    "other": "Autre"
+  },
+  "report": {
+    "notFound": "Signalement introuvable",
+    "kind": "Signalement",
+    "submitted": "Envoyé le {{date}}",
+    "noBody": "Aucun détail ajouté."
+  },
+  "form": {
+    "title": "Nouveau signalement",
+    "subtitleAt": "Partagez ce que vous avez vu à {{facility}} pour aider le prochain visiteur",
+    "subtitle": "Partagez ce que vous avez vu pour aider le prochain visiteur",
+    "titleLabel": "Titre du signalement",
+    "titlePlaceholder": "Que faut-il savoir ?",
+    "bodyLabel": "Votre signalement",
+    "bodyPlaceholder": "Saisissez le texte",
+    "bodyHint": "Facultatif. Que s’est-il passé, où et quand ?",
+    "pictureSoon": "L’ajout de photos arrive bientôt.",
+    "speakSoon": "Les signalements vocaux arrivent bientôt. Écrivez votre signalement pour l’instant.",
+    "topic": "Sujet",
+    "submit": "Envoyer",
+    "sendFailed": "Impossible d’envoyer le signalement. Vérifiez votre connexion et réessayez.",
+    "titleRequired": "Ajoutez un titre, par ex. « La rampe de la Gate 2 est fissurée ».",
+    "titleTooLong": "Le titre doit faire moins de {{max}} caractères.",
+    "topicRequired": "Choisissez le sujet le plus adapté.",
+    "bodyTooLong": "Le signalement doit faire moins de {{max}} caractères."
+  }
+}

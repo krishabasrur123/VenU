@@ -1,0 +1,49 @@
+<svg width="256" height="64" viewBox="0 0 256 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_255_27175)">
+<mask id="stroke0_255_27175" fill="white">
+<path d="M32 16L36.8904 25.269L47.2169 27.0557L39.9128 34.571L41.4046 44.9443L32 40.32L22.5954 44.9443L24.0872 34.571L16.7831 27.0557L27.1096 25.269L32 16Z"/>
+</mask>
+<path d="M32 16L36.8904 25.269L47.2169 27.0557L39.9128 34.571L41.4046 44.9443L32 40.32L22.5954 44.9443L24.0872 34.571L16.7831 27.0557L27.1096 25.269L32 16Z" stroke-width="4" stroke="#FFD788" mask="url(#stroke0_255_27175)"/>
+</g>
+<g clip-path="url(#clip1_255_27175)">
+<mask id="stroke1_255_27175" fill="white">
+<path d="M80 16L84.8904 25.269L95.2169 27.0557L87.9128 34.571L89.4046 44.9443L80 40.32L70.5954 44.9443L72.0872 34.571L64.7831 27.0557L75.1096 25.269L80 16Z"/>
+</mask>
+<path d="M80 16L84.8904 25.269L95.2169 27.0557L87.9128 34.571L89.4046 44.9443L80 40.32L70.5954 44.9443L72.0872 34.571L64.7831 27.0557L75.1096 25.269L80 16Z" stroke-width="4" stroke="#FFD788" mask="url(#stroke1_255_27175)"/>
+</g>
+<g clip-path="url(#clip2_255_27175)">
+<mask id="stroke2_255_27175" fill="white">
+<path d="M128 16L132.89 25.269L143.217 27.0557L135.913 34.571L137.405 44.9443L128 40.32L118.595 44.9443L120.087 34.571L112.783 27.0557L123.11 25.269L128 16Z"/>
+</mask>
+<path d="M128 16L132.89 25.269L143.217 27.0557L135.913 34.571L137.405 44.9443L128 40.32L118.595 44.9443L120.087 34.571L112.783 27.0557L123.11 25.269L128 16Z" stroke-width="4" stroke="#FFD788" mask="url(#stroke2_255_27175)"/>
+</g>
+<g clip-path="url(#clip3_255_27175)">
+<mask id="stroke3_255_27175" fill="white">
+<path d="M176 16L180.89 25.269L191.217 27.0557L183.913 34.571L185.405 44.9443L176 40.32L166.595 44.9443L168.087 34.571L160.783 27.0557L171.11 25.269L176 16Z"/>
+</mask>
+<path d="M176 16L180.89 25.269L191.217 27.0557L183.913 34.571L185.405 44.9443L176 40.32L166.595 44.9443L168.087 34.571L160.783 27.0557L171.11 25.269L176 16Z" stroke-width="4" stroke="#FFD788" mask="url(#stroke3_255_27175)"/>
+</g>
+<g clip-path="url(#clip4_255_27175)">
+<mask id="stroke4_255_27175" fill="white">
+<path d="M224 16L228.89 25.269L239.217 27.0557L231.913 34.571L233.405 44.9443L224 40.32L214.595 44.9443L216.087 34.571L208.783 27.0557L219.11 25.269L224 16Z"/>
+</mask>
+<path d="M224 16L228.89 25.269L239.217 27.0557L231.913 34.571L233.405 44.9443L224 40.32L214.595 44.9443L216.087 34.571L208.783 27.0557L219.11 25.269L224 16Z" stroke-width="4" stroke="#FFD788" mask="url(#stroke4_255_27175)"/>
+</g>
+<defs>
+<clipPath id="clip0_255_27175">
+<rect width="32" height="32" fill="white" transform="translate(16 16)"/>
+</clipPath>
+<clipPath id="clip1_255_27175">
+<rect width="32" height="32" fill="white" transform="translate(64 16)"/>
+</clipPath>
+<clipPath id="clip2_255_27175">
+<rect width="32" height="32" fill="white" transform="translate(112 16)"/>
+</clipPath>
+<clipPath id="clip3_255_27175">
+<rect width="32" height="32" fill="white" transform="translate(160 16)"/>
+</clipPath>
+<clipPath id="clip4_255_27175">
+<rect width="32" height="32" fill="white" transform="translate(208 16)"/>
+</clipPath>
+</defs>
+</svg>

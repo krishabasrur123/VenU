@@ -15,11 +15,12 @@ import { createRequire } from 'node:module';
 import { createServer } from 'node:net';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { MOCK_SUPABASE_PORT, startMockSupabase } from './mock-supabase.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RUN_DIR = join(ROOT, '.expo', 'dev-servers'); // one file per running server (git-ignored)
 const MOCK_STATE = join(ROOT, '.expo', 'mock-supabase.json');
-const MOCK_API_PORT = 54330;
+const MOCK_API_PORT = MOCK_SUPABASE_PORT;
 const PORTS = { supabase: 8081, local: 8082, mock: 8083 };
 
 const [mode, ...rest] = process.argv.slice(2);
@@ -68,7 +69,6 @@ let mockServer = null;
 if (mode === 'mock') {
   if (reset) rmSync(MOCK_STATE, { force: true });
   await freePort(MOCK_API_PORT);
-  const { startMockSupabase } = await import('./mock-supabase.mjs');
   mockServer = await startMockSupabase({ port: MOCK_API_PORT, confirmEmail: verify, stateFile: MOCK_STATE });
   env.EXPO_PUBLIC_SUPABASE_URL = `http://localhost:${MOCK_API_PORT}`;
   env.EXPO_PUBLIC_SUPABASE_ANON_KEY = 'mock-publishable-key';
@@ -115,17 +115,32 @@ function readEnvLocal() {
   return out;
 }
 
-function isPortFree(p) {
+/** Resolves null when the port can be bound, otherwise the error code (EADDRINUSE, EACCES, ...). */
+function portError(p) {
   return new Promise(done => {
     const probe = createServer();
-    probe.once('error', () => done(false));
-    probe.listen(p, () => probe.close(() => done(true)));
+    probe.once('error', e => done(e.code ?? 'UNKNOWN'));
+    probe.listen(p, () => probe.close(() => done(null)));
   });
+}
+
+async function isPortFree(p) {
+  return (await portError(p)) === null;
 }
 
 /** Frees the port if one of our own servers holds it; otherwise explains and exits. */
 async function freePort(p) {
-  if (await isPortFree(p)) return;
+  const error = await portError(p);
+  if (error === null) return;
+  if (error === 'EACCES') {
+    // Nothing is listening; the OS refuses the port (on Windows, a Hyper-V/WSL reserved range).
+    console.error(`Port ${p} is blocked by the system, not used by a program.`);
+    if (process.platform === 'win32') console.error('Reserved ranges: netsh interface ipv4 show excludedportrange protocol=tcp');
+    console.error(p === MOCK_API_PORT
+      ? 'Change MOCK_SUPABASE_PORT in scripts/mock-supabase.mjs to a port outside those ranges.'
+      : 'Pick another port: -- --port <number>.');
+    process.exit(1);
+  }
   const ours = runningServers().filter(s => s.port === p || (s.mode === 'mock' && p === MOCK_API_PORT));
   if (ours.length) {
     for (const s of ours) killTree(s.pid);

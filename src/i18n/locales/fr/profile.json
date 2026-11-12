@@ -1,0 +1,232 @@
+{
+  "tab": {
+    "title": "Profil",
+    "visitor": "Spectateur",
+    "volunteer": "Bénévole",
+    "verified": "✓ Vérifié LA28",
+    "unverified": "Non vérifié",
+    "sharedVisitor": "Ce que voit votre accompagnant",
+    "sharedVolunteer": "Ce que voient les spectateurs",
+    "account": "Compte",
+    "support": "Assistance",
+    "editProfile": "Modifier le profil",
+    "notifications": "Notifications",
+    "privacy": "Confidentialité et données",
+    "help": "Aide et avis",
+    "terms": "Conditions d'utilisation",
+    "signOutFailed": "Impossible de se déconnecter. {{reason}}",
+    "deleteWarning": "Votre profil et votre photo seront supprimés définitivement. Vous pourrez en créer un nouveau plus tard.",
+    "deleteFailed": "Impossible de supprimer toutes vos données. {{reason}}",
+    "deleteData": "Supprimer mes données"
+  },
+  "edit": {
+    "title": "Modifier le profil",
+    "subtitle": "Les changements s'appliquent à votre prochaine demande d'aide.",
+    "submit": "Enregistrer"
+  },
+  "form": {
+    "aboutYou": "À propos de vous",
+    "firstName": "Prénom",
+    "firstNamePlaceholderVisitor": "p. ex. Rosa",
+    "firstNamePlaceholderVolunteer": "p. ex. Daniel",
+    "firstNameHint": "Seul votre prénom est visible par les personnes que vous rencontrez.",
+    "languagesVisitor": "Langues que vous parlez",
+    "languagesVolunteer": "Langues que vous parlez couramment",
+    "accessNeeds": "Quelque chose à nous signaler ?",
+    "accessNeedsLabel": "Besoins d'accessibilité",
+    "otherNeedsPlaceholder": "p. ex. J'ai un chien d'assistance",
+    "otherNeedsLabel": "Autres besoins d'accessibilité",
+    "communication": "Comment préférez-vous communiquer ?",
+    "communicationHint": "Votre accompagnant le voit avant de vous rejoindre.",
+    "communicationLabel": "Communication",
+    "helperPref": "Je préfère être aidé par",
+    "gender": "Genre",
+    "age": "Âge",
+    "helperGenderLabel": "Genre de l'accompagnant",
+    "helperAgeLabel": "Âge de l'accompagnant",
+    "training": "Formation",
+    "trainingHint": "LA28 les vérifie lors de votre validation.",
+    "yourGender": "Votre genre",
+    "yourGenderHint": "Utilisé seulement si un spectateur demande une femme ou un homme. Jamais affiché.",
+    "yourAge": "Votre tranche d'âge",
+    "yourAgeHint": "Uniquement pour la mise en relation, jamais affichée.",
+    "privacyAgree": "J'accepte que VenU utilise mes informations comme décrit dans la <a>politique de confidentialité</a>.",
+    "privacyAgreeLabel": "J'accepte que VenU utilise mes informations comme décrit dans la politique de confidentialité",
+    "fixAbove": "Certaines réponses ci-dessus sont à corriger (en rouge)."
+  },
+  "validate": {
+    "firstName": "Ajoutez votre prénom.",
+    "tooLong": "Utilisez {{max}} caractères maximum.",
+    "noLanguage": "Ajoutez au moins une langue.",
+    "mainLanguage": "Choisissez votre langue principale.",
+    "otherNote": "Dites-nous en quelques mots ce dont vous avez besoin.",
+    "pickOne": "Choisissez une option (ou « Je préfère ne pas répondre »).",
+    "privacy": "Acceptez la politique de confidentialité pour continuer."
+  },
+  "options": {
+    "accessNeeds": {
+      "wheelchair": "En fauteuil roulant",
+      "hard_of_hearing": "Malentendant",
+      "low_vision": "Malvoyant",
+      "walking_aid": "Aide à la marche",
+      "other": "Autre"
+    },
+    "communication": {
+      "speaking": "À l'oral",
+      "text": "Texte / écrit",
+      "sign_language": "Langue des signes"
+    },
+    "helperGender": {
+      "none": "Pas de préférence",
+      "man": "Homme",
+      "woman": "Femme"
+    },
+    "helperAge": {
+      "any": "Tout âge",
+      "under_40": "Moins de 40 ans",
+      "40_plus": "40 ans et +"
+    },
+    "training": {
+      "wheelchair": "Formé au fauteuil roulant",
+      "asl": "ASL",
+      "first_aid": "Premiers secours",
+      "sighted_guide": "Guide pour malvoyants",
+      "mental_health": "Premiers secours en santé mentale"
+    },
+    "gender": {
+      "woman": "Femme",
+      "man": "Homme",
+      "nonbinary": "Non binaire",
+      "prefer_not": "Je préfère ne pas répondre"
+    },
+    "ageBand": {
+      "under_40": "Moins de 40 ans",
+      "40_plus": "40 ans et +",
+      "prefer_not": "Je préfère ne pas répondre"
+    }
+  },
+  "summary": {
+    "speaks": "Parle {{languages}}",
+    "listSeparator": ", ",
+    "otherNeeds": "Autres besoins (voir la note)",
+    "prefers": {
+      "speaking": "Préfère l'oral",
+      "text": "Préfère le texte / l'écrit",
+      "sign_language": "Préfère la langue des signes"
+    }
+  },
+  "languageNames": {
+    "en": "anglais",
+    "es": "espagnol",
+    "zh": "chinois",
+    "ko": "coréen",
+    "tl": "tagalog",
+    "vi": "vietnamien",
+    "hy": "arménien",
+    "fa": "persan",
+    "ja": "japonais",
+    "ru": "russe",
+    "ar": "arabe",
+    "fr": "français",
+    "pt": "portugais",
+    "de": "allemand",
+    "it": "italien",
+    "hi": "hindi",
+    "pa": "pendjabi",
+    "th": "thaï",
+    "km": "khmer",
+    "he": "hébreu",
+    "ase": "langue des signes américaine"
+  },
+  "privacy": {
+    "title": "Votre vie privée",
+    "summary": "Nous ne demandons que ce qu'il faut pour trouver la bonne personne pour vous aider, et vous pouvez le modifier ou le supprimer à tout moment.",
+    "englishNotice": "Cette politique est affichée en anglais.",
+    "version": "Version {{version}}. Brouillon à relire par l'équipe.",
+    "sections": {
+      "collect": "Ce que nous collectons",
+      "why": "Pourquoi nous le collectons",
+      "who": "Qui le voit",
+      "where": "Où c'est stocké",
+      "keep": "Combien de temps nous le gardons",
+      "choices": "Vos choix"
+    }
+  },
+  "terms": {
+    "title": "Conditions d'utilisation",
+    "subtitle": "La version courte des règles d'utilisation de VenU.",
+    "englishNotice": "Ces conditions sont affichées en anglais.",
+    "privacyLink": "L'usage de vos informations est décrit dans la <a>politique de confidentialité</a>.",
+    "version": "Version {{version}}. Brouillon à relire par l'équipe.",
+    "sections": {
+      "what": "Ce qu'est VenU",
+      "emergencies": "Pas pour les urgences",
+      "kind": "Soyez bienveillant et honnête",
+      "remove": "Ce que nous pouvons supprimer",
+      "guarantees": "Aucune garantie"
+    }
+  },
+  "help": {
+    "title": "Aide et avis",
+    "subtitle": "Les réponses aux questions fréquentes, et un moyen de nous dire quoi corriger.",
+    "commonQuestions": "Questions fréquentes",
+    "faq": {
+      "matching": {
+        "q": "Comment se fait la mise en relation ?",
+        "a": "Quand vous demandez de l'aide, nous cherchons un bénévole près de vous sur le site, qui parle votre langue et a la formation adaptée à vos besoins, p. ex. un bénévole formé au fauteuil roulant qui parle espagnol."
+      },
+      "volunteers": {
+        "q": "En quoi les bénévoles peuvent-ils aider ?",
+        "a": "Trouver votre place, une porte, des toilettes ou un ascenseur, vous orienter sur le site et traduire. Ils ne peuvent pas donner de soins médicaux."
+      },
+      "emergency": {
+        "q": "Et en cas d'urgence ?",
+        "a": "Appelez le 911 ou prévenez le membre du personnel le plus proche. Les bénévoles VenU ne sont pas des secouristes."
+      },
+      "languages": {
+        "q": "Quelles langues sont proposées ?",
+        "a": "Vous pouvez choisir parmi 21 langues, dont l'ASL. Ajoutez toutes vos langues dans Modifier le profil pour que nous trouvions plus d'accompagnants."
+      },
+      "privacy": {
+        "q": "Qui voit mes informations ?",
+        "a": "Seulement la personne qui vous aide, et seulement pendant l'aide : votre prénom, votre photo, vos langues et les besoins que vous avez choisi de partager. Voir Confidentialité et données pour le reste."
+      },
+      "report": {
+        "q": "Comment signaler un problème d'équipement ?",
+        "a": "Dans l'onglet Site, touchez l'équipement (p. ex. un ascenseur ou des toilettes), puis Ajouter votre signalement. Tous ceux qui ouvrent cet équipement le verront."
+      }
+    },
+    "sendFeedback": "Envoyer un avis",
+    "feedbackHint": "Quelque chose de confus, cassé ou manquant ? Dites-le-nous.",
+    "thanksTitle": "Merci !",
+    "thanksBody": "Nous lisons chaque message et nous en servons pour améliorer VenU.",
+    "sendMore": "Envoyer un autre avis",
+    "placeholder": "p. ex. La carte était difficile à lire au soleil",
+    "feedbackLabel": "Votre avis",
+    "send": "Envoyer l'avis",
+    "empty": "Écrivez d'abord quelques mots."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Choisissez ce que VenU vous signale.",
+    "note": "Les alertes arriveront une fois les notifications configurées pour VenU.",
+    "options": {
+      "volunteer": {
+        "label": "Nouvelles du bénévole",
+        "hint": "p. ex. Daniel a accepté et arrive"
+      },
+      "chat": {
+        "label": "Messages du chat",
+        "hint": "Nouveaux messages de votre accompagnant ou du spectateur"
+      },
+      "venue": {
+        "label": "Alertes du site",
+        "hint": "p. ex. La porte C du SoFi Stadium est fermée"
+      },
+      "reports": {
+        "label": "Réponses aux signalements",
+        "hint": "Quand le personnel répond à un signalement"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+# Building Blocks (134:15288)
+COMPONENT_SET "Building Blocks" 391x152 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 351x35 @20,20 auto:col gap=2 pad=0/0/0/0 align=CENTER/CENTER fill=#f5f5f5 stroke=#a6a6a6/1 r=8
+    INSTANCE "State-layer" 351x56 @20,10 auto:row gap=8 pad=16/24/16/24 align=CENTER/CENTER
+      INSTANCE "Icon" 24x24 @109,26 [ICON svg/add-circle-f1fa11.svg]
+      TEXT "Directions" 142x16 @141,30 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="Add Your Own Report"
+  COMPONENT "Property 1=Variant2" 351x35 @20,86 auto:col gap=2 pad=0/0/0/0 align=CENTER/CENTER fill=#f5f5f5 stroke=#a6a6a6/1 r=8 drop_shadow(0,4 blur=4 #00000040)
+    INSTANCE "State-layer" 351x56 @20,76 auto:row gap=8 pad=16/24/16/24 align=CENTER/CENTER
+      INSTANCE "Icon" 24x24 @109,92 [ICON svg/add-circle-f1fa11.svg]
+      TEXT "Directions" 142x16 @141,96 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="Add Your Own Report"

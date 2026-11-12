@@ -1,0 +1,8 @@
+# Frame 2208 (231:25732)
+COMPONENT "Frame 2208" 440x97 @0,0 fill=#ffffff
+  GROUP "Group 4" 213x49 @20,22
+    TEXT "Jayden L." 105x28 @128,22 font=Alexandria 400 23/28 ls=0 align=LEFT color=#000000 text="Jayden L."
+    TEXT "2 min away" 57x13 @128,58 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="2 min away"
+    INSTANCE "Arrow left" 40x40 @20,26 [ICON svg/arrow-left-53079b.svg]
+  ELLIPSE "Ellipse 20" 40x40 @76,26 fill=image(ece298d0)
+  GROUP "Group 43" 50x50 @369,21 [ICON svg/group-43-c358d1.svg]

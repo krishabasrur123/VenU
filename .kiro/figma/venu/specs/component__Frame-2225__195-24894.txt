@@ -1,0 +1,8 @@
+# Frame 2225 (195:24894)
+COMPONENT_SET "Frame 2225" 215x132 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 175x36 @20,20 auto:row gap=20 pad=13/20/12/20 align=CENTER/CENTER fill=#f5f5f5 stroke=#a6a6a6/1 r=10
+    INSTANCE "add_circle" 24x24 @47,27 [ICON svg/add-circle-f1fa11.svg]
+    TEXT "Add picture" 77x16 @91,31 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Add picture"
+  COMPONENT "Property 1=Variant2" 175x36 @20,76 auto:row gap=20 pad=13/20/12/20 align=CENTER/CENTER fill=#f5f5f5 stroke=#a6a6a6/1 r=10 drop_shadow(0,4 blur=4 #00000040)
+    INSTANCE "add_circle" 24x24 @47,83 [ICON svg/add-circle-f1fa11.svg]
+    TEXT "Add picture" 77x16 @91,87 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Add picture"

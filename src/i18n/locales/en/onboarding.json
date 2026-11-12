@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "Create Account",
+    "or": "or",
+    "signIn": "Sign In",
+    "socialTitle": "OR sign up using",
+    "socialSoon": "Google, Apple and Facebook sign-in are coming soon.",
+    "languageTitle": "App language"
+  },
+  "auth": {
+    "languagePill": "App language: {{language}}",
+    "languagePillHint": "Opens the language list",
+    "signUpWith": "Sign up with {{provider}}",
+    "devMode": "Dev mode: no Supabase keys set, so sign-in is skipped and data stays on this device.",
+    "name": "Name",
+    "namePlaceholder": "Enter name",
+    "email": "Email",
+    "emailPlaceholder": "Enter email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password"
+  },
+  "signIn": {
+    "title": "Sign In",
+    "noAccount": "Don’t have an account?",
+    "signUp": "Sign Up",
+    "forgot": "Forgot Password?",
+    "forgotSoon": "Password reset is coming soon.",
+    "confirmNotice": "Check your email to confirm your account, then sign in.",
+    "submit": "Sign In"
+  },
+  "signUp": {
+    "title": "Create Account",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "agree": "Agree with <a>Terms & Conditions</a>",
+    "agreeLabel": "Agree with Terms & Conditions",
+    "submit": "Create Account"
+  },
+  "validate": {
+    "email": "Enter a valid email.",
+    "passwordLength": "Use at least {{min}} characters for your password.",
+    "password": "Enter your password.",
+    "terms": "Agree to the Terms & Conditions to continue."
+  },
+  "gate": {
+    "offlineTitle": "Can't reach VenU",
+    "errorTitle": "Couldn't load your profile",
+    "offlineBody": "Check your connection and try again. You're still signed in."
+  },
+  "role": {
+    "title": "How will you use VenU?",
+    "subtitle": "So we can ask you the right questions.",
+    "visitorTitle": "I'm visiting",
+    "visitorBody": "Get help at the venue in your language.",
+    "volunteerTitle": "I'm an LA28 volunteer",
+    "volunteerBody": "Help visitors near you. You'll show as unverified until LA28 confirms you."
+  },
+  "setup": {
+    "visitorTitle": "Set up your profile",
+    "visitorSubtitle": "So we can find the right helper for you. Change it anytime in your settings.",
+    "volunteerTitle": "Your volunteer profile",
+    "volunteerSubtitle": "So we can send you the visitors you can help most.",
+    "submit": "Save and continue"
+  }
+}

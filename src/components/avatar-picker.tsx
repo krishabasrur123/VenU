@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Avatar } from '@/components/avatar';
+import { PHOTO_MAX_BYTES, PHOTO_TOO_BIG } from '@/constants/photo';
 import { Colors, Spacing, Type } from '@/constants/theme';
 import { checkPhoto, type PickedImage } from '@/features/profile/store';
+import { useT } from '@/i18n';
 import { isLocalMode } from '@/lib/auth';
 
 interface AvatarPickerProps {
@@ -29,6 +31,7 @@ const PICK_OPTIONS: ImagePicker.ImagePickerOptions = {
 /** Photo + "Choose photo" / "Take photo" / "Remove" actions. Must be launched from a tap (web rule). */
 export function AvatarPicker({ name, uri, onPick, onRemove }: AvatarPickerProps) {
   const [error, setError] = useState<string | null>(null);
+  const t = useT('common');
 
   async function pick(source: 'library' | 'camera') {
     setError(null);
@@ -36,7 +39,7 @@ export function AvatarPicker({ name, uri, onPick, onRemove }: AvatarPickerProps)
       ? await ImagePicker.requestCameraPermissionsAsync()
       : await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!perm.granted) {
-      setError(source === 'camera' ? 'Camera access is off. Turn it on in Settings.' : 'Photo access is off. Turn it on in Settings.');
+      setError(source === 'camera' ? t('photo.cameraOff') : t('photo.libraryOff'));
       return;
     }
     const result = source === 'camera'
@@ -47,7 +50,8 @@ export function AvatarPicker({ name, uri, onPick, onRemove }: AvatarPickerProps)
     if (!asset) return;
     const image: PickedImage = { uri: asset.uri, mimeType: asset.mimeType ?? null, fileSize: asset.fileSize ?? null, base64: asset.base64 ?? null };
     const problem = checkPhoto(image);
-    if (problem) return setError(problem);
+    // checkPhoto answers in English (shared with the store); show the same rule in the UI language.
+    if (problem) return setError(problem === PHOTO_TOO_BIG ? t('errors.photoTooBig', { size: PHOTO_MAX_BYTES / 1024 / 1024 }) : t('errors.photoWrongType'));
     onPick(image);
   }
 
@@ -56,12 +60,12 @@ export function AvatarPicker({ name, uri, onPick, onRemove }: AvatarPickerProps)
       <Avatar name={name} uri={uri} size={72} />
       <View style={styles.actions}>
         <View style={styles.links}>
-          <Action label={uri ? 'Change photo' : 'Add a photo'} onPress={() => pick('library')} />
-          {Platform.OS !== 'web' && <Action label="Take photo" onPress={() => pick('camera')} />}
-          {uri && <Action label="Remove" onPress={onRemove} muted />}
+          <Action label={uri ? t('photo.change') : t('photo.add')} onPress={() => pick('library')} />
+          {Platform.OS !== 'web' && <Action label={t('photo.take')} onPress={() => pick('camera')} />}
+          {uri && <Action label={t('photo.remove')} onPress={onRemove} muted />}
         </View>
         <Text style={[styles.hint, error && styles.error]} accessibilityLiveRegion="polite">
-          {error ?? 'Helps your helper spot you. Optional.'}
+          {error ?? t('photo.hint')}
         </Text>
       </View>
     </View>

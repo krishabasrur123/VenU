@@ -1,19 +1,28 @@
 // Plain-language privacy policy. DRAFT: the team needs to review it before launch;
 // this isn't legal text. Bump PRIVACY_VERSION whenever a section changes so
 // profiles store which version the person agreed to.
+// The points stay English in every language (legal text wants a reviewed translation); the summary
+// and section headings are translated: profile:privacy.summary and profile:privacy.sections.<key>.
 
 export const PRIVACY_VERSION = '2026-11-draft-3';
 
+export type PrivacySectionKey = 'collect' | 'why' | 'who' | 'where' | 'keep' | 'choices';
+
 export interface PrivacySection {
+  /** Heading key: profile:privacy.sections.<key>. */
+  key: PrivacySectionKey;
+  /** English heading (the translated one is in the string tables). */
   title: string;
   points: string[];
 }
 
+/** English; screens show profile:privacy.summary. */
 export const PRIVACY_SUMMARY =
   'We only ask for what we need to match you with the right helper, and you can change or delete it any time.';
 
 export const PRIVACY_SECTIONS: PrivacySection[] = [
   {
+    key: 'collect',
     title: 'What we collect',
     points: [
       'Your first name and, if you add one, a profile photo.',
@@ -24,6 +33,7 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     ],
   },
   {
+    key: 'why',
     title: 'Why we collect it',
     points: [
       'To find a volunteer who speaks your language and has the right training.',
@@ -32,6 +42,7 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     ],
   },
   {
+    key: 'who',
     title: 'Who sees it',
     points: [
       'Your helper sees your first name, photo, languages and the access needs you shared, and only while helping you.',
@@ -40,6 +51,7 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     ],
   },
   {
+    key: 'where',
     title: 'Where it\'s stored',
     points: [
       'In our database (Supabase), encrypted in transit and protected so each account can only read its own profile.',
@@ -47,6 +59,7 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     ],
   },
   {
+    key: 'keep',
     title: 'How long we keep it',
     points: [
       'Your profile and photo: until you delete them (Profile → Delete my data).',
@@ -55,6 +68,7 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     ],
   },
   {
+    key: 'choices',
     title: 'Your choices',
     points: [
       'Edit your profile any time from the Profile tab.',

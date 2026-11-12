@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "Gumawa ng Account",
+    "or": "o",
+    "signIn": "Mag-sign In",
+    "socialTitle": "O mag-sign up gamit ang",
+    "socialSoon": "Malapit nang magamit ang pag-sign in gamit ang Google, Apple at Facebook.",
+    "languageTitle": "Wika ng app"
+  },
+  "auth": {
+    "languagePill": "Wika ng app: {{language}}",
+    "languagePillHint": "Binubuksan ang listahan ng mga wika",
+    "signUpWith": "Mag-sign up gamit ang {{provider}}",
+    "devMode": "Dev mode: walang Supabase key, kaya nilalaktawan ang pag-sign in at sa device na ito lang nananatili ang data.",
+    "name": "Pangalan",
+    "namePlaceholder": "Ilagay ang pangalan",
+    "email": "Email",
+    "emailPlaceholder": "Ilagay ang email",
+    "password": "Password",
+    "passwordPlaceholder": "Ilagay ang password"
+  },
+  "signIn": {
+    "title": "Mag-sign In",
+    "noAccount": "Wala ka pang account?",
+    "signUp": "Mag-sign Up",
+    "forgot": "Nakalimutan ang Password?",
+    "forgotSoon": "Malapit nang magamit ang pag-reset ng password.",
+    "confirmNotice": "Tingnan ang iyong email para kumpirmahin ang account, saka mag-sign in.",
+    "submit": "Mag-sign In"
+  },
+  "signUp": {
+    "title": "Gumawa ng Account",
+    "haveAccount": "May account ka na?",
+    "signIn": "Mag-sign In",
+    "agree": "Sumasang-ayon sa <a>Mga Tuntunin at Kundisyon</a>",
+    "agreeLabel": "Sumasang-ayon sa Mga Tuntunin at Kundisyon",
+    "submit": "Gumawa ng Account"
+  },
+  "validate": {
+    "email": "Maglagay ng tamang email.",
+    "passwordLength": "Gumamit ng hindi bababa sa {{min}} character para sa password.",
+    "password": "Ilagay ang iyong password.",
+    "terms": "Sumang-ayon sa Mga Tuntunin at Kundisyon para magpatuloy."
+  },
+  "gate": {
+    "offlineTitle": "Hindi maabot ang VenU",
+    "errorTitle": "Hindi ma-load ang iyong profile",
+    "offlineBody": "Tingnan ang iyong koneksyon at subukang muli. Naka-sign in ka pa rin."
+  },
+  "role": {
+    "title": "Paano mo gagamitin ang VenU?",
+    "subtitle": "Para maitanong namin ang mga tamang tanong.",
+    "visitorTitle": "Bisita ako",
+    "visitorBody": "Humingi ng tulong sa venue sa sarili mong wika.",
+    "volunteerTitle": "Volunteer ako ng LA28",
+    "volunteerBody": "Tumulong sa mga bisitang malapit sa iyo. Hindi ka pa verified hangga't hindi ka kinukumpirma ng LA28."
+  },
+  "setup": {
+    "visitorTitle": "I-set up ang iyong profile",
+    "visitorSubtitle": "Para mahanap namin ang tamang tutulong sa iyo. Mababago mo ito anumang oras sa settings.",
+    "volunteerTitle": "Ang iyong volunteer profile",
+    "volunteerSubtitle": "Para maipadala namin sa iyo ang mga bisitang pinakamatutulungan mo.",
+    "submit": "I-save at magpatuloy"
+  }
+}

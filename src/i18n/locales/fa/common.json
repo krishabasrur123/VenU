@@ -1,0 +1,101 @@
+{
+  "tabs": {
+    "volunteer": "داوطلب",
+    "venue": "مکان",
+    "profile": "نمایه"
+  },
+  "actions": {
+    "save": "ذخیره",
+    "cancel": "لغو",
+    "continue": "ادامه",
+    "back": "بازگشت",
+    "close": "بستن",
+    "done": "تمام",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "send": "ارسال",
+    "tryAgain": "تلاش دوباره",
+    "signIn": "ورود",
+    "signOut": "خروج",
+    "ok": "باشه"
+  },
+  "status": {
+    "loading": "در حال بارگذاری…",
+    "comingSoon": "به‌زودی",
+    "optional": "اختیاری"
+  },
+  "field": {
+    "showPassword": "نمایش رمز عبور",
+    "hidePassword": "پنهان کردن رمز عبور"
+  },
+  "errors": {
+    "offline": "اتصال به VenU ممکن نیست. اتصال خود را بررسی کنید و دوباره تلاش کنید.",
+    "wrongLogin": "ایمیل یا رمز عبور اشتباه است.",
+    "confirmEmail": "ابتدا ایمیل خود را تأیید کنید. پیوند را در صندوق ورودی پیدا کنید.",
+    "alreadyRegistered": "این ایمیل قبلاً حساب دارد. وارد شوید.",
+    "rateLimit": "تلاش‌ها بیش از حد است. یک دقیقه صبر کنید و دوباره تلاش کنید.",
+    "sessionExpired": "نشست شما منقضی شده است. لطفاً دوباره وارد شوید.",
+    "cantSave": "VenU نتوانست این تغییر را ذخیره کند. اگر تکرار شد، خارج شوید و دوباره وارد شوید.",
+    "photoTooBig": "حجم این عکس بیشتر از {{size}} مگابایت است. عکس کوچک‌تری انتخاب کنید.",
+    "photoWrongType": "از عکس JPG، PNG، WebP یا HEIC استفاده کنید.",
+    "generic": "مشکلی پیش آمد. دوباره تلاش کنید."
+  },
+  "direction": {
+    "restartTitle": "راه‌اندازی دوباره لازم است",
+    "restartBody": "برای تغییر چیدمان بین راست‌به‌چپ و چپ‌به‌راست، VenU باید دوباره راه‌اندازی شود.",
+    "restartNow": "راه‌اندازی دوباره",
+    "later": "بعداً",
+    "ok": "باشه"
+  },
+  "count": {
+    "people_one": "{{count}} نفر",
+    "people_other": "{{count}} نفر"
+  },
+  "media": {
+    "addPicture": "افزودن عکس",
+    "changePicture": "تغییر عکس",
+    "holdToSpeak": "یا نگه دارید و بگویید"
+  },
+  "form": {
+    "optionalTitle": "{{title}} <muted>(اختیاری)</muted>",
+    "step": "مرحله {{step}} از {{total}}"
+  },
+  "nav": {
+    "backTo": "بازگشت به {{label}}"
+  },
+  "chip": {
+    "remove": "حذف {{label}}"
+  },
+  "photo": {
+    "add": "افزودن عکس",
+    "change": "تغییر عکس",
+    "take": "گرفتن عکس",
+    "remove": "حذف",
+    "hint": "به کمک‌رسان کمک می‌کند شما را پیدا کند. اختیاری.",
+    "cameraOff": "دسترسی به دوربین خاموش است. آن را در تنظیمات روشن کنید.",
+    "libraryOff": "دسترسی به عکس‌ها خاموش است. آن را در تنظیمات روشن کنید.",
+    "labelNamed": "عکس نمایه {{name}}",
+    "labelYours": "عکس نمایه شما",
+    "labelNone": "بدون عکس نمایه"
+  },
+  "language": {
+    "primary": "زبان اصلی",
+    "secondary": "زبان دوم",
+    "another": "زبان دیگر",
+    "add": "افزودن زبان دیگر",
+    "search": "جست‌وجوی زبان",
+    "fieldLabel": "جست‌وجوی زبان",
+    "searchFor": "جست‌وجوی زبان برای {{field}}",
+    "examples": "مثلاً فارسی، Español، ASL",
+    "searchExamples": "جست‌وجو، مثلاً فارسی، Español، ASL",
+    "field": "{{field}}: {{language}}",
+    "fieldEmpty": "{{field}}: هیچ",
+    "openHint": "جست‌وجوی زبان را باز می‌کند",
+    "choose": "یک زبان انتخاب کنید",
+    "closeSearch": "بستن جست‌وجوی زبان",
+    "remove": "حذف {{language}}",
+    "removeField": "حذف این فیلد زبان",
+    "noMatch": "نتیجه‌ای نیست. نام انگلیسی را امتحان کنید.",
+    "addTitle": "افزودن زبان"
+  }
+}

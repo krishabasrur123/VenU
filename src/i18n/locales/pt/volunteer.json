@@ -1,0 +1,187 @@
+{
+  "role": "Equipe de voluntários LA28",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "Ajuda em {{language}}",
+  "quoted": "“{{text}}”",
+  "cancelRequest": "Cancelar pedido",
+  "dismiss": "Fechar",
+  "distance": {
+    "feet": "{{value}} pés",
+    "miles": "{{value}} mi"
+  },
+  "helpTypes": {
+    "physical": "Assistência física",
+    "directions": "Como chegar",
+    "language": "Ajuda com idioma",
+    "quiet": "Espaço tranquilo",
+    "lost": "Achados e perdidos",
+    "other": "Outra coisa"
+  },
+  "skills": {
+    "wheelchair": "Treinamento em cadeira de rodas",
+    "first_aid": "Primeiros socorros",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "Encontre um voluntário",
+    "subtitle": "Vamos conectar você a alguém por perto",
+    "languageLabel": "Ajuda em {{language}}. Mudar idioma",
+    "locationLabel": "Sua localização: {{spot}}, {{venue}}",
+    "question": "Com o que você precisa de ajuda?",
+    "notePlaceholder": "ex.: Preciso de ajuda perto da rampa 2",
+    "photoOff": "O acesso às fotos está desativado. Ative em Ajustes.",
+    "voiceSoon": "Notas de voz em breve. Por enquanto, escreva uma nota.",
+    "pickOne": "Escolha pelo menos um tipo de ajuda.",
+    "send": "Enviar pedido"
+  },
+  "note": {
+    "label": "Adicionar nota <muted>(opcional)</muted>",
+    "labelPlain": "Adicionar nota (opcional)",
+    "placeholder": "Digite aqui",
+    "attached": "Foto anexada",
+    "remove": "Remover foto"
+  },
+  "emergency": {
+    "title": "Emergência?",
+    "call": "Ligue para o 911 agora",
+    "label": "Emergência? Ligue para o 911 agora",
+    "hint": "Abre o telefone para ligar para o 911"
+  },
+  "notice": {
+    "searchFailed": "Não conseguimos falar com um voluntário. Verifique sua conexão e tente de novo.",
+    "thanks": "Obrigado! Sua avaliação ajuda {{name}} e a equipe LA28."
+  },
+  "searching": {
+    "title": "Procurando um voluntário",
+    "subtitle": "Geralmente menos de um minuto · Fique onde está",
+    "askedFor": "Você pediu"
+  },
+  "match": {
+    "title": "Voluntário encontrado",
+    "onTheWay": {
+      "his": "{{name}} está a caminho",
+      "her": "{{name}} está a caminho",
+      "their": "{{name}} está a caminho"
+    },
+    "stay": "Fique onde está.",
+    "rated": "Nota {{rating}} de 5",
+    "skills": "Habilidades e idiomas",
+    "etaMain": "{{minutes}} min",
+    "etaSub": "até chegar",
+    "etaLabel": "Chega em {{minutes}} min",
+    "awaySub": "de você",
+    "awayLabel": "A {{distance}} de você",
+    "message": "Falar com o voluntário",
+    "done": "Marcar ajuda como concluída",
+    "doneHint": "Encerra o pedido e pede que você avalie {{name}}",
+    "confirmCancel": "Cancelar seu pedido? {{name}} vai parar de vir até você.",
+    "keep": "Manter pedido",
+    "yesCancel": "Sim, cancelar"
+  },
+  "map": {
+    "label": "Mapa: {{name}} está a {{distance}}, indo até você no Portão 2.",
+    "gate": "Portão 2",
+    "you": "Você"
+  },
+  "messages": {
+    "label": "Mensagens",
+    "unread_one": "Mensagens, {{count}} não lida",
+    "unread_many": "Mensagens, {{count}} não lidas",
+    "unread_other": "Mensagens, {{count}} não lidas"
+  },
+  "chat": {
+    "away": "A {{minutes}} min",
+    "call": "Ligar para {{name}}",
+    "callSoon": "Ainda não é possível ligar. Envie uma mensagem para {{name}}.",
+    "messages": "Mensagens",
+    "empty": "Diga oi para {{name}}. Essa pessoa pode ver onde você está.",
+    "typing": "{{name}} está digitando…",
+    "today": "Hoje {{time}}",
+    "yesterday": "Ontem {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "Leitura em voz alta em breve.",
+    "attach": "Anexar uma foto",
+    "attachSoon": "Envio de fotos em breve.",
+    "placeholder": "Mensagem",
+    "messageTo": "Mensagem para {{name}}",
+    "stickers": "Figurinhas",
+    "stickersSoon": "Figurinhas em breve.",
+    "record": "Gravar mensagem de voz",
+    "voiceSoon": "Mensagens de voz em breve."
+  },
+  "bubble": {
+    "mine": "Você, {{time}}: {{text}}",
+    "theirs": "Voluntário, {{time}}: {{text}}",
+    "listen": "ouvir",
+    "listenLabel": "Ouvir esta mensagem"
+  },
+  "feedback": {
+    "skip": "Pular",
+    "skipLabel": "Pular avaliação",
+    "question": "Como foi a ajuda?",
+    "wentWell": "O que foi bom?",
+    "tags": {
+      "language": "Falou meu idioma",
+      "venue": "Conhecia o local",
+      "patient": "Paciente",
+      "fast": "Chegou rápido",
+      "helpful": "Ajudou muito",
+      "other": "Outro"
+    },
+    "placeholder": "ex.: {{name}} achou um lugar na sombra para mim",
+    "pickStar": "Toque em uma estrela para avaliar a ajuda de {{name}}.",
+    "sendFailed": "Não foi possível enviar sua avaliação. {{reason}}",
+    "submit": "Enviar"
+  },
+  "rating": {
+    "label": "Avaliação",
+    "star_one": "{{count}} estrela, {{word}}",
+    "star_many": "{{count}} de estrelas, {{word}}",
+    "star_other": "{{count}} estrelas, {{word}}",
+    "words": {
+      "poor": "Ruim",
+      "notGreat": "Não muito boa",
+      "ok": "Razoável",
+      "good": "Boa",
+      "excellent": "Excelente"
+    }
+  },
+  "report": {
+    "title": "Relatar um problema",
+    "kindLabel": "O que deu errado?",
+    "kinds": {
+      "no_show": "Não apareceu",
+      "unsafe": "Me senti em perigo",
+      "rude": "Falta de educação",
+      "other": "Outra coisa"
+    },
+    "notePlaceholder": "O que aconteceu? (opcional)",
+    "pickKind": "Escolha o que deu errado.",
+    "sendFailed": "Não foi possível enviar o relato. {{reason}}",
+    "notNow": "Agora não",
+    "send": "Enviar relato",
+    "sent": "Relato enviado",
+    "sentBody": "A equipe LA28 vai verificar hoje. Em perigo agora? Ligue para o 911."
+  },
+  "incoming": {
+    "title": "Pedidos recebidos",
+    "subtitle": "Visitantes por perto que pediram ajuda",
+    "preview": "Prévia: a conexão ainda não está ativa, então estes são exemplos.",
+    "who": "{{help}} · {{name}}",
+    "meta": "A {{distance}} · há {{minutes}} min · {{language}}",
+    "accept": "Aceitar",
+    "acceptSoon": "Você poderá aceitar pedidos quando a conexão for ativada."
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "Perto da rampa do Portão 2",
+      "section214": "Corredor da seção 214",
+      "mainPlaza": "Praça da entrada principal"
+    },
+    "greeting": "Oi, {{name}}! Aqui é {{volunteer}}, da equipe de voluntários do LA28. Estou indo até você agora. Ponto de encontro: {{spot}}.",
+    "greetingNoName": "Oi! Aqui é {{volunteer}}, da equipe de voluntários do LA28. Estou indo até você agora. Ponto de encontro: {{spot}}.",
+    "reply1": "Entendi, valeu! Chego em uns dois minutos.",
+    "reply2": "Já estou vendo o Portão 2. Estou com um colete rosa do LA28.",
+    "reply3": "Sem problema, sem pressa. Vou esperar com você."
+  }
+}

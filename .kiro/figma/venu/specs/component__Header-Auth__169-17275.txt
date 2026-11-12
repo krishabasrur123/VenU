@@ -1,0 +1,6 @@
+# Header Auth (169:17275)
+INSTANCE "Header Auth" 178x32 @0,0 auto:row gap=12 pad=0/0/0/0 align=/CENTER props={"State":"Logged Out"}
+  INSTANCE "Button" 83x32 @0,0 auto:row gap=8 pad=8/8/8/8 align=CENTER/CENTER fill=#e3e3e3 stroke=#767676/1 r=8 props={"Icon End":"169:17105","Has Icon Start":false,"Has Icon End":false,"Icon Start":"169:17107","Label":"Sign in","Variant":"Neutral","State":"Default","Size":"Small"}
+    TEXT "Button" 51x16 @16,8 font=Inter 400 16/16 ls=0 align=LEFT color=#1e1e1e text="Sign in"
+  INSTANCE "Button" 83x32 @95,0 auto:row gap=8 pad=8/8/8/8 align=CENTER/CENTER fill=#2c2c2c stroke=#2c2c2c/1 r=8 props={"Icon End":"169:17105","Has Icon Start":false,"Has Icon End":false,"Icon Start":"169:17107","Label":"Register","Variant":"Primary","State":"Default","Size":"Small"}
+    TEXT "Button" 63x16 @105,8 font=Inter 400 16/16 ls=0 align=LEFT color=#f5f5f5 text="Register"

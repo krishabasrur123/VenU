@@ -1,0 +1,35 @@
+# Frame 15 (128:3520)
+COMPONENT "Frame 15" 440x149 @0,0
+  FRAME "Frame 2208" 440x149 @0,0 auto:col gap=10 pad=20/20/0/20 align=/ fill=#ffffff
+    GROUP "Group 4" 400x115 @20,20
+      INSTANCE "Chip groups" 394x48 @26,87 auto:row gap=8 pad=8/0/8/0 align=/CENTER
+        INSTANCE "Chip 01" 42x32 @26,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"All","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 42x28 @26,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 18x16 @38,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="All"
+        INSTANCE "Chip 02" 61x32 @76,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Gates","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 61x28 @76,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 37x16 @88,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Gates"
+        INSTANCE "Chip 03" 94x32 @145,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Restrooms","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 94x28 @145,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 70x16 @157,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Restrooms"
+        INSTANCE "Chip 04" 114x32 @247,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Food & Drinks","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 114x28 @247,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 90x16 @259,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Food & Drinks"
+        INSTANCE "Chip 05" 108x32 @369,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Lost & Found","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 108x28 @369,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 84x16 @381,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Lost & Found"
+        INSTANCE "Chip 06" 85x32 @485,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Info Desk","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 85x28 @485,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 61x16 @497,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Info Desk"
+        INSTANCE "Chip 07" 125x32 @578,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Water Fountain","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 125x28 @578,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 101x16 @590,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Water Fountain"
+        INSTANCE "Chip 08" 74x32 @711,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Seating","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 74x28 @711,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 50x16 @723,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Seating"
+        INSTANCE "Chip 09" 59x32 @793,95 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=8 props={"Show focus indicator":false,"Avatar":"131:3739","Leading icon":"131:3865","Label text":"Label","Configuration":"Label only","State":"Enabled","Selected":"False","Show closing icon":"false"}
+          FRAME "state-layer" 59x28 @793,97 auto:row gap=8 pad=6/12/6/12 align=CENTER/CENTER
+            TEXT "label-text" 35x16 @805,103 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Label"
+      TEXT "XXX Stadium" 153x28 @67,20 font=Alexandria 400 23/28 ls=0 align=CENTER color=#000000 text="XXX Stadium"
+      TEXT "Address" 42x13 @68,58 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="Address"
+      INSTANCE "Arrow left" 40x40 @20,26 [ICON svg/arrow-left-53079b.svg]

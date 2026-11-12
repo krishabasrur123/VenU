@@ -1,0 +1,102 @@
+{
+  "tabs": {
+    "volunteer": "Bénévole",
+    "venue": "Site",
+    "profile": "Profil"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "back": "Retour",
+    "close": "Fermer",
+    "done": "Terminé",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "send": "Envoyer",
+    "tryAgain": "Réessayer",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "ok": "OK"
+  },
+  "status": {
+    "loading": "Chargement…",
+    "comingSoon": "Bientôt disponible",
+    "optional": "Facultatif"
+  },
+  "field": {
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
+  },
+  "errors": {
+    "offline": "Impossible de joindre VenU. Vérifiez votre connexion et réessayez.",
+    "wrongLogin": "E-mail ou mot de passe incorrect.",
+    "confirmEmail": "Confirmez d’abord votre e-mail. Le lien est dans votre boîte de réception.",
+    "alreadyRegistered": "Cet e-mail a déjà un compte. Essayez de vous connecter.",
+    "rateLimit": "Trop de tentatives. Patientez une minute et réessayez.",
+    "sessionExpired": "Votre session a expiré. Reconnectez-vous.",
+    "cantSave": "VenU n’a pas pu enregistrer cette modification. Si le problème persiste, déconnectez-vous puis reconnectez-vous.",
+    "photoTooBig": "Cette photo dépasse {{size}} Mo. Choisissez-en une plus petite.",
+    "photoWrongType": "Utilisez une photo JPG, PNG, WebP ou HEIC.",
+    "generic": "Une erreur s’est produite. Réessayez."
+  },
+  "direction": {
+    "restartTitle": "Redémarrage nécessaire",
+    "restartBody": "VenU doit redémarrer pour passer d’une mise en page de droite à gauche à une mise en page de gauche à droite.",
+    "restartNow": "Redémarrer",
+    "later": "Plus tard",
+    "ok": "OK"
+  },
+  "count": {
+    "people_one": "{{count}} personne",
+    "people_many": "{{count}} de personnes",
+    "people_other": "{{count}} personnes"
+  },
+  "media": {
+    "addPicture": "Ajouter une photo",
+    "changePicture": "Changer la photo",
+    "holdToSpeak": "Maintenir pour parler"
+  },
+  "form": {
+    "optionalTitle": "{{title}} <muted>(facultatif)</muted>",
+    "step": "Étape {{step}} sur {{total}}"
+  },
+  "nav": {
+    "backTo": "Retour à {{label}}"
+  },
+  "chip": {
+    "remove": "Retirer {{label}}"
+  },
+  "photo": {
+    "add": "Ajouter une photo",
+    "change": "Changer de photo",
+    "take": "Prendre une photo",
+    "remove": "Retirer",
+    "hint": "Aide votre accompagnant à vous repérer. Facultatif.",
+    "cameraOff": "L'accès à l'appareil photo est désactivé. Activez-le dans Réglages.",
+    "libraryOff": "L'accès aux photos est désactivé. Activez-le dans Réglages.",
+    "labelNamed": "Photo de profil de {{name}}",
+    "labelYours": "Votre photo de profil",
+    "labelNone": "Pas de photo de profil"
+  },
+  "language": {
+    "primary": "Langue principale",
+    "secondary": "Deuxième langue",
+    "another": "Autre langue",
+    "add": "Ajouter une autre langue",
+    "search": "Rechercher une langue",
+    "fieldLabel": "Rechercher une langue",
+    "searchFor": "Rechercher une langue pour {{field}}",
+    "examples": "p. ex. Français, Español, ASL",
+    "searchExamples": "Rechercher, p. ex. Français, Español, ASL",
+    "field": "{{field}} : {{language}}",
+    "fieldEmpty": "{{field}} : aucune",
+    "openHint": "Ouvre la recherche de langue",
+    "choose": "Choisissez une langue",
+    "closeSearch": "Fermer la recherche de langue",
+    "remove": "Retirer {{language}}",
+    "removeField": "Retirer ce champ de langue",
+    "noMatch": "Aucun résultat. Essayez le nom anglais.",
+    "addTitle": "Ajouter une langue"
+  }
+}

@@ -1,0 +1,10 @@
+# Venue Selection (184:18502)
+FRAME "Venue Selection" 440x956 @0,0 fill=#ffffff
+  TEXT "VenU" 61x28 @193,316 font=Alexandria 400 23/28 ls=0 align=LEFT color=#000000 text="VenU"
+  RECTANGLE "Rectangle 14" 130x130 @155,166 fill=#d9d9d9
+  FRAME "Frame 2235" 202x128 @119,414 auto:col gap=20 pad=0/0/0/0 align=/CENTER
+    INSTANCE "Frame 2227" 202x36 @119,414 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#ffffff stroke=#242222/2 r=10 props={"Property 1":"Default"}
+      TEXT "Create Account" 100x16 @170,425 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Create Account"
+    TEXT "or" 202x16 @119,470 font=Alexandria 400 13/16 ls=0 align=CENTER color=#000000 text="or"
+    INSTANCE "Frame 2226" 202x36 @119,506 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#242222 stroke=#242222/2 r=10 props={"Property 1":"Default"}
+      TEXT "Sign In" 45x16 @198,517 font=Alexandria 400 13/16 ls=0 align=CENTER color=#ffffff text="Sign In"

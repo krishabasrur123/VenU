@@ -1,0 +1,183 @@
+{
+  "role": "LA28 자원봉사자",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "도움 언어: {{language}}",
+  "quoted": "“{{text}}”",
+  "cancelRequest": "요청 취소",
+  "dismiss": "닫기",
+  "distance": {
+    "feet": "{{value}}피트",
+    "miles": "{{value}}마일"
+  },
+  "helpTypes": {
+    "physical": "신체 지원",
+    "directions": "길 안내",
+    "language": "언어 지원",
+    "quiet": "조용한 공간",
+    "lost": "분실물",
+    "other": "기타"
+  },
+  "skills": {
+    "wheelchair": "휠체어 교육 이수",
+    "first_aid": "응급처치",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "자원봉사자 찾기",
+    "subtitle": "가까운 분과 연결해 드릴게요",
+    "languageLabel": "도움 언어: {{language}}. 언어 변경",
+    "locationLabel": "내 위치: {{spot}}, {{venue}}",
+    "question": "어떤 도움이 필요하세요?",
+    "notePlaceholder": "예: 2번 경사로 근처에서 못 움직여요",
+    "photoOff": "사진 접근이 꺼져 있어요. 설정에서 켜 주세요.",
+    "voiceSoon": "음성 메모는 곧 지원돼요. 지금은 메모를 입력해 주세요.",
+    "pickOne": "필요한 도움을 하나 이상 선택하세요.",
+    "send": "요청 보내기"
+  },
+  "note": {
+    "label": "메모 추가 <muted>(선택)</muted>",
+    "labelPlain": "메모 추가 (선택)",
+    "placeholder": "내용 입력",
+    "attached": "첨부한 사진",
+    "remove": "사진 삭제"
+  },
+  "emergency": {
+    "title": "긴급 상황인가요?",
+    "call": "지금 911에 전화하세요",
+    "label": "긴급 상황인가요? 지금 911에 전화하세요",
+    "hint": "911에 전화하도록 전화 앱을 엽니다"
+  },
+  "notice": {
+    "searchFailed": "자원봉사자와 연결하지 못했어요. 연결 상태를 확인하고 다시 시도하세요.",
+    "thanks": "감사합니다! 의견은 {{name}} 님과 LA28 팀에 도움이 돼요."
+  },
+  "searching": {
+    "title": "자원봉사자를 찾는 중",
+    "subtitle": "보통 1분 이내 · 그 자리에 계세요",
+    "askedFor": "요청한 도움"
+  },
+  "match": {
+    "title": "자원봉사자를 찾았어요",
+    "onTheWay": {
+      "his": "{{name}} 님이 오고 있어요",
+      "her": "{{name}} 님이 오고 있어요",
+      "their": "{{name}} 님이 오고 있어요"
+    },
+    "stay": "그 자리에 계세요.",
+    "rated": "평점 5점 중 {{rating}}점",
+    "skills": "기술 및 언어",
+    "etaMain": "{{minutes}}분",
+    "etaSub": "후 도착",
+    "etaLabel": "{{minutes}}분 후 도착",
+    "awaySub": "거리",
+    "awayLabel": "{{distance}} 거리",
+    "message": "자원봉사자에게 메시지",
+    "done": "도움 완료로 표시",
+    "doneHint": "요청을 종료하고 {{name}} 님을 평가합니다",
+    "confirmCancel": "요청을 취소할까요? {{name}} 님이 더 이상 오지 않아요.",
+    "keep": "요청 유지",
+    "yesCancel": "네, 취소할게요"
+  },
+  "map": {
+    "label": "지도: {{name}} 님이 {{distance}} 거리에 있으며 2번 게이트로 오고 있어요.",
+    "gate": "2번 게이트",
+    "you": "나"
+  },
+  "messages": {
+    "label": "메시지",
+    "unread_other": "메시지, 읽지 않음 {{count}}개"
+  },
+  "chat": {
+    "away": "{{minutes}}분 거리",
+    "call": "{{name}} 님에게 전화",
+    "callSoon": "아직 전화는 지원되지 않아요. 대신 {{name}} 님에게 메시지를 보내세요.",
+    "messages": "메시지",
+    "empty": "{{name}} 님에게 인사해 보세요. 상대방이 내 위치를 볼 수 있어요.",
+    "typing": "{{name}} 님이 입력 중…",
+    "today": "오늘 {{time}}",
+    "yesterday": "어제 {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "소리 내어 읽기는 곧 지원돼요.",
+    "attach": "사진 첨부",
+    "attachSoon": "사진 보내기는 곧 지원돼요.",
+    "placeholder": "메시지",
+    "messageTo": "{{name}} 님에게 메시지",
+    "stickers": "스티커",
+    "stickersSoon": "스티커는 곧 지원돼요.",
+    "record": "음성 메시지 녹음",
+    "voiceSoon": "음성 메시지는 곧 지원돼요."
+  },
+  "bubble": {
+    "mine": "나, {{time}}: {{text}}",
+    "theirs": "자원봉사자, {{time}}: {{text}}",
+    "listen": "듣기",
+    "listenLabel": "이 메시지 듣기"
+  },
+  "feedback": {
+    "skip": "건너뛰기",
+    "skipLabel": "평가 건너뛰기",
+    "question": "도움은 어떠셨나요?",
+    "wentWell": "어떤 점이 좋았나요?",
+    "tags": {
+      "language": "내 언어로 대화",
+      "venue": "경기장을 잘 앎",
+      "patient": "차분하고 친절함",
+      "fast": "빠른 도착",
+      "helpful": "도움이 됨",
+      "other": "기타"
+    },
+    "placeholder": "예: {{name}} 님이 그늘진 자리를 찾아 줬어요",
+    "pickStar": "별을 눌러 {{name}} 님의 도움을 평가하세요.",
+    "sendFailed": "의견을 보내지 못했어요. {{reason}}",
+    "submit": "제출"
+  },
+  "rating": {
+    "label": "평점",
+    "star_other": "별 {{count}}개, {{word}}",
+    "words": {
+      "poor": "나쁨",
+      "notGreat": "별로",
+      "ok": "보통",
+      "good": "좋음",
+      "excellent": "최고"
+    }
+  },
+  "report": {
+    "title": "문제 신고",
+    "kindLabel": "무엇이 문제였나요?",
+    "kinds": {
+      "no_show": "오지 않음",
+      "unsafe": "불안했음",
+      "rude": "무례하거나 불친절함",
+      "other": "기타"
+    },
+    "notePlaceholder": "무슨 일이 있었나요? (선택)",
+    "pickKind": "문제를 선택하세요.",
+    "sendFailed": "신고를 보내지 못했어요. {{reason}}",
+    "notNow": "나중에",
+    "send": "신고 보내기",
+    "sent": "신고를 보냈어요",
+    "sentBody": "LA28 직원이 오늘 확인할 거예요. 지금 위험한가요? 911에 전화하세요."
+  },
+  "incoming": {
+    "title": "들어온 요청",
+    "subtitle": "근처에서 도움을 요청한 방문객",
+    "preview": "미리보기: 아직 매칭이 운영되지 않아 예시만 보여요.",
+    "who": "{{help}} · {{name}}",
+    "meta": "{{distance}} 거리 · {{minutes}}분 전 · {{language}}",
+    "accept": "수락",
+    "acceptSoon": "매칭이 시작되면 요청을 수락할 수 있어요."
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "2번 게이트 경사로 근처",
+      "section214": "214구역 통로",
+      "mainPlaza": "정문 광장"
+    },
+    "greeting": "{{name}} 님, 안녕하세요! LA28 자원봉사자 {{volunteer}}입니다. 지금 가고 있어요. 만날 곳: {{spot}}.",
+    "greetingNoName": "안녕하세요! LA28 자원봉사자 {{volunteer}}입니다. 지금 가고 있어요. 만날 곳: {{spot}}.",
+    "reply1": "알겠어요, 감사합니다! 몇 분 안에 도착해요.",
+    "reply2": "이제 2번 게이트가 보여요. 분홍색 LA28 조끼를 입고 있어요.",
+    "reply3": "괜찮아요, 천천히 하세요. 함께 기다릴게요."
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "role": "LA28 ボランティア",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "{{language}}でサポート",
+  "quoted": "「{{text}}」",
+  "cancelRequest": "リクエストをキャンセル",
+  "dismiss": "閉じる",
+  "distance": {
+    "feet": "{{value}} フィート",
+    "miles": "{{value}} マイル"
+  },
+  "helpTypes": {
+    "physical": "身体のサポート",
+    "directions": "道案内",
+    "language": "言語サポート",
+    "quiet": "静かな場所",
+    "lost": "落とし物",
+    "other": "その他"
+  },
+  "skills": {
+    "wheelchair": "車いす介助の研修済み",
+    "first_aid": "応急手当",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "ボランティアを探す",
+    "subtitle": "近くにいる人とおつなぎします",
+    "languageLabel": "{{language}}でサポート。言語を変更",
+    "locationLabel": "現在地：{{spot}}、{{venue}}",
+    "question": "どんなサポートが必要ですか？",
+    "notePlaceholder": "例：2番スロープの近くで動けません",
+    "photoOff": "写真へのアクセスがオフです。設定でオンにしてください。",
+    "voiceSoon": "音声メモは近日対応予定です。今はテキストで入力してください。",
+    "pickOne": "必要なサポートを1つ以上選んでください。",
+    "send": "リクエストを送信"
+  },
+  "note": {
+    "label": "メモを追加<muted>（任意）</muted>",
+    "labelPlain": "メモを追加（任意）",
+    "placeholder": "テキストを入力",
+    "attached": "添付した写真",
+    "remove": "写真を削除"
+  },
+  "emergency": {
+    "title": "緊急ですか？",
+    "call": "今すぐ 911 に電話",
+    "label": "緊急ですか？今すぐ 911 に電話",
+    "hint": "電話アプリを開いて 911 に発信します"
+  },
+  "notice": {
+    "searchFailed": "ボランティアにつながりませんでした。接続を確認して、もう一度お試しください。",
+    "thanks": "ありがとうございます！フィードバックは {{name}} さんと LA28 チームの役に立ちます。"
+  },
+  "searching": {
+    "title": "ボランティアを探しています",
+    "subtitle": "通常 1 分以内 · その場でお待ちください",
+    "askedFor": "リクエスト内容"
+  },
+  "match": {
+    "title": "ボランティアが見つかりました",
+    "onTheWay": {
+      "his": "{{name}} さんが向かっています",
+      "her": "{{name}} さんが向かっています",
+      "their": "{{name}} さんが向かっています"
+    },
+    "stay": "その場でお待ちください。",
+    "rated": "評価 {{rating}}（5 点満点）",
+    "skills": "スキルと言語",
+    "etaMain": "{{minutes}} 分",
+    "etaSub": "で到着",
+    "etaLabel": "{{minutes}} 分で到着",
+    "awaySub": "先",
+    "awayLabel": "{{distance}} 先",
+    "message": "ボランティアにメッセージ",
+    "done": "サポート完了にする",
+    "doneHint": "リクエストを終了し、{{name}} さんの評価に進みます",
+    "confirmCancel": "リクエストをキャンセルしますか？{{name}} さんは向かうのをやめます。",
+    "keep": "リクエストを続ける",
+    "yesCancel": "キャンセルする"
+  },
+  "map": {
+    "label": "地図：{{name}} さんは {{distance}} 先にいて、2番ゲートであなたのもとへ向かっています。",
+    "gate": "2番ゲート",
+    "you": "あなた"
+  },
+  "messages": {
+    "label": "メッセージ",
+    "unread_other": "メッセージ、未読 {{count}} 件"
+  },
+  "chat": {
+    "away": "あと {{minutes}} 分",
+    "call": "{{name}} さんに電話",
+    "callSoon": "通話はまだ利用できません。{{name}} さんにメッセージを送ってください。",
+    "messages": "メッセージ",
+    "empty": "{{name}} さんにあいさつしましょう。あなたの居場所は相手に見えています。",
+    "typing": "{{name}} さんが入力中…",
+    "today": "今日 {{time}}",
+    "yesterday": "昨日 {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "読み上げは近日対応予定です。",
+    "attach": "写真を添付",
+    "attachSoon": "写真の送信は近日対応予定です。",
+    "placeholder": "メッセージ",
+    "messageTo": "{{name}} さんへのメッセージ",
+    "stickers": "スタンプ",
+    "stickersSoon": "スタンプは近日対応予定です。",
+    "record": "ボイスメッセージを録音",
+    "voiceSoon": "ボイスメッセージは近日対応予定です。"
+  },
+  "bubble": {
+    "mine": "あなた、{{time}}：{{text}}",
+    "theirs": "ボランティア、{{time}}：{{text}}",
+    "listen": "聞く",
+    "listenLabel": "このメッセージを聞く"
+  },
+  "feedback": {
+    "skip": "スキップ",
+    "skipLabel": "フィードバックをスキップ",
+    "question": "サポートはいかがでしたか？",
+    "wentWell": "良かった点は？",
+    "tags": {
+      "language": "母語で話せた",
+      "venue": "会場に詳しい",
+      "patient": "丁寧",
+      "fast": "到着が早い",
+      "helpful": "役に立った",
+      "other": "その他"
+    },
+    "placeholder": "例：{{name}} さんが日陰の席を見つけてくれた",
+    "pickStar": "星をタップして {{name}} さんのサポートを評価してください。",
+    "sendFailed": "フィードバックを送信できませんでした。{{reason}}",
+    "submit": "送信"
+  },
+  "rating": {
+    "label": "評価",
+    "star_other": "星 {{count}} つ、{{word}}",
+    "words": {
+      "poor": "悪い",
+      "notGreat": "いまいち",
+      "ok": "普通",
+      "good": "良い",
+      "excellent": "とても良い"
+    }
+  },
+  "report": {
+    "title": "問題を報告",
+    "kindLabel": "何がありましたか？",
+    "kinds": {
+      "no_show": "来なかった",
+      "unsafe": "危険を感じた",
+      "rude": "失礼・不親切",
+      "other": "その他"
+    },
+    "notePlaceholder": "詳しい状況（任意）",
+    "pickKind": "問題の内容を選んでください。",
+    "sendFailed": "報告を送信できませんでした。{{reason}}",
+    "notNow": "今はしない",
+    "send": "報告を送信",
+    "sent": "報告を送信しました",
+    "sentBody": "LA28 スタッフが本日中に確認します。今、危険な状況ですか？911 に電話してください。"
+  },
+  "incoming": {
+    "title": "届いたリクエスト",
+    "subtitle": "近くでサポートを求めている来場者",
+    "preview": "プレビュー：マッチングはまだ利用できないため、これらは例です。",
+    "who": "{{help}} · {{name}}",
+    "meta": "{{distance}} 先 · {{minutes}} 分前 · {{language}}",
+    "accept": "引き受ける",
+    "acceptSoon": "マッチング開始後にリクエストを引き受けられます。"
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "2番ゲートのスロープ付近",
+      "section214": "214 セクションのコンコース",
+      "mainPlaza": "メインエントランス広場"
+    },
+    "greeting": "{{name}} さん、こんにちは！LA28 ボランティアの {{volunteer}} です。今そちらに向かっています。待ち合わせ場所：{{spot}}。",
+    "greetingNoName": "こんにちは！LA28 ボランティアの {{volunteer}} です。今そちらに向かっています。待ち合わせ場所：{{spot}}。",
+    "reply1": "了解です、ありがとうございます！数分で着きます。",
+    "reply2": "2番ゲートが見えてきました。ピンクの LA28 ベストを着ています。",
+    "reply3": "大丈夫です、ゆっくりで構いません。一緒に待ちますね。"
+  }
+}

@@ -1,0 +1,13 @@
+# Frame 2241 (235:26768)
+COMPONENT "Frame 2241" 400x159 @0,0 auto:col gap=20 pad=0/0/0/0 align=/
+  FRAME "Frame 2239" 400x103 @0,0 auto:col gap=7 pad=0/0/0/0 align=/
+    TEXT "Add a note (optional)" 400x16 @0,0 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Add a note (optional)"
+    INSTANCE "msft_TextInput" 400x80 @0,23 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10 props={"Type":"Text","Hint | Input":"False","Display mode":"Edit","Multiline":"True"}
+      TEXT "Enter text" 368x50 @16,38 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter text"
+  FRAME "Frame 2240" 400x36 @0,123 auto:row gap=23 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+    INSTANCE "Frame 2225" 175x36 @0,123 auto:row gap=20 pad=13/20/12/20 align=CENTER/CENTER fill=#f5f5f5 stroke=#a6a6a6/1 r=10 props={"Property 1":"Default"}
+      INSTANCE "add_circle" 24x24 @27,130 [ICON svg/add-circle-f1fa11.svg]
+      TEXT "Add picture" 77x16 @71,134 font=Alexandria 400 13/16 ls=0 align=CENTER color=#242222 text="Add picture"
+    INSTANCE "Frame 2224" 202x36 @198,123 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#ffffff stroke=#1d5dbc/2 r=10 props={"Property 1":"Default"}
+      VECTOR "Icon" 14x22 @229,131 stroke=#1d5dbc/2.5 [ICON svg/icon-c230e9.svg]
+      TEXT "Or hold to speak" 107x16 @263,134 font=Alexandria 400 13/16 ls=0 align=CENTER color=#1d5dbc text="Or hold to speak"

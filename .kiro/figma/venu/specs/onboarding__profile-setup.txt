@@ -1,0 +1,76 @@
+# Venue Selection (184:18561)
+FRAME "Venue Selection" 440x956 @0,0 fill=#ffffff
+  TEXT "Set up your profile" 211x28 @24,78 font=Alexandria 400 23/28 ls=0 align=LEFT color=#000000 text="Set up your profile"
+  TEXT "So we can find the right helper for you. Change it anytime in your settings." 384x13 @24,112 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="So we can find the right helper for you. Change it anytime in your settings."
+  TEXT "Languages you speak" 138x16 @24,174 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Languages you speak"
+  TEXT "Anything we should know?" 175x16 @20,462 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Anything we should know?"
+  TEXT "I’d prefer help from" 126x16 @20,632 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="I’d prefer help from"
+  INSTANCE "Menu with Text field - Example 2" 400x53 @20,209 auto:col gap=0 pad=8/0/0/0 align=/ r=10 props={"Property 1":"Variant2"}
+    INSTANCE "Text field" 400x45 @20,217 auto:col gap=0 pad=0/0/0/0 align=/ r=4/4/0/0 props={"Placeholder text":"Placeholder","Supporting text":"Supporting text","Label text":"Search Languages","Input text":"Input","Show supporting text":false,"Style":"Filled","State":"Enabled","Text configurations":"Input text","Leading icon":"True","Trailing icon":"True"}
+      FRAME "Text field" 400x45 @20,217 auto:col gap=10 pad=0/0/0/0 align=/ fill=#f5f5f5 r=10
+        FRAME "State-layer" 400x56 @20,217 auto:row gap=4 pad=2/0/2/0 align=/ r=4/4/0/0
+          INSTANCE "Leading icon" 48x48 @20,219 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18582","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON (not exported)]
+          FRAME "Content" 296x48 @72,219 auto:col gap=0 pad=0/0/0/0 align=CENTER/
+            FRAME "Label text container" 31x13 @72,229 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Label text" 93x13 @72,229 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#49454f text="Search Languages"
+            FRAME "Input text container" 296x16 @72,242 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Input text" 296x16 @72,242 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="Input"
+          INSTANCE "Trailing icon" 48x48 @372,219 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18580","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON svg/leading-icon-de9321.svg]
+  INSTANCE "Menu with Text field - Example 3" 400x53 @20,292 auto:col gap=0 pad=8/0/0/0 align=/ r=10 props={"Property 1":"Variant2"}
+    INSTANCE "Text field" 400x45 @20,300 auto:col gap=0 pad=0/0/0/0 align=/ r=4/4/0/0 props={"Placeholder text":"Placeholder","Supporting text":"Supporting text","Label text":"Search Languages","Input text":"Input","Show supporting text":false,"Style":"Filled","State":"Enabled","Text configurations":"Input text","Leading icon":"True","Trailing icon":"True"}
+      FRAME "Text field" 400x45 @20,300 auto:col gap=10 pad=0/0/0/0 align=/ fill=#f5f5f5 r=10
+        FRAME "State-layer" 400x56 @20,300 auto:row gap=4 pad=2/0/2/0 align=/ r=4/4/0/0
+          INSTANCE "Leading icon" 48x48 @20,302 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18582","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON svg/leading-icon-de9321.svg]
+          FRAME "Content" 296x48 @72,302 auto:col gap=0 pad=0/0/0/0 align=CENTER/
+            FRAME "Label text container" 31x13 @72,312 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Label text" 93x13 @72,312 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#49454f text="Search Languages"
+            FRAME "Input text container" 296x16 @72,325 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Input text" 296x16 @72,325 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="Input"
+          INSTANCE "Trailing icon" 48x48 @372,302 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18580","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON svg/leading-icon-de9321.svg]
+  TEXT "Primary language" 88x13 @24,203 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="Primary language"
+  TEXT "Secondary language" 103x13 @24,286 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#000000 text="Secondary language"
+  INSTANCE "Filter chip" 135x32 @20,500 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+    INSTANCE "state-layer" 135x32 @20,500 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Wheelchair user"}
+      TEXT "label-text" 103x20 @36,506 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Wheelchair user"
+  INSTANCE "Filter chip" 156x32 @139,545 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+    INSTANCE "state-layer" 156x32 @139,545 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Speech impairment"}
+      TEXT "label-text" 124x20 @155,551 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Speech impairment"
+  INSTANCE "Filter chip" 131x32 @171,500 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+    INSTANCE "state-layer" 131x32 @171,500 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Hard of hearing"}
+      TEXT "label-text" 99x20 @187,506 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Hard of hearing"
+  INSTANCE "Filter chip" 100x32 @314,500 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+    INSTANCE "state-layer" 100x32 @314,500 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Low vision"}
+      TEXT "label-text" 68x20 @330,506 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Low vision"
+  INSTANCE "Filter chip" 106x32 @20,545 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+    INSTANCE "state-layer" 106x32 @20,545 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Walking aid"}
+      TEXT "label-text" 74x20 @36,551 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Walking aid"
+  INSTANCE "Filter chip" 67x32 @305,545 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+    INSTANCE "state-layer" 67x32 @305,545 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Other"}
+      TEXT "label-text" 35x20 @321,551 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Other"
+  FRAME "Frame 2236" 368x32 @20,670 auto:row gap=18 pad=0/0/0/0 align=/CENTER
+    TEXT "Gender" 48x16 @20,678 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Gender"
+    INSTANCE "Filter chip" 123x32 @86,670 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+      INSTANCE "state-layer" 123x32 @86,670 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"No preference"}
+        TEXT "label-text" 91x20 @102,676 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="No preference"
+    INSTANCE "Filter chip" 64x32 @227,670 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+      INSTANCE "state-layer" 64x32 @227,670 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Male"}
+        TEXT "label-text" 32x20 @243,676 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Male"
+    INSTANCE "Filter chip" 79x32 @309,670 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+      INSTANCE "state-layer" 79x32 @309,670 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Female"}
+        TEXT "label-text" 47x20 @325,676 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Female"
+  FRAME "Frame 2237" 375x32 @20,715 auto:row gap=18 pad=0/0/0/0 align=/CENTER
+    TEXT "Age" 26x16 @20,723 font=Alexandria 400 13/16 ls=0 align=LEFT color=#000000 text="Age"
+    INSTANCE "Filter chip" 83x32 @64,715 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+      INSTANCE "state-layer" 83x32 @64,715 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Any age"}
+        TEXT "label-text" 51x20 @80,721 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Any age"
+    INSTANCE "Filter chip" 69x32 @165,715 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+      INSTANCE "state-layer" 69x32 @165,715 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"20-30"}
+        TEXT "label-text" 37x20 @181,721 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="20-30"
+    INSTANCE "Filter chip" 69x32 @252,715 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+      INSTANCE "state-layer" 69x32 @252,715 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"30-40"}
+        TEXT "label-text" 37x20 @268,721 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="30-40"
+    INSTANCE "Filter chip" 56x32 @339,715 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8 props={"Property 1":"Default"}
+      INSTANCE "state-layer" 56x32 @339,715 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"40+"}
+        TEXT "label-text" 24x20 @355,721 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="40+"
+  INSTANCE "Frame 2228" 400x47 @20,814 auto:row gap=20 pad=13/138/12/121 align=CENTER/CENTER fill=#1d5dbc stroke=#1d5dbc/2 r=10 props={"Property 1":"Default"}
+    TEXT "Send Request" 212x28 @106,824 font=Alexandria 400 23/28 ls=0 align=CENTER color=#ffffff text="Save and continue"

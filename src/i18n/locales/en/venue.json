@@ -1,0 +1,221 @@
+{
+  "search": {
+    "placeholder": "Search",
+    "clear": "Clear search"
+  },
+  "back": {
+    "venues": "Back to venues",
+    "facilities": "Back to facilities",
+    "facility": "Back to facility"
+  },
+  "choose": {
+    "title": "Choose Your Venue",
+    "subtitle": "Pick where you want to see map and facilities",
+    "searchLabel": "Search venues",
+    "languageLabel": "App language: {{language}}",
+    "languageHint": "Changes the language of the whole app",
+    "languageTitle": "App language",
+    "languageConsent": "Review the updated privacy policy in Profile first, then change the language.",
+    "assistTitle": "Need Assistance?",
+    "assistBody": "Connect with a volunteer",
+    "assistLabel": "Need assistance? Connect with a volunteer",
+    "empty": "No venue matches “{{query}}”. Try a city, like Inglewood.",
+    "cardHint": "Opens the map and facilities"
+  },
+  "events": {
+    "opening_ceremony": "Opening Ceremony",
+    "swimming": "Swimming",
+    "athletics": "Athletics",
+    "football": "Football",
+    "gymnastics": "Gymnastics",
+    "basketball": "Basketball"
+  },
+  "category": {
+    "all": "All",
+    "groupLabel": "Facility type",
+    "gate": "Gates",
+    "restroom": "Restrooms",
+    "food": "Food & Drinks",
+    "first_aid": "First Aid",
+    "lost_found": "Lost & Found",
+    "info": "Info Desk",
+    "accessible": "Accessibility",
+    "parking": "Parking"
+  },
+  "emptyMatch": {
+    "all": "No facilities match “{{query}}”",
+    "gate": "No gates match “{{query}}”",
+    "restroom": "No restrooms match “{{query}}”",
+    "food": "No food or drink stands match “{{query}}”",
+    "first_aid": "No first aid stations match “{{query}}”",
+    "lost_found": "No lost & found desks match “{{query}}”",
+    "info": "No info desks match “{{query}}”",
+    "accessible": "No accessible facilities match “{{query}}”",
+    "parking": "No parking lots match “{{query}}”"
+  },
+  "emptyNone": {
+    "all": "No facilities at {{venue}} yet",
+    "gate": "No gates at {{venue}} yet",
+    "restroom": "No restrooms at {{venue}} yet",
+    "food": "No food or drink stands at {{venue}} yet",
+    "first_aid": "No first aid stations at {{venue}} yet",
+    "lost_found": "No lost & found desks at {{venue}} yet",
+    "info": "No info desks at {{venue}} yet",
+    "accessible": "No accessible facilities at {{venue}} yet",
+    "parking": "No parking lots at {{venue}} yet"
+  },
+  "list": {
+    "title": "Facilities Near You",
+    "searchLabel": "Search facilities",
+    "showing": "Showing {{category}}",
+    "showAll": "Show all",
+    "showAllHint": "Shows every facility again"
+  },
+  "sheet": {
+    "down": "Facility panel, lowered",
+    "mid": "Facility panel, half open",
+    "up": "Facility panel, raised",
+    "hint": "Tap to resize, or drag up and down"
+  },
+  "map": {
+    "pin": "{{name}} on the map",
+    "north": "N"
+  },
+  "walk_one": "{{count}} min walk",
+  "walk_other": "{{count}} min walk",
+  "wait": {
+    "none": "No wait",
+    "short": "Short wait",
+    "long": "Long wait"
+  },
+  "row": {
+    "label": "{{name}}, {{meta}}",
+    "labelAccessible": "{{name}}, {{meta}}, accessible"
+  },
+  "tags": {
+    "label": "Tags:",
+    "accessible": "Accessible",
+    "stairs": "Stairs",
+    "busy_before_events": "Busy before events",
+    "ramp": "Ramp",
+    "bag_check": "Bag check",
+    "rideshare": "Rideshare",
+    "escalators": "Escalators",
+    "sensory_kits": "Sensory kits",
+    "quiet_room": "Quiet room",
+    "family_room": "Family room",
+    "long_lines_halftime": "Long lines at halftime",
+    "wheelchair_loans": "Wheelchair loans",
+    "permit_needed": "Permit needed"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "North entrance, closest to the Metro shuttle stop.",
+      "location": "North side, at the shuttle stop"
+    },
+    "gate-2": {
+      "description": "East entrance with a ramp, next to accessible parking in Lot C.",
+      "location": "East side, by Lot C"
+    },
+    "gate-3": {
+      "description": "South entrance for rideshare drop-off and pick-up.",
+      "location": "South side, at the rideshare zone"
+    },
+    "gate-4": {
+      "description": "West entrance for ticket holders in sections 200 to 240.",
+      "location": "West side, off the main plaza"
+    },
+    "info-desk": {
+      "description": "Questions, lost tickets, sensory kits and ear defenders.",
+      "location": "Concourse, section 105"
+    },
+    "first-aid": {
+      "description": "Nurses and EMTs on duty from gates open until the venue clears.",
+      "location": "Concourse, section 112"
+    },
+    "restroom-east": {
+      "description": "Men’s, women’s and an all-gender family room with a changing table.",
+      "location": "Concourse, section 118"
+    },
+    "food-south": {
+      "description": "Tacos, burritos and agua fresca. Vegetarian options.",
+      "location": "Concourse, section 124"
+    },
+    "lost-found": {
+      "description": "Drop off or pick up lost items. Lost children are brought here too.",
+      "location": "Concourse, section 131"
+    },
+    "accessible-seating": {
+      "description": "Wheelchair loans, companion seating and assistive listening devices.",
+      "location": "Concourse, section 136"
+    },
+    "food-west": {
+      "description": "Burgers, fries and soft drinks. Halal patties available.",
+      "location": "Concourse, section 140"
+    },
+    "restroom-west": {
+      "description": "Men’s and women’s restrooms. The accessible stall is on the left.",
+      "location": "Concourse, section 145"
+    },
+    "parking-c": {
+      "description": "Accessible parking with a short, level path to Gate 2.",
+      "location": "Southeast lot"
+    }
+  },
+  "facility": {
+    "notFound": "Facility not found",
+    "wheelchair": "Wheelchair accessible",
+    "directions": "Directions",
+    "directionsSoon": "Step-by-step directions are coming soon. {{name}}: {{location}}.",
+    "reports": "Reports",
+    "results_one": "{{count}} result",
+    "results_other": "{{count}} results",
+    "noReports": "No reports yet. Be the first to share what you found.",
+    "addReport": "Add Your Own Report"
+  },
+  "submitted": {
+    "title": "Report Submitted",
+    "body": "Thank you for submitting a facility report.",
+    "again": "Submit another report"
+  },
+  "card": {
+    "label": "Report: {{title}}, by {{author}}",
+    "hint": "Opens the full report",
+    "new": "New",
+    "by": "By {{author}}",
+    "seeMore": "see more →"
+  },
+  "topic": {
+    "accessibility": "Accessibility",
+    "directions": "Directions",
+    "facility_condition": "Facility condition",
+    "security": "Security",
+    "crowds": "Crowds",
+    "other": "Other"
+  },
+  "report": {
+    "notFound": "Report not found",
+    "kind": "Report",
+    "submitted": "Submitted {{date}}",
+    "noBody": "No details added."
+  },
+  "form": {
+    "title": "Add report",
+    "subtitleAt": "Share what you found at {{facility}} to help the next visitor",
+    "subtitle": "Share what you found to help the next visitor",
+    "titleLabel": "Report title",
+    "titlePlaceholder": "What should people know?",
+    "bodyLabel": "Your report",
+    "bodyPlaceholder": "Enter text",
+    "bodyHint": "Optional. What happened, where, and when?",
+    "pictureSoon": "Adding pictures is coming soon.",
+    "speakSoon": "Voice reports are coming soon. Type your report for now.",
+    "topic": "Topic",
+    "submit": "Submit Report",
+    "sendFailed": "Couldn’t send the report. Check your connection and try again.",
+    "titleRequired": "Add a title, e.g. “Gate 2 ramp is cracked”.",
+    "titleTooLong": "Keep the title under {{max}} characters.",
+    "topicRequired": "Pick the topic that fits best.",
+    "bodyTooLong": "Keep the report under {{max}} characters."
+  }
+}

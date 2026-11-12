@@ -1,0 +1,8 @@
+# Filter chip (192:22671)
+COMPONENT_SET "Filter chip" 100x124 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 60x32 @20,20 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#ffffff stroke=#a6a6a6/1 r=8
+    INSTANCE "state-layer" 60x32 @20,20 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Text"}
+      TEXT "label-text" 28x20 @36,26 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Text"
+  COMPONENT "Property 1=Selected" 60x32 @20,72 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd stroke=#1d5dbc/1 r=8
+    INSTANCE "state-layer" 60x32 @20,72 auto:row gap=8 pad=6/16/6/16 align=CENTER/CENTER props={"Text":"Text"}
+      TEXT "label-text" 28x20 @36,78 font=Roboto 500 14/20 ls=0.10000000149011612 align=CENTER color=#242222 text="Text"

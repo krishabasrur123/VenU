@@ -1,0 +1,232 @@
+{
+  "tab": {
+    "title": "Hồ sơ",
+    "visitor": "Khán giả",
+    "volunteer": "Tình nguyện viên",
+    "verified": "✓ Đã xác minh LA28",
+    "unverified": "Chưa xác minh",
+    "sharedVisitor": "Chia sẻ với người hỗ trợ",
+    "sharedVolunteer": "Hiển thị cho khán giả",
+    "account": "Tài khoản",
+    "support": "Hỗ trợ",
+    "editProfile": "Sửa hồ sơ",
+    "notifications": "Thông báo",
+    "privacy": "Quyền riêng tư & dữ liệu",
+    "help": "Trợ giúp & góp ý",
+    "terms": "Điều khoản sử dụng",
+    "signOutFailed": "Không thể đăng xuất. {{reason}}",
+    "deleteWarning": "Thao tác này xóa vĩnh viễn hồ sơ và ảnh của bạn. Bạn có thể tạo hồ sơ mới sau.",
+    "deleteFailed": "Không xóa hết được dữ liệu của bạn. {{reason}}",
+    "deleteData": "Xóa dữ liệu của tôi"
+  },
+  "edit": {
+    "title": "Sửa hồ sơ",
+    "subtitle": "Thay đổi sẽ áp dụng cho lần nhờ trợ giúp tiếp theo.",
+    "submit": "Lưu thay đổi"
+  },
+  "form": {
+    "aboutYou": "Về bạn",
+    "firstName": "Tên",
+    "firstNamePlaceholderVisitor": "vd. Rosa",
+    "firstNamePlaceholderVolunteer": "vd. Daniel",
+    "firstNameHint": "Người bạn gặp chỉ thấy tên của bạn.",
+    "languagesVisitor": "Ngôn ngữ bạn nói",
+    "languagesVolunteer": "Ngôn ngữ bạn thông thạo",
+    "accessNeeds": "Bạn có điều gì muốn cho chúng tôi biết?",
+    "accessNeedsLabel": "Nhu cầu hỗ trợ tiếp cận",
+    "otherNeedsPlaceholder": "vd. Tôi đi cùng chó hỗ trợ",
+    "otherNeedsLabel": "Nhu cầu hỗ trợ tiếp cận khác",
+    "communication": "Bạn muốn giao tiếp thế nào?",
+    "communicationHint": "Người hỗ trợ sẽ thấy điều này trước khi đến gặp bạn.",
+    "communicationLabel": "Giao tiếp",
+    "helperPref": "Tôi muốn được giúp bởi",
+    "gender": "Giới tính",
+    "age": "Tuổi",
+    "helperGenderLabel": "Giới tính người hỗ trợ",
+    "helperAgeLabel": "Tuổi người hỗ trợ",
+    "training": "Đào tạo",
+    "trainingHint": "LA28 kiểm tra những mục này khi xác minh bạn.",
+    "yourGender": "Giới tính của bạn",
+    "yourGenderHint": "Chỉ dùng khi khán giả yêu cầu người hỗ trợ nữ hoặc nam. Không bao giờ hiển thị.",
+    "yourAge": "Độ tuổi của bạn",
+    "yourAgeHint": "Chỉ để ghép đôi, không bao giờ hiển thị.",
+    "privacyAgree": "Tôi đồng ý với cách VenU dùng thông tin của tôi, theo <a>chính sách quyền riêng tư</a>.",
+    "privacyAgreeLabel": "Tôi đồng ý với cách VenU dùng thông tin của tôi, theo chính sách quyền riêng tư",
+    "fixAbove": "Một số câu trả lời ở trên cần sửa (đánh dấu màu đỏ)."
+  },
+  "validate": {
+    "firstName": "Thêm tên của bạn.",
+    "tooLong": "Dùng tối đa {{max}} ký tự.",
+    "noLanguage": "Thêm ít nhất một ngôn ngữ.",
+    "mainLanguage": "Chọn ngôn ngữ chính của bạn.",
+    "otherNote": "Cho chúng tôi biết đôi chút bạn cần gì.",
+    "pickOne": "Chọn một mục (hoặc \"Không muốn nói\").",
+    "privacy": "Vui lòng đồng ý với chính sách quyền riêng tư để tiếp tục."
+  },
+  "options": {
+    "accessNeeds": {
+      "wheelchair": "Dùng xe lăn",
+      "hard_of_hearing": "Khiếm thính nhẹ",
+      "low_vision": "Thị lực kém",
+      "walking_aid": "Dụng cụ hỗ trợ đi lại",
+      "other": "Khác"
+    },
+    "communication": {
+      "speaking": "Nói",
+      "text": "Nhắn tin / viết",
+      "sign_language": "Ngôn ngữ ký hiệu"
+    },
+    "helperGender": {
+      "none": "Không quan trọng",
+      "man": "Nam",
+      "woman": "Nữ"
+    },
+    "helperAge": {
+      "any": "Mọi độ tuổi",
+      "under_40": "Dưới 40",
+      "40_plus": "40+"
+    },
+    "training": {
+      "wheelchair": "Được đào tạo hỗ trợ xe lăn",
+      "asl": "ASL",
+      "first_aid": "Sơ cứu",
+      "sighted_guide": "Dẫn đường cho người khiếm thị",
+      "mental_health": "Sơ cứu sức khỏe tâm thần"
+    },
+    "gender": {
+      "woman": "Nữ",
+      "man": "Nam",
+      "nonbinary": "Phi nhị nguyên",
+      "prefer_not": "Không muốn nói"
+    },
+    "ageBand": {
+      "under_40": "Dưới 40",
+      "40_plus": "40+",
+      "prefer_not": "Không muốn nói"
+    }
+  },
+  "summary": {
+    "speaks": "Nói {{languages}}",
+    "listSeparator": ", ",
+    "otherNeeds": "Nhu cầu khác (xem ghi chú)",
+    "prefers": {
+      "speaking": "Thích nói chuyện",
+      "text": "Thích nhắn tin / viết",
+      "sign_language": "Thích ngôn ngữ ký hiệu"
+    }
+  },
+  "languageNames": {
+    "en": "tiếng Anh",
+    "es": "tiếng Tây Ban Nha",
+    "zh": "tiếng Trung",
+    "ko": "tiếng Hàn",
+    "tl": "tiếng Tagalog",
+    "vi": "tiếng Việt",
+    "hy": "tiếng Armenia",
+    "fa": "tiếng Ba Tư",
+    "ja": "tiếng Nhật",
+    "ru": "tiếng Nga",
+    "ar": "tiếng Ả Rập",
+    "fr": "tiếng Pháp",
+    "pt": "tiếng Bồ Đào Nha",
+    "de": "tiếng Đức",
+    "it": "tiếng Ý",
+    "hi": "tiếng Hindi",
+    "pa": "tiếng Punjab",
+    "th": "tiếng Thái",
+    "km": "tiếng Khmer",
+    "he": "tiếng Do Thái",
+    "ase": "ngôn ngữ ký hiệu Mỹ"
+  },
+  "privacy": {
+    "title": "Quyền riêng tư của bạn",
+    "summary": "Chúng tôi chỉ hỏi những gì cần để ghép bạn với đúng người hỗ trợ, và bạn có thể sửa hoặc xóa bất cứ lúc nào.",
+    "englishNotice": "Chính sách này hiển thị bằng tiếng Anh.",
+    "version": "Phiên bản {{version}}. Bản nháp để nhóm duyệt.",
+    "sections": {
+      "collect": "Chúng tôi thu thập gì",
+      "why": "Tại sao chúng tôi thu thập",
+      "who": "Ai được xem",
+      "where": "Lưu ở đâu",
+      "keep": "Lưu trong bao lâu",
+      "choices": "Lựa chọn của bạn"
+    }
+  },
+  "terms": {
+    "title": "Điều khoản sử dụng",
+    "subtitle": "Bản tóm tắt các quy tắc khi dùng VenU.",
+    "englishNotice": "Các điều khoản này hiển thị bằng tiếng Anh.",
+    "privacyLink": "Cách chúng tôi dùng thông tin của bạn có trong <a>chính sách quyền riêng tư</a>.",
+    "version": "Phiên bản {{version}}. Bản nháp để nhóm duyệt.",
+    "sections": {
+      "what": "VenU là gì",
+      "emergencies": "Không dùng cho trường hợp khẩn cấp",
+      "kind": "Tử tế và trung thực",
+      "remove": "Những gì chúng tôi có thể gỡ bỏ",
+      "guarantees": "Không bảo đảm"
+    }
+  },
+  "help": {
+    "title": "Trợ giúp & góp ý",
+    "subtitle": "Giải đáp câu hỏi thường gặp, và nơi để cho chúng tôi biết cần sửa gì.",
+    "commonQuestions": "Câu hỏi thường gặp",
+    "faq": {
+      "matching": {
+        "q": "Việc ghép đôi diễn ra thế nào?",
+        "a": "Khi bạn nhờ trợ giúp, chúng tôi tìm một tình nguyện viên gần bạn tại địa điểm, nói ngôn ngữ của bạn và được đào tạo đúng nhu cầu, vd. một tình nguyện viên biết hỗ trợ xe lăn và nói tiếng Tây Ban Nha."
+      },
+      "volunteers": {
+        "q": "Tình nguyện viên giúp được gì?",
+        "a": "Tìm chỗ ngồi, cổng, nhà vệ sinh hoặc thang máy, đi lại trong địa điểm, và phiên dịch. Họ không thể chăm sóc y tế."
+      },
+      "emergency": {
+        "q": "Nếu là trường hợp khẩn cấp thì sao?",
+        "a": "Gọi 911, hoặc báo nhân viên địa điểm gần nhất. Tình nguyện viên VenU không phải lực lượng cấp cứu."
+      },
+      "languages": {
+        "q": "Hỗ trợ những ngôn ngữ nào?",
+        "a": "Bạn có thể chọn trong 21 ngôn ngữ, gồm cả ASL. Hãy thêm mọi ngôn ngữ bạn nói trong Sửa hồ sơ để chúng tôi tìm được nhiều người hỗ trợ hơn."
+      },
+      "privacy": {
+        "q": "Ai xem được thông tin của tôi?",
+        "a": "Chỉ người đang giúp bạn, và chỉ trong lúc giúp: tên, ảnh, ngôn ngữ và các nhu cầu bạn chọn chia sẻ. Xem Quyền riêng tư & dữ liệu để biết thêm."
+      },
+      "report": {
+        "q": "Làm sao báo sự cố cơ sở vật chất?",
+        "a": "Ở thẻ Địa điểm, chạm vào cơ sở (vd. thang máy hoặc nhà vệ sinh), rồi chọn Thêm báo cáo của bạn. Ai mở cơ sở đó cũng sẽ thấy."
+      }
+    },
+    "sendFeedback": "Gửi góp ý",
+    "feedbackHint": "Có gì khó hiểu, bị lỗi hay còn thiếu? Hãy cho chúng tôi biết.",
+    "thanksTitle": "Cảm ơn bạn!",
+    "thanksBody": "Chúng tôi đọc mọi góp ý và dùng chúng để cải thiện VenU.",
+    "sendMore": "Gửi thêm góp ý",
+    "placeholder": "vd. Bản đồ khó đọc dưới nắng",
+    "feedbackLabel": "Góp ý của bạn",
+    "send": "Gửi góp ý",
+    "empty": "Hãy viết vài chữ trước."
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "subtitle": "Chọn những gì VenU sẽ báo cho bạn.",
+    "note": "Bạn sẽ bắt đầu nhận cảnh báo khi thông báo của VenU được thiết lập.",
+    "options": {
+      "volunteer": {
+        "label": "Cập nhật từ tình nguyện viên",
+        "hint": "vd. Daniel đã nhận và đang đến"
+      },
+      "chat": {
+        "label": "Tin nhắn trò chuyện",
+        "hint": "Tin nhắn mới từ người hỗ trợ hoặc khán giả"
+      },
+      "venue": {
+        "label": "Cảnh báo địa điểm",
+        "hint": "vd. Cổng C ở SoFi Stadium đã đóng"
+      },
+      "reports": {
+        "label": "Phản hồi báo cáo",
+        "hint": "Khi nhân viên trả lời báo cáo cơ sở vật chất"
+      }
+    }
+  }
+}

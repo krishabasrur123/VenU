@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "계정 만들기",
+    "or": "또는",
+    "signIn": "로그인",
+    "socialTitle": "또는 다음으로 가입",
+    "socialSoon": "Google, Apple, Facebook 로그인은 곧 제공됩니다.",
+    "languageTitle": "앱 언어"
+  },
+  "auth": {
+    "languagePill": "앱 언어: {{language}}",
+    "languagePillHint": "언어 목록을 엽니다",
+    "signUpWith": "{{provider}}(으)로 가입",
+    "devMode": "개발 모드: Supabase 키가 없어 로그인을 건너뛰고 데이터는 이 기기에만 저장됩니다.",
+    "name": "이름",
+    "namePlaceholder": "이름 입력",
+    "email": "이메일",
+    "emailPlaceholder": "이메일 입력",
+    "password": "비밀번호",
+    "passwordPlaceholder": "비밀번호 입력"
+  },
+  "signIn": {
+    "title": "로그인",
+    "noAccount": "계정이 없으신가요?",
+    "signUp": "가입하기",
+    "forgot": "비밀번호를 잊으셨나요?",
+    "forgotSoon": "비밀번호 재설정은 곧 제공됩니다.",
+    "confirmNotice": "이메일에서 계정을 확인한 뒤 로그인하세요.",
+    "submit": "로그인"
+  },
+  "signUp": {
+    "title": "계정 만들기",
+    "haveAccount": "이미 계정이 있으신가요?",
+    "signIn": "로그인",
+    "agree": "<a>이용 약관</a>에 동의합니다",
+    "agreeLabel": "이용 약관에 동의합니다",
+    "submit": "계정 만들기"
+  },
+  "validate": {
+    "email": "올바른 이메일을 입력하세요.",
+    "passwordLength": "비밀번호는 {{min}}자 이상이어야 합니다.",
+    "password": "비밀번호를 입력하세요.",
+    "terms": "계속하려면 이용 약관에 동의하세요."
+  },
+  "gate": {
+    "offlineTitle": "VenU에 연결할 수 없습니다",
+    "errorTitle": "프로필을 불러오지 못했습니다",
+    "offlineBody": "연결을 확인하고 다시 시도하세요. 로그인 상태는 유지됩니다."
+  },
+  "role": {
+    "title": "VenU를 어떻게 사용하시나요?",
+    "subtitle": "알맞은 질문을 드리기 위해서예요.",
+    "visitorTitle": "관람객입니다",
+    "visitorBody": "경기장에서 내 언어로 도움을 받으세요.",
+    "volunteerTitle": "LA28 자원봉사자입니다",
+    "volunteerBody": "가까운 관람객을 도와주세요. LA28이 확인할 때까지 미인증으로 표시됩니다."
+  },
+  "setup": {
+    "visitorTitle": "프로필 설정",
+    "visitorSubtitle": "알맞은 도우미를 찾기 위해서예요. 설정에서 언제든 바꿀 수 있어요.",
+    "volunteerTitle": "자원봉사자 프로필",
+    "volunteerSubtitle": "가장 잘 도울 수 있는 관람객을 연결해 드리기 위해서예요.",
+    "submit": "저장하고 계속"
+  }
+}

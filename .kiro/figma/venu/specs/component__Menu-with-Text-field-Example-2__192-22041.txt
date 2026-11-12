@@ -1,0 +1,48 @@
+# Menu with Text field - Example 2 (192:22041)
+COMPONENT_SET "Menu with Text field - Example 2" 440x518 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 400x229 @20,20 auto:col gap=0 pad=8/0/0/0 align=/ r=10
+    INSTANCE "Text field" 400x45 @20,28 auto:col gap=0 pad=0/0/0/0 align=/ r=4/4/0/0 props={"Placeholder text":"Placeholder","Supporting text":"Supporting text","Label text":"Search languages","Input text":"Input","Show supporting text":false,"Style":"Filled","State":"Focused","Text configurations":"Input text","Leading icon":"True","Trailing icon":"True"}
+      FRAME "Text field" 400x45 @20,28 auto:col gap=10 pad=0/0/0/0 align=/ fill=#f5f5f5 r=4/4/0/0
+        FRAME "State-layer" 400x56 @20,28 auto:row gap=4 pad=2/0/2/0 align=/ r=4/4/0/0
+          INSTANCE "Leading icon" 48x48 @20,30 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18582","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON svg/leading-icon-de9321.svg]
+          FRAME "Content" 296x48 @72,30 auto:col gap=0 pad=0/0/0/0 align=CENTER/
+            FRAME "Label text container" 31x13 @72,40 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Label text" 89x13 @72,40 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="Search languages"
+            FRAME "Input text container" 296x16 @72,53 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Input text" 36x16 @72,53 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="Input"
+              VECTOR "Caret"  stroke=#242222/1 [ICON svg/caret-90a693.svg]
+          INSTANCE "Trailing icon" 48x48 @372,30 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18580","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON svg/leading-icon-de9321.svg]
+      LINE "Active indicator" 400x0 @20,73 stroke=#242222/3
+    INSTANCE "Menu (baseline)" 400x176 @20,73 auto:row gap=0 pad=8/0/8/0 align=/ fill=#f5f5f5 r=4 drop_shadow(0,2 blur=6 #00000026) drop_shadow(0,1 blur=2 #0000004d) props={"Show scrollbar":false,"Density":"0"}
+      FRAME "Menu list" 400x160 @20,81 auto:col gap=0 pad=0/0/0/0 align=/
+        INSTANCE "Menu list item 1" 400x40 @20,81 auto:col gap=0 pad=0/0/0/0 align=/ props={"Label text":"Menu item","Show focus indicator":false,"Show supporting text":false,"Content":{"guid":{"sessionID":193,"localID":1666}},"Show trailing element":false,"Show leading element":true,"Supporting text":"Supporting text","Show divider":false,"State":"Enabled"}
+          FRAME "state-layer" 400x40 @20,81 auto:row gap=12 pad=4/12/4/12 align=/CENTER
+            INSTANCE "Leading element" 24x24 @32,89 props={"Content":{"guid":{"sessionID":-1,"localID":-1}},"Leading icon":"184:20651","Type":"Icon"} [ICON svg/leading-element-be5e35.svg]
+            SLOT "Content" 340x24 @68,89 auto:col gap=0 pad=0/0/0/0 align=/
+              TEXT "Label text" 340x24 @68,89 font=Roboto 400 13/24 ls=0.5 align=LEFT color=#1d1b20 text="Menu item"
+        INSTANCE "Menu list item 2" 400x40 @20,121 auto:col gap=0 pad=0/0/0/0 align=/ props={"Show focus indicator":false,"Show supporting text":false,"Content":{"guid":{"sessionID":193,"localID":1669}},"Show trailing element":false,"Show leading element":true,"Label text":"Menu item","Supporting text":"Supporting text","Show divider":false,"State":"Enabled"}
+          FRAME "state-layer" 400x40 @20,121 auto:row gap=12 pad=4/12/4/12 align=/CENTER
+            INSTANCE "Leading element" 24x24 @32,129 props={"Content":{"guid":{"sessionID":-1,"localID":-1}},"Leading icon":"184:20651","Type":"Icon"} [ICON svg/leading-element-be5e35.svg]
+            SLOT "Content" 340x24 @68,129 auto:col gap=0 pad=0/0/0/0 align=/
+              TEXT "Label text" 340x24 @68,129 font=Roboto 400 13/24 ls=0.5 align=LEFT color=#1d1b20 text="Menu item"
+        INSTANCE "Menu list item 3" 400x40 @20,161 auto:col gap=0 pad=0/0/0/0 align=/ props={"Show focus indicator":false,"Show supporting text":false,"Content":{"guid":{"sessionID":193,"localID":1672}},"Show trailing element":false,"Show leading element":true,"Label text":"Menu item","Supporting text":"Supporting text","Show divider":false,"State":"Enabled"}
+          FRAME "state-layer" 400x40 @20,161 auto:row gap=12 pad=4/12/4/12 align=/CENTER
+            INSTANCE "Leading element" 24x24 @32,169 props={"Content":{"guid":{"sessionID":-1,"localID":-1}},"Leading icon":"184:20651","Type":"Icon"} [ICON svg/leading-element-be5e35.svg]
+            SLOT "Content" 340x24 @68,169 auto:col gap=0 pad=0/0/0/0 align=/
+              TEXT "Label text" 340x24 @68,169 font=Roboto 400 13/24 ls=0.5 align=LEFT color=#1d1b20 text="Menu item"
+        INSTANCE "Menu list item 4" 400x40 @20,201 auto:col gap=0 pad=0/0/0/0 align=/ props={"Show focus indicator":false,"Show supporting text":false,"Content":{"guid":{"sessionID":193,"localID":1675}},"Show trailing element":false,"Show leading element":true,"Label text":"Menu item","Supporting text":"Supporting text","Show divider":false,"State":"Enabled"}
+          FRAME "state-layer" 400x40 @20,201 auto:row gap=12 pad=4/12/4/12 align=/CENTER
+            INSTANCE "Leading element" 24x24 @32,209 props={"Content":{"guid":{"sessionID":-1,"localID":-1}},"Leading icon":"184:20651","Type":"Icon"} [ICON svg/leading-element-be5e35.svg]
+            SLOT "Content" 340x24 @68,209 auto:col gap=0 pad=0/0/0/0 align=/
+              TEXT "Label text" 340x24 @68,209 font=Roboto 400 13/24 ls=0.5 align=LEFT color=#1d1b20 text="Menu item"
+  COMPONENT "Property 1=Variant2" 400x53 @20,269 auto:col gap=0 pad=8/0/0/0 align=/ r=10
+    INSTANCE "Text field" 400x45 @20,277 auto:col gap=0 pad=0/0/0/0 align=/ r=4/4/0/0 props={"Placeholder text":"Placeholder","Supporting text":"Supporting text","Label text":"Search Languages","Input text":"Input","Show supporting text":false,"Style":"Filled","State":"Enabled","Text configurations":"Input text","Leading icon":"True","Trailing icon":"True"}
+      FRAME "Text field" 400x45 @20,277 auto:col gap=10 pad=0/0/0/0 align=/ fill=#f5f5f5 r=10
+        FRAME "State-layer" 400x56 @20,277 auto:row gap=4 pad=2/0/2/0 align=/ r=4/4/0/0
+          INSTANCE "Leading icon" 48x48 @20,279 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18582","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON svg/leading-icon-de9321.svg]
+          FRAME "Content" 296x48 @72,279 auto:col gap=0 pad=0/0/0/0 align=CENTER/
+            FRAME "Label text container" 31x13 @72,289 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Label text" 93x13 @72,289 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#49454f text="Search Languages"
+            FRAME "Input text container" 296x16 @72,302 auto:row gap=0 pad=0/0/0/0 align=/CENTER
+              TEXT "Input text" 296x16 @72,302 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="Input"
+          INSTANCE "Trailing icon" 48x48 @372,279 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"184:18580","Type":"Round","Size":"Small","Width":"Default","State":"Enabled"} [ICON svg/leading-icon-de9321.svg]

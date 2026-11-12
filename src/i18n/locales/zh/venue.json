@@ -1,0 +1,219 @@
+{
+  "search": {
+    "placeholder": "搜索",
+    "clear": "清除搜索"
+  },
+  "back": {
+    "venues": "返回场馆列表",
+    "facilities": "返回设施列表",
+    "facility": "返回设施"
+  },
+  "choose": {
+    "title": "选择场馆",
+    "subtitle": "选择要查看地图和设施的场馆",
+    "searchLabel": "搜索场馆",
+    "languageLabel": "应用语言：{{language}}",
+    "languageHint": "更改整个应用的语言",
+    "languageTitle": "应用语言",
+    "languageConsent": "请先在“个人资料”中查看更新后的隐私政策，再更改语言。",
+    "assistTitle": "需要帮助？",
+    "assistBody": "联系志愿者",
+    "assistLabel": "需要帮助？联系志愿者",
+    "empty": "没有与“{{query}}”匹配的场馆。试试城市名，例如 Inglewood。",
+    "cardHint": "打开地图和设施"
+  },
+  "events": {
+    "opening_ceremony": "开幕式",
+    "swimming": "游泳",
+    "athletics": "田径",
+    "football": "美式橄榄球",
+    "gymnastics": "体操",
+    "basketball": "篮球"
+  },
+  "category": {
+    "all": "全部",
+    "groupLabel": "设施类型",
+    "gate": "入口",
+    "restroom": "洗手间",
+    "food": "餐饮",
+    "first_aid": "急救",
+    "lost_found": "失物招领",
+    "info": "问询处",
+    "accessible": "无障碍",
+    "parking": "停车场"
+  },
+  "emptyMatch": {
+    "all": "没有与“{{query}}”匹配的设施",
+    "gate": "没有与“{{query}}”匹配的入口",
+    "restroom": "没有与“{{query}}”匹配的洗手间",
+    "food": "没有与“{{query}}”匹配的餐饮摊位",
+    "first_aid": "没有与“{{query}}”匹配的急救站",
+    "lost_found": "没有与“{{query}}”匹配的失物招领处",
+    "info": "没有与“{{query}}”匹配的问询处",
+    "accessible": "没有与“{{query}}”匹配的无障碍设施",
+    "parking": "没有与“{{query}}”匹配的停车场"
+  },
+  "emptyNone": {
+    "all": "{{venue}}暂无设施",
+    "gate": "{{venue}}暂无入口信息",
+    "restroom": "{{venue}}暂无洗手间信息",
+    "food": "{{venue}}暂无餐饮摊位信息",
+    "first_aid": "{{venue}}暂无急救站信息",
+    "lost_found": "{{venue}}暂无失物招领处信息",
+    "info": "{{venue}}暂无问询处信息",
+    "accessible": "{{venue}}暂无无障碍设施信息",
+    "parking": "{{venue}}暂无停车场信息"
+  },
+  "list": {
+    "title": "附近设施",
+    "searchLabel": "搜索设施",
+    "showing": "正在显示：{{category}}",
+    "showAll": "显示全部",
+    "showAllHint": "重新显示所有设施"
+  },
+  "sheet": {
+    "down": "设施面板，已收起",
+    "mid": "设施面板，半展开",
+    "up": "设施面板，已展开",
+    "hint": "点按可调整大小，或上下拖动"
+  },
+  "map": {
+    "pin": "地图上的{{name}}",
+    "north": "北"
+  },
+  "walk_other": "步行 {{count}} 分钟",
+  "wait": {
+    "none": "无需排队",
+    "short": "排队较短",
+    "long": "排队较长"
+  },
+  "row": {
+    "label": "{{name}}，{{meta}}",
+    "labelAccessible": "{{name}}，{{meta}}，无障碍"
+  },
+  "tags": {
+    "label": "标签：",
+    "accessible": "无障碍",
+    "stairs": "台阶",
+    "busy_before_events": "赛前拥挤",
+    "ramp": "坡道",
+    "bag_check": "安检",
+    "rideshare": "网约车",
+    "escalators": "自动扶梯",
+    "sensory_kits": "感官工具包",
+    "quiet_room": "安静室",
+    "family_room": "家庭间",
+    "long_lines_halftime": "中场排长队",
+    "wheelchair_loans": "轮椅借用",
+    "permit_needed": "需要许可证"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "北入口，离 Metro 接驳车站最近。",
+      "location": "北侧，接驳车站旁"
+    },
+    "gate-2": {
+      "description": "东入口，设有坡道，紧邻 C 停车场的无障碍车位。",
+      "location": "东侧，C 停车场旁"
+    },
+    "gate-3": {
+      "description": "南入口，供网约车上下客。",
+      "location": "南侧，网约车区"
+    },
+    "gate-4": {
+      "description": "西入口，供 200 至 240 区持票观众使用。",
+      "location": "西侧，主广场旁"
+    },
+    "info-desk": {
+      "description": "咨询、遗失门票、感官工具包和降噪耳罩。",
+      "location": "环廊，105 区"
+    },
+    "first-aid": {
+      "description": "从开门到观众全部离场，护士和急救员全程值守。",
+      "location": "环廊，112 区"
+    },
+    "restroom-east": {
+      "description": "男洗手间、女洗手间，以及带尿布台的全性别家庭间。",
+      "location": "环廊，118 区"
+    },
+    "food-south": {
+      "description": "塔可、墨西哥卷饼和鲜果水，有素食选择。",
+      "location": "环廊，124 区"
+    },
+    "lost-found": {
+      "description": "交还或领取遗失物品。走失儿童也会被带到这里。",
+      "location": "环廊，131 区"
+    },
+    "accessible-seating": {
+      "description": "轮椅借用、陪同座位和助听设备。",
+      "location": "环廊，136 区"
+    },
+    "food-west": {
+      "description": "汉堡、薯条和软饮，提供清真肉饼。",
+      "location": "环廊，140 区"
+    },
+    "restroom-west": {
+      "description": "男女洗手间。无障碍隔间在左侧。",
+      "location": "环廊，145 区"
+    },
+    "parking-c": {
+      "description": "无障碍停车场，有一条平坦的短路通往 Gate 2。",
+      "location": "东南停车场"
+    }
+  },
+  "facility": {
+    "notFound": "未找到该设施",
+    "wheelchair": "轮椅可通行",
+    "directions": "路线",
+    "directionsSoon": "分步导航即将推出。{{name}}：{{location}}。",
+    "reports": "反馈",
+    "results_other": "{{count}} 条结果",
+    "noReports": "还没有反馈。来分享你的发现吧。",
+    "addReport": "添加你的反馈"
+  },
+  "submitted": {
+    "title": "反馈已提交",
+    "body": "感谢你提交设施反馈。",
+    "again": "再提交一条反馈"
+  },
+  "card": {
+    "label": "反馈：{{title}}，来自 {{author}}",
+    "hint": "打开完整反馈",
+    "new": "新",
+    "by": "来自 {{author}}",
+    "seeMore": "查看更多 →"
+  },
+  "topic": {
+    "accessibility": "无障碍",
+    "directions": "路线",
+    "facility_condition": "设施状况",
+    "security": "安全",
+    "crowds": "人流",
+    "other": "其他"
+  },
+  "report": {
+    "notFound": "未找到该反馈",
+    "kind": "反馈",
+    "submitted": "提交于 {{date}}",
+    "noBody": "未添加详情。"
+  },
+  "form": {
+    "title": "添加反馈",
+    "subtitleAt": "分享你在{{facility}}的发现，帮助下一位观众",
+    "subtitle": "分享你的发现，帮助下一位观众",
+    "titleLabel": "反馈标题",
+    "titlePlaceholder": "大家需要知道什么？",
+    "bodyLabel": "你的反馈",
+    "bodyPlaceholder": "输入内容",
+    "bodyHint": "选填。发生了什么、在哪里、什么时候？",
+    "pictureSoon": "添加照片功能即将推出。",
+    "speakSoon": "语音反馈即将推出，请先输入文字。",
+    "topic": "主题",
+    "submit": "提交反馈",
+    "sendFailed": "反馈发送失败。请检查网络后重试。",
+    "titleRequired": "请添加标题，例如“Gate 2 坡道有裂缝”。",
+    "titleTooLong": "标题请少于 {{max}} 个字符。",
+    "topicRequired": "请选择最合适的主题。",
+    "bodyTooLong": "反馈请少于 {{max}} 个字符。"
+  }
+}

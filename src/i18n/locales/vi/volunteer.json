@@ -1,0 +1,183 @@
+{
+  "role": "Tình nguyện viên LA28",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "Hỗ trợ bằng {{language}}",
+  "quoted": "“{{text}}”",
+  "cancelRequest": "Hủy yêu cầu",
+  "dismiss": "Đóng",
+  "distance": {
+    "feet": "{{value}} ft",
+    "miles": "{{value}} dặm"
+  },
+  "helpTypes": {
+    "physical": "Hỗ trợ đi lại",
+    "directions": "Chỉ đường",
+    "language": "Hỗ trợ ngôn ngữ",
+    "quiet": "Nơi yên tĩnh",
+    "lost": "Đồ thất lạc",
+    "other": "Việc khác"
+  },
+  "skills": {
+    "wheelchair": "Được đào tạo về xe lăn",
+    "first_aid": "Sơ cứu",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "Tìm tình nguyện viên",
+    "subtitle": "Chúng tôi sẽ kết nối bạn với người ở gần",
+    "languageLabel": "Hỗ trợ bằng {{language}}. Đổi ngôn ngữ",
+    "locationLabel": "Vị trí của bạn: {{spot}}, {{venue}}",
+    "question": "Bạn cần giúp gì?",
+    "notePlaceholder": "VD: Tôi bị kẹt gần dốc số 2",
+    "photoOff": "Quyền truy cập ảnh đang tắt. Hãy bật trong Cài đặt.",
+    "voiceSoon": "Ghi chú giọng nói sắp ra mắt. Tạm thời hãy nhập ghi chú.",
+    "pickOne": "Hãy chọn ít nhất một việc bạn cần giúp.",
+    "send": "Gửi yêu cầu"
+  },
+  "note": {
+    "label": "Thêm ghi chú <muted>(không bắt buộc)</muted>",
+    "labelPlain": "Thêm ghi chú (không bắt buộc)",
+    "placeholder": "Nhập nội dung",
+    "attached": "Ảnh đã đính kèm",
+    "remove": "Xóa ảnh"
+  },
+  "emergency": {
+    "title": "Khẩn cấp?",
+    "call": "Gọi 911 ngay",
+    "label": "Khẩn cấp? Gọi 911 ngay",
+    "hint": "Mở điện thoại để gọi 911"
+  },
+  "notice": {
+    "searchFailed": "Không liên lạc được với tình nguyện viên. Hãy kiểm tra kết nối và thử lại.",
+    "thanks": "Cảm ơn bạn! Góp ý của bạn giúp {{name}} và đội LA28."
+  },
+  "searching": {
+    "title": "Đang tìm tình nguyện viên",
+    "subtitle": "Thường dưới một phút · Hãy ở yên tại chỗ",
+    "askedFor": "Bạn đã yêu cầu"
+  },
+  "match": {
+    "title": "Đã tìm thấy tình nguyện viên",
+    "onTheWay": {
+      "his": "{{name}} đang đến",
+      "her": "{{name}} đang đến",
+      "their": "{{name}} đang đến"
+    },
+    "stay": "Hãy ở yên tại chỗ.",
+    "rated": "Đánh giá {{rating}} trên 5",
+    "skills": "Kỹ năng và ngôn ngữ",
+    "etaMain": "{{minutes}} phút",
+    "etaSub": "nữa sẽ đến",
+    "etaLabel": "{{minutes}} phút nữa sẽ đến",
+    "awaySub": "cách bạn",
+    "awayLabel": "Cách bạn {{distance}}",
+    "message": "Nhắn tin cho tình nguyện viên",
+    "done": "Đánh dấu đã được giúp",
+    "doneHint": "Kết thúc yêu cầu và mời bạn đánh giá {{name}}",
+    "confirmCancel": "Hủy yêu cầu? {{name}} sẽ không đến chỗ bạn nữa.",
+    "keep": "Giữ yêu cầu",
+    "yesCancel": "Có, hủy"
+  },
+  "map": {
+    "label": "Bản đồ: {{name}} cách bạn {{distance}}, đang đến chỗ bạn ở Cổng 2.",
+    "gate": "Cổng 2",
+    "you": "Bạn"
+  },
+  "messages": {
+    "label": "Tin nhắn",
+    "unread_other": "Tin nhắn, {{count}} chưa đọc"
+  },
+  "chat": {
+    "away": "Cách {{minutes}} phút",
+    "call": "Gọi {{name}}",
+    "callSoon": "Chưa thể gọi điện. Hãy nhắn tin cho {{name}}.",
+    "messages": "Tin nhắn",
+    "empty": "Hãy chào {{name}}. Họ có thể thấy vị trí của bạn.",
+    "typing": "{{name}} đang nhập…",
+    "today": "Hôm nay {{time}}",
+    "yesterday": "Hôm qua {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "Tính năng đọc to sắp ra mắt.",
+    "attach": "Đính kèm ảnh",
+    "attachSoon": "Tính năng gửi ảnh sắp ra mắt.",
+    "placeholder": "Tin nhắn",
+    "messageTo": "Nhắn cho {{name}}",
+    "stickers": "Nhãn dán",
+    "stickersSoon": "Nhãn dán sắp ra mắt.",
+    "record": "Ghi âm tin nhắn thoại",
+    "voiceSoon": "Tin nhắn thoại sắp ra mắt."
+  },
+  "bubble": {
+    "mine": "Bạn, {{time}}: {{text}}",
+    "theirs": "Tình nguyện viên, {{time}}: {{text}}",
+    "listen": "nghe",
+    "listenLabel": "Nghe tin nhắn này"
+  },
+  "feedback": {
+    "skip": "Bỏ qua",
+    "skipLabel": "Bỏ qua đánh giá",
+    "question": "Bạn thấy sự hỗ trợ thế nào?",
+    "wentWell": "Điều gì tốt?",
+    "tags": {
+      "language": "Nói ngôn ngữ của tôi",
+      "venue": "Thông thạo địa điểm",
+      "patient": "Kiên nhẫn",
+      "fast": "Đến nhanh",
+      "helpful": "Nhiệt tình",
+      "other": "Khác"
+    },
+    "placeholder": "VD: {{name}} tìm cho tôi chỗ ngồi trong bóng râm",
+    "pickStar": "Chạm vào ngôi sao để đánh giá sự hỗ trợ của {{name}}.",
+    "sendFailed": "Không gửi được đánh giá. {{reason}}",
+    "submit": "Gửi"
+  },
+  "rating": {
+    "label": "Đánh giá",
+    "star_other": "{{count}} sao, {{word}}",
+    "words": {
+      "poor": "Kém",
+      "notGreat": "Chưa tốt",
+      "ok": "Tạm được",
+      "good": "Tốt",
+      "excellent": "Tuyệt vời"
+    }
+  },
+  "report": {
+    "title": "Báo cáo sự cố",
+    "kindLabel": "Có chuyện gì?",
+    "kinds": {
+      "no_show": "Không đến",
+      "unsafe": "Tôi thấy không an toàn",
+      "rude": "Thô lỗ hoặc thiếu tử tế",
+      "other": "Việc khác"
+    },
+    "notePlaceholder": "Đã xảy ra chuyện gì? (không bắt buộc)",
+    "pickKind": "Hãy chọn sự cố.",
+    "sendFailed": "Không gửi được báo cáo. {{reason}}",
+    "notNow": "Để sau",
+    "send": "Gửi báo cáo",
+    "sent": "Đã gửi báo cáo",
+    "sentBody": "Nhân viên LA28 sẽ xem xét trong hôm nay. Đang gặp nguy hiểm? Hãy gọi 911."
+  },
+  "incoming": {
+    "title": "Yêu cầu đến",
+    "subtitle": "Khách gần bạn đang cần giúp",
+    "preview": "Xem trước: tính năng ghép đôi chưa hoạt động, đây là ví dụ.",
+    "who": "{{help}} · {{name}}",
+    "meta": "Cách {{distance}} · {{minutes}} phút trước · {{language}}",
+    "accept": "Nhận",
+    "acceptSoon": "Bạn có thể nhận yêu cầu khi tính năng ghép đôi hoạt động."
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "Gần dốc Cổng 2",
+      "section214": "Hành lang khu 214",
+      "mainPlaza": "Quảng trường lối vào chính"
+    },
+    "greeting": "Chào {{name}}! Tôi là {{volunteer}}, tình nguyện viên LA28. Tôi đang đến chỗ bạn. Điểm hẹn: {{spot}}.",
+    "greetingNoName": "Xin chào! Tôi là {{volunteer}}, tình nguyện viên LA28. Tôi đang đến chỗ bạn. Điểm hẹn: {{spot}}.",
+    "reply1": "Đã rõ, cảm ơn bạn! Vài phút nữa tôi sẽ tới.",
+    "reply2": "Tôi thấy Cổng 2 rồi. Tôi mặc áo gi-lê LA28 màu hồng.",
+    "reply3": "Không sao, bạn cứ từ từ. Tôi sẽ đợi cùng bạn."
+  }
+}

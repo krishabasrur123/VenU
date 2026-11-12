@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "Crear cuenta",
+    "or": "o",
+    "signIn": "Iniciar sesión",
+    "socialTitle": "O regístrate con",
+    "socialSoon": "El inicio de sesión con Google, Apple y Facebook llegará pronto.",
+    "languageTitle": "Idioma de la app"
+  },
+  "auth": {
+    "languagePill": "Idioma de la app: {{language}}",
+    "languagePillHint": "Abre la lista de idiomas",
+    "signUpWith": "Regístrate con {{provider}}",
+    "devMode": "Modo de desarrollo: no hay claves de Supabase, así que se omite el inicio de sesión y los datos se quedan en este dispositivo.",
+    "name": "Nombre",
+    "namePlaceholder": "Escribe tu nombre",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Escribe tu correo",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Escribe tu contraseña"
+  },
+  "signIn": {
+    "title": "Iniciar sesión",
+    "noAccount": "¿No tienes cuenta?",
+    "signUp": "Regístrate",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "forgotSoon": "Restablecer la contraseña llegará pronto.",
+    "confirmNotice": "Revisa tu correo para confirmar tu cuenta y luego inicia sesión.",
+    "submit": "Iniciar sesión"
+  },
+  "signUp": {
+    "title": "Crear cuenta",
+    "haveAccount": "¿Ya tienes cuenta?",
+    "signIn": "Inicia sesión",
+    "agree": "Acepto los <a>Términos y condiciones</a>",
+    "agreeLabel": "Acepto los Términos y condiciones",
+    "submit": "Crear cuenta"
+  },
+  "validate": {
+    "email": "Escribe un correo válido.",
+    "passwordLength": "Usa al menos {{min}} caracteres en tu contraseña.",
+    "password": "Escribe tu contraseña.",
+    "terms": "Acepta los Términos y condiciones para continuar."
+  },
+  "gate": {
+    "offlineTitle": "No se puede conectar con VenU",
+    "errorTitle": "No se pudo cargar tu perfil",
+    "offlineBody": "Revisa tu conexión e inténtalo de nuevo. Tu sesión sigue abierta."
+  },
+  "role": {
+    "title": "¿Cómo usarás VenU?",
+    "subtitle": "Así podemos hacerte las preguntas adecuadas.",
+    "visitorTitle": "Soy visitante",
+    "visitorBody": "Recibe ayuda en la sede en tu idioma.",
+    "volunteerTitle": "Soy voluntario de LA28",
+    "volunteerBody": "Ayuda a visitantes cerca de ti. Aparecerás como no verificado hasta que LA28 te confirme."
+  },
+  "setup": {
+    "visitorTitle": "Configura tu perfil",
+    "visitorSubtitle": "Así encontramos a la persona adecuada para ayudarte. Puedes cambiarlo cuando quieras en tus ajustes.",
+    "volunteerTitle": "Tu perfil de voluntario",
+    "volunteerSubtitle": "Así te enviamos a los visitantes a los que mejor puedes ayudar.",
+    "submit": "Guardar y continuar"
+  }
+}

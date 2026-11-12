@@ -1,0 +1,6 @@
+# Frame 2227 (184:18521)
+COMPONENT_SET "Frame 2227" 440x154 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 202x36 @20,20 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#242222 stroke=#242222/2 r=10
+    TEXT "Create Account" 100x16 @71,31 font=Alexandria 400 13/16 ls=0 align=CENTER color=#ffffff text="Create Account"
+  COMPONENT "Property 1=Variant2" 202x36 @20,87 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#242222 stroke=#242222/2 r=10 drop_shadow(0,4 blur=4 #00000040)
+    TEXT "Create Account" 100x16 @71,98 font=Alexandria 400 13/16 ls=0 align=CENTER color=#ffffff text="Create Account"

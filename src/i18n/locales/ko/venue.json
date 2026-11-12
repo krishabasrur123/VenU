@@ -1,0 +1,219 @@
+{
+  "search": {
+    "placeholder": "검색",
+    "clear": "검색어 지우기"
+  },
+  "back": {
+    "venues": "경기장 목록으로",
+    "facilities": "시설 목록으로",
+    "facility": "시설로 돌아가기"
+  },
+  "choose": {
+    "title": "경기장 선택",
+    "subtitle": "지도와 시설을 볼 경기장을 고르세요",
+    "searchLabel": "경기장 검색",
+    "languageLabel": "앱 언어: {{language}}",
+    "languageHint": "앱 전체의 언어를 바꿉니다",
+    "languageTitle": "앱 언어",
+    "languageConsent": "먼저 프로필에서 업데이트된 개인정보 처리방침을 확인한 후 언어를 바꾸세요.",
+    "assistTitle": "도움이 필요하세요?",
+    "assistBody": "봉사자와 연결하기",
+    "assistLabel": "도움이 필요하세요? 봉사자와 연결하기",
+    "empty": "“{{query}}”와(과) 일치하는 경기장이 없습니다. Inglewood 같은 도시 이름으로 검색해 보세요.",
+    "cardHint": "지도와 시설을 엽니다"
+  },
+  "events": {
+    "opening_ceremony": "개막식",
+    "swimming": "수영",
+    "athletics": "육상",
+    "football": "미식축구",
+    "gymnastics": "체조",
+    "basketball": "농구"
+  },
+  "category": {
+    "all": "전체",
+    "groupLabel": "시설 종류",
+    "gate": "게이트",
+    "restroom": "화장실",
+    "food": "음식·음료",
+    "first_aid": "응급처치",
+    "lost_found": "분실물",
+    "info": "안내소",
+    "accessible": "접근성",
+    "parking": "주차"
+  },
+  "emptyMatch": {
+    "all": "“{{query}}”와(과) 일치하는 시설이 없습니다",
+    "gate": "“{{query}}”와(과) 일치하는 게이트가 없습니다",
+    "restroom": "“{{query}}”와(과) 일치하는 화장실이 없습니다",
+    "food": "“{{query}}”와(과) 일치하는 음식·음료 매점이 없습니다",
+    "first_aid": "“{{query}}”와(과) 일치하는 응급처치소가 없습니다",
+    "lost_found": "“{{query}}”와(과) 일치하는 분실물 센터가 없습니다",
+    "info": "“{{query}}”와(과) 일치하는 안내소가 없습니다",
+    "accessible": "“{{query}}”와(과) 일치하는 무장애 시설이 없습니다",
+    "parking": "“{{query}}”와(과) 일치하는 주차장이 없습니다"
+  },
+  "emptyNone": {
+    "all": "{{venue}}에 아직 시설 정보가 없습니다",
+    "gate": "{{venue}}에 아직 게이트 정보가 없습니다",
+    "restroom": "{{venue}}에 아직 화장실 정보가 없습니다",
+    "food": "{{venue}}에 아직 음식·음료 매점 정보가 없습니다",
+    "first_aid": "{{venue}}에 아직 응급처치소 정보가 없습니다",
+    "lost_found": "{{venue}}에 아직 분실물 센터 정보가 없습니다",
+    "info": "{{venue}}에 아직 안내소 정보가 없습니다",
+    "accessible": "{{venue}}에 아직 무장애 시설 정보가 없습니다",
+    "parking": "{{venue}}에 아직 주차장 정보가 없습니다"
+  },
+  "list": {
+    "title": "가까운 시설",
+    "searchLabel": "시설 검색",
+    "showing": "{{category}} 표시 중",
+    "showAll": "전체 보기",
+    "showAllHint": "모든 시설을 다시 표시합니다"
+  },
+  "sheet": {
+    "down": "시설 패널, 내려감",
+    "mid": "시설 패널, 반쯤 열림",
+    "up": "시설 패널, 올라감",
+    "hint": "탭하여 크기를 바꾸거나 위아래로 끌어 보세요"
+  },
+  "map": {
+    "pin": "지도의 {{name}}",
+    "north": "북"
+  },
+  "walk_other": "도보 {{count}}분",
+  "wait": {
+    "none": "대기 없음",
+    "short": "대기 짧음",
+    "long": "대기 김"
+  },
+  "row": {
+    "label": "{{name}}, {{meta}}",
+    "labelAccessible": "{{name}}, {{meta}}, 휠체어 이용 가능"
+  },
+  "tags": {
+    "label": "태그:",
+    "accessible": "무장애",
+    "stairs": "계단",
+    "busy_before_events": "경기 전 혼잡",
+    "ramp": "경사로",
+    "bag_check": "가방 검사",
+    "rideshare": "차량 호출",
+    "escalators": "에스컬레이터",
+    "sensory_kits": "감각 키트",
+    "quiet_room": "조용한 방",
+    "family_room": "가족실",
+    "long_lines_halftime": "하프타임에 긴 줄",
+    "wheelchair_loans": "휠체어 대여",
+    "permit_needed": "허가증 필요"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "북쪽 입구로, Metro 셔틀 정류장과 가장 가깝습니다.",
+      "location": "북쪽, 셔틀 정류장 앞"
+    },
+    "gate-2": {
+      "description": "경사로가 있는 동쪽 입구로, C 주차장의 장애인 주차 구역 옆입니다.",
+      "location": "동쪽, C 주차장 옆"
+    },
+    "gate-3": {
+      "description": "차량 호출 승하차용 남쪽 입구입니다.",
+      "location": "남쪽, 차량 호출 구역"
+    },
+    "gate-4": {
+      "description": "200~240구역 티켓 소지자를 위한 서쪽 입구입니다.",
+      "location": "서쪽, 중앙 광장 옆"
+    },
+    "info-desk": {
+      "description": "문의, 분실 티켓, 감각 키트, 귀마개.",
+      "location": "콘코스, 105구역"
+    },
+    "first-aid": {
+      "description": "개문부터 관중이 모두 나갈 때까지 간호사와 응급구조사가 대기합니다.",
+      "location": "콘코스, 112구역"
+    },
+    "restroom-east": {
+      "description": "남성용, 여성용 화장실과 기저귀 교환대가 있는 모두를 위한 가족실.",
+      "location": "콘코스, 118구역"
+    },
+    "food-south": {
+      "description": "타코, 부리토, 아과 프레스카. 채식 메뉴 있음.",
+      "location": "콘코스, 124구역"
+    },
+    "lost-found": {
+      "description": "분실물을 맡기거나 찾아가세요. 길 잃은 아이도 이곳으로 데려옵니다.",
+      "location": "콘코스, 131구역"
+    },
+    "accessible-seating": {
+      "description": "휠체어 대여, 동반자석, 보조 청취 기기.",
+      "location": "콘코스, 136구역"
+    },
+    "food-west": {
+      "description": "버거, 감자튀김, 탄산음료. 할랄 패티 제공.",
+      "location": "콘코스, 140구역"
+    },
+    "restroom-west": {
+      "description": "남성용, 여성용 화장실. 장애인 칸은 왼쪽에 있습니다.",
+      "location": "콘코스, 145구역"
+    },
+    "parking-c": {
+      "description": "Gate 2까지 짧고 평탄한 길이 있는 장애인 주차장입니다.",
+      "location": "남동쪽 주차장"
+    }
+  },
+  "facility": {
+    "notFound": "시설을 찾을 수 없습니다",
+    "wheelchair": "휠체어 이용 가능",
+    "directions": "길찾기",
+    "directionsSoon": "단계별 길찾기는 곧 제공됩니다. {{name}}: {{location}}.",
+    "reports": "제보",
+    "results_other": "{{count}}건",
+    "noReports": "아직 제보가 없습니다. 처음으로 발견한 내용을 공유해 주세요.",
+    "addReport": "제보 추가하기"
+  },
+  "submitted": {
+    "title": "제보가 접수되었습니다",
+    "body": "시설 제보를 보내 주셔서 감사합니다.",
+    "again": "다른 제보 보내기"
+  },
+  "card": {
+    "label": "제보: {{title}}, 작성자 {{author}}",
+    "hint": "전체 제보를 엽니다",
+    "new": "새 글",
+    "by": "작성자: {{author}}",
+    "seeMore": "더 보기 →"
+  },
+  "topic": {
+    "accessibility": "접근성",
+    "directions": "길찾기",
+    "facility_condition": "시설 상태",
+    "security": "보안",
+    "crowds": "혼잡",
+    "other": "기타"
+  },
+  "report": {
+    "notFound": "제보를 찾을 수 없습니다",
+    "kind": "제보",
+    "submitted": "{{date}}에 제출됨",
+    "noBody": "추가된 내용이 없습니다."
+  },
+  "form": {
+    "title": "제보 추가",
+    "subtitleAt": "{{facility}}에서 발견한 내용을 공유해 다음 방문자를 도와주세요",
+    "subtitle": "발견한 내용을 공유해 다음 방문자를 도와주세요",
+    "titleLabel": "제보 제목",
+    "titlePlaceholder": "사람들이 알아야 할 내용은?",
+    "bodyLabel": "제보 내용",
+    "bodyPlaceholder": "내용 입력",
+    "bodyHint": "선택 사항. 무엇이, 어디서, 언제 있었나요?",
+    "pictureSoon": "사진 추가 기능은 곧 제공됩니다.",
+    "speakSoon": "음성 제보는 곧 제공됩니다. 지금은 글로 입력해 주세요.",
+    "topic": "주제",
+    "submit": "제보 보내기",
+    "sendFailed": "제보를 보내지 못했습니다. 연결을 확인하고 다시 시도하세요.",
+    "titleRequired": "제목을 입력하세요. 예: “Gate 2 경사로 균열”",
+    "titleTooLong": "제목은 {{max}}자 미만으로 입력하세요.",
+    "topicRequired": "가장 알맞은 주제를 고르세요.",
+    "bodyTooLong": "제보는 {{max}}자 미만으로 입력하세요."
+  }
+}

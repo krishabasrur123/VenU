@@ -76,53 +76,48 @@ export function searchLanguages(query: string): Language[] {
   return LANGUAGES.filter(l => [l.native, l.english, l.code].some(s => fold(s).includes(q)));
 }
 
-export const ACCESS_NEEDS: Option<AccessNeed>[] = [
-  { value: 'wheelchair', label: 'Wheelchair user' },
-  { value: 'hard_of_hearing', label: 'Hard of hearing' },
-  { value: 'low_vision', label: 'Low vision' },
-  { value: 'walking_aid', label: 'Walking aid' },
-  { value: 'other', label: 'Other' },
-];
+/**
+ * Option groups; each label is profile:options.<group>.<value>, e.g. options.accessNeeds.wheelchair.
+ * The stored value never changes; only the label follows the UI language.
+ */
+type OptionGroup = 'accessNeeds' | 'communication' | 'helperGender' | 'helperAge' | 'training' | 'gender' | 'ageBand';
 
-export const COMMUNICATION: Option<CommunicationMethod>[] = [
-  { value: 'speaking', label: 'Speaking' },
-  { value: 'text', label: 'Text / writing' },
-  { value: 'sign_language', label: 'Sign language' },
-];
+/**
+ * The label in the current UI language, read each time (a getter), so a screen that re-renders on a
+ * language change shows the new label. i18n is required lazily: src/i18n imports LANGUAGES from here,
+ * so a top-level import would be circular.
+ */
+function translated(group: OptionGroup, value: string): string {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const i18n = (require('@/i18n') as typeof import('@/i18n')).default;
+  return (i18n.t as (key: string) => string)(`profile:options.${group}.${value}`);
+}
 
-export const HELPER_GENDER: Option<HelperGenderPref>[] = [
-  { value: 'none', label: 'No preference' },
-  { value: 'woman', label: 'Woman' },
-  { value: 'man', label: 'Man' },
-];
+function options<T extends string>(group: OptionGroup, values: T[]): Option<T>[] {
+  return values.map(value => ({
+    value,
+    get label() {
+      return translated(group, value);
+    },
+  }));
+}
 
-export const HELPER_AGE: Option<HelperAgePref>[] = [
-  { value: 'any', label: 'Any age' },
-  { value: 'under_40', label: 'Under 40' },
-  { value: '40_plus', label: '40+' },
-];
+export const ACCESS_NEEDS = options<AccessNeed>('accessNeeds', ['wheelchair', 'hard_of_hearing', 'low_vision', 'walking_aid', 'other']);
 
-export const TRAININGS: Option<Training>[] = [
-  { value: 'wheelchair', label: 'Wheelchair trained' },
-  { value: 'asl', label: 'ASL' },
-  { value: 'first_aid', label: 'First aid' },
-  { value: 'sighted_guide', label: 'Sighted guide' },
-  { value: 'mental_health', label: 'Mental health first aid' },
-];
+export const COMMUNICATION = options<CommunicationMethod>('communication', ['speaking', 'text', 'sign_language']);
 
-export const GENDERS: Option<Gender>[] = [
-  { value: 'woman', label: 'Woman' },
-  { value: 'man', label: 'Man' },
-  { value: 'nonbinary', label: 'Non-binary' },
-  { value: 'prefer_not', label: 'Prefer not to say' },
-];
+// Figma's wording and order ("No preference / Male / Female"); stored values stay 'man' / 'woman'.
+export const HELPER_GENDER = options<HelperGenderPref>('helperGender', ['none', 'man', 'woman']);
 
-export const AGE_BANDS: Option<AgeBand>[] = [
-  { value: 'under_40', label: 'Under 40' },
-  { value: '40_plus', label: '40+' },
-  { value: 'prefer_not', label: 'Prefer not to say' },
-];
+export const HELPER_AGE = options<HelperAgePref>('helperAge', ['any', 'under_40', '40_plus']);
 
+export const TRAININGS = options<Training>('training', ['wheelchair', 'asl', 'first_aid', 'sighted_guide', 'mental_health']);
+
+export const GENDERS = options<Gender>('gender', ['woman', 'man', 'nonbinary', 'prefer_not']);
+
+export const AGE_BANDS = options<AgeBand>('ageBand', ['under_40', '40_plus', 'prefer_not']);
+
+/** The option's label in the current UI language, e.g. labelFor(ACCESS_NEEDS, 'wheelchair') → "Wheelchair user". */
 export function labelFor<T extends string>(options: Option<T>[], value: T): string {
   return options.find(o => o.value === value)?.label ?? value;
 }

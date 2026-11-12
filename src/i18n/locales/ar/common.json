@@ -1,0 +1,105 @@
+{
+  "tabs": {
+    "volunteer": "متطوع",
+    "venue": "المكان",
+    "profile": "ملفي"
+  },
+  "actions": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "continue": "متابعة",
+    "back": "رجوع",
+    "close": "إغلاق",
+    "done": "تم",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "send": "إرسال",
+    "tryAgain": "إعادة المحاولة",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج",
+    "ok": "حسنًا"
+  },
+  "status": {
+    "loading": "جارٍ التحميل…",
+    "comingSoon": "قريبًا",
+    "optional": "اختياري"
+  },
+  "field": {
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور"
+  },
+  "errors": {
+    "offline": "تعذّر الاتصال بـ VenU. تحقّق من اتصالك وحاول مرة أخرى.",
+    "wrongLogin": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    "confirmEmail": "أكّد بريدك الإلكتروني أولًا. ستجد الرابط في صندوق الوارد.",
+    "alreadyRegistered": "هذا البريد مسجّل بالفعل. جرّب تسجيل الدخول.",
+    "rateLimit": "محاولات كثيرة جدًا. انتظر دقيقة وحاول مرة أخرى.",
+    "sessionExpired": "انتهت جلستك. يُرجى تسجيل الدخول مرة أخرى.",
+    "cantSave": "تعذّر على VenU حفظ هذا التغيير. إذا تكرر ذلك، سجّل الخروج ثم ادخل مجددًا.",
+    "photoTooBig": "حجم الصورة أكبر من {{size}} ميغابايت. اختر صورة أصغر.",
+    "photoWrongType": "استخدم صورة بصيغة JPG أو PNG أو WebP أو HEIC.",
+    "generic": "حدث خطأ ما. حاول مرة أخرى."
+  },
+  "direction": {
+    "restartTitle": "أعِد التشغيل للإكمال",
+    "restartBody": "يجب إعادة تشغيل VenU للتبديل بين التخطيط من اليمين إلى اليسار ومن اليسار إلى اليمين.",
+    "restartNow": "إعادة التشغيل الآن",
+    "later": "لاحقًا",
+    "ok": "حسنًا"
+  },
+  "count": {
+    "people_zero": "{{count}} شخص",
+    "people_one": "شخص واحد",
+    "people_two": "شخصان",
+    "people_few": "{{count}} أشخاص",
+    "people_many": "{{count}} شخصًا",
+    "people_other": "{{count}} شخص"
+  },
+  "media": {
+    "addPicture": "إضافة صورة",
+    "changePicture": "تغيير الصورة",
+    "holdToSpeak": "أو اضغط للتحدث"
+  },
+  "form": {
+    "optionalTitle": "{{title}} <muted>(اختياري)</muted>",
+    "step": "الخطوة {{step}} من {{total}}"
+  },
+  "nav": {
+    "backTo": "العودة إلى {{label}}"
+  },
+  "chip": {
+    "remove": "إزالة {{label}}"
+  },
+  "photo": {
+    "add": "إضافة صورة",
+    "change": "تغيير الصورة",
+    "take": "التقاط صورة",
+    "remove": "إزالة",
+    "hint": "تساعد مساعدك على التعرّف عليك. اختياري.",
+    "cameraOff": "الوصول إلى الكاميرا متوقف. شغّله من الإعدادات.",
+    "libraryOff": "الوصول إلى الصور متوقف. شغّله من الإعدادات.",
+    "labelNamed": "صورة الملف الشخصي لـ {{name}}",
+    "labelYours": "صورة ملفك الشخصي",
+    "labelNone": "لا توجد صورة للملف الشخصي"
+  },
+  "language": {
+    "primary": "اللغة الأساسية",
+    "secondary": "اللغة الثانية",
+    "another": "لغة أخرى",
+    "add": "إضافة لغة أخرى",
+    "search": "البحث عن لغة",
+    "fieldLabel": "البحث عن لغة",
+    "searchFor": "البحث عن لغة لـ {{field}}",
+    "examples": "مثلًا العربية، Español، ASL",
+    "searchExamples": "ابحث، مثلًا العربية، Español، ASL",
+    "field": "{{field}}: {{language}}",
+    "fieldEmpty": "{{field}}: لا شيء",
+    "openHint": "يفتح البحث عن اللغات",
+    "choose": "اختر لغة",
+    "closeSearch": "إغلاق البحث عن اللغات",
+    "remove": "إزالة {{language}}",
+    "removeField": "إزالة حقل اللغة هذا",
+    "noMatch": "لا نتائج. جرّب الاسم بالإنجليزية.",
+    "addTitle": "إضافة لغة"
+  }
+}

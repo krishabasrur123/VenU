@@ -1,0 +1,8 @@
+# Frame 2224 (168:17065)
+COMPONENT_SET "Frame 2224" 440x154 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 202x36 @20,20 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#ffffff stroke=#1d5dbc/2 r=10
+    VECTOR "Icon" 14x22 @51,28 stroke=#1d5dbc/2.5 [ICON svg/icon-c230e9.svg]
+    TEXT "Or hold to speak" 107x16 @85,31 font=Alexandria 400 13/16 ls=0 align=CENTER color=#1d5dbc text="Or hold to speak"
+  COMPONENT "Property 1=Variant2" 202x36 @20,87 auto:row gap=20 pad=13/50/12/50 align=CENTER/CENTER fill=#dfebfd stroke=#1d5dbc/2 r=10
+    VECTOR "Icon" 14x22 @51,95 stroke=#1d5dbc/2.5 [ICON svg/icon-c230e9.svg]
+    TEXT "Or hold to speak" 107x16 @85,98 font=Alexandria 400 13/16 ls=0 align=CENTER color=#1d5dbc text="Or hold to speak"

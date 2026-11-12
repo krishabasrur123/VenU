@@ -4,105 +4,94 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/button';
-import { Chip } from '@/components/chip';
-import { FormSection, StepHeader } from '@/components/form-section';
-import { LanguageSearchModal } from '@/components/language-picker';
-import { TopBar } from '@/components/top-bar';
-import { Colors, Radius, Spacing, Type } from '@/constants/theme';
-import { isolatedLanguageName } from '@/features/profile/options';
+import { StepHeader } from '@/components/form-section';
+import { FigmaIcon, type FigmaIconName } from '@/components/icons/figma-icon';
+import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
 import type { Role } from '@/features/profile/types';
+import { useT } from '@/i18n';
 
-// Shown as one-tap chips; everything else is behind "More languages".
-const QUICK_LANGUAGES = ['en', 'es', 'zh', 'ko', 'tl', 'vi', 'ja', 'fr'];
-
-const ROLES: { value: Role; title: string; body: string }[] = [
-  { value: 'visitor', title: "I'm visiting", body: 'Get help at the venue in your language.' },
-  { value: 'volunteer', title: "I'm an LA28 volunteer", body: "Help visitors near you. You'll show as unverified until LA28 confirms you." },
+// Text: onboarding:role.<value>Title / <value>Body.
+const ROLES: { value: Role; icon: FigmaIconName }[] = [
+  { value: 'visitor', icon: 'person' },
+  { value: 'volunteer', icon: 'volunteer' },
 ];
 
-/** Step 1 of 2: main language first (the first thing someone who doesn't read English needs), then role. */
+/**
+ * Before "Set up your profile": visitor or volunteer, since the two get different questions.
+ * The language is chosen on the landing page's language pill and in profile setup.
+ */
 export default function RoleStep() {
-  const [lang, setLang] = useState('en');
   const [role, setRole] = useState<Role | null>(null);
-  const [searchOpen, setSearchOpen] = useState(false);
-
-  const chips = QUICK_LANGUAGES.includes(lang) ? QUICK_LANGUAGES : [lang, ...QUICK_LANGUAGES];
+  const t = useT('onboarding');
+  const tc = useT('common');
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      <TopBar />
       <ScrollView contentContainerStyle={styles.content}>
-        <StepHeader step={1} total={2} title="Welcome to VenU" subtitle="Two quick steps so we can find the right helper for you." />
+        <StepHeader title={t('role.title')} subtitle={t('role.subtitle')} />
 
-        <FormSection title="Your main language" hint="We'll use it for the app and to match you.">
-          <View style={styles.chips}>
-            {chips.map(code => (
-              <Chip key={code} label={isolatedLanguageName(code)} selected={lang === code} role="radio" onPress={() => setLang(code)} />
-            ))}
-            <Chip label="+ More languages" dashed role="button" onPress={() => setSearchOpen(true)} />
-          </View>
-        </FormSection>
+        <View style={styles.cards} accessibilityRole="radiogroup">
+          {ROLES.map(r => {
+            const on = role === r.value;
+            const title = t(`role.${r.value}Title`);
+            const body = t(`role.${r.value}Body`);
+            return (
+              <Pressable
+                key={r.value}
+                onPress={() => setRole(r.value)}
+                style={({ pressed }) => [styles.card, on && styles.cardOn, pressed && !on && styles.cardPressed]}
+                accessibilityRole="radio"
+                accessibilityState={{ checked: on }}
+                accessibilityLabel={`${title}. ${body}`}>
+                <View style={[styles.iconTile, on && styles.iconTileOn]}>
+                  <FigmaIcon name={r.icon} size={26} color={on ? Colors.onPrimary : Colors.ink} />
+                </View>
+                <View style={styles.cardText}>
+                  <Text style={[styles.cardTitle, on && styles.textOn]}>{title}</Text>
+                  <Text style={Type.caption}>{body}</Text>
+                </View>
+                <View style={[styles.radio, on && styles.radioOn]}>{on && <View style={styles.radioDot} />}</View>
+              </Pressable>
+            );
+          })}
+        </View>
 
-        <FormSection title="How will you use VenU?">
-          <View style={styles.cards} accessibilityRole="radiogroup">
-            {ROLES.map(r => {
-              const on = role === r.value;
-              return (
-                <Pressable
-                  key={r.value}
-                  onPress={() => setRole(r.value)}
-                  style={[styles.card, on && styles.cardOn]}
-                  accessibilityRole="radio"
-                  accessibilityState={{ checked: on }}>
-                  <View style={[styles.radio, on && styles.radioOn]}>{on && <View style={styles.radioDot} />}</View>
-                  <View style={styles.cardText}>
-                    <Text style={[Type.bodyStrong, on && styles.textOn]}>{r.title}</Text>
-                    <Text style={Type.caption}>{r.body}</Text>
-                  </View>
-                </Pressable>
-              );
-            })}
-          </View>
-        </FormSection>
-
+        <View style={styles.spacer} />
         <Button
-          label="Continue"
+          label={tc('actions.continue')}
+          size="lg"
           disabled={!role}
-          onPress={() => role && router.push({ pathname: '/onboarding/profile', params: { role, lang } })}
+          onPress={() => role && router.push({ pathname: '/onboarding/profile', params: { role } })}
         />
       </ScrollView>
-
-      <LanguageSearchModal
-        visible={searchOpen}
-        onSelect={code => {
-          setLang(code);
-          setSearchOpen(false);
-        }}
-        onClose={() => setSearchOpen(false)}
-      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: Colors.bg },
-  content: { paddingHorizontal: Spacing.gutter, paddingTop: Spacing.xl, paddingBottom: 48 },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.sm },
-  cards: { gap: Spacing.md },
+  content: { flexGrow: 1, paddingHorizontal: Spacing.gutter, paddingTop: 48, paddingBottom: Spacing.xl },
+  cards: { gap: Spacing.lg },
+  // Same outline as the Figma text inputs: 2px gray, radius 10.
   card: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.md,
     padding: Spacing.lg,
-    borderRadius: Radius.lg,
-    borderWidth: 1.5,
-    borderColor: Colors.border,
+    borderRadius: Radius.md,
+    borderWidth: 2,
+    borderColor: Colors.controlBorder,
     backgroundColor: Colors.surface,
   },
   cardOn: { borderColor: Colors.primary, backgroundColor: Colors.primarySoft },
+  cardPressed: { backgroundColor: Colors.surfaceAlt },
+  iconTile: { width: 48, height: 48, borderRadius: Radius.md, backgroundColor: Colors.surfaceAlt, alignItems: 'center', justifyContent: 'center' },
+  iconTileOn: { backgroundColor: Colors.primary },
   cardText: { flex: 1, gap: 2 },
+  cardTitle: { fontFamily: Fonts.display, fontSize: 17, lineHeight: 22, color: Colors.text },
   textOn: { color: Colors.primary },
-  radio: { width: 22, height: 22, borderRadius: 11, borderWidth: 2, borderColor: Colors.textFaint, alignItems: 'center', justifyContent: 'center' },
+  radio: { width: 22, height: 22, borderRadius: 11, borderWidth: 2, borderColor: Colors.controlBorder, alignItems: 'center', justifyContent: 'center' },
   radioOn: { borderColor: Colors.primary },
   radioDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: Colors.primary },
+  spacer: { flexGrow: 1, minHeight: Spacing.xxl },
 });

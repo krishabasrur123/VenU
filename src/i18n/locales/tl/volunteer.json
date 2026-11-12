@@ -1,0 +1,185 @@
+{
+  "role": "Volunteer ng LA28",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "Tulong sa {{language}}",
+  "quoted": "“{{text}}”",
+  "cancelRequest": "Kanselahin ang request",
+  "dismiss": "Isara",
+  "distance": {
+    "feet": "{{value}} ft",
+    "miles": "{{value}} mi"
+  },
+  "helpTypes": {
+    "physical": "Tulong sa Paggalaw",
+    "directions": "Direksyon",
+    "language": "Tulong sa Wika",
+    "quiet": "Tahimik na Lugar",
+    "lost": "Lost & Found",
+    "other": "Iba Pa"
+  },
+  "skills": {
+    "wheelchair": "Sanay sa wheelchair",
+    "first_aid": "First aid",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "Maghanap ng Volunteer",
+    "subtitle": "Ikokonekta ka namin sa malapit na tao",
+    "languageLabel": "Tulong sa {{language}}. Palitan ang wika",
+    "locationLabel": "Lokasyon mo: {{spot}}, {{venue}}",
+    "question": "Saan mo kailangan ng tulong?",
+    "notePlaceholder": "hal. Naipit ako malapit sa ramp 2",
+    "photoOff": "Naka-off ang access sa larawan. I-on ito sa Settings.",
+    "voiceSoon": "Malapit nang dumating ang voice note. Mag-type muna ng note.",
+    "pickOne": "Pumili ng kahit isang bagay na kailangan mo ng tulong.",
+    "send": "Ipadala ang Request"
+  },
+  "note": {
+    "label": "Magdagdag ng note <muted>(opsyonal)</muted>",
+    "labelPlain": "Magdagdag ng note (opsyonal)",
+    "placeholder": "Mag-type dito",
+    "attached": "Nakalakip na larawan",
+    "remove": "Alisin ang larawan"
+  },
+  "emergency": {
+    "title": "Emergency?",
+    "call": "Tumawag sa 911 ngayon",
+    "label": "Emergency? Tumawag sa 911 ngayon",
+    "hint": "Bubuksan ang telepono para tumawag sa 911"
+  },
+  "notice": {
+    "searchFailed": "Hindi makakonekta sa volunteer. Tingnan ang koneksyon mo at subukan ulit.",
+    "thanks": "Salamat! Nakakatulong ang feedback mo kay {{name}} at sa LA28 team."
+  },
+  "searching": {
+    "title": "Naghahanap ng volunteer",
+    "subtitle": "Karaniwang wala pang isang minuto · Manatili ka lang diyan",
+    "askedFor": "Hiniling mo"
+  },
+  "match": {
+    "title": "May nahanap na volunteer",
+    "onTheWay": {
+      "his": "Papunta na si {{name}}",
+      "her": "Papunta na si {{name}}",
+      "their": "Papunta na si {{name}}"
+    },
+    "stay": "Manatili ka lang diyan.",
+    "rated": "Rating na {{rating}} sa 5",
+    "skills": "Kasanayan at wika",
+    "etaMain": "{{minutes}} min",
+    "etaSub": "bago dumating",
+    "etaLabel": "{{minutes}} min bago dumating",
+    "awaySub": "ang layo sa iyo",
+    "awayLabel": "{{distance}} ang layo sa iyo",
+    "message": "I-message ang Volunteer",
+    "done": "Tapos na ang tulong",
+    "doneHint": "Tatapusin ang request at hihilingin mong i-rate si {{name}}",
+    "confirmCancel": "Kanselahin ang request? Hindi na pupunta si {{name}}.",
+    "keep": "Ituloy ang request",
+    "yesCancel": "Oo, kanselahin"
+  },
+  "map": {
+    "label": "Mapa: {{distance}} ang layo ni {{name}}, papunta sa iyo sa Gate 2.",
+    "gate": "Gate 2",
+    "you": "Ikaw"
+  },
+  "messages": {
+    "label": "Mga mensahe",
+    "unread_one": "Mga mensahe, {{count}} hindi pa nababasa",
+    "unread_other": "Mga mensahe, {{count}} hindi pa nababasa"
+  },
+  "chat": {
+    "away": "{{minutes}} min ang layo",
+    "call": "Tawagan si {{name}}",
+    "callSoon": "Hindi pa puwede ang tawag. Mag-message na lang kay {{name}}.",
+    "messages": "Mga mensahe",
+    "empty": "Batiin si {{name}}. Nakikita niya kung nasaan ka.",
+    "typing": "Nagta-type si {{name}}…",
+    "today": "Ngayon {{time}}",
+    "yesterday": "Kahapon {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "Malapit nang dumating ang read aloud.",
+    "attach": "Maglakip ng larawan",
+    "attachSoon": "Malapit nang dumating ang pagpapadala ng larawan.",
+    "placeholder": "Mensahe",
+    "messageTo": "Mensahe kay {{name}}",
+    "stickers": "Stickers",
+    "stickersSoon": "Malapit nang dumating ang stickers.",
+    "record": "Mag-record ng voice message",
+    "voiceSoon": "Malapit nang dumating ang voice message."
+  },
+  "bubble": {
+    "mine": "Ikaw, {{time}}: {{text}}",
+    "theirs": "Volunteer, {{time}}: {{text}}",
+    "listen": "pakinggan",
+    "listenLabel": "Pakinggan ang mensaheng ito"
+  },
+  "feedback": {
+    "skip": "Laktawan",
+    "skipLabel": "Laktawan ang feedback",
+    "question": "Kumusta ang tulong?",
+    "wentWell": "Ano ang naging maganda?",
+    "tags": {
+      "language": "Nagsalita ng wika ko",
+      "venue": "Kilala ang venue",
+      "patient": "Matiyaga",
+      "fast": "Mabilis dumating",
+      "helpful": "Matulungin",
+      "other": "Iba pa"
+    },
+    "placeholder": "hal. Hinanapan ako ni {{name}} ng upuan sa lilim",
+    "pickStar": "I-tap ang isang bituin para i-rate ang tulong ni {{name}}.",
+    "sendFailed": "Hindi maipadala ang feedback mo. {{reason}}",
+    "submit": "Ipadala"
+  },
+  "rating": {
+    "label": "Rating",
+    "star_one": "{{count}} bituin, {{word}}",
+    "star_other": "{{count}} bituin, {{word}}",
+    "words": {
+      "poor": "Mahina",
+      "notGreat": "Hindi masyado",
+      "ok": "Okay",
+      "good": "Maganda",
+      "excellent": "Napakahusay"
+    }
+  },
+  "report": {
+    "title": "Mag-ulat ng problema",
+    "kindLabel": "Ano ang nangyaring mali?",
+    "kinds": {
+      "no_show": "Hindi dumating",
+      "unsafe": "Nakaramdam ako ng panganib",
+      "rude": "Bastos o hindi mabait",
+      "other": "Iba pa"
+    },
+    "notePlaceholder": "Ano ang nangyari? (opsyonal)",
+    "pickKind": "Piliin kung ano ang naging mali.",
+    "sendFailed": "Hindi maipadala ang ulat. {{reason}}",
+    "notNow": "Hindi muna",
+    "send": "Ipadala ang ulat",
+    "sent": "Naipadala ang ulat",
+    "sentBody": "Titingnan ito ng LA28 staff ngayong araw. Nasa panganib ka ba ngayon? Tumawag sa 911."
+  },
+  "incoming": {
+    "title": "Mga papasok na request",
+    "subtitle": "Mga bisitang malapit sa iyo na humingi ng tulong",
+    "preview": "Preview: hindi pa live ang matching, kaya mga halimbawa ito.",
+    "who": "{{help}} · {{name}}",
+    "meta": "{{distance}} ang layo · {{minutes}} min ang nakalipas · {{language}}",
+    "accept": "Tanggapin",
+    "acceptSoon": "Puwede nang tumanggap ng request kapag live na ang matching."
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "Malapit sa Ramp ng Gate 2",
+      "section214": "Concourse ng Section 214",
+      "mainPlaza": "Plaza ng pangunahing pasukan"
+    },
+    "greeting": "Hi {{name}}! Ako si {{volunteer}}, ang iyong LA28 volunteer. Papunta na ako sa iyo. Tagpuan: {{spot}}.",
+    "greetingNoName": "Hi! Ako si {{volunteer}}, ang iyong LA28 volunteer. Papunta na ako sa iyo. Tagpuan: {{spot}}.",
+    "reply1": "Sige, salamat! Nandiyan na ako sa loob ng ilang minuto.",
+    "reply2": "Nakikita ko na ang Gate 2. Naka-pink na LA28 vest ako.",
+    "reply3": "Walang problema, dahan-dahan lang. Hihintayin kita."
+  }
+}

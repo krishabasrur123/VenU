@@ -1,0 +1,2 @@
+# Message 1 (235:26730)
+COMPONENT_SET "Message 1" 64x108 @0,0 stroke=#8a38f5/1 r=5 [ICON svg/message-1-524926.svg]

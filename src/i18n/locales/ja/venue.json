@@ -1,0 +1,219 @@
+{
+  "search": {
+    "placeholder": "検索",
+    "clear": "検索をクリア"
+  },
+  "back": {
+    "venues": "会場一覧に戻る",
+    "facilities": "施設一覧に戻る",
+    "facility": "施設に戻る"
+  },
+  "choose": {
+    "title": "会場を選ぶ",
+    "subtitle": "地図と施設を見たい会場を選んでください",
+    "searchLabel": "会場を検索",
+    "languageLabel": "アプリの言語：{{language}}",
+    "languageHint": "アプリ全体の言語を変更します",
+    "languageTitle": "アプリの言語",
+    "languageConsent": "先にプロフィールで更新されたプライバシーポリシーを確認してから、言語を変更してください。",
+    "assistTitle": "お困りですか？",
+    "assistBody": "ボランティアに相談する",
+    "assistLabel": "お困りですか？ボランティアに相談する",
+    "empty": "「{{query}}」に一致する会場はありません。Inglewood などの都市名で試してください。",
+    "cardHint": "地図と施設を開きます"
+  },
+  "events": {
+    "opening_ceremony": "開会式",
+    "swimming": "競泳",
+    "athletics": "陸上競技",
+    "football": "アメリカンフットボール",
+    "gymnastics": "体操",
+    "basketball": "バスケットボール"
+  },
+  "category": {
+    "all": "すべて",
+    "groupLabel": "施設の種類",
+    "gate": "ゲート",
+    "restroom": "トイレ",
+    "food": "飲食",
+    "first_aid": "救護",
+    "lost_found": "落とし物",
+    "info": "案内所",
+    "accessible": "バリアフリー",
+    "parking": "駐車場"
+  },
+  "emptyMatch": {
+    "all": "「{{query}}」に一致する施設はありません",
+    "gate": "「{{query}}」に一致するゲートはありません",
+    "restroom": "「{{query}}」に一致するトイレはありません",
+    "food": "「{{query}}」に一致する飲食店はありません",
+    "first_aid": "「{{query}}」に一致する救護所はありません",
+    "lost_found": "「{{query}}」に一致する落とし物窓口はありません",
+    "info": "「{{query}}」に一致する案内所はありません",
+    "accessible": "「{{query}}」に一致するバリアフリー施設はありません",
+    "parking": "「{{query}}」に一致する駐車場はありません"
+  },
+  "emptyNone": {
+    "all": "{{venue}}の施設はまだありません",
+    "gate": "{{venue}}のゲート情報はまだありません",
+    "restroom": "{{venue}}のトイレ情報はまだありません",
+    "food": "{{venue}}の飲食店情報はまだありません",
+    "first_aid": "{{venue}}の救護所情報はまだありません",
+    "lost_found": "{{venue}}の落とし物窓口情報はまだありません",
+    "info": "{{venue}}の案内所情報はまだありません",
+    "accessible": "{{venue}}のバリアフリー施設情報はまだありません",
+    "parking": "{{venue}}の駐車場情報はまだありません"
+  },
+  "list": {
+    "title": "近くの施設",
+    "searchLabel": "施設を検索",
+    "showing": "表示中：{{category}}",
+    "showAll": "すべて表示",
+    "showAllHint": "すべての施設を再表示します"
+  },
+  "sheet": {
+    "down": "施設パネル（下げた状態）",
+    "mid": "施設パネル（半分開いた状態）",
+    "up": "施設パネル（上げた状態）",
+    "hint": "タップでサイズ変更、または上下にドラッグ"
+  },
+  "map": {
+    "pin": "地図上の{{name}}",
+    "north": "北"
+  },
+  "walk_other": "徒歩{{count}}分",
+  "wait": {
+    "none": "待ち時間なし",
+    "short": "待ち時間短め",
+    "long": "待ち時間長め"
+  },
+  "row": {
+    "label": "{{name}}、{{meta}}",
+    "labelAccessible": "{{name}}、{{meta}}、バリアフリー"
+  },
+  "tags": {
+    "label": "タグ：",
+    "accessible": "バリアフリー",
+    "stairs": "階段あり",
+    "busy_before_events": "開始前は混雑",
+    "ramp": "スロープ",
+    "bag_check": "手荷物検査",
+    "rideshare": "配車サービス",
+    "escalators": "エスカレーター",
+    "sensory_kits": "感覚過敏キット",
+    "quiet_room": "静かな部屋",
+    "family_room": "ファミリールーム",
+    "long_lines_halftime": "ハーフタイムは行列",
+    "wheelchair_loans": "車いす貸出",
+    "permit_needed": "許可証が必要"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "北口。Metro シャトル乗り場から最も近い入口です。",
+      "location": "北側、シャトル乗り場前"
+    },
+    "gate-2": {
+      "description": "スロープのある東口。C 駐車場のバリアフリー区画の隣です。",
+      "location": "東側、C 駐車場そば"
+    },
+    "gate-3": {
+      "description": "配車サービスの乗降用の南口です。",
+      "location": "南側、配車サービス乗り場"
+    },
+    "gate-4": {
+      "description": "200〜240 セクションのチケットをお持ちの方向けの西口です。",
+      "location": "西側、メイン広場そば"
+    },
+    "info-desk": {
+      "description": "お問い合わせ、チケット紛失、感覚過敏キット、イヤーマフ。",
+      "location": "コンコース、105 セクション"
+    },
+    "first-aid": {
+      "description": "開門から観客の退場まで、看護師と救急隊員が待機しています。",
+      "location": "コンコース、112 セクション"
+    },
+    "restroom-east": {
+      "description": "男性用、女性用、おむつ交換台のある誰でも使えるファミリールーム。",
+      "location": "コンコース、118 セクション"
+    },
+    "food-south": {
+      "description": "タコス、ブリトー、アグア・フレスカ。ベジタリアン向けメニューあり。",
+      "location": "コンコース、124 セクション"
+    },
+    "lost-found": {
+      "description": "落とし物の届け出と受け取り。迷子のお子さまもこちらでお預かりします。",
+      "location": "コンコース、131 セクション"
+    },
+    "accessible-seating": {
+      "description": "車いす貸出、同伴者席、補聴支援機器。",
+      "location": "コンコース、136 セクション"
+    },
+    "food-west": {
+      "description": "ハンバーガー、フライドポテト、ソフトドリンク。ハラールパティあり。",
+      "location": "コンコース、140 セクション"
+    },
+    "restroom-west": {
+      "description": "男性用・女性用トイレ。バリアフリー個室は左側です。",
+      "location": "コンコース、145 セクション"
+    },
+    "parking-c": {
+      "description": "Gate 2 まで短く平らな通路があるバリアフリー駐車場です。",
+      "location": "南東の駐車場"
+    }
+  },
+  "facility": {
+    "notFound": "施設が見つかりません",
+    "wheelchair": "車いす対応",
+    "directions": "経路",
+    "directionsSoon": "ステップごとの経路案内はまもなく対応します。{{name}}：{{location}}。",
+    "reports": "レポート",
+    "results_other": "{{count}}件",
+    "noReports": "レポートはまだありません。最初に気づいたことを共有しましょう。",
+    "addReport": "レポートを追加"
+  },
+  "submitted": {
+    "title": "レポートを送信しました",
+    "body": "施設レポートをお送りいただきありがとうございます。",
+    "again": "別のレポートを送る"
+  },
+  "card": {
+    "label": "レポート：{{title}}、投稿者 {{author}}",
+    "hint": "レポート全文を開きます",
+    "new": "新着",
+    "by": "投稿者：{{author}}",
+    "seeMore": "続きを読む →"
+  },
+  "topic": {
+    "accessibility": "バリアフリー",
+    "directions": "経路",
+    "facility_condition": "施設の状態",
+    "security": "セキュリティ",
+    "crowds": "混雑",
+    "other": "その他"
+  },
+  "report": {
+    "notFound": "レポートが見つかりません",
+    "kind": "レポート",
+    "submitted": "{{date}} に送信",
+    "noBody": "詳細はありません。"
+  },
+  "form": {
+    "title": "レポートを追加",
+    "subtitleAt": "{{facility}}で気づいたことを共有して、次の来場者の役に立てましょう",
+    "subtitle": "気づいたことを共有して、次の来場者の役に立てましょう",
+    "titleLabel": "レポートのタイトル",
+    "titlePlaceholder": "みんなに知らせたいことは？",
+    "bodyLabel": "レポート内容",
+    "bodyPlaceholder": "テキストを入力",
+    "bodyHint": "任意。何が、どこで、いつ起きましたか？",
+    "pictureSoon": "写真の追加はまもなく対応します。",
+    "speakSoon": "音声レポートはまもなく対応します。今はテキストで入力してください。",
+    "topic": "トピック",
+    "submit": "レポートを送信",
+    "sendFailed": "レポートを送信できませんでした。接続を確認してもう一度お試しください。",
+    "titleRequired": "タイトルを入力してください（例：「Gate 2 のスロープにひび割れ」）。",
+    "titleTooLong": "タイトルは {{max}} 文字未満にしてください。",
+    "topicRequired": "最も近いトピックを選んでください。",
+    "bodyTooLong": "レポートは {{max}} 文字未満にしてください。"
+  }
+}

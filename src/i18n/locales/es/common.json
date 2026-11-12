@@ -1,0 +1,102 @@
+{
+  "tabs": {
+    "volunteer": "Voluntario",
+    "venue": "Sede",
+    "profile": "Perfil"
+  },
+  "actions": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "close": "Cerrar",
+    "done": "Listo",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "send": "Enviar",
+    "tryAgain": "Reintentar",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "ok": "Aceptar"
+  },
+  "status": {
+    "loading": "Cargando…",
+    "comingSoon": "Próximamente",
+    "optional": "Opcional"
+  },
+  "field": {
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña"
+  },
+  "errors": {
+    "offline": "No se puede conectar con VenU. Revisa tu conexión e inténtalo de nuevo.",
+    "wrongLogin": "Correo o contraseña incorrectos.",
+    "confirmEmail": "Primero confirma tu correo. Busca el enlace en tu bandeja de entrada.",
+    "alreadyRegistered": "Ese correo ya tiene una cuenta. Prueba a iniciar sesión.",
+    "rateLimit": "Demasiados intentos. Espera un minuto e inténtalo de nuevo.",
+    "sessionExpired": "Tu sesión caducó. Vuelve a iniciar sesión.",
+    "cantSave": "VenU no pudo guardar ese cambio. Si sigue pasando, cierra sesión y vuelve a entrar.",
+    "photoTooBig": "Esa foto pesa más de {{size}} MB. Elige una más pequeña.",
+    "photoWrongType": "Usa una foto JPG, PNG, WebP o HEIC.",
+    "generic": "Algo salió mal. Inténtalo de nuevo."
+  },
+  "direction": {
+    "restartTitle": "Reinicia para terminar",
+    "restartBody": "VenU debe reiniciarse para cambiar el diseño entre derecha a izquierda e izquierda a derecha.",
+    "restartNow": "Reiniciar ahora",
+    "later": "Más tarde",
+    "ok": "Aceptar"
+  },
+  "count": {
+    "people_one": "{{count}} persona",
+    "people_many": "{{count}} de personas",
+    "people_other": "{{count}} personas"
+  },
+  "media": {
+    "addPicture": "Añadir foto",
+    "changePicture": "Cambiar foto",
+    "holdToSpeak": "Mantén para hablar"
+  },
+  "form": {
+    "optionalTitle": "{{title}} <muted>(opcional)</muted>",
+    "step": "Paso {{step}} de {{total}}"
+  },
+  "nav": {
+    "backTo": "Volver a {{label}}"
+  },
+  "chip": {
+    "remove": "Quitar {{label}}"
+  },
+  "photo": {
+    "add": "Añadir una foto",
+    "change": "Cambiar foto",
+    "take": "Tomar foto",
+    "remove": "Quitar",
+    "hint": "Ayuda a quien te ayuda a reconocerte. Opcional.",
+    "cameraOff": "El acceso a la cámara está desactivado. Actívalo en Ajustes.",
+    "libraryOff": "El acceso a las fotos está desactivado. Actívalo en Ajustes.",
+    "labelNamed": "Foto de perfil de {{name}}",
+    "labelYours": "Tu foto de perfil",
+    "labelNone": "Sin foto de perfil"
+  },
+  "language": {
+    "primary": "Idioma principal",
+    "secondary": "Segundo idioma",
+    "another": "Otro idioma",
+    "add": "Añadir otro idioma",
+    "search": "Buscar idiomas",
+    "fieldLabel": "Buscar idiomas",
+    "searchFor": "Buscar idiomas para {{field}}",
+    "examples": "p. ej., Español, 한국어, ASL",
+    "searchExamples": "Buscar, p. ej., Español, 한국어, ASL",
+    "field": "{{field}}: {{language}}",
+    "fieldEmpty": "{{field}}: ninguno",
+    "openHint": "Abre la búsqueda de idiomas",
+    "choose": "Elige un idioma",
+    "closeSearch": "Cerrar la búsqueda de idiomas",
+    "remove": "Quitar {{language}}",
+    "removeField": "Quitar este campo de idioma",
+    "noMatch": "Sin resultados. Prueba con el nombre en inglés.",
+    "addTitle": "Añadir un idioma"
+  }
+}

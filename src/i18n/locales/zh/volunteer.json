@@ -1,0 +1,183 @@
+{
+  "role": "LA28 志愿者",
+  "place": "{{spot}} · {{venue}}",
+  "helpIn": "帮助语言：{{language}}",
+  "quoted": "“{{text}}”",
+  "cancelRequest": "取消请求",
+  "dismiss": "关闭",
+  "distance": {
+    "feet": "{{value}} 英尺",
+    "miles": "{{value}} 英里"
+  },
+  "helpTypes": {
+    "physical": "行动协助",
+    "directions": "指路",
+    "language": "语言帮助",
+    "quiet": "安静空间",
+    "lost": "失物招领",
+    "other": "其他"
+  },
+  "skills": {
+    "wheelchair": "轮椅协助培训",
+    "first_aid": "急救",
+    "asl": "ASL"
+  },
+  "form": {
+    "title": "寻找志愿者",
+    "subtitle": "我们会为你匹配附近的人",
+    "languageLabel": "帮助语言：{{language}}。更改语言",
+    "locationLabel": "你的位置：{{spot}}，{{venue}}",
+    "question": "你需要什么帮助？",
+    "notePlaceholder": "例如：我在 2 号坡道附近过不去",
+    "photoOff": "照片访问已关闭。请在“设置”中开启。",
+    "voiceSoon": "语音备注即将推出。请先输入文字备注。",
+    "pickOne": "请至少选择一项需要的帮助。",
+    "send": "发送请求"
+  },
+  "note": {
+    "label": "添加备注<muted>（可选）</muted>",
+    "labelPlain": "添加备注（可选）",
+    "placeholder": "输入文字",
+    "attached": "已附加的图片",
+    "remove": "移除图片"
+  },
+  "emergency": {
+    "title": "紧急情况？",
+    "call": "立即拨打 911",
+    "label": "紧急情况？立即拨打 911",
+    "hint": "打开电话拨打 911"
+  },
+  "notice": {
+    "searchFailed": "无法联系到志愿者。请检查网络连接后重试。",
+    "thanks": "谢谢！你的反馈能帮助 {{name}} 和 LA28 团队。"
+  },
+  "searching": {
+    "title": "正在寻找志愿者",
+    "subtitle": "通常不到一分钟 · 请留在原地",
+    "askedFor": "你请求的帮助"
+  },
+  "match": {
+    "title": "已找到志愿者",
+    "onTheWay": {
+      "his": "{{name}} 正在赶来",
+      "her": "{{name}} 正在赶来",
+      "their": "{{name}} 正在赶来"
+    },
+    "stay": "请留在原地。",
+    "rated": "评分 {{rating}}/5",
+    "skills": "技能和语言",
+    "etaMain": "{{minutes}} 分钟",
+    "etaSub": "后到达",
+    "etaLabel": "{{minutes}} 分钟后到达",
+    "awaySub": "距离你",
+    "awayLabel": "距离你 {{distance}}",
+    "message": "给志愿者发消息",
+    "done": "标记为已完成帮助",
+    "doneHint": "结束请求并请你为 {{name}} 评分",
+    "confirmCancel": "要取消请求吗？{{name}} 将不再前来。",
+    "keep": "保留请求",
+    "yesCancel": "是，取消"
+  },
+  "map": {
+    "label": "地图：{{name}} 距你 {{distance}}，正前往 2 号门与你会合。",
+    "gate": "2 号门",
+    "you": "你"
+  },
+  "messages": {
+    "label": "消息",
+    "unread_other": "消息，{{count}} 条未读"
+  },
+  "chat": {
+    "away": "{{minutes}} 分钟路程",
+    "call": "呼叫 {{name}}",
+    "callSoon": "暂不支持通话。请给 {{name}} 发消息。",
+    "messages": "消息",
+    "empty": "向 {{name}} 打个招呼吧。对方能看到你的位置。",
+    "typing": "{{name}} 正在输入…",
+    "today": "今天 {{time}}",
+    "yesterday": "昨天 {{time}}",
+    "dayTime": "{{day}} {{time}}",
+    "listenSoon": "朗读功能即将推出。",
+    "attach": "附加照片",
+    "attachSoon": "发送照片功能即将推出。",
+    "placeholder": "消息",
+    "messageTo": "给 {{name}} 发消息",
+    "stickers": "贴纸",
+    "stickersSoon": "贴纸即将推出。",
+    "record": "录制语音消息",
+    "voiceSoon": "语音消息即将推出。"
+  },
+  "bubble": {
+    "mine": "你，{{time}}：{{text}}",
+    "theirs": "志愿者，{{time}}：{{text}}",
+    "listen": "收听",
+    "listenLabel": "收听这条消息"
+  },
+  "feedback": {
+    "skip": "跳过",
+    "skipLabel": "跳过评价",
+    "question": "这次帮助怎么样？",
+    "wentWell": "哪些方面做得好？",
+    "tags": {
+      "language": "会说我的语言",
+      "venue": "熟悉场馆",
+      "patient": "有耐心",
+      "fast": "到达迅速",
+      "helpful": "很有帮助",
+      "other": "其他"
+    },
+    "placeholder": "例如：{{name}} 帮我找到了阴凉处的座位",
+    "pickStar": "点按星星为 {{name}} 的帮助评分。",
+    "sendFailed": "无法发送你的评价。{{reason}}",
+    "submit": "提交"
+  },
+  "rating": {
+    "label": "评分",
+    "star_other": "{{count}} 星，{{word}}",
+    "words": {
+      "poor": "差",
+      "notGreat": "不太好",
+      "ok": "还行",
+      "good": "好",
+      "excellent": "非常好"
+    }
+  },
+  "report": {
+    "title": "报告问题",
+    "kindLabel": "出了什么问题？",
+    "kinds": {
+      "no_show": "没有到达",
+      "unsafe": "我感到不安全",
+      "rude": "粗鲁或不友善",
+      "other": "其他"
+    },
+    "notePlaceholder": "发生了什么？（可选）",
+    "pickKind": "请选择出了什么问题。",
+    "sendFailed": "无法发送报告。{{reason}}",
+    "notNow": "暂不",
+    "send": "发送报告",
+    "sent": "报告已发送",
+    "sentBody": "LA28 工作人员今天会处理。现在有危险？请拨打 911。"
+  },
+  "incoming": {
+    "title": "收到的请求",
+    "subtitle": "附近需要帮助的访客",
+    "preview": "预览：匹配功能尚未上线，以下为示例。",
+    "who": "{{help}} · {{name}}",
+    "meta": "距离 {{distance}} · {{minutes}} 分钟前 · {{language}}",
+    "accept": "接受",
+    "acceptSoon": "匹配功能上线后即可接受请求。"
+  },
+  "mock": {
+    "spots": {
+      "gate2Ramp": "2 号门坡道附近",
+      "section214": "214 区走廊",
+      "mainPlaza": "主入口广场"
+    },
+    "greeting": "{{name}}，你好！我是 {{volunteer}}，LA28 志愿者。我现在就过去找你。会合地点：{{spot}}。",
+    "greetingNoName": "你好！我是 {{volunteer}}，LA28 志愿者。我现在就过去找你。会合地点：{{spot}}。",
+    "reply1": "收到，谢谢！我几分钟后到。",
+    "reply2": "我已经看到 2 号门了。我穿着粉色的 LA28 背心。",
+    "reply3": "没问题，不着急。我会陪你一起等。"
+  }
+}

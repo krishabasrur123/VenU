@@ -1,0 +1,6 @@
+# Frame 2225 (168:17096)
+COMPONENT_SET "Frame 2225" 440x154 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 400x47 @20,20 auto:row gap=20 pad=13/138/12/121 align=CENTER/CENTER fill=#1d5dbc stroke=#1d5dbc/2 r=10
+    TEXT "Send Request" 160x28 @132,30 font=Alexandria 400 23/28 ls=0 align=CENTER color=#ffffff text="Send Request"
+  COMPONENT "Property 1=Variant2" 400x47 @20,87 auto:row gap=20 pad=13/138/12/121 align=CENTER/CENTER fill=#1d5dbc stroke=#1d5dbc/2 r=10 drop_shadow(0,4 blur=4 #00000040)
+    TEXT "Send Request" 160x28 @132,97 font=Alexandria 400 23/28 ls=0 align=CENTER color=#ffffff text="Send Request"

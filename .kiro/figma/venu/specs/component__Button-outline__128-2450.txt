@@ -1,0 +1,14 @@
+# Button - outline (128:2450)
+COMPONENT_SET "Button - outline" 135x156 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 95x48 @20,20 auto:row gap=0 pad=0/0/0/0 align=/ inner_shadow(0,4 blur=4 #00000040)
+    INSTANCE "Button - outline" 95x48 @20,20 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"98:1510","Show icon":true,"Label text":"Label","Type":"Round","Size":"Small","State":"Enabled"}
+      FRAME "Content" 95x30 @20,29 auto:col gap=0 pad=0/0/0/0 align=CENTER/CENTER stroke=#a6a6a6/1 r=100
+        FRAME "State-layer" 95x30 @20,29 auto:row gap=8 pad=5/16/5/16 align=CENTER/CENTER
+          INSTANCE "Icon" 20x20 @36,34 [ICON svg/icon-c513eb.svg]
+          TEXT "Label" 35x20 @64,34 font=Roboto 500 14/20 ls=0.10000000149011612 align=LEFT color=#242222 text="Label"
+  COMPONENT "Property 1=Selected" 95x48 @20,88 auto:row gap=0 pad=0/0/0/0 align=/
+    INSTANCE "Button - outline" 95x48 @20,88 auto:row gap=0 pad=0/0/0/0 align=CENTER/CENTER props={"Show focus indicator":false,"Icon":"98:1510","Show icon":true,"Label text":"Label","Type":"Round","Size":"Small","State":"Enabled"}
+      FRAME "Content" 95x30 @20,97 auto:col gap=0 pad=0/0/0/0 align=CENTER/CENTER fill=#dfebfd stroke=#f5f5f5/1 r=100
+        FRAME "State-layer" 95x30 @20,97 auto:row gap=8 pad=5/16/5/16 align=CENTER/CENTER
+          INSTANCE "Icon" 20x20 @36,102 [ICON svg/icon-c513eb.svg]
+          TEXT "Label" 35x20 @64,102 font=Roboto 500 14/20 ls=0.10000000149011612 align=LEFT color=#1e1e1e text="Label"

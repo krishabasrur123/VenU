@@ -1,0 +1,2 @@
+# star rating (255:26852)
+COMPONENT_SET "star rating" 296x824 @0,0 auto:col gap=8 pad=20/20/20/20 align=/ stroke=#7b61ff/1 r=5 [ICON svg/star-rating-5a0ea5.svg]

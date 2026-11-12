@@ -1,0 +1,3 @@
+# Icons (131:3653)
+FRAME "Icons" 213x88 @0,0
+  FRAME "icons" 213x88 @0,0 auto:col gap=0 pad=0/0/0/0 align=/ [ICON svg/icons-82d19f.svg]

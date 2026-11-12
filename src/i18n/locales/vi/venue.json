@@ -1,0 +1,219 @@
+{
+  "search": {
+    "placeholder": "Tìm kiếm",
+    "clear": "Xóa tìm kiếm"
+  },
+  "back": {
+    "venues": "Quay lại danh sách địa điểm",
+    "facilities": "Quay lại danh sách tiện ích",
+    "facility": "Quay lại tiện ích"
+  },
+  "choose": {
+    "title": "Chọn địa điểm",
+    "subtitle": "Chọn nơi bạn muốn xem bản đồ và tiện ích",
+    "searchLabel": "Tìm địa điểm",
+    "languageLabel": "Ngôn ngữ ứng dụng: {{language}}",
+    "languageHint": "Đổi ngôn ngữ của toàn bộ ứng dụng",
+    "languageTitle": "Ngôn ngữ ứng dụng",
+    "languageConsent": "Hãy xem chính sách quyền riêng tư đã cập nhật trong Hồ sơ trước, rồi đổi ngôn ngữ.",
+    "assistTitle": "Cần hỗ trợ?",
+    "assistBody": "Kết nối với tình nguyện viên",
+    "assistLabel": "Cần hỗ trợ? Kết nối với tình nguyện viên",
+    "empty": "Không có địa điểm nào khớp với “{{query}}”. Hãy thử tên thành phố, như Inglewood.",
+    "cardHint": "Mở bản đồ và tiện ích"
+  },
+  "events": {
+    "opening_ceremony": "Lễ khai mạc",
+    "swimming": "Bơi lội",
+    "athletics": "Điền kinh",
+    "football": "Bóng bầu dục",
+    "gymnastics": "Thể dục dụng cụ",
+    "basketball": "Bóng rổ"
+  },
+  "category": {
+    "all": "Tất cả",
+    "groupLabel": "Loại tiện ích",
+    "gate": "Cổng",
+    "restroom": "Nhà vệ sinh",
+    "food": "Đồ ăn & thức uống",
+    "first_aid": "Sơ cứu",
+    "lost_found": "Đồ thất lạc",
+    "info": "Quầy thông tin",
+    "accessible": "Hỗ trợ tiếp cận",
+    "parking": "Bãi đỗ xe"
+  },
+  "emptyMatch": {
+    "all": "Không có tiện ích nào khớp với “{{query}}”",
+    "gate": "Không có cổng nào khớp với “{{query}}”",
+    "restroom": "Không có nhà vệ sinh nào khớp với “{{query}}”",
+    "food": "Không có quầy đồ ăn, thức uống nào khớp với “{{query}}”",
+    "first_aid": "Không có trạm sơ cứu nào khớp với “{{query}}”",
+    "lost_found": "Không có quầy đồ thất lạc nào khớp với “{{query}}”",
+    "info": "Không có quầy thông tin nào khớp với “{{query}}”",
+    "accessible": "Không có tiện ích hỗ trợ tiếp cận nào khớp với “{{query}}”",
+    "parking": "Không có bãi đỗ xe nào khớp với “{{query}}”"
+  },
+  "emptyNone": {
+    "all": "{{venue}} chưa có tiện ích nào",
+    "gate": "{{venue}} chưa có thông tin cổng",
+    "restroom": "{{venue}} chưa có thông tin nhà vệ sinh",
+    "food": "{{venue}} chưa có thông tin quầy đồ ăn, thức uống",
+    "first_aid": "{{venue}} chưa có thông tin trạm sơ cứu",
+    "lost_found": "{{venue}} chưa có thông tin quầy đồ thất lạc",
+    "info": "{{venue}} chưa có thông tin quầy thông tin",
+    "accessible": "{{venue}} chưa có thông tin tiện ích hỗ trợ tiếp cận",
+    "parking": "{{venue}} chưa có thông tin bãi đỗ xe"
+  },
+  "list": {
+    "title": "Tiện ích gần bạn",
+    "searchLabel": "Tìm tiện ích",
+    "showing": "Đang hiển thị: {{category}}",
+    "showAll": "Hiện tất cả",
+    "showAllHint": "Hiển thị lại mọi tiện ích"
+  },
+  "sheet": {
+    "down": "Bảng tiện ích, đã hạ xuống",
+    "mid": "Bảng tiện ích, mở một nửa",
+    "up": "Bảng tiện ích, đã kéo lên",
+    "hint": "Chạm để đổi kích thước, hoặc kéo lên xuống"
+  },
+  "map": {
+    "pin": "{{name}} trên bản đồ",
+    "north": "B"
+  },
+  "walk_other": "{{count}} phút đi bộ",
+  "wait": {
+    "none": "Không phải chờ",
+    "short": "Chờ ít",
+    "long": "Chờ lâu"
+  },
+  "row": {
+    "label": "{{name}}, {{meta}}",
+    "labelAccessible": "{{name}}, {{meta}}, hỗ trợ tiếp cận"
+  },
+  "tags": {
+    "label": "Nhãn:",
+    "accessible": "Hỗ trợ tiếp cận",
+    "stairs": "Cầu thang",
+    "busy_before_events": "Đông trước sự kiện",
+    "ramp": "Lối dốc",
+    "bag_check": "Kiểm tra túi",
+    "rideshare": "Xe công nghệ",
+    "escalators": "Thang cuốn",
+    "sensory_kits": "Bộ dụng cụ giác quan",
+    "quiet_room": "Phòng yên tĩnh",
+    "family_room": "Phòng gia đình",
+    "long_lines_halftime": "Xếp hàng dài giờ nghỉ",
+    "wheelchair_loans": "Cho mượn xe lăn",
+    "permit_needed": "Cần giấy phép"
+  },
+  "facilityText": {
+    "gate-1": {
+      "description": "Lối vào phía bắc, gần trạm xe đưa đón Metro nhất.",
+      "location": "Phía bắc, tại trạm xe đưa đón"
+    },
+    "gate-2": {
+      "description": "Lối vào phía đông có lối dốc, cạnh chỗ đỗ xe hỗ trợ tiếp cận ở Bãi C.",
+      "location": "Phía đông, cạnh Bãi C"
+    },
+    "gate-3": {
+      "description": "Lối vào phía nam để lên xuống xe công nghệ.",
+      "location": "Phía nam, tại khu xe công nghệ"
+    },
+    "gate-4": {
+      "description": "Lối vào phía tây cho người có vé khu 200 đến 240.",
+      "location": "Phía tây, gần quảng trường chính"
+    },
+    "info-desk": {
+      "description": "Giải đáp thắc mắc, vé thất lạc, bộ dụng cụ giác quan và chụp tai chống ồn.",
+      "location": "Hành lang, khu 105"
+    },
+    "first-aid": {
+      "description": "Y tá và nhân viên cấp cứu trực từ khi mở cổng đến khi khán giả ra về hết.",
+      "location": "Hành lang, khu 112"
+    },
+    "restroom-east": {
+      "description": "Nhà vệ sinh nam, nữ và phòng gia đình cho mọi giới tính có bàn thay tã.",
+      "location": "Hành lang, khu 118"
+    },
+    "food-south": {
+      "description": "Taco, burrito và agua fresca. Có món chay.",
+      "location": "Hành lang, khu 124"
+    },
+    "lost-found": {
+      "description": "Gửi hoặc nhận lại đồ thất lạc. Trẻ đi lạc cũng được đưa đến đây.",
+      "location": "Hành lang, khu 131"
+    },
+    "accessible-seating": {
+      "description": "Cho mượn xe lăn, ghế cho người đi kèm và thiết bị hỗ trợ nghe.",
+      "location": "Hành lang, khu 136"
+    },
+    "food-west": {
+      "description": "Burger, khoai tây chiên và nước ngọt. Có thịt halal.",
+      "location": "Hành lang, khu 140"
+    },
+    "restroom-west": {
+      "description": "Nhà vệ sinh nam và nữ. Buồng hỗ trợ tiếp cận ở bên trái.",
+      "location": "Hành lang, khu 145"
+    },
+    "parking-c": {
+      "description": "Bãi đỗ xe hỗ trợ tiếp cận, có lối đi ngắn và bằng phẳng đến Gate 2.",
+      "location": "Bãi phía đông nam"
+    }
+  },
+  "facility": {
+    "notFound": "Không tìm thấy tiện ích",
+    "wheelchair": "Xe lăn vào được",
+    "directions": "Chỉ đường",
+    "directionsSoon": "Chỉ đường từng bước sắp ra mắt. {{name}}: {{location}}.",
+    "reports": "Báo cáo",
+    "results_other": "{{count}} kết quả",
+    "noReports": "Chưa có báo cáo. Hãy là người đầu tiên chia sẻ điều bạn thấy.",
+    "addReport": "Thêm báo cáo của bạn"
+  },
+  "submitted": {
+    "title": "Đã gửi báo cáo",
+    "body": "Cảm ơn bạn đã gửi báo cáo về tiện ích.",
+    "again": "Gửi báo cáo khác"
+  },
+  "card": {
+    "label": "Báo cáo: {{title}}, của {{author}}",
+    "hint": "Mở toàn bộ báo cáo",
+    "new": "Mới",
+    "by": "Của {{author}}",
+    "seeMore": "xem thêm →"
+  },
+  "topic": {
+    "accessibility": "Hỗ trợ tiếp cận",
+    "directions": "Chỉ đường",
+    "facility_condition": "Tình trạng tiện ích",
+    "security": "An ninh",
+    "crowds": "Đám đông",
+    "other": "Khác"
+  },
+  "report": {
+    "notFound": "Không tìm thấy báo cáo",
+    "kind": "Báo cáo",
+    "submitted": "Gửi ngày {{date}}",
+    "noBody": "Không có chi tiết."
+  },
+  "form": {
+    "title": "Thêm báo cáo",
+    "subtitleAt": "Chia sẻ điều bạn thấy ở {{facility}} để giúp người đến sau",
+    "subtitle": "Chia sẻ điều bạn thấy để giúp người đến sau",
+    "titleLabel": "Tiêu đề báo cáo",
+    "titlePlaceholder": "Mọi người nên biết điều gì?",
+    "bodyLabel": "Báo cáo của bạn",
+    "bodyPlaceholder": "Nhập nội dung",
+    "bodyHint": "Không bắt buộc. Chuyện gì, ở đâu, khi nào?",
+    "pictureSoon": "Tính năng thêm ảnh sắp ra mắt.",
+    "speakSoon": "Báo cáo bằng giọng nói sắp ra mắt. Hiện hãy nhập báo cáo.",
+    "topic": "Chủ đề",
+    "submit": "Gửi báo cáo",
+    "sendFailed": "Không gửi được báo cáo. Hãy kiểm tra kết nối và thử lại.",
+    "titleRequired": "Thêm tiêu đề, ví dụ “Lối dốc ở Gate 2 bị nứt”.",
+    "titleTooLong": "Tiêu đề phải dưới {{max}} ký tự.",
+    "topicRequired": "Chọn chủ đề phù hợp nhất.",
+    "bodyTooLong": "Báo cáo phải dưới {{max}} ký tự."
+  }
+}

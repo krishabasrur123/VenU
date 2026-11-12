@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "创建账户",
+    "or": "或",
+    "signIn": "登录",
+    "socialTitle": "或使用以下方式注册",
+    "socialSoon": "Google、Apple 和 Facebook 登录即将推出。",
+    "languageTitle": "应用语言"
+  },
+  "auth": {
+    "languagePill": "应用语言：{{language}}",
+    "languagePillHint": "打开语言列表",
+    "signUpWith": "使用 {{provider}} 注册",
+    "devMode": "开发模式：未设置 Supabase 密钥，因此跳过登录，数据仅保存在此设备上。",
+    "name": "姓名",
+    "namePlaceholder": "输入姓名",
+    "email": "电子邮件",
+    "emailPlaceholder": "输入电子邮件",
+    "password": "密码",
+    "passwordPlaceholder": "输入密码"
+  },
+  "signIn": {
+    "title": "登录",
+    "noAccount": "还没有账户？",
+    "signUp": "注册",
+    "forgot": "忘记密码？",
+    "forgotSoon": "密码重置功能即将推出。",
+    "confirmNotice": "请查收电子邮件确认账户，然后登录。",
+    "submit": "登录"
+  },
+  "signUp": {
+    "title": "创建账户",
+    "haveAccount": "已有账户？",
+    "signIn": "登录",
+    "agree": "同意<a>条款与条件</a>",
+    "agreeLabel": "同意条款与条件",
+    "submit": "创建账户"
+  },
+  "validate": {
+    "email": "请输入有效的电子邮件。",
+    "passwordLength": "密码至少需要 {{min}} 个字符。",
+    "password": "请输入密码。",
+    "terms": "请同意条款与条件后继续。"
+  },
+  "gate": {
+    "offlineTitle": "无法连接 VenU",
+    "errorTitle": "无法加载你的资料",
+    "offlineBody": "请检查网络连接后重试。你仍处于登录状态。"
+  },
+  "role": {
+    "title": "你将如何使用 VenU？",
+    "subtitle": "这样我们才能问你合适的问题。",
+    "visitorTitle": "我是观众",
+    "visitorBody": "在场馆用你的语言获得帮助。",
+    "volunteerTitle": "我是 LA28 志愿者",
+    "volunteerBody": "帮助你附近的观众。在 LA28 确认你之前，你将显示为未验证。"
+  },
+  "setup": {
+    "visitorTitle": "设置你的资料",
+    "visitorSubtitle": "这样我们能为你找到合适的帮手。你可以随时在设置中修改。",
+    "volunteerTitle": "你的志愿者资料",
+    "volunteerSubtitle": "这样我们能为你匹配最需要你帮助的观众。",
+    "submit": "保存并继续"
+  }
+}

@@ -1,0 +1,60 @@
+# Volunteer Chatroom keyboard up (231:26460)
+FRAME "Volunteer Chatroom keyboard up" 440x956 @0,0 fill=#ffffff
+  RECTANGLE "Rectangle 15" 440x811 @0,145 fill=#f5f5f5
+  INSTANCE "Frame 2208" 440x97 @0,48 fill=#ffffff props={"description":"2 min away","Name":"Jayden L."}
+    GROUP "Group 4" 213x49 @20,70
+      TEXT "Jayden L." 105x28 @128,70 font=Alexandria 400 23/28 ls=0 align=LEFT color=#000000 text="Jayden L."
+      TEXT "2 min away" 57x13 @128,106 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#000000 text="2 min away"
+      INSTANCE "Arrow left" 40x40 @20,74 [ICON svg/arrow-left-53079b.svg]
+    ELLIPSE "Ellipse 20" 40x40 @76,74 fill=image(ece298d0)
+    GROUP "Group 43" 50x50 @369,69 [ICON svg/group-43-c358d1.svg]
+  INSTANCE "chat-bubble" 362x61 @30,162 auto:row gap=-1 pad=0/0/0/0 align=/ props={"Status":"231:25785","Text":"Message here","Time":"2:00pm","Last message":true,"Multiple lines":"yes","Variant":"incoming"}
+    FRAME "frame" 19x61 @30,162 auto:col gap=-1 pad=0/0/0/0 align=/MAX
+      RECTANGLE "rectangle" 16x46 @33,162 fill=#ffffff stroke=#9ba9b0/1 r=100/0/0/0
+      BOOLEAN_OPERATION "Union" 19x16 @30,207 fill=#ffffff stroke=#9ba9b0/0.5 [ICON svg/union-6a4ae0.svg]
+    FRAME "text" 344x61 @48,162 auto:col gap=8 pad=12/16/12/0 align=/ fill=#ffffff stroke=#9ba9b0/1 r=0/24/24/0
+      TEXT "Message here" 328x16 @48,174 font=Alexandria 400 13/16 ls=0 align=LEFT color=#22282b text="Message here"
+      FRAME "frame" 328x13 @48,198 auto:row gap=10 pad=0/0/0/0 align=MAX/CENTER
+        TEXT "2:00pm" 40x13 @336,198 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#7e919a text="2:00pm"
+  INSTANCE "chat-bubble" 362x64 @48,271 auto:row gap=-1 pad=0/0/0/0 align=MAX/ props={"Time":"2:00pm","Status":"231:25785","Text":"Message here","Last message":true,"Multiple lines":"yes","Variant":"outgoing"}
+    FRAME "text" 344x64 @48,271 auto:col gap=8 pad=12/0/12/16 align=/ fill=#1d5dbc stroke=#a6a6a6/1 r=24/0/0/24
+      TEXT "Message here" 328x16 @64,283 font=Alexandria 400 13/16 ls=0 align=LEFT color=#ffffff text="Message here"
+      FRAME "frame" 328x16 @64,307 auto:row gap=4 pad=0/0/0/0 align=MAX/CENTER
+        TEXT "2:00pm" 40x13 @332,309 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#ffffff text="2:00pm"
+        INSTANCE "read" 16x16 @376,307 [ICON svg/read-4b1a0c.svg]
+    FRAME "frame" 19x64 @391,271 auto:col gap=-1 pad=0/0/0/0 align=/MAX
+      RECTANGLE "rectangle" 16x49 @391,271 fill=#1d5dbc stroke=#a6a6a6/1 r=100/0/0/0
+      BOOLEAN_OPERATION "Union" 19x16 @391,319 fill=#1d5dbc stroke=#a6a6a6/0.5 [ICON svg/union-859373.svg]
+  INSTANCE "Bars/Status Bars/iPhone/Light" 390x48 @25,0 fill=#ffffff
+    GROUP "Battery" 24x11 @372,19 r=0/0/0/0
+      RECTANGLE "Border" 22x11 @372,19 stroke=#000000/1 r=2.6666667461395264 opacity=0.3499999940395355
+      VECTOR "Cap" 1x4 @395,23 fill=#000000 opacity=0.4000000059604645 [ICON (not exported)]
+      RECTANGLE "Capacity" 18x7 @374,21 fill=#000000 r=1.3333333730697632
+    BOOLEAN_OPERATION "Wifi" 15x11 @350,20 fill=#000000 [ICON (not exported)]
+    BOOLEAN_OPERATION "Cellular Connection" 17x11 @327,20 fill=#000000 [ICON (not exported)]
+    INSTANCE "Time Style" 54x21 @46,12
+      TEXT "Time" 54x18 @46,15 font=SF Pro 590 15/18 ls=0 align=CENTER color=#000000 text="9:41"
+  INSTANCE "chat-bubble" 171x40 @30,382 props={"Status":"231:25785","Time":"2:00pm","Text":"Message here","Last message":true,"Multiple lines":"no","Variant":"incoming"}
+    FRAME "frame" 19x40 @30,382 auto:col gap=-1 pad=0/0/0/0 align=/MAX
+      RECTANGLE "rectangle" 16x25 @33,382 fill=#ffffff stroke=#9ba9b0/1 r=100/0/0/0
+      BOOLEAN_OPERATION "Union" 19x16 @30,406 fill=#ffffff stroke=#9ba9b0/0.5 [ICON svg/union-6a4ae0.svg]
+    FRAME "text" 153x40 @48,382 auto:row gap=8 pad=12/16/12/0 align=/MAX fill=#ffffff stroke=#9ba9b0/1 r=0/24/24/0
+      TEXT "Message here" 89x16 @48,394 font=Alexandria 400 13/16 ls=0 align=LEFT color=#22282b text="Message here"
+      FRAME "frame" 40x13 @145,397 auto:row gap=10 pad=0/0/0/0 align=/CENTER
+        TEXT "2:00pm" 40x13 @145,397 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#7e919a text="2:00pm"
+  FRAME "bottom-bar" 440x74 @0,549 auto:col gap=0 pad=0/0/0/0 align=/ fill=#f9f9f9cc stroke=#3c3c435c/1 background_blur( blur=20)
+    FRAME "message" 440x74 @0,549 auto:row gap=8 pad=8/12/4/8 align=CENTER/CENTER
+      GROUP "attachment" 24x24 @8,576 [ICON svg/attachment-842b0c.svg]
+      FRAME "input" 364x32 @40,572 auto:row gap=180 pad=5/8/5/8 align=SPACE_BETWEEN/CENTER fill=#ffffff stroke=#d1d1d6/1 r=16.5
+        TEXT "Message" 70x22 @48,577 font=SF Pro Text 400 17/22 ls=-0.4000000059604645 align=LEFT color=#aeaeb2 text="Message"
+        GROUP "stickers" 16x16 @380,580 [ICON svg/stickers-bba547.svg]
+      GROUP "record" 16x21 @412,577 [ICON svg/record-7973f2.svg]
+  INSTANCE "Frame 2271" 49x16 @39,223 auto:row gap=6 pad=0/0/0/0 align=/CENTER
+    INSTANCE "Volume 2" 16x16 @39,223 props={"Size":"16"} [ICON (not exported)]
+    TEXT "listen" 27x13 @61,225 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#1d5dbc text="listen"
+  INSTANCE "Frame 2272" 49x16 @40,422 auto:row gap=6 pad=0/0/0/0 align=/CENTER
+    INSTANCE "Volume 2" 16x16 @40,422 props={"Size":"16"} [ICON svg/volume-2-9f50a9.svg]
+    TEXT "listen" 27x13 @62,424 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#1d5dbc text="listen"
+  GROUP "Group 42" 441x333 @-1,623
+    GROUP "Group 41" 441x333 @-1,623
+      RECTANGLE "IMG_0185 1" 441x333 @-1,623 fill=image(af8ad5c4)

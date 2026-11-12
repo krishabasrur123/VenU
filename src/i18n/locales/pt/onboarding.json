@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "Criar conta",
+    "or": "ou",
+    "signIn": "Entrar",
+    "socialTitle": "OU cadastre-se com",
+    "socialSoon": "O login com Google, Apple e Facebook chega em breve.",
+    "languageTitle": "Idioma do app"
+  },
+  "auth": {
+    "languagePill": "Idioma do app: {{language}}",
+    "languagePillHint": "Abre a lista de idiomas",
+    "signUpWith": "Cadastre-se com {{provider}}",
+    "devMode": "Modo de desenvolvimento: sem chaves do Supabase, então o login é pulado e os dados ficam neste aparelho.",
+    "name": "Nome",
+    "namePlaceholder": "Digite seu nome",
+    "email": "E-mail",
+    "emailPlaceholder": "Digite seu e-mail",
+    "password": "Senha",
+    "passwordPlaceholder": "Digite sua senha"
+  },
+  "signIn": {
+    "title": "Entrar",
+    "noAccount": "Não tem uma conta?",
+    "signUp": "Cadastre-se",
+    "forgot": "Esqueceu a senha?",
+    "forgotSoon": "A redefinição de senha chega em breve.",
+    "confirmNotice": "Confira seu e-mail para confirmar a conta e depois entre.",
+    "submit": "Entrar"
+  },
+  "signUp": {
+    "title": "Criar conta",
+    "haveAccount": "Já tem uma conta?",
+    "signIn": "Entrar",
+    "agree": "Concordo com os <a>Termos e Condições</a>",
+    "agreeLabel": "Concordo com os Termos e Condições",
+    "submit": "Criar conta"
+  },
+  "validate": {
+    "email": "Digite um e-mail válido.",
+    "passwordLength": "Use pelo menos {{min}} caracteres na senha.",
+    "password": "Digite sua senha.",
+    "terms": "Aceite os Termos e Condições para continuar."
+  },
+  "gate": {
+    "offlineTitle": "Não foi possível conectar ao VenU",
+    "errorTitle": "Não foi possível carregar seu perfil",
+    "offlineBody": "Verifique sua conexão e tente de novo. Você continua conectado."
+  },
+  "role": {
+    "title": "Como você vai usar o VenU?",
+    "subtitle": "Assim podemos fazer as perguntas certas.",
+    "visitorTitle": "Sou visitante",
+    "visitorBody": "Receba ajuda no local no seu idioma.",
+    "volunteerTitle": "Sou voluntário do LA28",
+    "volunteerBody": "Ajude visitantes perto de você. Você aparecerá como não verificado até o LA28 confirmar."
+  },
+  "setup": {
+    "visitorTitle": "Configure seu perfil",
+    "visitorSubtitle": "Assim encontramos a pessoa certa para ajudar você. Mude quando quiser nas configurações.",
+    "volunteerTitle": "Seu perfil de voluntário",
+    "volunteerSubtitle": "Assim enviamos a você os visitantes que você pode ajudar melhor.",
+    "submit": "Salvar e continuar"
+  }
+}

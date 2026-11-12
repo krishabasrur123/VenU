@@ -1,0 +1,6 @@
+# msft_TextInput (181:18324)
+COMPONENT_SET "msft_TextInput" 440x220 @0,0 stroke=#8a38f5/1 r=5
+  COMPONENT "Property 1=Default" 400x80 @20,20 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10
+    TEXT "Enter text" 368x50 @36,35 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#a6a6a6 text="Enter text"
+  COMPONENT "Property 1=filled content" 400x80 @20,120 auto:row gap=10 pad=15/16/15/16 align=/ fill=#ffffff stroke=#a6a6a6/2 r=10
+    TEXT "I am stuck near ramp 2" 368x50 @36,135 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="I am stuck near ramp 2"

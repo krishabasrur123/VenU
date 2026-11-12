@@ -1,0 +1,7 @@
+# Frame 2249 (215:25267)
+COMPONENT "Frame 2249" 139x47 @0,0 auto:col gap=10 pad=7/39/11/10 align=/ fill=#f5f5f5 r=10
+  FRAME "Frame 2248" 86x29 @10,7 auto:row gap=10 pad=0/0/0/0 align=/CENTER
+    INSTANCE "Clock" 20x20 @10,12 [ICON svg/clock-8cfca4.svg]
+    FRAME "Frame 2247" 56x29 @40,7 auto:col gap=0 pad=0/0/0/0 align=/
+      TEXT "2 min" 56x16 @40,7 font=Alexandria 400 13/16 ls=0 align=LEFT color=#242222 text="2 min"
+      TEXT "until arrival" 56x13 @40,23 font=Albert Sans 400 11/13 ls=0 align=LEFT color=#242222 text="until arrival"

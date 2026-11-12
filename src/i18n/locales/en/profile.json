@@ -1,0 +1,232 @@
+{
+  "tab": {
+    "title": "Profile",
+    "visitor": "Visitor",
+    "volunteer": "Volunteer",
+    "verified": "✓ Verified LA28",
+    "unverified": "Unverified",
+    "sharedVisitor": "Shared with your helper",
+    "sharedVolunteer": "Shown to visitors",
+    "account": "Account",
+    "support": "Support",
+    "editProfile": "Edit profile",
+    "notifications": "Notifications",
+    "privacy": "Privacy & data",
+    "help": "Help & feedback",
+    "terms": "Terms of use",
+    "signOutFailed": "Couldn't sign out. {{reason}}",
+    "deleteWarning": "This removes your profile and photo for good. You can make a new one later.",
+    "deleteFailed": "Couldn't finish deleting your data. {{reason}}",
+    "deleteData": "Delete my data"
+  },
+  "edit": {
+    "title": "Edit profile",
+    "subtitle": "Changes apply to your next help request.",
+    "submit": "Save changes"
+  },
+  "form": {
+    "aboutYou": "About you",
+    "firstName": "First name",
+    "firstNamePlaceholderVisitor": "e.g. Rosa",
+    "firstNamePlaceholderVolunteer": "e.g. Daniel",
+    "firstNameHint": "Only your first name is shown to the people you meet.",
+    "languagesVisitor": "Languages you speak",
+    "languagesVolunteer": "Languages you’re fluent in",
+    "accessNeeds": "Anything we should know?",
+    "accessNeedsLabel": "Access needs",
+    "otherNeedsPlaceholder": "e.g. I use a service dog",
+    "otherNeedsLabel": "Other access needs",
+    "communication": "How do you like to communicate?",
+    "communicationHint": "Your helper sees this before they reach you.",
+    "communicationLabel": "Communication",
+    "helperPref": "I’d prefer help from",
+    "gender": "Gender",
+    "age": "Age",
+    "helperGenderLabel": "Helper gender",
+    "helperAgeLabel": "Helper age",
+    "training": "Training",
+    "trainingHint": "LA28 checks these when verifying you.",
+    "yourGender": "Your gender",
+    "yourGenderHint": "Only used when a visitor asks for a woman or man helper. Never shown.",
+    "yourAge": "Your age range",
+    "yourAgeHint": "Only for matching, never shown.",
+    "privacyAgree": "I agree to how VenU uses my info, as set out in the <a>privacy policy</a>.",
+    "privacyAgreeLabel": "I agree to how VenU uses my info, as set out in the privacy policy",
+    "fixAbove": "Some answers above need a fix (marked in red)."
+  },
+  "validate": {
+    "firstName": "Add your first name.",
+    "tooLong": "Use {{max}} characters or fewer.",
+    "noLanguage": "Add at least one language.",
+    "mainLanguage": "Pick your main language.",
+    "otherNote": "Tell us a bit about what you need.",
+    "pickOne": "Pick one (or \"Prefer not to say\").",
+    "privacy": "Please agree to the privacy policy to continue."
+  },
+  "options": {
+    "accessNeeds": {
+      "wheelchair": "Wheelchair user",
+      "hard_of_hearing": "Hard of hearing",
+      "low_vision": "Low vision",
+      "walking_aid": "Walking aid",
+      "other": "Other"
+    },
+    "communication": {
+      "speaking": "Speaking",
+      "text": "Text / writing",
+      "sign_language": "Sign language"
+    },
+    "helperGender": {
+      "none": "No preference",
+      "man": "Male",
+      "woman": "Female"
+    },
+    "helperAge": {
+      "any": "Any age",
+      "under_40": "Under 40",
+      "40_plus": "40+"
+    },
+    "training": {
+      "wheelchair": "Wheelchair trained",
+      "asl": "ASL",
+      "first_aid": "First aid",
+      "sighted_guide": "Sighted guide",
+      "mental_health": "Mental health first aid"
+    },
+    "gender": {
+      "woman": "Woman",
+      "man": "Man",
+      "nonbinary": "Non-binary",
+      "prefer_not": "Prefer not to say"
+    },
+    "ageBand": {
+      "under_40": "Under 40",
+      "40_plus": "40+",
+      "prefer_not": "Prefer not to say"
+    }
+  },
+  "summary": {
+    "speaks": "Speaks {{languages}}",
+    "listSeparator": ", ",
+    "otherNeeds": "Other needs (see note)",
+    "prefers": {
+      "speaking": "Prefers speaking",
+      "text": "Prefers text / writing",
+      "sign_language": "Prefers sign language"
+    }
+  },
+  "languageNames": {
+    "en": "English",
+    "es": "Spanish",
+    "zh": "Chinese",
+    "ko": "Korean",
+    "tl": "Tagalog",
+    "vi": "Vietnamese",
+    "hy": "Armenian",
+    "fa": "Persian",
+    "ja": "Japanese",
+    "ru": "Russian",
+    "ar": "Arabic",
+    "fr": "French",
+    "pt": "Portuguese",
+    "de": "German",
+    "it": "Italian",
+    "hi": "Hindi",
+    "pa": "Punjabi",
+    "th": "Thai",
+    "km": "Khmer",
+    "he": "Hebrew",
+    "ase": "American Sign Language"
+  },
+  "privacy": {
+    "title": "Your privacy",
+    "summary": "We only ask for what we need to match you with the right helper, and you can change or delete it any time.",
+    "englishNotice": "This policy is shown in English.",
+    "version": "Version {{version}}. Draft for team review.",
+    "sections": {
+      "collect": "What we collect",
+      "why": "Why we collect it",
+      "who": "Who sees it",
+      "where": "Where it's stored",
+      "keep": "How long we keep it",
+      "choices": "Your choices"
+    }
+  },
+  "terms": {
+    "title": "Terms of use",
+    "subtitle": "The short version of the rules for using VenU.",
+    "englishNotice": "These terms are shown in English.",
+    "privacyLink": "How we use your info is in the <a>privacy policy</a>.",
+    "version": "Version {{version}}. Draft for team review.",
+    "sections": {
+      "what": "What VenU is",
+      "emergencies": "Not for emergencies",
+      "kind": "Be kind and honest",
+      "remove": "What we can remove",
+      "guarantees": "No guarantees"
+    }
+  },
+  "help": {
+    "title": "Help & feedback",
+    "subtitle": "Answers to common questions, and a way to tell us what to fix.",
+    "commonQuestions": "Common questions",
+    "faq": {
+      "matching": {
+        "q": "How does matching work?",
+        "a": "When you ask for help, we look for a nearby volunteer at your venue who speaks your language and has the training your needs call for, e.g. a wheelchair-trained volunteer who speaks Español."
+      },
+      "volunteers": {
+        "q": "What can volunteers help with?",
+        "a": "Finding your seat, gate, restroom or elevator, getting around the venue, and translating. They can’t give medical care."
+      },
+      "emergency": {
+        "q": "What if it’s an emergency?",
+        "a": "Call 911, or tell the nearest venue staff member. VenU volunteers aren’t emergency responders."
+      },
+      "languages": {
+        "q": "Which languages are supported?",
+        "a": "You can list any of 21 languages, including ASL. Add every language you speak in Edit profile so we can find more helpers for you."
+      },
+      "privacy": {
+        "q": "Who sees my information?",
+        "a": "Only the person helping you, and only while they help: your first name, photo, languages and the needs you chose to share. See Privacy & data for the rest."
+      },
+      "report": {
+        "q": "How do I report a facility problem?",
+        "a": "On the Venue tab, tap the facility (e.g. an elevator or restroom), then Add Your Own Report. Everyone who opens that facility sees it."
+      }
+    },
+    "sendFeedback": "Send feedback",
+    "feedbackHint": "Something confusing, broken or missing? Tell us.",
+    "thanksTitle": "Thank you!",
+    "thanksBody": "We read every note and use it to make VenU better.",
+    "sendMore": "Send more feedback",
+    "placeholder": "e.g. The map was hard to read in the sun",
+    "feedbackLabel": "Your feedback",
+    "send": "Send feedback",
+    "empty": "Write a few words first."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Choose what VenU tells you about.",
+    "note": "Alerts start arriving once notifications are set up for VenU.",
+    "options": {
+      "volunteer": {
+        "label": "Volunteer updates",
+        "hint": "e.g. Daniel accepted and is on his way"
+      },
+      "chat": {
+        "label": "Chat messages",
+        "hint": "New messages from your helper or visitor"
+      },
+      "venue": {
+        "label": "Venue alerts",
+        "hint": "e.g. Gate C at SoFi Stadium is closed"
+      },
+      "reports": {
+        "label": "Report replies",
+        "hint": "When staff answer a facility report"
+      }
+    }
+  }
+}

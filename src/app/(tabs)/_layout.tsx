@@ -1,17 +1,17 @@
 import { Href, Redirect, router, Slot, usePathname } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
-import { XrNavigationBar, XrTab } from '@/components/xr-navigation-bar';
+import { TabBar, type Tab } from '@/components/tab-bar';
 import { Colors } from '@/constants/theme';
 import { useProfile } from '@/features/profile/profile-context';
 
-const TAB_ROUTES: Record<XrTab, Href> = {
+const TAB_ROUTES: Record<Tab, Href> = {
   venue:     '/venue',
   volunteer: '/volunteer',
   profile:   '/profile',
 };
 
-function pathnameToTab(pathname: string): XrTab {
+function pathnameToTab(pathname: string): Tab {
   if (pathname.includes('volunteer')) return 'volunteer';
   if (pathname.includes('profile')) return 'profile';
   return 'venue';
@@ -22,7 +22,7 @@ export default function TabsLayout() {
   const { status, profile } = useProfile();
   const activeTab = pathnameToTab(pathname);
 
-  function handleTabPress(tab: XrTab) {
+  function handleTabPress(tab: Tab) {
     router.replace(TAB_ROUTES[tab]);
   }
 
@@ -40,7 +40,7 @@ export default function TabsLayout() {
       </View>
 
       {/* Floating nav bar */}
-      <XrNavigationBar activeTab={activeTab} onTabPress={handleTabPress} />
+      <TabBar active={activeTab} onPress={handleTabPress} />
     </View>
   );
 }

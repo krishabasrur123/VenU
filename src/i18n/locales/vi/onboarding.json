@@ -1,0 +1,65 @@
+{
+  "welcome": {
+    "createAccount": "Tạo tài khoản",
+    "or": "hoặc",
+    "signIn": "Đăng nhập",
+    "socialTitle": "HOẶC đăng ký bằng",
+    "socialSoon": "Đăng nhập bằng Google, Apple và Facebook sẽ sớm ra mắt.",
+    "languageTitle": "Ngôn ngữ ứng dụng"
+  },
+  "auth": {
+    "languagePill": "Ngôn ngữ ứng dụng: {{language}}",
+    "languagePillHint": "Mở danh sách ngôn ngữ",
+    "signUpWith": "Đăng ký bằng {{provider}}",
+    "devMode": "Chế độ phát triển: chưa có khóa Supabase nên bỏ qua đăng nhập và dữ liệu chỉ lưu trên thiết bị này.",
+    "name": "Tên",
+    "namePlaceholder": "Nhập tên",
+    "email": "Email",
+    "emailPlaceholder": "Nhập email",
+    "password": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu"
+  },
+  "signIn": {
+    "title": "Đăng nhập",
+    "noAccount": "Chưa có tài khoản?",
+    "signUp": "Đăng ký",
+    "forgot": "Quên mật khẩu?",
+    "forgotSoon": "Tính năng đặt lại mật khẩu sẽ sớm ra mắt.",
+    "confirmNotice": "Kiểm tra email để xác nhận tài khoản, rồi đăng nhập.",
+    "submit": "Đăng nhập"
+  },
+  "signUp": {
+    "title": "Tạo tài khoản",
+    "haveAccount": "Đã có tài khoản?",
+    "signIn": "Đăng nhập",
+    "agree": "Đồng ý với <a>Điều khoản & Điều kiện</a>",
+    "agreeLabel": "Đồng ý với Điều khoản & Điều kiện",
+    "submit": "Tạo tài khoản"
+  },
+  "validate": {
+    "email": "Nhập email hợp lệ.",
+    "passwordLength": "Mật khẩu cần ít nhất {{min}} ký tự.",
+    "password": "Nhập mật khẩu của bạn.",
+    "terms": "Đồng ý với Điều khoản & Điều kiện để tiếp tục."
+  },
+  "gate": {
+    "offlineTitle": "Không thể kết nối VenU",
+    "errorTitle": "Không tải được hồ sơ của bạn",
+    "offlineBody": "Kiểm tra kết nối và thử lại. Bạn vẫn đang đăng nhập."
+  },
+  "role": {
+    "title": "Bạn sẽ dùng VenU thế nào?",
+    "subtitle": "Để chúng tôi hỏi đúng câu hỏi.",
+    "visitorTitle": "Tôi là khán giả",
+    "visitorBody": "Nhận trợ giúp tại địa điểm bằng ngôn ngữ của bạn.",
+    "volunteerTitle": "Tôi là tình nguyện viên LA28",
+    "volunteerBody": "Giúp khán giả gần bạn. Bạn sẽ hiện là chưa xác minh cho đến khi LA28 xác nhận."
+  },
+  "setup": {
+    "visitorTitle": "Thiết lập hồ sơ",
+    "visitorSubtitle": "Để chúng tôi tìm đúng người giúp bạn. Bạn có thể thay đổi bất cứ lúc nào trong cài đặt.",
+    "volunteerTitle": "Hồ sơ tình nguyện viên",
+    "volunteerSubtitle": "Để chúng tôi gửi đến bạn những khán giả bạn giúp được nhiều nhất.",
+    "submit": "Lưu và tiếp tục"
+  }
+}

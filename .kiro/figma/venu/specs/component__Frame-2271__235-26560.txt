@@ -1,0 +1,4 @@
+# Frame 2271 (235:26560)
+COMPONENT "Frame 2271" 49x16 @0,0 auto:row gap=6 pad=0/0/0/0 align=/CENTER
+  INSTANCE "Volume 2" 16x16 @0,0 props={"Size":"16"} [ICON svg/volume-2-9f50a9.svg]
+  TEXT "listen" 27x13 @22,2 font=Albert Sans 400 11/13 ls=0 align=CENTER color=#1d5dbc text="listen"
