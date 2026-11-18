@@ -28,14 +28,14 @@
     "languageLabel": "Help in {{language}}. Change language",
     "locationLabel": "Your location: {{spot}}, {{venue}}",
     "near": "Near {{place}}",
-    "locationUnset": "Your location: not chosen yet, {{venue}}",
+    "locationUnset": "Your location: {{venue}}, no spot chosen yet",
     "whereAreYou": "Where are you?",
     "tapToChoose": "Tap to choose a spot",
     "locationHint": "Opens a list of places at {{venue}}",
     "question": "What do you need help with?",
     "notePlaceholder": "e.g. I'm stuck near ramp 2",
     "photoOff": "Photo access is off. Turn it on in Settings.",
-    "pickOne": "Pick at least one thing you need help with.",
+    "pickOne": "Choose what you need help with.",
     "send": "Send Request"
   },
   "where": {
@@ -49,9 +49,11 @@
   "note": {
     "label": "Add a note <muted>(optional)</muted>",
     "labelPlain": "Add a note (optional)",
+    "speak": "Speak your note",
     "placeholder": "Enter text",
     "attached": "Attached picture",
-    "remove": "Remove picture"
+    "remove": "Remove picture",
+    "count": "{{used}} of {{max}} characters"
   },
   "emergency": {
     "title": "Emergency?",
@@ -69,15 +71,16 @@
   "notice": {
     "searchFailed": "Couldn't reach a volunteer. Check your connection and try again.",
     "thanks": "Thanks! Your feedback helps {{name}} and the LA28 team.",
-    "volunteerLeft": "Your volunteer had to leave. Finding someone else."
+    "volunteerLeft": "Your volunteer had to leave. Finding someone else.",
+    "volunteerEnded": "{{name}} ended the chat. Still need help? Tap Skip and send a new request."
   },
   "searching": {
     "title": "Finding a volunteer",
     "subtitle": "Usually under a minute · Stay where you are",
     "askedFor": "You asked for",
     "notFoundTitle": "No volunteer is free right now",
-    "notFoundBody": "Your request is saved. Keep searching, or call venue staff for help.",
-    "keepSearching": "Keep searching"
+    "notFoundBody": "Nobody was free, so your request was withdrawn. Search again, or call venue staff for help.",
+    "keepSearching": "Search again"
   },
   "match": {
     "title": "Volunteer found",
@@ -132,7 +135,9 @@
     "stickers": "Stickers",
     "stickersSoon": "Stickers are coming soon.",
     "record": "Speak a message",
-    "emptyVolunteer": "Say hello to {{name}} and let them know you're on your way."
+    "emptyVolunteer": "Say hello to {{name}} and let them know you're on your way.",
+    "yourRequest": "Your request",
+    "requestFrom": "Request from {{name}}"
   },
   "translation": {
     "translatedFrom": "Translated from {{language}}",
@@ -155,7 +160,7 @@
   },
   "bubble": {
     "mine": "You, {{time}}: {{text}}",
-    "listen": "listen",
+    "listen": "Listen",
     "listenLabel": "Listen to this message",
     "from": "{{name}}, {{time}}: {{text}}",
     "fromTranslated": "{{name}}, {{time}}: {{text}} (translated from {{language}})",
@@ -218,6 +223,8 @@
     "meta": "{{distance}} away · {{minutes}} min ago · {{language}}",
     "accept": "Accept",
     "acceptSoon": "Accepting requests opens when matching goes live.",
+    "waitTitle": "Waiting for verification",
+    "waitBody": "LA28 is checking your details. You can see requests now, and accept them once you're verified.",
     "empty": "No one nearby needs help right now. New requests show up here.",
     "metaLive": "{{minutes}} min ago · {{language}}"
   },
@@ -227,14 +234,23 @@
     "end": "End chat",
     "endHint": "Marks the help as done for you and {{name}}",
     "confirmEnd": "End your chat with {{name}}? This marks the help as done.",
-    "yesEnd": "Yes, end chat"
+    "yesEnd": "Yes, end chat",
+    "handBack": "Can’t make it",
+    "handBackHint": "Hands the request back so another volunteer can help {{name}}",
+    "confirmHandBack": "Can’t make it? We’ll find another volunteer for {{name}}.",
+    "keepHelping": "Keep helping",
+    "yesHandBack": "Hand it back",
+    "handBackFailed": "Couldn’t hand the request back. Check your connection and try again."
   },
   "desk": {
     "taken": "Someone else already took this request.",
     "acceptFailed": "Couldn't accept the request. Check your connection and try again.",
+    "notVerified": "You can accept requests once LA28 verifies you.",
     "cancelled": "{{name}} cancelled the request.",
+    "closed": "The request from {{name}} was closed.",
     "done": "{{name}} marked the help as done. Thank you!",
     "ended": "Chat ended. Thanks for helping {{name}}!",
+    "handedBack": "You handed back the request from {{name}}. Another volunteer can take it.",
     "withdrawn": "This request was withdrawn."
   },
   "home": {
@@ -251,16 +267,17 @@
       "off": "Off"
     },
     "statusLine": {
-      "free": "You’ll get nearby requests. Switch to Busy or Off on a break and requests will skip you.",
+      "free": "You’ll get nearby requests. Switch to Busy or Off and requests will skip you.",
       "busy": "You’re busy for now. New requests skip you until you switch back to Free.",
-      "off": "You’re off duty. Requests skip you until you switch to Free."
+      "off": "You’re off duty. Requests skip you until you switch to Free.",
+      "helping": "You’re helping {{name}}. New requests wait until you finish."
     },
     "helpTitle": "What you can help with",
     "editLabel": "Edit what you can help with",
     "languages": "Fluent languages",
     "training": "Training",
     "noTraining": "No training added yet",
-    "paused": "Requests are paused while you’re on a break. Switch to Free to see who needs help nearby."
+    "paused": "Requests are paused while you’re busy or off duty. Switch to Free to see who needs help nearby."
   },
   "mock": {
     "greeting": "Hi {{name}}! I'm {{volunteer}}, your LA28 volunteer. I'm heading to you now. Meeting point: {{spot}}.",

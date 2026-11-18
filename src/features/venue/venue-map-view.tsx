@@ -14,7 +14,7 @@ import Svg, { Line } from 'react-native-svg';
 import { scheduleOnRN } from 'react-native-worklets';
 
 import { Button } from '@/components/button';
-import { Colors, Fonts, Radius, Shadow, Spacing } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Shadow, Spacing } from '@/constants/theme';
 import { useT } from '@/i18n';
 
 import { FacilityIcon } from './categories';
@@ -377,7 +377,7 @@ const styles = StyleSheet.create({
   youLabel: {
     position: 'absolute',
     top: HIT - 6,
-    fontFamily: Fonts.textBold,
+    ...Face.textBold,
     fontSize: 12,
     lineHeight: 16,
     color: Colors.onPrimary,
@@ -397,13 +397,14 @@ const styles = StyleSheet.create({
     gap: Spacing.sm,
     height: SOURCE_BAR,
     paddingHorizontal: Spacing.gutter,
-    backgroundColor: 'rgba(255,255,255,0.94)',
+    // Solid, so a pin panned under the bar is hidden instead of showing through its text.
+    backgroundColor: Colors.surface,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: Colors.border,
   },
   source: { flex: 1, fontFamily: Fonts.text, fontSize: 13, lineHeight: 17, color: Colors.textMuted },
   openLink: { minHeight: 36, justifyContent: 'center' },
-  openText: { fontFamily: Fonts.textBold, fontSize: 13, lineHeight: 17, color: Colors.primary, textDecorationLine: 'underline' },
+  openText: { ...Face.textBold, fontSize: 13, lineHeight: 17, color: Colors.primary, textDecorationLine: 'underline' },
   pressed: { opacity: 0.6 },
   zoomButtons: { position: 'absolute', right: Spacing.sm, gap: Spacing.sm },
   zoom: {
@@ -417,7 +418,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     ...Shadow.card,
   },
-  zoomGlyph: { fontFamily: Fonts.displayMedium, fontSize: 24, lineHeight: 28, color: Colors.ink },
+  zoomGlyph: { ...Face.displayMedium, fontSize: 24, lineHeight: 28, color: Colors.ink },
   cover: { position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', gap: Spacing.md, paddingHorizontal: Spacing.xl, backgroundColor: Colors.surfaceAlt },
   coverText: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20, textAlign: 'center', color: Colors.textMuted },
   bottom: { position: 'absolute', left: 0, right: 0, justifyContent: 'flex-end', paddingHorizontal: Spacing.gutter, paddingBottom: Spacing.md },

@@ -18,6 +18,9 @@
     "assistTitle": "کمک لازم دارید؟",
     "assistBody": "با یک داوطلب در تماس باشید",
     "assistLabel": "کمک لازم دارید؟ با یک داوطلب در تماس باشید",
+    "assistTitleVolunteer": "آماده‌اید کمک کنید؟",
+    "assistBodyVolunteer": "درخواست‌های نزدیک خود را ببینید",
+    "assistLabelVolunteer": "آماده‌اید کمک کنید؟ درخواست‌های نزدیک خود را ببینید",
     "empty": "هیچ مکانی با «{{query}}» مطابقت ندارد. نام یک شهر را امتحان کنید، مثل Inglewood.",
     "cardHint": "نقشه و امکانات را باز می‌کند"
   },
@@ -350,8 +353,8 @@
     "imHereHint": "هنگام درخواست کمک، اینجا مکان شما در نظر گرفته می‌شود",
     "isHere": "مکان شما",
     "reports": "گزارش‌ها",
-    "results_one": "{{number}} نتیجه",
-    "results_other": "{{number}} نتیجه",
+    "reportCount_one": "{{number}} گزارش",
+    "reportCount_other": "{{number}} گزارش",
     "noReports": "هنوز گزارشی نیست. اولین نفری باشید که تجربه‌اش را می‌گوید.",
     "addReport": "گزارش خود را اضافه کنید"
   },
@@ -381,7 +384,12 @@
     "authorFallback": "بازدیدکننده VenU",
     "submitted": "ارسال‌شده در {{date}}",
     "originalLanguage": "زبان اصلی: {{language}}",
-    "noBody": "جزئیاتی اضافه نشده."
+    "noBody": "جزئیاتی اضافه نشده.",
+    "delete": "حذف گزارش من",
+    "deleteConfirm": "این گزارش حذف شود؟ بازدیدکنندگان این مکان دیگر آن را نمی‌بینند.",
+    "deleteKeep": "نگه داشتن",
+    "deleteYes": "حذف",
+    "deleteFailed": "گزارش حذف نشد. {{reason}}"
   },
   "form": {
     "title": "افزودن گزارش",

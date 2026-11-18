@@ -14,6 +14,9 @@ export default function Root({ children }: PropsWithChildren) {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
         <ScrollViewStyleReset />
+        {/* Each app font file is one weight, drawn at that weight (Face in constants/theme.ts): never
+            thicken it into a fake bold when a style asks for more. */}
+        <style dangerouslySetInnerHTML={{ __html: '*{font-synthesis-weight:none}' }} />
         {headNodes}
       </head>
       <body {...bodyAttributes}>

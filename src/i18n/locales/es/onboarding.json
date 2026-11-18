@@ -7,8 +7,9 @@
     "roleQuestion": "¿Visitante o voluntario?",
     "signIn": "Iniciar sesión",
     "socialTitle": "O regístrate con",
-    "socialSoon": "El inicio de sesión con Google, Apple y Facebook llegará pronto.",
-    "languageTitle": "Idioma de la app"
+    "languageTitle": "Idioma de la app",
+    "accountDeleted": "Tu cuenta se eliminó. Puedes crear una nueva cuando quieras.",
+    "signInKept": "Tu perfil y tu foto se eliminaron. Tu acceso (correo) sigue existiendo por ahora; pide al equipo de VenU que lo elimine."
   },
   "auth": {
     "languagePill": "Idioma de la app: {{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "¿No tienes cuenta?",
     "signUp": "Regístrate",
     "forgot": "¿Olvidaste tu contraseña?",
-    "forgotSoon": "Restablecer la contraseña llegará pronto.",
     "confirmNotice": "Revisa tu correo para confirmar tu cuenta y luego inicia sesión.",
+    "resetNotice": "Contraseña cambiada. Inicia sesión con tu nueva contraseña.",
     "submit": "Iniciar sesión"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "Acepto los Términos y condiciones",
     "submit": "Crear cuenta"
   },
+  "forgot": {
+    "title": "Olvidé mi contraseña",
+    "intro": "Escribe tu usuario o correo. Te enviaremos un enlace para elegir una contraseña nueva.",
+    "identifier": "Usuario o correo",
+    "submit": "Enviar enlace",
+    "resend": "Enviar de nuevo",
+    "sent": "Si existe una cuenta con ese usuario o correo, le enviamos un enlace. Revisa tu bandeja de entrada.",
+    "useEmail": "Aún no se puede restablecer con el usuario. Escribe tu correo.",
+    "remembered": "¿La recordaste?"
+  },
+  "reset": {
+    "title": "Nueva contraseña",
+    "intro": "Elige una contraseña nueva para tu cuenta.",
+    "password": "Nueva contraseña",
+    "passwordPlaceholder": "Escribe la nueva contraseña",
+    "confirm": "Confirmar contraseña",
+    "confirmPlaceholder": "Escríbela otra vez",
+    "submit": "Guardar contraseña",
+    "checking": "Comprobando tu enlace…",
+    "badLink": "Ese enlace no funciona. Pide uno nuevo.",
+    "noLink": "Abre esta página desde el enlace del correo para restablecer la contraseña.",
+    "newLink": "Enviar un enlace nuevo"
+  },
+  "social": {
+    "notEnabled": "El acceso con {{provider}} aún no está disponible. Crea una cuenta con tu correo.",
+    "notEnabledAny": "Esa opción de acceso aún no está disponible. Crea una cuenta con tu correo.",
+    "cancelled": "Se canceló el inicio de sesión. Inténtalo de nuevo o usa tu correo.",
+    "failed": "No se pudo iniciar sesión con esa cuenta. Inténtalo de nuevo o usa tu correo.",
+    "failedTitle": "No se pudo iniciar sesión",
+    "signingIn": "Iniciando sesión…"
+  },
   "validate": {
     "email": "Escribe un correo válido.",
     "identifier": "Escribe tu nombre de usuario o correo.",
     "usernameLength": "Usa de {{min}} a {{max}} caracteres en tu nombre de usuario.",
     "usernameChars": "Usa solo letras, números, _ y . en tu nombre de usuario.",
     "passwordLength": "Usa al menos {{min}} caracteres en tu contraseña.",
+    "passwordMatch": "Las contraseñas no coinciden.",
     "password": "Escribe tu contraseña.",
     "terms": "Acepta los Términos y condiciones para continuar."
   },

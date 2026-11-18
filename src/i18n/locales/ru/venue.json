@@ -18,6 +18,9 @@
     "assistTitle": "Нужна помощь?",
     "assistBody": "Свяжитесь с волонтёром",
     "assistLabel": "Нужна помощь? Свяжитесь с волонтёром",
+    "assistTitleVolunteer": "Готовы помочь?",
+    "assistBodyVolunteer": "Смотрите запросы рядом",
+    "assistLabelVolunteer": "Готовы помочь? Смотрите запросы рядом",
     "empty": "Нет площадок по запросу «{{query}}». Попробуйте город, например Inglewood.",
     "cardHint": "Открывает карту и объекты"
   },
@@ -352,10 +355,10 @@
     "imHereHint": "Это место будет вашим местоположением в запросе помощи",
     "isHere": "Ваше местоположение",
     "reports": "Отзывы",
-    "results_one": "{{number}} результат",
-    "results_few": "{{number}} результата",
-    "results_many": "{{number}} результатов",
-    "results_other": "{{number}} результата",
+    "reportCount_one": "{{number}} отзыв",
+    "reportCount_few": "{{number}} отзыва",
+    "reportCount_many": "{{number}} отзывов",
+    "reportCount_other": "{{number}} отзыва",
     "noReports": "Отзывов пока нет. Расскажите первым, что вы увидели.",
     "addReport": "Добавить отзыв"
   },
@@ -385,7 +388,12 @@
     "authorFallback": "Посетитель VenU",
     "submitted": "Отправлено {{date}}",
     "originalLanguage": "Язык оригинала: {{language}}",
-    "noBody": "Без подробностей."
+    "noBody": "Без подробностей.",
+    "delete": "Удалить мой отзыв",
+    "deleteConfirm": "Удалить этот отзыв? Посетители этой площадки больше его не увидят.",
+    "deleteKeep": "Оставить",
+    "deleteYes": "Удалить",
+    "deleteFailed": "Не удалось удалить отзыв. {{reason}}"
   },
   "form": {
     "title": "Новый отзыв",

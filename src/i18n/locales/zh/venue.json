@@ -18,6 +18,9 @@
     "assistTitle": "需要帮助？",
     "assistBody": "联系志愿者",
     "assistLabel": "需要帮助？联系志愿者",
+    "assistTitleVolunteer": "准备好帮忙了吗？",
+    "assistBodyVolunteer": "查看你附近的求助",
+    "assistLabelVolunteer": "准备好帮忙了吗？查看你附近的求助",
     "empty": "没有与“{{query}}”匹配的场馆。试试城市名，例如 Inglewood。",
     "cardHint": "打开地图和设施"
   },
@@ -349,7 +352,7 @@
     "imHereHint": "请求帮助时将此处作为你的位置",
     "isHere": "你的位置",
     "reports": "反馈",
-    "results_other": "{{number}} 条结果",
+    "reportCount_other": "{{number}} 条反馈",
     "noReports": "还没有反馈。来分享你的发现吧。",
     "addReport": "添加你的反馈"
   },
@@ -379,7 +382,12 @@
     "authorFallback": "VenU 访客",
     "submitted": "提交于 {{date}}",
     "originalLanguage": "原文语言：{{language}}",
-    "noBody": "未添加详情。"
+    "noBody": "未添加详情。",
+    "delete": "删除我的反馈",
+    "deleteConfirm": "要删除这条反馈吗？此场馆的访客将不会再看到它。",
+    "deleteKeep": "保留",
+    "deleteYes": "删除",
+    "deleteFailed": "无法删除反馈。{{reason}}"
   },
   "form": {
     "title": "添加反馈",

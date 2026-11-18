@@ -8,7 +8,7 @@ import { createTranslateClient, cutToLimit, type Transport, type Translate, type
 import { chatLanguage, profileChatLanguage } from '../languages';
 import { MOCK_CATALOG } from '../local';
 import { createStub } from '../stub';
-import { needsTranslation, viewOf } from '../use-translation';
+import { needsTranslation, shownText, viewOf } from '../use-translation';
 
 // use-translation reads the profile, whose store uses AsyncStorage.
 jest.mock('@react-native-async-storage/async-storage', () => jest.requireActual('@react-native-async-storage/async-storage/jest/async-storage-mock'));
@@ -92,6 +92,37 @@ describe('translation cache', () => {
     await flush();
     cache.request('m1', { text: 'Hi', target: 'es' }); // switching back: still cached
     expect(translate).toHaveBeenCalledTimes(2);
+  });
+
+  it('never lets a slow answer for the old text replace the one for the new text', async () => {
+    const answers = new Map<string, (t: Translation) => void>();
+    const failures = new Map<string, (e: Error) => void>();
+    const translate: Translate = r => new Promise((resolve, reject) => { answers.set(r.text, resolve); failures.set(r.text, reject); });
+    const cache = createTranslationCache(translate);
+    cache.request('note:r1', { text: 'Hola', target: 'en' });
+    cache.request('note:r1', { text: 'Hola, estoy en la puerta 5', target: 'en' }); // edited before the first came back
+    answers.get('Hola, estoy en la puerta 5')!(ok("Hi, I'm at gate 5"));
+    await flush();
+    answers.get('Hola')!(ok('Hi'));
+    await flush();
+    expect(cache.get('note:r1', 'en')).toEqual({ status: 'done', result: ok("Hi, I'm at gate 5") });
+
+    // The other order: the old answer (or failure) lands first and is ignored; the new one still applies.
+    cache.request('note:r2', { text: 'Uno', target: 'en' });
+    cache.request('note:r2', { text: 'Dos', target: 'en' });
+    answers.get('Uno')!(ok('One'));
+    await flush();
+    expect(cache.get('note:r2', 'en')).toEqual({ status: 'loading' });
+    cache.request('note:r3', { text: 'Tres', target: 'en' });
+    cache.request('note:r3', { text: 'Cuatro', target: 'en' });
+    failures.get('Tres')!(new Error('offline'));
+    await flush();
+    expect(cache.get('note:r3', 'en')).toEqual({ status: 'loading' });
+    answers.get('Dos')!(ok('Two'));
+    answers.get('Cuatro')!(ok('Four'));
+    await flush();
+    expect(cache.get('note:r2', 'en')).toEqual({ status: 'done', result: ok('Two') });
+    expect(cache.get('note:r3', 'en')).toEqual({ status: 'done', result: ok('Four') });
   });
 
   it('only notifies the listeners of the key that changed', async () => {
@@ -224,6 +255,15 @@ describe('what a bubble shows', () => {
     expect(viewOf(done({ text: incoming.text, detectedSource: null, unavailable: true }), incoming, 'hi')).toEqual({ kind: 'unavailable' });
     // The provider found it was already in the reader's language.
     expect(viewOf(done({ text: 'Hola', detectedSource: 'es' }), { ...incoming, text: 'Hola', lang: undefined }, 'es')).toEqual({ kind: 'original' });
+  });
+});
+
+describe('shownText', () => {
+  it('shows the translation, its start with "…", or the original when switched or untranslated', () => {
+    expect(shownText({ kind: 'translated', text: 'Hi', source: 'es', partial: false }, 'Hola', false)).toBe('Hi');
+    expect(shownText({ kind: 'translated', text: 'Hi', source: 'es', partial: true }, 'Hola', false)).toBe('Hi…');
+    expect(shownText({ kind: 'translated', text: 'Hi', source: 'es', partial: false }, 'Hola', true)).toBe('Hola');
+    expect(shownText({ kind: 'loading' }, 'Hola', false)).toBe('Hola');
   });
 });
 

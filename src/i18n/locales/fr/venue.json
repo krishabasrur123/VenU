@@ -18,6 +18,9 @@
     "assistTitle": "Besoin d’aide ?",
     "assistBody": "Contactez un bénévole",
     "assistLabel": "Besoin d’aide ? Contactez un bénévole",
+    "assistTitleVolunteer": "Envie d’aider ?",
+    "assistBodyVolunteer": "Voir les demandes près de vous",
+    "assistLabelVolunteer": "Envie d’aider ? Voir les demandes près de vous",
     "empty": "Aucun site ne correspond à « {{query}} ». Essayez une ville, comme Inglewood.",
     "cardHint": "Ouvre le plan et les services"
   },
@@ -351,9 +354,9 @@
     "imHereHint": "Utilise cet endroit comme votre position quand vous demandez de l’aide",
     "isHere": "Votre position",
     "reports": "Signalements",
-    "results_one": "{{number}} résultat",
-    "results_many": "{{number}} de résultats",
-    "results_other": "{{number}} résultats",
+    "reportCount_one": "{{number}} signalement",
+    "reportCount_many": "{{number}} de signalements",
+    "reportCount_other": "{{number}} signalements",
     "noReports": "Aucun signalement pour l’instant. Soyez le premier à partager ce que vous avez vu.",
     "addReport": "Ajouter un signalement"
   },
@@ -383,7 +386,12 @@
     "authorFallback": "Visiteur VenU",
     "submitted": "Envoyé le {{date}}",
     "originalLanguage": "Langue d’origine : {{language}}",
-    "noBody": "Aucun détail ajouté."
+    "noBody": "Aucun détail ajouté.",
+    "delete": "Supprimer mon signalement",
+    "deleteConfirm": "Supprimer ce signalement ? Les visiteurs de ce site ne le verront plus.",
+    "deleteKeep": "Le garder",
+    "deleteYes": "Supprimer",
+    "deleteFailed": "Impossible de supprimer le signalement. {{reason}}"
   },
   "form": {
     "title": "Nouveau signalement",

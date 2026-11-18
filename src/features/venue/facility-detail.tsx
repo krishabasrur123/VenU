@@ -136,7 +136,7 @@ export function FacilityDetail() {
 
         <View style={styles.reportsHead}>
           <Text style={venueText.title} accessibilityRole="header">{t('facility.reports')}</Text>
-          <Text style={venueText.caption}>{reports ? t('facility.results', { count: reports.length, number: formatNumber(reports.length, undefined, languageOf(t)) }) : ''}</Text>
+          <Text style={venueText.caption}>{reports ? t('facility.reportCount', { count: reports.length, number: formatNumber(reports.length, undefined, languageOf(t)) }) : ''}</Text>
         </View>
         <View style={styles.reports}>
           {reports?.map(r => (

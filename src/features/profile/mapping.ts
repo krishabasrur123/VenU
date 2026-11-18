@@ -1,5 +1,8 @@
+import { parseNotificationPrefs } from '@/features/settings/notification-prefs';
+import { DEFAULT_AVAILABILITY, parseAvailability } from '@/features/volunteer/availability';
+
 import { PRIVACY_VERSION } from './privacy';
-import type { Profile, ProfileDraft } from './types';
+import type { Profile, ProfileDraft, ProfileSettings } from './types';
 
 /** Row shape of `public.profiles` (see supabase/migrations). */
 export interface ProfileRow {
@@ -19,12 +22,27 @@ export interface ProfileRow {
   gender: Profile['gender'];
   age_band: Profile['ageBand'];
   verified: boolean;
+  /** 'free' | 'busy' | 'off'. Rows saved on the device before it existed have none. */
+  availability?: Profile['availability'];
+  /** Partial or missing on old device rows; missing keys mean on. */
+  notification_prefs?: Partial<Profile['notificationPrefs']>;
   privacy_version: string;
   privacy_accepted_at: string;
 }
 
-/** Columns a user may write. `id`, `verified` and timestamps are left to the DB. */
-export type ProfileWrite = Omit<ProfileRow, 'id' | 'verified'>;
+/**
+ * Columns the profile form writes. `id`, `verified` and timestamps are left to the DB; the settings
+ * columns are written on their own (settingsToWrite).
+ */
+export type ProfileWrite = Omit<ProfileRow, 'id' | 'verified' | 'availability' | 'notification_prefs'>;
+
+/** The settings columns to write, only for what changed: settingsToWrite({ availability: 'busy' }) → { availability: 'busy' }. */
+export function settingsToWrite(s: Partial<ProfileSettings>): Pick<ProfileRow, 'availability' | 'notification_prefs'> {
+  return {
+    ...(s.availability ? { availability: s.availability } : {}),
+    ...(s.notificationPrefs ? { notification_prefs: { ...s.notificationPrefs } } : {}),
+  };
+}
 
 export function rowToProfile(r: ProfileRow): Profile {
   return {
@@ -43,7 +61,9 @@ export function rowToProfile(r: ProfileRow): Profile {
     trainings: r.trainings ?? [],
     gender: r.gender,
     ageBand: r.age_band,
-    verified: r.verified,
+    verified: r.verified === true,
+    availability: parseAvailability(r.availability) ?? DEFAULT_AVAILABILITY,
+    notificationPrefs: parseNotificationPrefs(r.notification_prefs),
     privacyVersion: r.privacy_version,
     privacyAcceptedAt: r.privacy_accepted_at,
   };

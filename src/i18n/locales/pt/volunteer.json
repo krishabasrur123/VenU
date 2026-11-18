@@ -28,14 +28,14 @@
     "languageLabel": "Ajuda em {{language}}. Mudar idioma",
     "locationLabel": "Sua localização: {{spot}}, {{venue}}",
     "near": "Perto de {{place}}",
-    "locationUnset": "Sua localização: ainda não escolhida, {{venue}}",
+    "locationUnset": "Sua localização: {{venue}}, nenhum lugar escolhido ainda",
     "whereAreYou": "Onde você está?",
     "tapToChoose": "Toque para escolher um lugar",
     "locationHint": "Abre a lista de lugares de {{venue}}",
     "question": "Com o que você precisa de ajuda?",
     "notePlaceholder": "ex.: Preciso de ajuda perto da rampa 2",
     "photoOff": "O acesso às fotos está desativado. Ative em Ajustes.",
-    "pickOne": "Escolha pelo menos um tipo de ajuda.",
+    "pickOne": "Escolha o tipo de ajuda de que você precisa.",
     "send": "Enviar pedido"
   },
   "where": {
@@ -49,9 +49,11 @@
   "note": {
     "label": "Adicionar nota <muted>(opcional)</muted>",
     "labelPlain": "Adicionar nota (opcional)",
+    "speak": "Ditar sua nota",
     "placeholder": "Digite aqui",
     "attached": "Foto anexada",
-    "remove": "Remover foto"
+    "remove": "Remover foto",
+    "count": "{{used}} de {{max}} caracteres"
   },
   "emergency": {
     "title": "Emergência?",
@@ -69,15 +71,16 @@
   "notice": {
     "searchFailed": "Não conseguimos falar com um voluntário. Verifique sua conexão e tente de novo.",
     "thanks": "Obrigado! Sua avaliação ajuda {{name}} e a equipe LA28.",
-    "volunteerLeft": "Seu voluntário precisou sair. Estamos procurando outra pessoa."
+    "volunteerLeft": "Seu voluntário precisou sair. Estamos procurando outra pessoa.",
+    "volunteerEnded": "{{name}} encerrou a conversa. Ainda precisa de ajuda? Toque em Pular e envie um novo pedido."
   },
   "searching": {
     "title": "Procurando um voluntário",
     "subtitle": "Geralmente menos de um minuto · Fique onde está",
     "askedFor": "Você pediu",
     "notFoundTitle": "Nenhum voluntário está livre agora",
-    "notFoundBody": "Seu pedido foi guardado. Continue procurando ou ligue para a equipe do local para pedir ajuda.",
-    "keepSearching": "Continuar procurando"
+    "notFoundBody": "Ninguém estava livre, então seu pedido foi retirado. Procure de novo ou ligue para a equipe do local para pedir ajuda.",
+    "keepSearching": "Procurar de novo"
   },
   "match": {
     "title": "Voluntário encontrado",
@@ -133,7 +136,9 @@
     "stickers": "Figurinhas",
     "stickersSoon": "Figurinhas em breve.",
     "record": "Ditar uma mensagem",
-    "emptyVolunteer": "Diga oi para {{name}} e avise que você está a caminho."
+    "emptyVolunteer": "Diga oi para {{name}} e avise que você está a caminho.",
+    "yourRequest": "Seu pedido",
+    "requestFrom": "Pedido de {{name}}"
   },
   "translation": {
     "translatedFrom": "Traduzido do {{language}}",
@@ -156,7 +161,7 @@
   },
   "bubble": {
     "mine": "Você, {{time}}: {{text}}",
-    "listen": "ouvir",
+    "listen": "Ouvir",
     "listenLabel": "Ouvir esta mensagem",
     "from": "{{name}}, {{time}}: {{text}}",
     "fromTranslated": "{{name}}, {{time}}: {{text}} (traduzido do {{language}})",
@@ -220,6 +225,8 @@
     "meta": "A {{distance}} · há {{minutes}} min · {{language}}",
     "accept": "Aceitar",
     "acceptSoon": "Você poderá aceitar pedidos quando a conexão for ativada.",
+    "waitTitle": "Aguardando verificação",
+    "waitBody": "A LA28 está analisando seus dados. Você já pode ver os pedidos e poderá aceitá-los quando sua conta for verificada.",
     "empty": "Ninguém por perto precisa de ajuda agora. Novos pedidos aparecem aqui.",
     "metaLive": "há {{minutes}} min · {{language}}"
   },
@@ -229,14 +236,23 @@
     "end": "Encerrar conversa",
     "endHint": "Marca a ajuda como concluída para você e para {{name}}",
     "confirmEnd": "Encerrar a conversa com {{name}}? Isso marca a ajuda como concluída.",
-    "yesEnd": "Sim, encerrar"
+    "yesEnd": "Sim, encerrar",
+    "handBack": "Não posso ir",
+    "handBackHint": "Devolve o pedido para que outro voluntário ajude {{name}}",
+    "confirmHandBack": "Não pode ir? Vamos encontrar outro voluntário para {{name}}.",
+    "keepHelping": "Continuar ajudando",
+    "yesHandBack": "Devolver",
+    "handBackFailed": "Não foi possível devolver o pedido. Verifique sua conexão e tente de novo."
   },
   "desk": {
     "taken": "Outra pessoa já aceitou este pedido.",
     "acceptFailed": "Não foi possível aceitar o pedido. Verifique sua conexão e tente de novo.",
+    "notVerified": "Você poderá aceitar pedidos quando a LA28 verificar sua conta.",
     "cancelled": "{{name}} cancelou o pedido.",
+    "closed": "O pedido de {{name}} foi encerrado.",
     "done": "{{name}} marcou a ajuda como concluída. Obrigado!",
     "ended": "Conversa encerrada. Obrigado por ajudar {{name}}!",
+    "handedBack": "Você devolveu o pedido de {{name}}. Outro voluntário pode assumi-lo.",
     "withdrawn": "Este pedido foi retirado."
   },
   "home": {
@@ -253,16 +269,17 @@
       "off": "Ausente"
     },
     "statusLine": {
-      "free": "Você vai receber pedidos por perto. Numa pausa, mude para Ocupado ou Ausente e os pedidos vão pular você.",
+      "free": "Você vai receber pedidos por perto. Mude para Ocupado ou Ausente e os pedidos vão pular você.",
       "busy": "Você está ocupado agora. Novos pedidos pulam você até você voltar para Livre.",
-      "off": "Você está fora do turno. Os pedidos pulam você até você mudar para Livre."
+      "off": "Você está fora do turno. Os pedidos pulam você até você mudar para Livre.",
+      "helping": "Você está ajudando {{name}}. Novos pedidos esperam até você terminar."
     },
     "helpTitle": "Como você pode ajudar",
     "editLabel": "Editar como você pode ajudar",
     "languages": "Idiomas fluentes",
     "training": "Treinamento",
     "noTraining": "Nenhum treinamento adicionado ainda",
-    "paused": "Os pedidos ficam pausados enquanto você descansa. Mude para Livre para ver quem precisa de ajuda por perto."
+    "paused": "Os pedidos ficam pausados enquanto você está ocupado ou fora do turno. Mude para Livre para ver quem precisa de ajuda por perto."
   },
   "mock": {
     "greeting": "Oi, {{name}}! Aqui é {{volunteer}}, da equipe de voluntários do LA28. Estou indo até você agora. Ponto de encontro: {{spot}}.",

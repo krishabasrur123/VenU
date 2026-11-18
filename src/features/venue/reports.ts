@@ -1,15 +1,13 @@
 /**
  * Facility reports: what visitors found at a gate, restroom or stand ("Gate 2 ramp is cracked").
  *
- * Everything the screens need goes through `ReportStore`, so the in-memory mock can be swapped for
- * Supabase without touching a screen: implement `ReportStore` against a table such as
- *
- *   facility_reports(id uuid pk, venue_id text, facility_id text, author_id uuid references profiles,
- *                    author_name text, title text, topic text, body text, created_at timestamptz)
- *
- * and call `setReportStore(createSupabaseReportStore(client))` at startup.
- * Until then reports live on the device: the seed reports plus the ones this device submitted,
- * which are kept in AsyncStorage under one key so they survive a reload.
+ * Everything the screens need goes through `ReportStore`, which depends on the backend mode:
+ *   supabase / mock   public.facility_reports (createLiveReportStore over report-db.ts), so every
+ *                     signed-in visitor at the venue sees them; plus the sample reports below.
+ *   local             on the device: the sample reports plus the ones this device submitted, kept in
+ *                     AsyncStorage under one key so they survive a reload (createPersistentReportStore).
+ * Reports saved on a device before the database existed stay there (local mode shows them); they
+ * aren't uploaded.
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
@@ -17,8 +15,10 @@ import { useEffect, useState } from 'react';
 import type { Option } from '@/features/profile/options';
 import i18n from '@/i18n';
 import { formatNumber } from '@/i18n/format';
+import { supabase } from '@/lib/supabase';
 
 import { venueT, type VenueT } from './labels';
+import { isUuid, rowToReport, supabaseReportDb, type ReportDb } from './report-db';
 
 export type ReportTopic = 'accessibility' | 'directions' | 'facility_condition' | 'security' | 'crowds' | 'other';
 
@@ -48,6 +48,8 @@ export interface FacilityReport {
   language?: string;
   /** ISO timestamp. */
   createdAt: string;
+  /** The signed-in user wrote it, so they may delete it (database reports only). */
+  mine?: boolean;
 }
 
 /** What the "Add report" form edits. */
@@ -95,6 +97,8 @@ export interface ReportStore {
   get(id: string): Promise<FacilityReport | null>;
   /** Validates, saves and returns the report. Throws `ReportValidationError` on a bad draft. */
   add(report: NewReport): Promise<FacilityReport>;
+  /** Deletes one of your own reports (`mine`). Optional: device and sample reports can't be deleted. */
+  remove?(id: string): Promise<void>;
 }
 
 export class ReportValidationError extends Error {
@@ -194,6 +198,45 @@ export function createPersistentReportStore(
   };
 }
 
+/**
+ * Reports in the database (`db`), with `seed` (the sample reports) mixed in, newest first. The
+ * author's name comes from their profile on the server, so NewReport.authorName isn't sent.
+ * Sample reports are read-only and never sent to the database.
+ */
+export function createLiveReportStore(db: ReportDb, seed: FacilityReport[] = []): ReportStore {
+  const samples = createMemoryReportStore(seed);
+  return {
+    async list(venueId, facilityId) {
+      // Offline (or signed out): the sample reports still show.
+      const [rows, fromSeed] = await Promise.all([db.list(venueId, facilityId).catch(() => []), samples.list(venueId, facilityId)]);
+      return [...rows.map(rowToReport), ...fromSeed].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    },
+    async get(id) {
+      const sample = await samples.get(id);
+      if (sample) return sample;
+      if (!isUuid(id)) return null; // a hand-typed or stale link
+      const row = await db.get(id);
+      return row ? rowToReport(row) : null;
+    },
+    async add({ venueId, facilityId, language, draft }) {
+      const errors = validateReport(draft);
+      if (Object.keys(errors).length) throw new ReportValidationError(errors);
+      const row = await db.insert({
+        venue_id: venueId,
+        facility_id: facilityId,
+        title: draft.title.trim(),
+        topic: draft.topic!,
+        body: draft.body.trim(),
+        language: language ?? null,
+      });
+      return rowToReport(row);
+    },
+    async remove(id) {
+      if (isUuid(id)) await db.remove(id);
+    },
+  };
+}
+
 const RAMP_REPORT =
   'I arrived around 45 minutes before kickoff from the east side of the stadium. The ramp was a little hard to find from Entry 11, so give yourself extra time.\n\n' +
   'As a wheelchair user I found it long but steady. Take it slowly near the top when the crowd builds up.';
@@ -224,7 +267,9 @@ export const SEED_REPORTS: FacilityReport[] = [
   },
 ];
 
-let store: ReportStore = createPersistentReportStore(AsyncStorage, SEED_REPORTS);
+let store: ReportStore = supabase
+  ? createLiveReportStore(supabaseReportDb(supabase), SEED_REPORTS)
+  : createPersistentReportStore(AsyncStorage, SEED_REPORTS);
 const listeners = new Set<() => void>();
 
 /** The seam for a real backend: swap the store once at startup. */
@@ -244,6 +289,12 @@ export async function submitReport(report: NewReport): Promise<FacilityReport> {
   return saved;
 }
 
+/** Deletes one of your own reports through the current store and refreshes every screen showing it. */
+export async function deleteReport(id: string): Promise<void> {
+  await store.remove?.(id);
+  listeners.forEach(l => l());
+}
+
 function useStoreVersion(): number {
   const [version, setVersion] = useState(0);
   useEffect(() => {
@@ -261,7 +312,11 @@ export function useFacilityReports(venueId: string, facilityId: string): Facilit
   const key = `${venueId}/${facilityId}/${version}`;
   useEffect(() => {
     let live = true;
-    store.list(venueId, facilityId).then(reports => { if (live) setState({ key, reports }); });
+    store.list(venueId, facilityId).then(
+      reports => { if (live) setState({ key, reports }); },
+      // Offline or signed out: an empty list rather than loading forever. The next change retries.
+      () => { if (live) setState({ key, reports: [] }); },
+    );
     return () => { live = false; };
   }, [venueId, facilityId, key]);
   return state && state.key.startsWith(`${venueId}/${facilityId}/`) ? state.reports : null;
@@ -288,7 +343,10 @@ export function useReport(id: string | undefined): FacilityReport | null | undef
   useEffect(() => {
     if (!id) return;
     let live = true;
-    store.get(id).then(report => { if (live) setState({ id, report }); });
+    store.get(id).then(
+      report => { if (live) setState({ id, report }); },
+      () => { if (live) setState({ id, report: null }); },
+    );
     return () => { live = false; };
   }, [id, version]);
   if (!id) return null;

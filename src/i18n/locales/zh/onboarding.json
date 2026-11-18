@@ -7,8 +7,9 @@
     "roleQuestion": "访客还是志愿者？",
     "signIn": "登录",
     "socialTitle": "或使用以下方式注册",
-    "socialSoon": "Google、Apple 和 Facebook 登录即将推出。",
-    "languageTitle": "应用语言"
+    "languageTitle": "应用语言",
+    "accountDeleted": "你的账户已删除。你可以随时重新创建。",
+    "signInKept": "你的资料和照片已删除。你的登录信息（电子邮件）暂时仍然存在，请联系 VenU 团队删除。"
   },
   "auth": {
     "languagePill": "应用语言：{{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "还没有账户？",
     "signUp": "注册",
     "forgot": "忘记密码？",
-    "forgotSoon": "密码重置功能即将推出。",
     "confirmNotice": "请查收电子邮件确认账户，然后登录。",
+    "resetNotice": "密码已更改。请用新密码登录。",
     "submit": "登录"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "同意条款与条件",
     "submit": "创建账户"
   },
+  "forgot": {
+    "title": "忘记密码",
+    "intro": "输入你的用户名或电子邮件，我们会发送一个链接，让你设置新密码。",
+    "identifier": "用户名或电子邮件",
+    "submit": "发送链接",
+    "resend": "重新发送",
+    "sent": "如果该用户名或电子邮件有对应的账户，我们已发送链接。请查收邮件。",
+    "useEmail": "暂时无法通过用户名重置。请改为输入电子邮件。",
+    "remembered": "想起来了？"
+  },
+  "reset": {
+    "title": "新密码",
+    "intro": "为你的账户设置一个新密码。",
+    "password": "新密码",
+    "passwordPlaceholder": "输入新密码",
+    "confirm": "确认密码",
+    "confirmPlaceholder": "再输入一次",
+    "submit": "保存密码",
+    "checking": "正在检查链接…",
+    "badLink": "该链接无效。请重新申请。",
+    "noLink": "请通过重置密码邮件中的链接打开此页面。",
+    "newLink": "发送新链接"
+  },
+  "social": {
+    "notEnabled": "{{provider}} 登录尚未开通。请改用电子邮件创建账户。",
+    "notEnabledAny": "该登录方式尚未开通。请改用电子邮件创建账户。",
+    "cancelled": "登录已取消。请重试，或使用电子邮件。",
+    "failed": "无法使用该账户登录。请重试，或使用电子邮件。",
+    "failedTitle": "无法登录",
+    "signingIn": "正在登录…"
+  },
   "validate": {
     "email": "请输入有效的电子邮件。",
     "identifier": "请输入用户名或电子邮件。",
     "usernameLength": "用户名需要 {{min}}–{{max}} 个字符。",
     "usernameChars": "用户名只能包含英文字母、数字、_ 和 .",
     "passwordLength": "密码至少需要 {{min}} 个字符。",
+    "passwordMatch": "两次输入的密码不一致。",
     "password": "请输入密码。",
     "terms": "请同意条款与条件后继续。"
   },

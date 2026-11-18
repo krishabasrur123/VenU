@@ -3,9 +3,9 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { PHOTO_MAX_BYTES, PHOTO_TOO_BIG, PHOTO_TYPES, PHOTO_WRONG_TYPE } from '@/constants/photo';
 import { codedError } from '@/lib/errors';
 
-import { draftToWrite, rowToProfile, type ProfileRow } from './mapping';
+import { draftToWrite, rowToProfile, settingsToWrite, type ProfileRow } from './mapping';
 import { PRIVACY_VERSION } from './privacy';
-import type { Profile, ProfileDraft } from './types';
+import type { Profile, ProfileDraft, ProfileSettings } from './types';
 
 export interface PickedImage {
   uri: string;
@@ -31,7 +31,7 @@ export function checkPhoto(image: Pick<PickedImage, 'mimeType' | 'fileSize'>): s
  * HTTP 4xx. Transport failures come back as errors too, but with `code: ""` and status 0; a 5xx
  * is also ambiguous (the write may have happened), so neither counts.
  */
-function isServerRejection(e: unknown): boolean {
+export function isServerRejection(e: unknown): boolean {
   const { code, status } = (e ?? {}) as { code?: unknown; status?: unknown };
   if (typeof code === 'string' && code.length > 0) return true;
   return typeof status === 'number' && status >= 400 && status < 500;
@@ -51,6 +51,11 @@ export interface ProfileStore {
    * pick never records agreement to a newer policy, e.g. setAppLanguage('u1', 'ko').
    */
   setAppLanguage(userId: string, code: string): Promise<Profile>;
+  /**
+   * Changes only the given settings of an existing profile (the form never writes them), e.g.
+   * saveSettings('u1', { availability: 'busy' }). Resolves with the profile as stored.
+   */
+  saveSettings(userId: string, settings: Partial<ProfileSettings>): Promise<Profile>;
   /** Stores the picked image and returns the value to keep in `avatarPath`. */
   uploadAvatar(userId: string, image: PickedImage): Promise<string>;
   removeAvatar(path: string): Promise<void>;
@@ -106,20 +111,28 @@ export function createLocalStore(storage: KeyValueStorage): ProfileStore {
       return null;
     },
     async save(userId, draft, existing) {
-      // The stored app language, read now (not from `existing`, which a pill save may have outdated).
-      let storedLanguage: string | undefined;
+      // The stored app language and settings, read now (not from `existing`, which a pill or settings
+      // save may have outdated).
+      let stored: ProfileRow | null = null;
       if (existing) {
         try {
-          const stored: unknown = JSON.parse((await storage.getItem(localKey(userId))) ?? 'null');
-          if (isProfileRowShape(stored)) storedLanguage = stored.app_language;
+          const parsed: unknown = JSON.parse((await storage.getItem(localKey(userId))) ?? 'null');
+          if (isProfileRowShape(parsed)) stored = parsed;
         } catch {}
       }
       const row: ProfileRow = {
         id: userId,
         verified: existing?.verified ?? false,
         ...draftToWrite(draft, consentTime(existing)),
-        // Role is fixed once the profile exists, same as the DB rule.
-        ...(existing ? { role: existing.role, app_language: storedLanguage ?? existing.appLanguage } : {}),
+        // Role is fixed once the profile exists, same as the DB rule. The form never writes the settings.
+        ...(existing
+          ? {
+              role: existing.role,
+              app_language: stored?.app_language ?? existing.appLanguage,
+              availability: stored?.availability ?? existing.availability,
+              notification_prefs: stored?.notification_prefs ?? existing.notificationPrefs,
+            }
+          : {}),
       };
       try {
         await storage.setItem(localKey(userId), JSON.stringify(row));
@@ -138,6 +151,17 @@ export function createLocalStore(storage: KeyValueStorage): ProfileStore {
       } catch {}
       if (!isProfileRowShape(row)) throw new Error('No profile to update');
       const next: ProfileRow = { ...row, app_language: code };
+      await storage.setItem(localKey(userId), JSON.stringify(next));
+      return rowToProfile(next);
+    },
+    async saveSettings(userId, settings) {
+      const raw = await storage.getItem(localKey(userId));
+      let row: unknown = null;
+      try {
+        row = raw ? JSON.parse(raw) : null;
+      } catch {}
+      if (!isProfileRowShape(row)) throw new Error('No profile to update');
+      const next: ProfileRow = { ...row, ...settingsToWrite(settings) };
       await storage.setItem(localKey(userId), JSON.stringify(next));
       return rowToProfile(next);
     },
@@ -199,6 +223,11 @@ export function createSupabaseStore(client: SupabaseClient, bucket: string): Pro
     },
     async setAppLanguage(userId, code) {
       const { data, error, status } = await table().update({ app_language: code }).eq('id', userId).select('*').single<ProfileRow>();
+      if (error) throw Object.assign(error, { status });
+      return rowToProfile(data);
+    },
+    async saveSettings(userId, settings) {
+      const { data, error, status } = await table().update(settingsToWrite(settings)).eq('id', userId).select('*').single<ProfileRow>();
       if (error) throw Object.assign(error, { status });
       return rowToProfile(data);
     },

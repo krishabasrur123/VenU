@@ -2,9 +2,9 @@ import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals
 
 import i18n from '@/i18n';
 
-import { createMockBackend, mockVolunteerFor } from '../backend';
+import { createMockBackend, mockVolunteerFor, type VolunteerBackend } from '../backend';
 import { createRequestStore, INITIAL_STATE, parseSaved, reduce, SEARCH_TIMEOUT_MS, type KeyValueStorage, type NewRequest } from '../request-store';
-import type { HelpRequest, MeetPoint, RequestState } from '../types';
+import type { HelpRequest, Match, MeetPoint, RequestState } from '../types';
 import { formatClock, formatDayTime, formatDistance, needsSeparator } from '../format';
 
 // The app's store (created when the module loads) saves to AsyncStorage; tests pass their own.
@@ -436,6 +436,7 @@ describe('no volunteer free in time', () => {
 
   it('gives up after SEARCH_TIMEOUT_MS, keeping the request and draft, and withdraws it', async () => {
     const backend = createMockBackend(TIMING);
+    const withdrawRequest = jest.spyOn(backend, 'withdrawRequest' as never) as unknown as jest.Mock;
     const cancelRequest = jest.spyOn(backend, 'cancelRequest');
     const store = createRequestStore(backend);
     store.setUser('rosa');
@@ -453,7 +454,9 @@ describe('no volunteer free in time', () => {
     expect(state.request?.language).toBe('de');
     expect(state.draft).toEqual(draft);
     expect(settled).toBe(true);
-    expect(cancelRequest).toHaveBeenCalledWith(state.request!.id);
+    // Withdrawn only if still open, never cancelled outright (that would call off a volunteer who just accepted).
+    expect(withdrawRequest).toHaveBeenCalledWith(state.request!.id);
+    expect(cancelRequest).not.toHaveBeenCalled();
   });
 
   it('a match before the timeout stays matched', async () => {
@@ -488,6 +491,142 @@ describe('no volunteer free in time', () => {
     await advance(SEARCH_TIMEOUT_MS);
     store.cancel();
     expect(store.getState()).toEqual({ ...INITIAL_STATE, draft });
+  });
+
+  describe('the timer fires after a volunteer accepted (a locked phone)', () => {
+    const sam: Match = {
+      volunteer: { id: 'sam', name: 'Sam', firstName: 'Sam', possessive: 'their', languages: ['en'], rating: null, tags: [] },
+      language: 'en', etaMinutes: null, distanceFeet: null,
+    };
+
+    /** A service whose poll hasn't seen the Accept yet; `withdraw` answers the timer's withdraw. */
+    function lateBackend(withdraw: (id: string) => Promise<Match | null>) {
+      let resolveFind: ((m: Match) => void) | null = null;
+      let rejectFind: ((e: Error) => void) | null = null;
+      const backend: VolunteerBackend = {
+        ...createMockBackend(TIMING),
+        findVolunteer: (_request, signal) => new Promise<Match>((resolve, reject) => {
+          resolveFind = resolve;
+          rejectFind = reject;
+          signal.addEventListener('abort', () => reject(Object.assign(new Error('aborted'), { name: 'AbortError' })), { once: true });
+        }),
+        withdrawRequest: jest.fn(withdraw),
+        cancelRequest: jest.fn(async () => {}),
+        onMessage: jest.fn(() => () => {}),
+      };
+      return { backend, find: { resolve: (m: Match) => resolveFind?.(m), reject: (e: Error) => rejectFind?.(e) } };
+    }
+
+    it('shows the match, not "No volunteer is free", and never cancels the request', async () => {
+      const { backend } = lateBackend(async () => sam);
+      const store = createRequestStore(backend);
+      void store.sendRequest(rosaNeedsHelp);
+      await advance(SEARCH_TIMEOUT_MS);
+      expect(store.getState()).toMatchObject({ status: 'matched', match: { volunteer: { firstName: 'Sam' } } });
+      expect(backend.cancelRequest).not.toHaveBeenCalled();
+      expect(backend.onMessage).toHaveBeenCalledWith(store.getState().request!.id, expect.any(Function), undefined); // following the chat
+    });
+
+    it('keeps searching while the withdraw is on its way, and a match seen meanwhile wins', async () => {
+      let answer: (m: Match | null) => void = () => {};
+      const { backend, find } = lateBackend(() => new Promise(r => { answer = r; }));
+      const store = createRequestStore(backend);
+      void store.sendRequest(rosaNeedsHelp);
+      await advance(SEARCH_TIMEOUT_MS);
+      expect(store.getState().status).toBe('searching');
+      find.resolve(sam);
+      await advance(0);
+      expect(store.getState().status).toBe('matched');
+      answer(sam); // the withdraw's answer arrives after: nothing changes
+      await advance(0);
+      expect(store.getState().status).toBe('matched');
+      expect(backend.onMessage).toHaveBeenCalledTimes(1);
+    });
+
+    it('the search seeing the row it withdrew says nobody was free, not "couldn’t reach a volunteer"', async () => {
+      let answer: (m: Match | null) => void = () => {};
+      const { backend, find } = lateBackend(() => new Promise(r => { answer = r; }));
+      const store = createRequestStore(backend);
+      void store.sendRequest(rosaNeedsHelp);
+      await advance(SEARCH_TIMEOUT_MS);
+      find.reject(new Error('Request cancelled'));
+      await advance(0);
+      answer(null);
+      await advance(0);
+      expect(store.getState()).toMatchObject({ status: 'notFound', notice: null });
+    });
+
+    it('offline, the withdraw failing still says nobody was free', async () => {
+      const { backend } = lateBackend(async () => { throw new Error('offline'); });
+      const store = createRequestStore(backend);
+      void store.sendRequest(rosaNeedsHelp);
+      await advance(SEARCH_TIMEOUT_MS);
+      expect(store.getState().status).toBe('notFound');
+    });
+
+    it('cancelling while the withdraw is on its way goes back to the form and stays there', async () => {
+      let answer: (m: Match | null) => void = () => {};
+      const { backend } = lateBackend(() => new Promise(r => { answer = r; }));
+      const store = createRequestStore(backend);
+      void store.sendRequest(rosaNeedsHelp);
+      await advance(SEARCH_TIMEOUT_MS);
+      store.cancel();
+      answer(sam);
+      await advance(0);
+      expect(store.getState().status).toBe('idle');
+      expect(backend.cancelRequest).toHaveBeenCalledTimes(1);
+    });
+
+    it('after a restart, a search that ran out while closed lands on the match a volunteer made meanwhile', async () => {
+      const { backend } = lateBackend(async () => sam);
+      const storage = memoryStorage();
+      const request: HelpRequest = { ...rosaNeedsHelp, id: 'req-1', createdAt: Date.now() - SEARCH_TIMEOUT_MS - 1000 };
+      storage.data.set(KEY, JSON.stringify({ v: 1, owner: 'rosa', state: { ...INITIAL_STATE, status: 'searching', request }, since: request.createdAt }));
+      const store = createRequestStore(backend, { storage, key: KEY });
+      await store.setUser('rosa');
+      await advance(0);
+      expect(store.getState()).toMatchObject({ status: 'matched', match: { volunteer: { firstName: 'Sam' } } });
+      expect(backend.withdrawRequest).toHaveBeenCalledWith('req-1');
+      expect(backend.cancelRequest).not.toHaveBeenCalled();
+    });
+
+    /** A search saved before the app closed, whose wait has run out by the time it opens again. */
+    function expiredSave() {
+      const storage = memoryStorage();
+      const request: HelpRequest = { ...rosaNeedsHelp, id: 'req-1', createdAt: Date.now() - SEARCH_TIMEOUT_MS - 1000 };
+      storage.data.set(KEY, JSON.stringify({ v: 1, owner: 'rosa', state: { ...INITIAL_STATE, status: 'searching', request }, since: request.createdAt }));
+      return storage;
+    }
+
+    it('after a restart on a slow network, shows "No volunteer is free" at once while the withdraw is on its way', async () => {
+      let answer: (m: Match | null) => void = () => {};
+      const { backend } = lateBackend(() => new Promise(r => { answer = r; }));
+      const store = createRequestStore(backend, { storage: expiredSave(), key: KEY });
+      await store.setUser('rosa');
+      expect(store.isRestored()).toBe(true);
+      expect(store.getState().status).toBe('notFound');
+
+      answer(sam); // a volunteer had accepted it after all: that's the match
+      await advance(0);
+      expect(store.getState()).toMatchObject({ status: 'matched', match: { volunteer: { firstName: 'Sam' } } });
+      expect(backend.onMessage).toHaveBeenCalledWith('req-1', expect.any(Function), undefined);
+      expect(backend.cancelRequest).not.toHaveBeenCalled();
+    });
+
+    it('after a restart, a late match for a request the visitor already searched again for is called off', async () => {
+      let answer: (m: Match | null) => void = () => {};
+      const { backend } = lateBackend(() => new Promise(r => { answer = r; }));
+      const store = createRequestStore(backend, { storage: expiredSave(), key: KEY });
+      await store.setUser('rosa');
+      void store.keepSearching();
+      const again = store.getState().request!.id;
+      expect(again).not.toBe('req-1');
+
+      answer(sam);
+      await advance(0);
+      expect(store.getState()).toMatchObject({ status: 'searching', request: { id: again } });
+      expect(backend.cancelRequest).toHaveBeenCalledWith('req-1');
+    });
   });
 
   describe('after a restart', () => {

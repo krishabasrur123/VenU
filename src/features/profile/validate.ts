@@ -16,6 +16,16 @@ export type DraftErrors = Partial<Record<DraftField, string>>;
 export const FIRST_NAME_MAX = 40;
 export const NOTE_MAX = 200;
 
+/**
+ * The first name to prefill from a full name (Create Account's "Name", a social account's name): its
+ * first word, so setup never offers a surname to show to strangers.
+ *   'Lucia Vistest' → 'Lucia'   ·   '  Rosa  ' → 'Rosa'   ·   '' → ''
+ * Only a prefill: a name typed into the First name field is saved as typed ("Mary Ann").
+ */
+export function firstNameFrom(fullName: string): string {
+  return (fullName.trim().split(/\s+/)[0] ?? '').slice(0, FIRST_NAME_MAX);
+}
+
 /** Returns one message per invalid field (in the UI language); an empty object means the draft can be saved. */
 export function validateDraft(d: ProfileDraft): DraftErrors {
   const errors: DraftErrors = {};

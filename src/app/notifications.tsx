@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -6,32 +5,20 @@ import { FigmaIcon } from '@/components/icons/figma-icon';
 import { StepHeader } from '@/components/form-section';
 import { BackLink } from '@/components/top-bar';
 import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
-import {
-  loadNotificationPrefs,
-  NOTIFICATION_OPTIONS,
-  saveNotificationPrefs,
-  type NotificationKind,
-  type NotificationPrefs,
-} from '@/features/settings/notification-prefs';
+import { useProfile } from '@/features/profile/profile-context';
+import { NOTIFICATION_OPTIONS, type NotificationKind } from '@/features/settings/notification-prefs';
 import { useLayoutRtl, useT } from '@/i18n';
 
-/** Profile → Notifications: which alerts to get, saved on this device (no push yet). */
+/** Profile → Notifications: which alerts to get, saved on the profile (no push yet). */
 export default function NotificationsScreen() {
-  const [prefs, setPrefs] = useState<NotificationPrefs | null>(null);
+  const { profile, saveSettings } = useProfile();
+  const prefs = profile?.notificationPrefs ?? null;
   const t = useT('profile');
   const webRtl = useLayoutRtl() && Platform.OS === 'web';
 
-  useEffect(() => {
-    let live = true;
-    loadNotificationPrefs().then(p => live && setPrefs(p));
-    return () => { live = false; };
-  }, []);
-
   function toggle(kind: NotificationKind) {
     if (!prefs) return;
-    const next = { ...prefs, [kind]: !prefs[kind] };
-    setPrefs(next);
-    saveNotificationPrefs(next);
+    saveSettings({ notificationPrefs: { ...prefs, [kind]: !prefs[kind] } });
   }
 
   return (
@@ -43,8 +30,10 @@ export default function NotificationsScreen() {
         {prefs && (
           <View style={styles.card}>
             {NOTIFICATION_OPTIONS.map(({ kind }, i) => {
-              const label = t(`notifications.options.${kind}.label`);
-              const hint = t(`notifications.options.${kind}.hint`);
+              // A volunteer's "volunteer updates" are new requests near them, not a helper on the way.
+              const helper = kind === 'volunteer' && profile?.role === 'volunteer';
+              const label = helper ? t('notifications.options.volunteer.labelVolunteer') : t(`notifications.options.${kind}.label`);
+              const hint = helper ? t('notifications.options.volunteer.hintVolunteer') : t(`notifications.options.${kind}.hint`);
               return (
                 <View key={kind}>
                   {/* The whole row is the switch; the Switch itself only shows the state. */}

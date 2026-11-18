@@ -7,8 +7,9 @@
     "roleQuestion": "Visitante ou voluntário?",
     "signIn": "Entrar",
     "socialTitle": "OU cadastre-se com",
-    "socialSoon": "O login com Google, Apple e Facebook chega em breve.",
-    "languageTitle": "Idioma do app"
+    "languageTitle": "Idioma do app",
+    "accountDeleted": "Sua conta foi apagada. Você pode criar uma nova quando quiser.",
+    "signInKept": "Seu perfil e sua foto foram apagados. Seu login (e-mail) ainda existe por enquanto; peça à equipe do VenU para removê-lo."
   },
   "auth": {
     "languagePill": "Idioma do app: {{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "Não tem uma conta?",
     "signUp": "Cadastre-se",
     "forgot": "Esqueceu a senha?",
-    "forgotSoon": "A redefinição de senha chega em breve.",
     "confirmNotice": "Confira seu e-mail para confirmar a conta e depois entre.",
+    "resetNotice": "Senha alterada. Entre com sua nova senha.",
     "submit": "Entrar"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "Concordo com os Termos e Condições",
     "submit": "Criar conta"
   },
+  "forgot": {
+    "title": "Esqueci a senha",
+    "intro": "Digite seu usuário ou e-mail. Enviaremos um link para você escolher uma nova senha.",
+    "identifier": "Usuário ou e-mail",
+    "submit": "Enviar link",
+    "resend": "Enviar de novo",
+    "sent": "Se houver uma conta com esse usuário ou e-mail, enviamos um link para ela. Confira sua caixa de entrada.",
+    "useEmail": "Ainda não é possível redefinir pelo usuário. Digite seu e-mail.",
+    "remembered": "Lembrou?"
+  },
+  "reset": {
+    "title": "Nova senha",
+    "intro": "Escolha uma nova senha para sua conta.",
+    "password": "Nova senha",
+    "passwordPlaceholder": "Digite a nova senha",
+    "confirm": "Confirmar senha",
+    "confirmPlaceholder": "Digite de novo",
+    "submit": "Salvar senha",
+    "checking": "Verificando seu link…",
+    "badLink": "Esse link não funciona. Peça um novo.",
+    "noLink": "Abra esta página pelo link do e-mail de redefinição de senha.",
+    "newLink": "Enviar um novo link"
+  },
+  "social": {
+    "notEnabled": "O login com {{provider}} ainda não está configurado. Crie uma conta com seu e-mail.",
+    "notEnabledAny": "Essa opção de login ainda não está configurada. Crie uma conta com seu e-mail.",
+    "cancelled": "O login foi cancelado. Tente de novo ou use seu e-mail.",
+    "failed": "Não foi possível entrar com essa conta. Tente de novo ou use seu e-mail.",
+    "failedTitle": "Não foi possível entrar",
+    "signingIn": "Entrando…"
+  },
   "validate": {
     "email": "Digite um e-mail válido.",
     "identifier": "Digite seu nome de usuário ou e-mail.",
     "usernameLength": "Use de {{min}} a {{max}} caracteres no nome de usuário.",
     "usernameChars": "Use só letras, números, _ e . no nome de usuário.",
     "passwordLength": "Use pelo menos {{min}} caracteres na senha.",
+    "passwordMatch": "As senhas não coincidem.",
     "password": "Digite sua senha.",
     "terms": "Aceite os Termos e Condições para continuar."
   },

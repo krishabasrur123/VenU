@@ -7,8 +7,9 @@
     "roleQuestion": "Khách tham quan hay tình nguyện viên?",
     "signIn": "Đăng nhập",
     "socialTitle": "HOẶC đăng ký bằng",
-    "socialSoon": "Đăng nhập bằng Google, Apple và Facebook sẽ sớm ra mắt.",
-    "languageTitle": "Ngôn ngữ ứng dụng"
+    "languageTitle": "Ngôn ngữ ứng dụng",
+    "accountDeleted": "Tài khoản của bạn đã bị xóa. Bạn có thể tạo tài khoản mới bất cứ lúc nào.",
+    "signInKept": "Hồ sơ và ảnh của bạn đã bị xóa. Thông tin đăng nhập (email) vẫn còn; hãy nhờ nhóm VenU xóa giúp."
   },
   "auth": {
     "languagePill": "Ngôn ngữ ứng dụng: {{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "Chưa có tài khoản?",
     "signUp": "Đăng ký",
     "forgot": "Quên mật khẩu?",
-    "forgotSoon": "Tính năng đặt lại mật khẩu sẽ sớm ra mắt.",
     "confirmNotice": "Kiểm tra email để xác nhận tài khoản, rồi đăng nhập.",
+    "resetNotice": "Đã đổi mật khẩu. Hãy đăng nhập bằng mật khẩu mới.",
     "submit": "Đăng nhập"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "Đồng ý với Điều khoản & Điều kiện",
     "submit": "Tạo tài khoản"
   },
+  "forgot": {
+    "title": "Quên mật khẩu",
+    "intro": "Nhập tên người dùng hoặc email. Chúng tôi sẽ gửi email kèm liên kết để bạn chọn mật khẩu mới.",
+    "identifier": "Tên người dùng hoặc email",
+    "submit": "Gửi liên kết",
+    "resend": "Gửi lại",
+    "sent": "Nếu có tài khoản với tên người dùng hoặc email đó, chúng tôi đã gửi liên kết. Hãy kiểm tra hộp thư.",
+    "useEmail": "Chưa thể đặt lại bằng tên người dùng. Hãy nhập email.",
+    "remembered": "Đã nhớ ra?"
+  },
+  "reset": {
+    "title": "Mật khẩu mới",
+    "intro": "Chọn mật khẩu mới cho tài khoản của bạn.",
+    "password": "Mật khẩu mới",
+    "passwordPlaceholder": "Nhập mật khẩu mới",
+    "confirm": "Xác nhận mật khẩu",
+    "confirmPlaceholder": "Nhập lại lần nữa",
+    "submit": "Lưu mật khẩu",
+    "checking": "Đang kiểm tra liên kết…",
+    "badLink": "Liên kết này không dùng được. Hãy yêu cầu liên kết mới.",
+    "noLink": "Hãy mở trang này từ liên kết trong email đặt lại mật khẩu.",
+    "newLink": "Gửi liên kết mới"
+  },
+  "social": {
+    "notEnabled": "Đăng nhập bằng {{provider}} chưa được thiết lập. Hãy tạo tài khoản bằng email.",
+    "notEnabledAny": "Cách đăng nhập này chưa được thiết lập. Hãy tạo tài khoản bằng email.",
+    "cancelled": "Đã hủy đăng nhập. Hãy thử lại hoặc dùng email.",
+    "failed": "Không đăng nhập được bằng tài khoản đó. Hãy thử lại hoặc dùng email.",
+    "failedTitle": "Không đăng nhập được",
+    "signingIn": "Đang đăng nhập…"
+  },
   "validate": {
     "email": "Nhập email hợp lệ.",
     "identifier": "Nhập tên người dùng hoặc email.",
     "usernameLength": "Tên người dùng cần {{min}}–{{max}} ký tự.",
     "usernameChars": "Tên người dùng chỉ gồm chữ cái không dấu, số, _ và .",
     "passwordLength": "Mật khẩu cần ít nhất {{min}} ký tự.",
+    "passwordMatch": "Mật khẩu không khớp.",
     "password": "Nhập mật khẩu của bạn.",
     "terms": "Đồng ý với Điều khoản & Điều kiện để tiếp tục."
   },

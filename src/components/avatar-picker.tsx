@@ -6,6 +6,7 @@ import { Avatar } from '@/components/avatar';
 import { PHOTO_MAX_BYTES, PHOTO_TOO_BIG } from '@/constants/photo';
 import { Colors, Spacing, Type } from '@/constants/theme';
 import { checkPhoto, type PickedImage } from '@/features/profile/store';
+import type { Role } from '@/features/profile/types';
 import { languageOf, useT } from '@/i18n';
 import { formatNumber } from '@/i18n/format';
 import { isLocalMode } from '@/lib/auth';
@@ -18,6 +19,8 @@ interface AvatarPickerProps {
   onRemove: () => void;
   /** 'stacked': a large photo you can tap, actions centred under it (Figma "Choose a profile picture" 482:32439). */
   layout?: 'row' | 'stacked';
+  /** Whose photo: the hint says who it helps (a visitor's helper, or the visitors a volunteer meets). */
+  role: Role;
 }
 
 const PICK_OPTIONS: ImagePicker.ImagePickerOptions = {
@@ -32,7 +35,7 @@ const PICK_OPTIONS: ImagePicker.ImagePickerOptions = {
 };
 
 /** Photo + "Choose photo" / "Take photo" / "Remove" actions. Must be launched from a tap (web rule). */
-export function AvatarPicker({ name, uri, onPick, onRemove, layout = 'row' }: AvatarPickerProps) {
+export function AvatarPicker({ name, uri, onPick, onRemove, layout = 'row', role }: AvatarPickerProps) {
   const [error, setError] = useState<string | null>(null);
   const t = useT('common');
 
@@ -75,7 +78,7 @@ export function AvatarPicker({ name, uri, onPick, onRemove, layout = 'row' }: Av
           {uri && <Action label={t('photo.remove')} onPress={onRemove} muted />}
         </View>
         <Text style={[styles.hint, stacked && styles.hintStacked, error && styles.error]} accessibilityLiveRegion="polite">
-          {error ?? t('photo.hint')}
+          {error ?? (role === 'volunteer' ? t('photo.hintVolunteer') : t('photo.hint'))}
         </Text>
       </View>
     </View>

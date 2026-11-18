@@ -6,7 +6,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Button } from '@/components/button';
-import { Colors, Fonts, Radius, Spacing } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Spacing } from '@/constants/theme';
 import { languageOf, useT } from '@/i18n';
 import { formatNumber } from '@/i18n/format';
 
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   steps: { gap: Spacing.sm, marginTop: 2 },
   step: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.sm },
   badge: { width: 22, height: 22, borderRadius: 11, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.primary },
-  badgeText: { fontFamily: Fonts.textBold, fontSize: 12, lineHeight: 16, color: Colors.onPrimary },
+  badgeText: { ...Face.textBold, fontSize: 12, lineHeight: 16, color: Colors.onPrimary },
   stepText: { ...venueText.caption, flex: 1, paddingTop: 2 },
   end: { alignSelf: 'flex-start', minHeight: 36 },
 });

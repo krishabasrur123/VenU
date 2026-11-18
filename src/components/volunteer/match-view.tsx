@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Button } from '@/components/button';
 import { FigmaIcon, type FigmaIconName } from '@/components/icons/figma-icon';
-import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Spacing, Type } from '@/constants/theme';
 import { formatDistance } from '@/features/volunteer/format';
 import { meetSpotName, meetVenueName } from '@/features/volunteer/meet-point';
 import { volunteerRequests } from '@/features/volunteer/request-store';
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.success,
   },
   statusText: { flex: 1, gap: 4 },
-  statusTitle: { fontFamily: Fonts.displayMedium, fontSize: 16, lineHeight: 20, color: Colors.onPrimary },
+  statusTitle: { ...Face.displayMedium, fontSize: 16, lineHeight: 20, color: Colors.onPrimary },
   statusSub: { fontFamily: Fonts.text, fontSize: 14, lineHeight: 18, color: Colors.onPrimary },
   card: { gap: Spacing.lg, paddingTop: Spacing.sm },
   who: { flexDirection: 'row', alignItems: 'center', gap: 15, paddingHorizontal: Spacing.sm },

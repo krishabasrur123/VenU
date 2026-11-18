@@ -65,7 +65,7 @@ export default function EditProfileScreen() {
           await save(draft, avatar);
           leave(); // saved: nothing to ask about
         }}
-        header={<StepHeader title={t('edit.title')} subtitle={t('edit.subtitle')} />}
+        header={<StepHeader title={t('edit.title')} subtitle={profile.role === 'volunteer' ? t('edit.subtitleVolunteer') : t('edit.subtitle')} />}
       />
     </SafeAreaView>
   );

@@ -10,7 +10,7 @@ import i18n, { isUiLanguage } from '@/i18n';
 import { meetSpotName, meetVenueName } from './meet-point';
 import type { FeedbackTag, HelpTypeId, IncomingRequest, MeetPoint, ProblemKind, Volunteer } from './types';
 
-/** The six "What do you need help with?" cards, in grid order (labels: volunteer `helpTypes.<id>`). */
+/** The six "What do you need help with?" rows, in screen order (labels: volunteer `helpTypes.<id>`). */
 export const HELP_TYPES: HelpTypeId[] = ['physical', 'directions', 'language', 'quiet', 'lost', 'other'];
 
 /** Volunteers on shift near the visitor. The mock matcher picks the first who speaks the request's language. */

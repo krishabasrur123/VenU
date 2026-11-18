@@ -9,7 +9,7 @@ import { FlatList, Modal, Pressable, StyleSheet, Text, View } from 'react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FigmaIcon } from '@/components/icons/figma-icon';
-import { Colors, Fonts, Radius, Spacing, Type, WEB_COLUMN_MAX } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Spacing, Type, WEB_COLUMN_MAX } from '@/constants/theme';
 import { emptyFacilitiesMessage, FacilityIcon } from '@/features/venue/categories';
 import { CategoryChips } from '@/features/venue/category-chips';
 import { setCurrentSpot, useWhereAmI } from '@/features/venue/current';
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: Spacing.md },
   title: { fontFamily: Fonts.display, fontSize: 22, lineHeight: 28, color: Colors.text, flexShrink: 1 },
   doneTarget: { minHeight: 44, minWidth: 44, alignItems: 'flex-end', justifyContent: 'center' },
-  done: { fontFamily: Fonts.textSemiBold, fontSize: 16, color: Colors.primary },
+  done: { ...Face.textSemiBold, fontSize: 16, color: Colors.primary },
   subtitle: { ...Type.caption, color: Colors.text },
   // Starts on the start edge (right in Arabic); 44pt tall for touch.
   linkTarget: { alignSelf: 'flex-start', minHeight: 44, justifyContent: 'center', marginTop: -Spacing.sm },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   rowPressed: { backgroundColor: Colors.surfaceAlt },
   icon: { width: 32, alignItems: 'center' },
   unsureIcon: { height: 32, borderRadius: 16, borderWidth: 1.5, borderColor: Colors.ink, justifyContent: 'center' },
-  unsureMark: { fontFamily: Fonts.textBold, fontSize: 17, color: Colors.ink },
+  unsureMark: { ...Face.textBold, fontSize: 17, color: Colors.ink },
   rowText: { flex: 1, gap: 2 },
   rowTitle: { fontFamily: Fonts.display, fontSize: 17, lineHeight: 22, color: Colors.text },
   rowSub: { ...Type.caption, color: Colors.textMuted },

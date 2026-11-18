@@ -37,7 +37,7 @@ The provider is one secret, so switching is a one-line change: `TRANSLATE_PROVID
 
 ### Try a real provider on your machine
 
-Create `.env.server.local` in the repo root (git-ignored; only the mock backend reads it, never the app bundle):
+Put the keys in `.env.local` (or `.env.server.local`, which wins per key). Both are git-ignored; the mock backend reads only these three keys, on the server, and the app bundle never sees them:
 
 ```bash
 TRANSLATE_PROVIDER=anthropic
@@ -47,9 +47,20 @@ TRANSLATE_PROVIDER=deepl
 DEEPL_API_KEY=...:fx
 ```
 
-Then `npm run dev:mock -- --web`. The terminal says which provider it uses (`Translate: anthropic`); without the file it says `offline stub`. Restart after changing the file. Needs Node 22.18+ (it loads the function's `.ts` files directly).
+Then `npm run dev:mock -- --web`. The terminal says which provider it uses: `Translate: anthropic, keys from .env.local`, or `offline stub` without keys. Restart after changing a file. Needs Node 22.18+ (it loads the function's `.ts` files directly).
 
-Test hooks on the mock backend: `curl -X POST localhost:47330/__control -d '{"failTranslate":2}'` (next 2 calls fail), `-d '{"translateDelayMs":4000}'` (slow), `-d '{"clockOffsetMs":7200000}'` (two hours on, so a username held by an unconfirmed sign-up is free again).
+- `npm run dev:mock -- --stub-translate`: offline stub even with keys (tests, no network, no cost).
+- `npm run dev:mock -- --env-file ../VenU/.env.local`: keys from another file, e.g. the main checkout's when you work in a worktree.
+
+Test hooks on the mock backend (port 47330, or your `-- --mock-port N`): `curl -X POST localhost:47330/__control -d '{"failTranslate":2}'` (next 2 calls fail), `-d '{"translateDelayMs":4000}'` (slow), `-d '{"clockOffsetMs":7200000}'` (two hours on, so a username held by an unconfirmed sign-up is free again), `-d '{"verify":"sam_helps"}'` (verify a volunteer by username or email, as LA28 staff do in the dashboard; add `"verified":false` to undo).
+
+## Verified volunteers
+
+New volunteers start unverified: they finish setup and see requests, but Accept stays off under "Waiting for verification" until LA28 staff verify them. The app re-checks every 30 seconds while they wait.
+
+- Live: Supabase → Table Editor → `profiles` → set `verified` to `true` (or `update public.profiles set verified = true where id = '<user id>';` in the SQL editor). The app can't change it; a trigger keeps it as is.
+- Mock: the `verify` hook above. Mock sign-ups start unverified too; volunteers saved before this rule load as verified, so the demo's volunteer keeps working.
+- Local mode has no verification: its example requests never accept anyway.
 
 ### Deploy (Supabase project owner)
 
@@ -58,10 +69,11 @@ supabase login
 supabase link --project-ref <project-ref>
 supabase secrets set TRANSLATE_PROVIDER=anthropic ANTHROPIC_API_KEY=sk-ant-...
 #   or: supabase secrets set TRANSLATE_PROVIDER=deepl DEEPL_API_KEY=...
-supabase functions deploy translate
+supabase functions deploy translate --no-verify-jwt
 ```
 
-- Only signed-in users can call it (the function checks the token; the anon key and anonymous sign-ins get 401). If calls fail at the gateway with the new signing keys, redeploy with `--no-verify-jwt`: the function verifies the token itself.
+- Only signed-in users can call it: the function checks the token itself (the anon key and anonymous sign-ins get 401), so the gateway check stays off; it can reject valid sessions under the new JWT signing keys.
+- Dashboard instead of the CLI: Edge Functions → Deploy a new function → Via Editor, name it `translate`, add `index.ts`, `handler.ts`, `core.ts`, `anthropic.ts`, `deepl.ts` and `deno.json` from `supabase/functions/translate/`, and turn off "Verify JWT" (the function checks the token itself). Secrets go in Edge Functions → Secrets.
 - Limits: 2,000 characters per message, 16 messages and 8,000 characters per request.
 - Switch providers later with `supabase secrets set TRANSLATE_PROVIDER=deepl DEEPL_API_KEY=...`; no redeploy or app update needed.
 
@@ -74,6 +86,40 @@ supabase functions deploy translate
 
 DeepL can't translate into Tagalog, Vietnamese, Armenian or Persian (and some other app languages); those messages show the original with "Translation isn't available for Tagalog yet". Claude covers all of them.
 
+## End-to-end API test
+
+`scripts/e2e.mjs` runs the core flow as two users against any backend and prints PASS / FAIL / SKIP per step (exit code 1 on any FAIL): sign in (username through `username-sign-in`, or email), read profiles, open a help request, the volunteer finds and accepts it, both chat (Realtime delivery when the backend has it), translate, rate, file a facility report, close.
+
+```bash
+# the mock (start it first with npm run dev:mock); --signup creates two throwaway accounts
+node scripts/e2e.mjs --url http://localhost:47330 --anon mock-publishable-key --signup
+# a real project, with existing confirmed accounts (or set E2E_VISITOR / E2E_VOLUNTEER to keep passwords out of shell history)
+node scripts/e2e.mjs --url https://<ref>.supabase.co --anon <publishable key> --visitor rosa_m:<pw> --volunteer sam_helps:<pw>
+```
+
+- Safe on a shared project: it creates accounts only with `--signup`, writes only rows it created (one request, its messages and rating, the `--signup` profiles), deletes only the facility report it filed, and cancels its own request if a step fails. An unverified volunteer must be refused; the mock then verifies it through `/__control`, a real project needs `profiles.verified = true` set in the dashboard first.
+- SKIP means "not checkable here": no Realtime on the mock, `translate` not deployed (404) or without a provider (503), or a feature not built yet (TODO steps).
+- New feature, new step: add `{ id, needs, run }` to `STEPS` in `scripts/e2e.mjs`; `run` throws to FAIL or returns `{ skip: 'why' }`.
+
+## Accounts: password reset, social sign-in, delete account
+
+- **Forgot Password** (Sign In → Forgot Password?) takes a username or an email and always answers "If an account exists…". An email goes to Supabase Auth; a username goes to the `password-reset` Edge Function, which looks the email up server-side. The link opens `/reset-password`, which sets the new password and signs out everywhere.
+- **Social sign-in** (landing: Facebook, Google, Apple) returns to `/auth-callback`. A new account goes on to setup like an email sign-up, with no username (it signs in with the provider).
+- **Delete my data** (Profile) calls the `delete-account` Edge Function: photos, then the auth user; the database drops the profile and username, and keeps finished help requests for the other person (`supabase/migrations/20261118030000_account_deletion.sql`). Until it's deployed, the app deletes the profile and photo and says the sign-in remains.
+
+On the mock backend: the reset link prints in the terminal, social sign-in comes straight back as "Google User" etc., and `POST /__control` takes `{"disabledProviders":["apple"]}` or `{"missingFunctions":["delete-account"]}` to try the "isn't set up" and "not deployed" paths.
+
+### Set up on Supabase (project owner)
+
+```bash
+supabase db push                                         # 20261118030000_account_deletion.sql first
+supabase functions deploy delete-account                 # add --no-verify-jwt if the gateway rejects new signing keys
+supabase functions deploy password-reset --no-verify-jwt # callers are signed out
+```
+
+- Authentication → URL Configuration → Redirect URLs: add `<site>/reset-password`, `<site>/auth-callback`, `venu://reset-password`, `venu://auth-callback` (and `http://localhost:8081/**` for `npm run dev:supabase`).
+- Authentication → Sign In / Providers: turn on Google, Facebook and Apple with each provider's client ID and secret. Each provider's console needs the callback `https://<project-ref>.supabase.co/auth/v1/callback`.
+
 ## Scripts
 
 | Command | What it does |
@@ -83,7 +129,7 @@ DeepL can't translate into Tagalog, Vietnamese, Armenian or Persian (and some ot
 | `npm run stop` | End every VenU dev server |
 | `npm run lint` | ESLint, fails on any warning |
 | `npm run typecheck` | Generate typed routes, then `tsc --noEmit` |
-| `npm test` | Jest unit tests (`src/**/__tests__`, `supabase/functions/**/__tests__`) |
+| `npm test` | Jest unit tests (`src/**/__tests__`, `supabase/functions/**/__tests__`, `scripts/__tests__`) |
 | `npm run check` | Lint, typecheck, tests and `expo-doctor`; run before opening a PR (CI runs the same) |
 
 ## Adding packages
@@ -108,7 +154,7 @@ src/lib/            supabase client, auth
 src/components/     shared UI (chips, buttons, avatar, language picker, nav bar)
 src/constants/      design tokens (Colors, Spacing, Radius, Type)
 supabase/           SQL migrations; functions/translate (Edge Function, providers)
-scripts/            dev.mjs (backend modes, stop), mock-supabase.mjs (fake backend)
+scripts/            dev.mjs (backend modes, stop), mock-supabase.mjs (fake backend), e2e.mjs (API test)
 assets/             app icon, splash, favicon
 .kiro/figma/        Figma export the first screens were built from
 ```

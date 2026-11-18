@@ -9,7 +9,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import { useProfile, type AvatarChange } from './profile-context';
 import { readSavedDraft, writeSavedDraft } from './setup-draft-storage';
 import { emptyDraft, type ProfileDraft, type Role } from './types';
-import { validateDraft, type DraftErrors, type DraftField } from './validate';
+import { firstNameFrom, validateDraft, type DraftErrors, type DraftField } from './validate';
 
 interface SetupDraft {
   /** False until the saved draft (if any) is read; steps render nothing until then. */
@@ -64,10 +64,13 @@ export function useSetupDraft(): SetupDraft {
 /**
  * The draft the languages step starts with. Switching role on the role step keeps the answers both
  * roles share (languages, first name) and starts the role's own questions over.
+ * A fresh draft prefills only the first word of the Create Account name; a name already in the draft
+ * was typed in the First name field, so it stays as typed.
  * e.g. draftForRole('volunteer', visitorDraft with ['es','en'], 'en', 'Rosa') → volunteer, ['es','en'], gender unset
+ *      draftForRole('visitor', null, 'es', 'Lucia Vistest') → firstName 'Lucia'
  */
-export function draftForRole(role: Role, previous: ProfileDraft | null, mainLanguage: string, firstName: string): ProfileDraft {
-  const fresh = { ...emptyDraft(role, mainLanguage), firstName };
+export function draftForRole(role: Role, previous: ProfileDraft | null, mainLanguage: string, accountName: string): ProfileDraft {
+  const fresh = { ...emptyDraft(role, mainLanguage), firstName: firstNameFrom(accountName) };
   if (!previous) return fresh;
   return { ...fresh, languages: previous.languages, mainLanguage: previous.mainLanguage, firstName: previous.firstName };
 }

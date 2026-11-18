@@ -18,6 +18,9 @@
     "assistTitle": "Cần hỗ trợ?",
     "assistBody": "Kết nối với tình nguyện viên",
     "assistLabel": "Cần hỗ trợ? Kết nối với tình nguyện viên",
+    "assistTitleVolunteer": "Sẵn sàng giúp đỡ?",
+    "assistBodyVolunteer": "Xem các yêu cầu gần bạn",
+    "assistLabelVolunteer": "Sẵn sàng giúp đỡ? Xem các yêu cầu gần bạn",
     "empty": "Không có địa điểm nào khớp với “{{query}}”. Hãy thử tên thành phố, như Inglewood.",
     "cardHint": "Mở bản đồ và tiện ích"
   },
@@ -349,7 +352,7 @@
     "imHereHint": "Dùng chỗ này làm vị trí của bạn khi nhờ giúp đỡ",
     "isHere": "Vị trí của bạn",
     "reports": "Báo cáo",
-    "results_other": "{{number}} kết quả",
+    "reportCount_other": "{{number}} báo cáo",
     "noReports": "Chưa có báo cáo. Hãy là người đầu tiên chia sẻ điều bạn thấy.",
     "addReport": "Thêm báo cáo của bạn"
   },
@@ -379,7 +382,12 @@
     "authorFallback": "Khách tham quan VenU",
     "submitted": "Gửi ngày {{date}}",
     "originalLanguage": "Ngôn ngữ gốc: {{language}}",
-    "noBody": "Không có chi tiết."
+    "noBody": "Không có chi tiết.",
+    "delete": "Xóa báo cáo của tôi",
+    "deleteConfirm": "Xóa báo cáo này? Khách tại địa điểm này sẽ không thấy nó nữa.",
+    "deleteKeep": "Giữ lại",
+    "deleteYes": "Xóa",
+    "deleteFailed": "Không xóa được báo cáo. {{reason}}"
   },
   "form": {
     "title": "Thêm báo cáo",
