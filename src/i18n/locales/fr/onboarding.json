@@ -7,8 +7,9 @@
     "roleQuestion": "Visiteur ou bénévole ?",
     "signIn": "Se connecter",
     "socialTitle": "OU s'inscrire avec",
-    "socialSoon": "La connexion avec Google, Apple et Facebook arrive bientôt.",
-    "languageTitle": "Langue de l'app"
+    "languageTitle": "Langue de l'app",
+    "accountDeleted": "Votre compte a été supprimé. Vous pouvez en créer un nouveau à tout moment.",
+    "signInKept": "Votre profil et votre photo ont été supprimés. Votre identifiant de connexion (e-mail) existe encore pour l’instant ; demandez à l’équipe VenU de le supprimer."
   },
   "auth": {
     "languagePill": "Langue de l'app : {{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "Pas encore de compte ?",
     "signUp": "S'inscrire",
     "forgot": "Mot de passe oublié ?",
-    "forgotSoon": "La réinitialisation du mot de passe arrive bientôt.",
     "confirmNotice": "Consultez vos e-mails pour confirmer votre compte, puis connectez-vous.",
+    "resetNotice": "Mot de passe modifié. Connectez-vous avec votre nouveau mot de passe.",
     "submit": "Se connecter"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "J'accepte les Conditions générales",
     "submit": "Créer un compte"
   },
+  "forgot": {
+    "title": "Mot de passe oublié",
+    "intro": "Saisissez votre nom d’utilisateur ou votre e-mail. Nous vous enverrons un lien pour choisir un nouveau mot de passe.",
+    "identifier": "Nom d’utilisateur ou e-mail",
+    "submit": "Envoyer le lien",
+    "resend": "Renvoyer",
+    "sent": "Si un compte existe pour ce nom d’utilisateur ou cet e-mail, nous lui avons envoyé un lien. Consultez votre boîte de réception.",
+    "useEmail": "La réinitialisation par nom d’utilisateur n’est pas encore disponible. Saisissez plutôt votre e-mail.",
+    "remembered": "Vous vous en souvenez ?"
+  },
+  "reset": {
+    "title": "Nouveau mot de passe",
+    "intro": "Choisissez un nouveau mot de passe pour votre compte.",
+    "password": "Nouveau mot de passe",
+    "passwordPlaceholder": "Saisissez le nouveau mot de passe",
+    "confirm": "Confirmer le mot de passe",
+    "confirmPlaceholder": "Saisissez-le à nouveau",
+    "submit": "Enregistrer le mot de passe",
+    "checking": "Vérification du lien…",
+    "badLink": "Ce lien ne fonctionne pas. Demandez-en un nouveau.",
+    "noLink": "Ouvrez cette page depuis le lien de l’e-mail de réinitialisation du mot de passe.",
+    "newLink": "Envoyer un nouveau lien"
+  },
+  "social": {
+    "notEnabled": "La connexion avec {{provider}} n’est pas encore configurée. Créez plutôt un compte avec votre e-mail.",
+    "notEnabledAny": "Ce mode de connexion n’est pas encore configuré. Créez plutôt un compte avec votre e-mail.",
+    "cancelled": "Connexion annulée. Réessayez ou utilisez votre e-mail.",
+    "failed": "Impossible de se connecter avec ce compte. Réessayez ou utilisez votre e-mail.",
+    "failedTitle": "Connexion impossible",
+    "signingIn": "Connexion en cours…"
+  },
   "validate": {
     "email": "Saisissez un e-mail valide.",
     "identifier": "Saisissez votre nom d’utilisateur ou votre e-mail.",
     "usernameLength": "Utilisez {{min}} à {{max}} caractères pour votre nom d’utilisateur.",
     "usernameChars": "N’utilisez que des lettres, des chiffres, _ et . dans votre nom d’utilisateur.",
     "passwordLength": "Utilisez au moins {{min}} caractères pour votre mot de passe.",
+    "passwordMatch": "Les mots de passe ne correspondent pas.",
     "password": "Saisissez votre mot de passe.",
     "terms": "Acceptez les Conditions générales pour continuer."
   },

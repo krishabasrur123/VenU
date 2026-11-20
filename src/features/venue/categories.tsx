@@ -9,10 +9,23 @@ import { FIGMA_ICONS } from '@/components/icons/figma-icons';
 import { Colors } from '@/constants/theme';
 
 import { echoQuery, venueT, type VenueT } from './labels';
-import type { FacilityCategory } from './types';
+import { matchesCategory } from './mock';
+import type { Facility, FacilityCategory } from './types';
 
 /** Header chip order; labels come from venue:category.<value> (categoryLabel in ./labels). */
 export const CATEGORIES: FacilityCategory[] = ['gate', 'restroom', 'food', 'first_aid', 'lost_found', 'info', 'accessible', 'parking'];
+
+/**
+ * The chips worth showing for a list of facilities: those with at least one of them (see
+ * matchesCategory), in CATEGORIES order, so a chip never empties the map. `keep` stays even when
+ * empty (the chip that's selected).
+ * e.g. Intuit Dome's own facilities list no food, so the "Where are you?" picker has no
+ * "Food & Drinks" chip; the venue screen adds the sponsored stands (venueFacilitiesFor in
+ * ./sponsors.ts), so its "Food & Drinks" chip shows and lists those stands, each marked Sponsored.
+ */
+export function categoriesAt(facilities: Facility[], keep: FacilityCategory | null = null): FacilityCategory[] {
+  return CATEGORIES.filter(c => c === keep || facilities.some(f => matchesCategory(f, c)));
+}
 
 /** The facility list's empty line: `No restrooms match "xyz"`, or `No parking lots at SoFi Stadium yet`. */
 export function emptyFacilitiesMessage(category: FacilityCategory | null, query: string, venueName: string, t: VenueT = venueT()): string {

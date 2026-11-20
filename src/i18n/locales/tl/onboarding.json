@@ -7,8 +7,9 @@
     "roleQuestion": "Bisita o volunteer?",
     "signIn": "Mag-sign In",
     "socialTitle": "O mag-sign up gamit ang",
-    "socialSoon": "Malapit nang magamit ang pag-sign in gamit ang Google, Apple at Facebook.",
-    "languageTitle": "Wika ng app"
+    "languageTitle": "Wika ng app",
+    "accountDeleted": "Nabura na ang iyong account. Puwede kang gumawa ng bago anumang oras.",
+    "signInKept": "Nabura na ang iyong profile at larawan. Nananatili pa ang iyong sign-in (email); hilingin sa VenU team na burahin ito."
   },
   "auth": {
     "languagePill": "Wika ng app: {{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "Wala ka pang account?",
     "signUp": "Mag-sign Up",
     "forgot": "Nakalimutan ang Password?",
-    "forgotSoon": "Malapit nang magamit ang pag-reset ng password.",
     "confirmNotice": "Tingnan ang iyong email para kumpirmahin ang account, saka mag-sign in.",
+    "resetNotice": "Napalitan na ang password. Mag-sign in gamit ang bago mong password.",
     "submit": "Mag-sign In"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "Sumasang-ayon sa Mga Tuntunin at Kundisyon",
     "submit": "Gumawa ng Account"
   },
+  "forgot": {
+    "title": "Nakalimutan ang Password",
+    "intro": "Ilagay ang iyong username o email. Padadalhan ka namin ng link para pumili ng bagong password.",
+    "identifier": "Username o email",
+    "submit": "Ipadala ang Link",
+    "resend": "Ipadala Ulit",
+    "sent": "Kung may account para sa username o email na iyon, pinadalhan namin ito ng link. Tingnan ang iyong inbox.",
+    "useEmail": "Hindi pa puwedeng mag-reset gamit ang username. Ilagay na lang ang iyong email.",
+    "remembered": "Naalala mo na?"
+  },
+  "reset": {
+    "title": "Bagong Password",
+    "intro": "Pumili ng bagong password para sa iyong account.",
+    "password": "Bagong password",
+    "passwordPlaceholder": "Ilagay ang bagong password",
+    "confirm": "Kumpirmahin ang password",
+    "confirmPlaceholder": "Ilagay ulit",
+    "submit": "I-save ang Password",
+    "checking": "Sinusuri ang iyong link…",
+    "badLink": "Hindi gumagana ang link na iyan. Humingi ng bago.",
+    "noLink": "Buksan ang page na ito mula sa link sa email para sa pag-reset ng password.",
+    "newLink": "Magpadala ng Bagong Link"
+  },
+  "social": {
+    "notEnabled": "Hindi pa naka-set up ang pag-sign in gamit ang {{provider}}. Gumawa na lang ng account gamit ang iyong email.",
+    "notEnabledAny": "Hindi pa naka-set up ang paraang iyan ng pag-sign in. Gumawa na lang ng account gamit ang iyong email.",
+    "cancelled": "Kinansela ang pag-sign in. Subukan ulit, o gamitin ang iyong email.",
+    "failed": "Hindi maka-sign in gamit ang account na iyan. Subukan ulit, o gamitin ang iyong email.",
+    "failedTitle": "Hindi maka-sign in",
+    "signingIn": "Sina-sign in ka…"
+  },
   "validate": {
     "email": "Maglagay ng tamang email.",
     "identifier": "Ilagay ang username o email mo.",
     "usernameLength": "Gumamit ng {{min}}–{{max}} character sa username mo.",
     "usernameChars": "Letra, numero, _ at . lang ang puwede sa username.",
     "passwordLength": "Gumamit ng hindi bababa sa {{min}} character para sa password.",
+    "passwordMatch": "Hindi magkatugma ang mga password.",
     "password": "Ilagay ang iyong password.",
     "terms": "Sumang-ayon sa Mga Tuntunin at Kundisyon para magpatuloy."
   },

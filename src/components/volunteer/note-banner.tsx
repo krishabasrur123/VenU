@@ -6,18 +6,19 @@ import { useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Colors, Radius, Spacing, Type } from '@/constants/theme';
-import { volunteerDesk, type DeskNotice } from '@/features/volunteer/desk-store';
+import { STICKY_DESK_NOTICES, volunteerDesk, type DeskNotice } from '@/features/volunteer/desk-store';
 import { useT } from '@/i18n';
 
-export function NoteBanner({ tone, text, onDismiss }: { tone: 'success' | 'error'; text: string; onDismiss: () => void }) {
+/** `sticky`: a success that stays until dismissed too (e.g. the other person ended the help). */
+export function NoteBanner({ tone, text, onDismiss, sticky = false }: { tone: 'success' | 'error'; text: string; onDismiss: () => void; sticky?: boolean }) {
   const ok = tone === 'success';
   const t = useT('volunteer');
-  // Thanks fade on their own; errors stay until dismissed or the next request.
+  // Thanks fade on their own; errors (and sticky notes) stay until dismissed or the next request.
   useEffect(() => {
-    if (!ok) return;
+    if (!ok || sticky) return;
     const t = setTimeout(onDismiss, 8000);
     return () => clearTimeout(t);
-  }, [ok, onDismiss]);
+  }, [ok, sticky, onDismiss]);
 
   return (
     <View style={[styles.box, ok ? styles.ok : styles.bad]} accessibilityLiveRegion="polite" role="status">
@@ -32,7 +33,14 @@ export function NoteBanner({ tone, text, onDismiss }: { tone: 'success' | 'error
 /** A volunteer's notice: "Rosa cancelled the request.", "Someone else already took this request.", … */
 export function DeskBanner({ notice }: { notice: DeskNotice }) {
   const t = useT('volunteer');
-  return <NoteBanner tone={notice.tone} text={t(`desk.${notice.key}`, { name: notice.params?.name ?? '' })} onDismiss={volunteerDesk.dismissNotice} />;
+  return (
+    <NoteBanner
+      tone={notice.tone}
+      text={t(`desk.${notice.key}`, { name: notice.params?.name ?? '' })}
+      onDismiss={volunteerDesk.dismissNotice}
+      sticky={STICKY_DESK_NOTICES.includes(notice.key)}
+    />
+  );
 }
 
 const styles = StyleSheet.create({

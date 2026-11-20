@@ -43,7 +43,7 @@ export function useT<N extends Namespace>(ns: N) {
  * The language `t` translates into: its own if it's fixed to one (getFixedT), else the current one.
  * Pass it on to formatNumber / formatDate next to the `t` call, so the React Compiler re-runs them
  * when the language (and so `t`) changes:
- *   const t = useT('venue'); t('facility.results', { count: n, number: formatNumber(n, undefined, languageOf(t)) })
+ *   const t = useT('venue'); t('facility.reportCount', { count: n, number: formatNumber(n, undefined, languageOf(t)) })
  */
 export function languageOf(t: unknown): string {
   return (t as { lng?: string | null } | null)?.lng || i18n.language;

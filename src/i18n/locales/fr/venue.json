@@ -18,6 +18,9 @@
     "assistTitle": "Besoin d’aide ?",
     "assistBody": "Contactez un bénévole",
     "assistLabel": "Besoin d’aide ? Contactez un bénévole",
+    "assistTitleVolunteer": "Envie d’aider ?",
+    "assistBodyVolunteer": "Voir les demandes près de vous",
+    "assistLabelVolunteer": "Envie d’aider ? Voir les demandes près de vous",
     "empty": "Aucun site ne correspond à « {{query}} ». Essayez une ville, comme Inglewood.",
     "cardHint": "Ouvre le plan et les services"
   },
@@ -95,6 +98,9 @@
   "walk_one": "{{number}} min à pied",
   "walk_many": "{{number}} min à pied",
   "walk_other": "{{number}} min à pied",
+  "walkStart": "Départ des itinéraires",
+  "walkMine": "Vous êtes ici",
+  "walkAsk": "Emplacement non publié",
   "wait": {
     "none": "Pas d’attente",
     "short": "Attente courte",
@@ -103,6 +109,18 @@
   "row": {
     "label": "{{name}}, {{meta}}",
     "labelAccessible": "{{name}}, {{meta}}, accessible"
+  },
+  "sponsor": {
+    "label": "Sponsorisé",
+    "pin": "Sponsorisé : {{name}} sur le plan",
+    "row": "Sponsorisé : {{name}}, {{meta}}",
+    "card": "Sponsorisé : {{name}}. {{offer}}. {{meta}}",
+    "heading": "Sponsorisé : {{name}}",
+    "showScreen": "Montrez cet écran au stand",
+    "disclosure": "Annonce payante, pas une information du site",
+    "banner": "Sponsorisé : {{name}}, {{walk}}. {{offer}}",
+    "bannerHint": "Ouvre le stand. Votre demande reste en cours.",
+    "hide": "Masquer le message sponsorisé"
   },
   "tags": {
     "label": "Étiquettes :",
@@ -119,6 +137,7 @@
     "long_lines_halftime": "Longues files à la mi-temps",
     "wheelchair_loans": "Prêt de fauteuils roulants",
     "permit_needed": "Permis requis",
+    "pass_needed": "Pass requis",
     "wheelchair_escort": "Accompagnement fauteuil",
     "premium_access": "VIP et premium",
     "sensory_room": "Salle sensorielle",
@@ -127,6 +146,36 @@
     "changing_table": "Table à langer"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "Stand Coca-Cola Refresh",
+      "description": "Boissons Coca-Cola fraîches, eau en bouteille et en-cas.",
+      "location": "Sur la place, près du terrain extérieur",
+      "offer": "1 $ de réduction sur toute boisson Coca-Cola avec VenU"
+    },
+    "panda-express-intuit": {
+      "name": "Stand Panda Express",
+      "description": "Poulet à l’orange, chow mein et bols de riz.",
+      "location": "Coursive du niveau Main, après l’entrée The Wall",
+      "offer": "Rouleau impérial offert avec tout bol"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "Stand Coca-Cola Refresh",
+      "description": "Boissons Coca-Cola fraîches, eau en bouteille et en-cas.",
+      "location": "Niveau 1, après les entrées 1 et 2",
+      "offer": "1 $ de réduction sur toute boisson Coca-Cola avec VenU"
+    },
+    "ben-jerrys-sofi": {
+      "name": "Stand de glaces Ben & Jerry’s",
+      "description": "Glaces en pot et en cornet.",
+      "location": "American Airlines Plaza",
+      "offer": "Garniture offerte sur toute boule"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "Stand Coca-Cola Refresh",
+      "description": "Boissons Coca-Cola fraîches, eau en bouteille et en-cas.",
+      "location": "Coursive principale, côté Figueroa",
+      "offer": "1 $ de réduction sur toute boisson Coca-Cola avec VenU"
+    },
     "entry-3": {
       "name": "Entrée 3",
       "description": "Entrée nord. Chaque entrée a un accès adapté et un accompagnement gratuit en fauteuil roulant.",
@@ -279,47 +328,47 @@
     },
     "main-entrance": {
       "name": "Entrée principale",
-      "description": "File GameFace ID à gauche, file Identity Pass à droite. Aide gratuite à la mobilité du contrôle de sécurité à votre place.",
+      "description": "File GameFace ID à gauche, file Identity Pass à droite ; pour l’entrée accessible, les détenteurs d’Identity Pass valident à l’Answers Portal. Sacs jusqu’à 10×6×2 po (sacs médicaux jusqu’à 14×14×6). Aide gratuite à la mobilité du contrôle de sécurité à votre place.",
       "location": "Sur la place, près de Century Blvd. et Prairie Ave."
     },
     "vip-entrance": {
       "name": "Entrée VIP",
-      "description": "Pour les billets suite, club et parquet.",
+      "description": "Pour les billets suite, club et parquet (l’entrée principale reste possible).",
       "location": "À gauche de l’entrée principale"
     },
     "wall-entrance": {
       "name": "Entrée The Wall",
-      "description": "Entrée réservée à The Wall.",
+      "description": "Pour les billets The Wall (l’entrée principale reste possible).",
       "location": "À gauche de l’entrée principale, après l’entrée VIP"
     },
     "answers-portal-main": {
       "name": "Answers Portal (Main)",
-      "description": "Accueil : objets trouvés, aide à l’écoute gratuite (pièce d’identité avec photo conservée) et appareils OneCourt.",
+      "description": "Accueil : objets trouvés, aide à l’écoute gratuite (pièce d’identité avec photo conservée), sacs sensoriels (pièce d’identité conservée) et appareils OneCourt.",
       "location": "Niveau Main, près de la section Main 6"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal (Terrace)",
-      "description": "Accueil : objets trouvés et aide à l’écoute gratuite (pièce d’identité avec photo conservée).",
+      "description": "Accueil : objets trouvés, aide à l’écoute gratuite (pièce d’identité avec photo conservée) et appareils OneCourt.",
       "location": "Niveau Terrace, près de la section Terrace 18"
     },
     "first-aid-main": {
       "name": "Poste de secours (Main)",
-      "description": "Secouristes formés à chaque événement.",
+      "description": "Techniciens médicaux d’urgence (EMT) formés à chaque événement.",
       "location": "Coursive du niveau Main, Main 6"
     },
     "first-aid-terrace": {
       "name": "Poste de secours (Terrace)",
-      "description": "Secouristes formés à chaque événement.",
+      "description": "Techniciens médicaux d’urgence (EMT) formés à chaque événement.",
       "location": "Coursive du niveau Terrace, Terrace 27"
     },
     "first-aid-floor": {
       "name": "Poste de secours (parquet)",
-      "description": "Secouristes formés à chaque événement.",
+      "description": "Techniciens médicaux d’urgence (EMT) formés à chaque événement.",
       "location": "Niveau parquet, sous Wall 19 près du tunnel est"
     },
     "sensory-room": {
       "name": "Salle sensorielle",
-      "description": "La salle sensorielle privée Kaiser Permanente. Sacs sensoriels sur demande.",
+      "description": "La salle sensorielle privée Kaiser Permanente. Les sacs sensoriels (casque, jouets anti-stress) sont à l’Answers Portal près de Main 6 ; pièce d’identité demandée.",
       "location": "Demandez le chemin à un hôte de l’aréna"
     },
     "infant-care-room": {
@@ -329,31 +378,42 @@
     },
     "mobility-hub": {
       "name": "Pôle mobilité",
-      "description": "Prise en charge et dépose VTC et taxis, dépose des familles et navettes.",
-      "location": "Parking est, niveau 1"
+      "description": "Le seul point de dépose et de prise en charge VTC. Aussi taxis, dépose des familles et navettes gratuites (vans adaptés disponibles).",
+      "location": "Parking est, niveau 1 (3700 W Century Blvd.)"
     },
     "east-garage": {
       "name": "Parking est",
-      "description": "Parking standard ; achetez votre pass à l’avance. Places accessibles vendues selon les arrivées.",
-      "location": "Entrée par 102nd St."
+      "description": "Parking standard ; achetez votre pass à l’avance. Les places accessibles s’achètent avec un pass parking, par ordre d’arrivée.",
+      "location": "3665 W 102nd St (entrée par 102nd St.)"
     },
     "west-garage": {
       "name": "Parking ouest",
-      "description": "Parking VIP de l’autre côté de Prairie Ave. ; achetez votre pass à l’avance.",
-      "location": "Entrée par Prairie Ave."
+      "description": "Parking VIP de l’autre côté de Prairie Ave. ; achetez votre pass à l’avance. Les places accessibles s’achètent avec un pass parking, par ordre d’arrivée.",
+      "location": "10117 S Prairie Ave (entrée par Prairie Ave.)"
+    },
+    "infant-care-terrace": {
+      "name": "Espace bébé (Terrace)",
+      "description": "Pièce privée pour s’occuper des bébés. Toutes les toilettes ont une table à langer.",
+      "location": "Niveau Terrace, Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "Ascenseurs",
+      "description": "Les ascenseurs relient l’entrée principale à tous les niveaux, et des escalators relient les niveaux Main et Terrace dans le hall principal. Priorité aux personnes à mobilité réduite.",
+      "location": "Demandez le plus proche à un hôte de l’aréna"
     }
   },
   "facility": {
     "notFound": "Service introuvable",
     "wheelchair": "Accessible en fauteuil roulant",
     "directions": "Itinéraire",
+    "noRoute": "Pas d’itinéraire à pied : le lieu ne publie pas cet emplacement. Demandez le chemin au personnel.",
     "imHere": "Je suis ici",
     "imHereHint": "Utilise cet endroit comme votre position quand vous demandez de l’aide",
     "isHere": "Votre position",
     "reports": "Signalements",
-    "results_one": "{{number}} résultat",
-    "results_many": "{{number}} de résultats",
-    "results_other": "{{number}} résultats",
+    "reportCount_one": "{{number}} signalement",
+    "reportCount_many": "{{number}} de signalements",
+    "reportCount_other": "{{number}} signalements",
     "noReports": "Aucun signalement pour l’instant. Soyez le premier à partager ce que vous avez vu.",
     "addReport": "Ajouter un signalement"
   },
@@ -383,7 +443,12 @@
     "authorFallback": "Visiteur VenU",
     "submitted": "Envoyé le {{date}}",
     "originalLanguage": "Langue d’origine : {{language}}",
-    "noBody": "Aucun détail ajouté."
+    "noBody": "Aucun détail ajouté.",
+    "delete": "Supprimer mon signalement",
+    "deleteConfirm": "Supprimer ce signalement ? Les visiteurs de ce site ne le verront plus.",
+    "deleteKeep": "Le garder",
+    "deleteYes": "Supprimer",
+    "deleteFailed": "Impossible de supprimer le signalement. {{reason}}"
   },
   "form": {
     "title": "Nouveau signalement",
@@ -407,6 +472,7 @@
     "title": "Itinéraire à pied",
     "from": "Depuis {{from}}",
     "fromArrival": "Depuis {{from}}, l’entrée principale. Vous êtes ailleurs ? Ouvrez cet endroit et touchez « Je suis ici ».",
+    "fromArrivalPlain": "Depuis {{from}}. Vous êtes ailleurs ? Ouvrez cet endroit et touchez « Je suis ici ».",
     "steps_many": "environ {{number}} de pas",
     "steps_one": "environ {{number}} pas",
     "steps_other": "environ {{number}} pas",

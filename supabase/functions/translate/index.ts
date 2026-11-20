@@ -1,5 +1,7 @@
 // Supabase Edge Function "translate": translates chat messages for signed-in users.
-// Deploy: supabase functions deploy translate
+// Deploy: supabase functions deploy translate --no-verify-jwt
+// --no-verify-jwt ("Verify JWT" off in the dashboard): verifyUser below checks the token itself, which
+// also works with the new JWT signing keys, where the gateway check can reject valid sessions.
 // Secrets: supabase secrets set TRANSLATE_PROVIDER=anthropic ANTHROPIC_API_KEY=...   (or deepl + DEEPL_API_KEY)
 // Contract and limits: core.ts. The provider keys stay here; the app never sees them.
 import Anthropic from '@anthropic-ai/sdk';

@@ -44,7 +44,7 @@ export type RequestAction =
   | { type: 'receive'; requestId: string; message: ChatMessage }
   | { type: 'typing'; requestId: string; typing: boolean }
   | { type: 'read' }
-  | { type: 'end' }
+  | { type: 'end'; notice?: RequestState['notice'] }
   | { type: 'finish'; notice: RequestState['notice'] }
   | { type: 'dismissNotice' }
   | { type: 'editDraft'; patch: Partial<RequestDraft> }
@@ -71,7 +71,8 @@ export function reduce(state: RequestState, action: RequestAction): RequestState
         ? { ...INITIAL_STATE, draft: state.draft, notice: { tone: 'error', key: 'searchFailed' } }
         : state;
     case 'searchTimedOut':
-      // Nobody free in time: keep the request (and draft) so "Keep searching" sends it again.
+      // Nobody free in time (the request was withdrawn): keep it (and the draft) so "Search again"
+      // sends it again under a new id.
       return state.status === 'searching' && state.request?.id === action.requestId ? { ...state, status: 'notFound' } : state;
     case 'keepSearching':
       return state.status === 'notFound' ? { ...state, status: 'searching', request: action.request } : state;
@@ -97,8 +98,11 @@ export function reduce(state: RequestState, action: RequestAction): RequestState
     case 'read':
       return state.unread ? { ...state, unread: 0 } : state;
     case 'end':
-      // The help happened: the next request starts from an empty form.
-      return state.status === 'matched' ? { ...state, status: 'done', unread: 0, draft: null, typing: false } : state;
+      // The help happened: the next request starts from an empty form. `notice`: why, when the
+      // volunteer ended it ("Daniel ended the chat"), shown above the rating.
+      return state.status === 'matched'
+        ? { ...state, status: 'done', unread: 0, draft: null, typing: false, notice: action.notice ?? null }
+        : state;
     case 'finish':
       return state.status === 'done' ? { ...INITIAL_STATE, notice: action.notice } : state;
     case 'dismissNotice':
@@ -238,12 +242,14 @@ export function createRequestStore(backend: VolunteerBackend, persist?: Persiste
     const since = theirs.length ? Math.max(...theirs) : undefined;
     const offMessage = backend.onMessage(requestId, message => dispatch({ type: 'receive', requestId, message }), since);
     const offTyping = backend.onTyping?.(requestId, typing => dispatch({ type: 'typing', requestId, typing }));
-    // The volunteer ended the chat: ask for feedback, as after "Mark help as done". Closed on our
-    // side (or called off by the service): back to the form, keeping the draft.
+    // The volunteer ended the chat: say so, then ask for feedback, as after "Mark help as done".
+    // Closed on our side (or called off by the service): back to the form, keeping the draft.
     const offClosed = backend.onClosed?.(requestId, closed => {
       if (closed.byMe || state.request?.id !== requestId) return;
       stopListening();
-      dispatch(closed.status === 'done' ? { type: 'end' } : { type: 'cancel' });
+      const name = state.match?.volunteer.firstName;
+      const ended = closed.bySystem ? undefined : { tone: 'success' as const, key: 'volunteerEnded' as const, params: { name } };
+      dispatch(closed.status === 'done' ? { type: 'end', notice: ended } : { type: 'cancel' });
     });
     // The volunteer left without finishing (signed out): the request is open again, so wait for the next one.
     const volunteerId = state.match?.volunteer.id;
@@ -272,26 +278,57 @@ export function createRequestStore(backend: VolunteerBackend, persist?: Persiste
     });
   }
 
+  /**
+   * Withdraws a request nobody took in time, unless a volunteer just did: resolves with their match,
+   * else null (withdrawn, or the service couldn't be reached: then it's treated as withdrawn).
+   */
+  async function withdraw(requestId: string): Promise<Match | null> {
+    try {
+      if (backend.withdrawRequest) return await backend.withdrawRequest(requestId);
+      await backend.cancelRequest(requestId);
+    } catch {
+      // Offline: say nobody was free; the server stops listing it after 5 minutes.
+    }
+    return null;
+  }
+
+  /** Shows the match and follows its chat. */
+  function matched(requestId: string, match: Match) {
+    dispatch({ type: 'matched', requestId, match });
+    listen(requestId); // after "matched", so the typing state it reports right away applies
+  }
+
+  /**
+   * The wait ran out: withdraw the request so no volunteer turns up after we said nobody was free.
+   * The timer can fire late (a locked phone, a background tab), after a volunteer accepted: the
+   * withdraw then leaves the request alone and the visitor gets the match instead.
+   */
+  async function giveUp(request: HelpRequest, ctl: AbortController): Promise<void> {
+    const match = await withdraw(request.id);
+    if (search !== ctl) return; // matched meanwhile (findVolunteer saw it first), or cancelled
+    search = null;
+    ctl.abort();
+    if (match) matched(request.id, match);
+    else dispatch({ type: 'searchTimedOut', requestId: request.id });
+  }
+
   /** Waits for a volunteer for a request that is already in the 'searching' state, until the wait runs out. */
   async function runSearch(request: HelpRequest): Promise<void> {
     const ctl = new AbortController();
     search = ctl;
+    let givingUp = null as Promise<void> | null;
     const timer = setTimeout(() => {
-      if (search !== ctl) return;
-      search = null;
-      ctl.abort();
-      dispatch({ type: 'searchTimedOut', requestId: request.id });
-      // Withdraw it, so no volunteer turns up after we said nobody was free.
-      backend.cancelRequest(request.id).catch(() => {});
+      if (search === ctl) givingUp = giveUp(request, ctl);
     }, Math.min(SEARCH_TIMEOUT_MS, Math.max(0, searchSince + SEARCH_TIMEOUT_MS - Date.now()))); // a clock change never stretches it
     try {
       const match = await backend.findVolunteer(request, ctl.signal);
       if (search !== ctl) return;
       search = null;
-      dispatch({ type: 'matched', requestId: request.id, match });
-      listen(request.id); // after "matched", so the typing state it reports right away applies
+      matched(request.id, match);
     } catch {
-      if (search !== ctl) return; // cancelled or timed out: the state already moved on
+      // Timing out: the withdraw decides (findVolunteer may see the row it cancels first).
+      if (givingUp) return await givingUp;
+      if (search !== ctl) return; // cancelled: the state already moved on
       search = null;
       dispatch({ type: 'searchFailed', requestId: request.id });
     } finally {
@@ -305,6 +342,28 @@ export function createRequestStore(backend: VolunteerBackend, persist?: Persiste
     emit();
   }
 
+  /** Follows a match the service already made (after a restart). */
+  function resumeMatch(requestId: string, match: Match) {
+    backend.resume?.(requestId, match);
+    listen(requestId);
+  }
+
+  /**
+   * Withdraws a restored request whose wait ran out while the app was closed. A volunteer who
+   * accepted it meanwhile wins: "No volunteer is free" turns into their match. If the visitor has
+   * moved on by then (searched again, cancelled, signed out), that late match is called off instead.
+   */
+  async function withdrawExpired(requestId: string, mine: number) {
+    const match = await withdraw(requestId);
+    if (!match) return;
+    if (mine === generation && state.status === 'notFound' && state.request?.id === requestId) {
+      dispatch({ type: 'restore', state: { ...state, status: 'matched', match, notice: null } });
+      resumeMatch(requestId, match);
+    } else {
+      backend.cancelRequest(requestId).catch(() => {});
+    }
+  }
+
   /** Puts back the request saved for `userId`, unless something newer already happened. */
   async function restore(userId: string) {
     if (!persist) return;
@@ -316,16 +375,15 @@ export function createRequestStore(backend: VolunteerBackend, persist?: Persiste
       const untouched = state.status === 'idle' && !state.draft;
       if (!saved || mine !== generation || owner !== userId || !untouched) return;
       if (saved.status === 'searching') searchSince = savedSince(raw) ?? Date.now();
-      // The wait ran out while the app was closed: say nobody was free rather than silently start over.
+      // The wait ran out while the app was closed: say nobody was free rather than silently start
+      // over, and withdraw it in the background, so the tab shows right away even on a slow network.
       const expired = saved.status === 'searching' && Date.now() - searchSince >= SEARCH_TIMEOUT_MS;
-      dispatch({ type: 'restore', state: expired ? { ...saved, status: 'notFound' } : saved });
+      const next: RequestState = expired ? { ...saved, status: 'notFound' } : saved;
+      dispatch({ type: 'restore', state: next });
       // Pick up where it left off: keep waiting for a volunteer, or keep listening to the chat.
-      if (expired && saved.request) backend.cancelRequest(saved.request.id).catch(() => {});
-      else if (saved.status === 'searching' && saved.request) void runSearch(saved.request);
-      else if (saved.status === 'matched' && saved.request && saved.match) {
-        backend.resume?.(saved.request.id, saved.match);
-        listen(saved.request.id);
-      }
+      if (expired && next.request) void withdrawExpired(next.request.id, mine);
+      else if (next.status === 'searching' && next.request) void runSearch(next.request);
+      else if (next.status === 'matched' && next.request && next.match) resumeMatch(next.request.id, next.match);
     } catch {
       // Unreadable storage: start from the empty form.
     } finally {

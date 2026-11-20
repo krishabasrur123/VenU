@@ -1,6 +1,6 @@
 /**
- * "Where are you?": a sheet listing the current venue's facilities to pick your spot from, with the
- * venue tab's search and category chips. Picking sets the current spot; "I'm not sure" clears it.
+ * "Where are you?": a sheet listing the current venue's facilities to pick your spot from (not the
+ * ones whose spot it doesn't publish, see meetSpotsFor), with the venue tab's search and category chips. Picking sets the current spot; "I'm not sure" clears it.
  * e.g. SoFi Stadium → tap "Entry 4" → the request form reads "Near Entry 4 · SoFi Stadium".
  */
 import { router } from 'expo-router';
@@ -9,15 +9,15 @@ import { FlatList, Modal, Pressable, StyleSheet, Text, View } from 'react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FigmaIcon } from '@/components/icons/figma-icon';
-import { Colors, Fonts, Radius, Spacing, Type, WEB_COLUMN_MAX } from '@/constants/theme';
-import { emptyFacilitiesMessage, FacilityIcon } from '@/features/venue/categories';
+import { Colors, Face, Fonts, Radius, Spacing, Type, WEB_COLUMN_MAX } from '@/constants/theme';
+import { categoriesAt, emptyFacilitiesMessage, FacilityIcon } from '@/features/venue/categories';
 import { CategoryChips } from '@/features/venue/category-chips';
 import { setCurrentSpot, useWhereAmI } from '@/features/venue/current';
 import { facilityLocation, facilityName } from '@/features/venue/labels';
-import { facilitiesFor, getVenue } from '@/features/venue/mock';
+import { getVenue } from '@/features/venue/mock';
 import type { Facility, FacilityCategory } from '@/features/venue/types';
 import { SearchField } from '@/features/venue/ui';
-import { spotChoices } from '@/features/volunteer/meet-point';
+import { meetSpotsFor, spotChoices } from '@/features/volunteer/meet-point';
 import { useT } from '@/i18n';
 
 export function LocationPicker({ visible, onClose }: { visible: boolean; onClose: () => void }) {
@@ -28,7 +28,8 @@ export function LocationPicker({ visible, onClose }: { visible: boolean; onClose
   const venue = getVenue(venueId);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<FacilityCategory | null>(null);
-  const results = spotChoices(facilitiesFor(venueId), query, category, tv);
+  const facilities = meetSpotsFor(venueId);
+  const results = spotChoices(facilities, query, category, tv);
   const venueName = venue?.name ?? venueId;
 
   function close() {
@@ -83,7 +84,7 @@ export function LocationPicker({ visible, onClose }: { visible: boolean; onClose
           </Pressable>
           <SearchField value={query} onChangeText={setQuery} placeholder={t('where.search')} accessibilityLabel={t('where.search')} />
           <View style={styles.chips}>
-            <CategoryChips value={category} onChange={setCategory} />
+            <CategoryChips value={category} onChange={setCategory} categories={categoriesAt(facilities, category)} />
           </View>
           <FlatList<Facility>
             data={results}
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: Spacing.md },
   title: { fontFamily: Fonts.display, fontSize: 22, lineHeight: 28, color: Colors.text, flexShrink: 1 },
   doneTarget: { minHeight: 44, minWidth: 44, alignItems: 'flex-end', justifyContent: 'center' },
-  done: { fontFamily: Fonts.textSemiBold, fontSize: 16, color: Colors.primary },
+  done: { ...Face.textSemiBold, fontSize: 16, color: Colors.primary },
   subtitle: { ...Type.caption, color: Colors.text },
   // Starts on the start edge (right in Arabic); 44pt tall for touch.
   linkTarget: { alignSelf: 'flex-start', minHeight: 44, justifyContent: 'center', marginTop: -Spacing.sm },
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
   rowPressed: { backgroundColor: Colors.surfaceAlt },
   icon: { width: 32, alignItems: 'center' },
   unsureIcon: { height: 32, borderRadius: 16, borderWidth: 1.5, borderColor: Colors.ink, justifyContent: 'center' },
-  unsureMark: { fontFamily: Fonts.textBold, fontSize: 17, color: Colors.ink },
+  unsureMark: { ...Face.textBold, fontSize: 17, color: Colors.ink },
   rowText: { flex: 1, gap: 2 },
   rowTitle: { fontFamily: Fonts.display, fontSize: 17, lineHeight: 22, color: Colors.text },
   rowSub: { ...Type.caption, color: Colors.textMuted },

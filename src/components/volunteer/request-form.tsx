@@ -1,5 +1,6 @@
 /**
- * "Find a Volunteer" (Figma 192:22809): where you are, what you need, a note, Send Request.
+ * "Find a Volunteer" (Figma v3 506:9816, note open 506:9412): where you are, the one thing you need
+ * (a radio list), an optional note behind the "Add a note" row, Send Request.
  * Where you are = the current venue and spot (features/venue/current); tap it to pick the spot.
  */
 import * as ImagePicker from 'expo-image-picker';
@@ -10,8 +11,7 @@ import { Button } from '@/components/button';
 import { FigmaIcon } from '@/components/icons/figma-icon';
 import { LanguageSearchModal } from '@/components/language-picker';
 import { AppLanguagePill } from '@/components/volunteer/app-language-pill';
-import { useWidestWord } from '@/components/widest-word';
-import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Spacing, Type } from '@/constants/theme';
 import { isolatedLanguageName, languageName } from '@/features/profile/options';
 import { useWhereAmI } from '@/features/venue/current';
 import { meetPointFrom, meetSpotLabel, meetVenueName } from '@/features/volunteer/meet-point';
@@ -22,14 +22,13 @@ import { useDictation } from '@/features/voice/use-dictation';
 import { useLayoutRtl, useT } from '@/i18n';
 
 import { EmergencyCard } from './emergency-card';
-import { HELP_LABEL, HelpCard, helpGridColumns } from './help-card';
+import { chosenHelpType, HelpRow } from './help-card';
 import { Hint, useHint } from './hint';
 import { LocationPicker } from './location-picker';
 import { NoteBanner } from './note-banner';
-import { NoteBox } from './note-box';
+import { NOTE_MAX, NoteBox } from './note-box';
+import { NoteToggle } from './note-toggle';
 
-/** NoteBox's maxLength; dictation can run past it, so it's cut here too. */
-const NOTE_MAX = 500;
 
 interface RequestFormProps {
   visitorName: string;
@@ -58,15 +57,26 @@ export function RequestForm({ visitorName, defaultLanguage, notice, draft }: Req
   // from liveText; the saved draft only changes when they settle.
   const dictation = useDictation({ onCommit: text => edit({ note: text.slice(0, NOTE_MAX) }), onNote: show });
   const [finishing, setFinishing] = useState(false);
-  // Two cards a row when a label's longest word wouldn't fit a third of the row (320pt phones, Armenian, Japanese).
-  const [gridWidth, setGridWidth] = useState(0);
-  const helpLabels = useWidestWord(HELP_TYPES.map(id => t(`helpTypes.${id}`)), HELP_LABEL);
-  const columns = helpGridColumns(gridWidth, Spacing.md, helpLabels.widest);
-  const rowStarts = HELP_TYPES.map((_, i) => i).filter(i => i % columns === 0);
+  const chosen = chosenHelpType(helpTypes);
+  // The note box sits behind the "Add a note" row; it starts open when the draft already has a note or picture.
+  const [noteOpen, setNoteOpen] = useState(() => !!(note || photoUri));
+  // Set when the row itself opened the box, so the text box takes focus (not when the camera or mic did).
+  const [focusNote, setFocusNote] = useState(false);
+  const showNote = noteOpen || dictation.listening;
 
-  function toggle(id: HelpTypeId) {
+  function choose(id: HelpTypeId) {
     setError(null);
-    edit({ helpTypes: helpTypes.includes(id) ? helpTypes.filter(x => x !== id) : [...helpTypes, id] });
+    edit({ helpTypes: [id] });
+  }
+
+  function toggleNote() {
+    // Closing would hide what's typed or attached, so the row only closes an empty box.
+    if (showNote && !note && !photoUri && !dictation.listening) {
+      setNoteOpen(false);
+      return;
+    }
+    setFocusNote(!showNote);
+    setNoteOpen(true);
   }
 
   async function addPicture() {
@@ -77,7 +87,7 @@ export function RequestForm({ visitorName, defaultLanguage, notice, draft }: Req
   }
 
   async function send() {
-    if (!helpTypes.length) return setError(t('form.pickOne'));
+    if (!chosen) return setError(t('form.pickOne'));
     if (finishing) return;
     let text = note;
     if (dictation.listening) {
@@ -87,9 +97,8 @@ export function RequestForm({ visitorName, defaultLanguage, notice, draft }: Req
       setFinishing(false);
     }
     volunteerRequests.dismissNotice();
-    // Ordered as on screen, so the volunteer sees the same list.
-    const ordered = HELP_TYPES.filter(id => helpTypes.includes(id));
-    void volunteerRequests.sendRequest({ visitorName, helpTypes: ordered, note: text.trim(), photoUri, language, location });
+    // Still a list for the database's help_types column; one item since the list is single-choice.
+    void volunteerRequests.sendRequest({ visitorName, helpTypes: [chosen], note: text.trim(), photoUri, language, location });
   }
 
   return (
@@ -136,33 +145,40 @@ export function RequestForm({ visitorName, defaultLanguage, notice, draft }: Req
         </View>
       </Pressable>
 
-      {/* Figma 492:8829 groups the question and the grid on a tinted panel. */}
-      <View style={styles.panel}>
+      <View style={styles.helpTypes}>
         <Text style={styles.question} accessibilityRole="header">{t('form.question')}</Text>
-        <View style={styles.grid} onLayout={e => setGridWidth(e.nativeEvent.layout.width)}>
-          {helpLabels.probe}
-          {rowStarts.map(start => (
-            <View key={start} style={styles.gridRow}>
-              {HELP_TYPES.slice(start, start + columns).map(id => (
-                <HelpCard key={id} type={id} selected={helpTypes.includes(id)} onPress={() => toggle(id)} />
-              ))}
-            </View>
+        <View style={styles.list} accessibilityRole="radiogroup" accessibilityLabel={t('form.question')}>
+          {HELP_TYPES.map(id => (
+            <HelpRow key={id} type={id} selected={chosen === id} onPress={() => choose(id)} />
           ))}
         </View>
       </View>
 
-      <NoteBox
-        value={dictation.liveText?.slice(0, NOTE_MAX) ?? note}
-        onChangeText={text => { edit({ note: text }); dictation.edit(text); }}
-        placeholder={t('form.notePlaceholder')}
-        photoUri={photoUri}
-        onAddPicture={addPicture}
-        onRemovePicture={() => edit({ photoUri: null })}
-        onSpeak={() => dictation.toggle(note)}
-        speakLabel={tc('media.tapToSpeak')}
-        listening={dictation.listening}
-      />
-      <Hint text={hint} />
+      <View style={styles.note}>
+        <NoteToggle
+          open={showNote}
+          onToggle={toggleNote}
+          onAddPicture={() => { setNoteOpen(true); void addPicture(); }}
+          onSpeak={() => { setNoteOpen(true); dictation.toggle(note); }}
+          listening={dictation.listening}
+        />
+        {showNote ? (
+          <NoteBox
+            hideLabel
+            autoFocus={focusNote}
+            value={dictation.liveText?.slice(0, NOTE_MAX) ?? note}
+            onChangeText={text => { edit({ note: text }); dictation.edit(text); }}
+            placeholder={t('form.notePlaceholder')}
+            photoUri={photoUri}
+            onAddPicture={addPicture}
+            onRemovePicture={() => edit({ photoUri: null })}
+            onSpeak={() => dictation.toggle(note)}
+            speakLabel={tc('media.tapToSpeak')}
+            listening={dictation.listening}
+          />
+        ) : null}
+        <Hint text={hint} />
+      </View>
 
       <View style={styles.actions}>
         {error ? <Text style={styles.error} accessibilityLiveRegion="polite">{error}</Text> : null}
@@ -187,7 +203,7 @@ const styles = StyleSheet.create({
   header: { gap: 0 },
   // No negative margin: a long title ("Maghanap ng Volunteer") runs under the language pill.
   titles: { gap: 5, marginTop: 2 },
-  title: { ...Type.title, fontFamily: Fonts.displaySemiBold, fontSize: 25, lineHeight: 30 },
+  title: { ...Type.title, ...Face.displaySemiBold, fontSize: 25, lineHeight: 30 },
   subtitle: { fontFamily: Fonts.text, fontSize: 14, lineHeight: 18, color: Colors.text },
   appLang: { alignSelf: 'flex-end' },
   langPill: {
@@ -225,20 +241,12 @@ const styles = StyleSheet.create({
   ltrText: { writingDirection: 'ltr' },
   spot: { ...Type.body },
   venue: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 16, color: Colors.text },
-  panel: {
-    gap: Spacing.lg,
-    paddingTop: Spacing.lg,
-    paddingBottom: 14,
-    paddingHorizontal: 14,
-    borderRadius: Radius.md,
-    borderWidth: 1,
-    borderColor: Colors.controlBorder,
-    backgroundColor: Colors.primarySoft,
-  },
-  question: { ...Type.body },
-  grid: { gap: Spacing.md },
-  gridRow: { flexDirection: 'row', gap: Spacing.md },
-  actions: { gap: Spacing.lg, marginTop: Spacing.md },
+  helpTypes: { gap: Spacing.lg },
+  question: { ...Type.body, fontSize: 16, lineHeight: 21 },
+  // Figma spaces the rows 15pt apart.
+  list: { gap: 14 },
+  note: { gap: Spacing.lg },
+  actions: { gap: Spacing.lg, marginTop: Spacing.xl },
   send: { minHeight: 52 },
   error: { ...Type.caption, color: Colors.danger, textAlign: 'center' },
 });

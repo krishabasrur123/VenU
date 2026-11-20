@@ -10,7 +10,9 @@
  * - `walkMinutes` and `wait` are stand-ins for live data, e.g. a gate is a "Long wait" before doors.
  * - `accessible` = the guide says it's step-free or reachable by the venue's elevators/ramp.
  */
-import { eventsLabel, facilityDescription, facilityLocation, facilityName, venueT, type VenueT } from './labels';
+import { languageOf } from '@/i18n';
+
+import { categoryLabel, eventsLabel, facilityDescription, facilityLocation, facilityName, facilityOffer, tagLabel, venueT, type VenueT } from './labels';
 import type { Facility, FacilityCategory, Venue } from './types';
 
 export const VENUES: Venue[] = [
@@ -226,94 +228,111 @@ const CRYPTO_ARENA: Template[] = [
   },
 ];
 
-// Intuit Dome. Sources (read 2026-11-15):
-//   https://intuitdome.com/about/a-z-guide
+// Intuit Dome. Sources (read 2026-11-15, rechecked 2026-11-18):
+//   https://www.intuitdome.com/about/a-z-guide
+//   https://www.intuitdome.com/about/faq
 //   https://www.intuitdome.com/plan-your-visit/know-before-you-go
-//   https://intuitdome.com/plan-your-visit/parking-information
+//   https://www.intuitdome.com/plan-your-visit/parking-information
 //   https://www.intuitdome.com/plan-your-visit/venue-map (exterior image: plaza north-west of the
 //   dome on Century Blvd., West Garage across Prairie Ave., East Garage to the east)
-// The Answers Portal and Main 6 services sit by the plaza entrance (the GameFace lane is "nearest
-// the Answers Portal"). "Left of the Main Entrance" is read facing it from the plaza. Terrace
-// section sides aren't published, so those pins are approximate, and the sensory room has no
-// published spot at all (its pin is a placeholder; the card says to ask an Arena Host).
+// Indoor pins sit where the official seating chart puts their section when it's laid over the dome
+// on the exterior map (the court runs east-west, The Wall is the east end): Main 6 north-west,
+// Terrace 18 and Terrace Wall 16 on the east outer ring, Terrace 27 in the south block, Wall 19 by
+// the east tunnel. The Answers Portal and Main 6 services sit by the plaza entrance (the GameFace
+// lane is "nearest the Answers Portal"). "Left of the Main Entrance" is read facing it from the
+// plaza. The sensory room's and the elevators' spots aren't published (`approximate`: the pin is a
+// placeholder and there's no route; the card says to ask an Arena Host).
+// Elevators reach every level, so indoor rooms count as accessible unless the guide says otherwise.
 const INTUIT_DOME: Template[] = [
   {
     id: 'main-entrance', name: 'Main Entrance', category: 'gate', x: 0.307, y: 0.542,
-    description: 'GameFace ID lane on the left, Identity Pass lane on the right. Free mobility help from security to your seat.',
+    description: 'GameFace ID lane on the left, Identity Pass lane on the right; for accessible entry, Identity Pass holders tap in at the Answers Portal. Bags up to 10×6×2 in. (medical bags up to 14×14×6). Free mobility help from security to your seat.',
     location: 'On the plaza, off Century Blvd. and Prairie Ave.', walkMinutes: 4, wait: 'long', accessible: true,
-    tags: [{ id: 'accessible', tone: 'good' }, { id: 'wheelchair_escort', tone: 'note' }, { id: 'busy_before_events', tone: 'note' }],
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'wheelchair_escort', tone: 'note' }, { id: 'bag_check', tone: 'note' }, { id: 'busy_before_events', tone: 'note' }],
   },
   {
     id: 'vip-entrance', name: 'VIP Entrance', category: 'gate', x: 0.359, y: 0.535,
-    description: 'For suite, club and floor ticket holders.',
+    description: 'For suite, club and floor tickets (they can also use the Main Entrance).',
     location: 'Left of the Main Entrance', walkMinutes: 5, wait: 'none', accessible: false,
     tags: [{ id: 'premium_access', tone: 'note' }],
   },
   {
     id: 'wall-entrance', name: 'The Wall Entrance', category: 'gate', x: 0.411, y: 0.528,
-    description: 'Dedicated entrance for The Wall.',
+    description: 'For tickets in The Wall (they can also use the Main Entrance).',
     location: 'Left of the Main Entrance, past the VIP Entrance', walkMinutes: 6, wait: 'short', accessible: false,
     tags: [],
   },
   {
     id: 'answers-portal-main', name: 'Answers Portal Main', category: 'info', x: 0.333, y: 0.616,
-    description: 'Guest services: lost and found, free assisted listening (photo ID held) and OneCourt devices.',
+    description: 'Guest services: lost and found, free assisted listening (photo ID held), sensory bags (ID held) and OneCourt devices.',
     location: 'Main Level, near section Main 6', walkMinutes: 3, wait: 'none', accessible: true,
-    tags: [{ id: 'accessible', tone: 'good' }, { id: 'assistive_listening', tone: 'note' }, { id: 'lost_items', tone: 'note' }],
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'assistive_listening', tone: 'note' }, { id: 'sensory_kits', tone: 'note' }, { id: 'wheelchair_escort', tone: 'note' }, { id: 'lost_items', tone: 'note' }],
   },
   {
-    id: 'answers-portal-terrace', name: 'Answers Portal Terrace', category: 'info', x: 0.484, y: 0.796,
-    description: 'Guest services: lost and found and free assisted listening (photo ID held).',
+    id: 'answers-portal-terrace', name: 'Answers Portal Terrace', category: 'info', x: 0.535, y: 0.765,
+    description: 'Guest services: lost and found, free assisted listening (photo ID held) and OneCourt devices.',
     location: 'Terrace Level, near section Terrace 18', walkMinutes: 9, wait: 'none', accessible: true,
-    tags: [{ id: 'accessible', tone: 'good' }, { id: 'assistive_listening', tone: 'note' }, { id: 'lost_items', tone: 'note' }],
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'assistive_listening', tone: 'note' }, { id: 'wheelchair_escort', tone: 'note' }, { id: 'lost_items', tone: 'note' }],
   },
   {
-    id: 'first-aid-main', name: 'First Aid Main', category: 'first_aid', x: 0.294, y: 0.667,
+    id: 'first-aid-main', name: 'First Aid Main', category: 'first_aid', x: 0.350, y: 0.668,
     description: 'Trained EMTs at all events.',
     location: 'Main Level concourse, Main 6', walkMinutes: 4, wait: 'none', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }],
   },
   {
-    id: 'first-aid-terrace', name: 'First Aid Terrace', category: 'first_aid', x: 0.359, y: 0.815,
+    id: 'first-aid-terrace', name: 'First Aid Terrace', category: 'first_aid', x: 0.376, y: 0.895,
     description: 'Trained EMTs at all events.',
     location: 'Terrace Level concourse, Terrace 27', walkMinutes: 10, wait: 'none', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }],
   },
   {
-    id: 'first-aid-floor', name: 'First Aid Floor', category: 'first_aid', x: 0.526, y: 0.676,
+    id: 'first-aid-floor', name: 'First Aid Floor', category: 'first_aid', x: 0.480, y: 0.760,
     description: 'Trained EMTs at all events.',
     location: 'Floor Level, under Wall 19 by the east tunnel', walkMinutes: 7, wait: 'none', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }],
   },
   {
-    id: 'sensory-room', name: 'Sensory Room', category: 'accessible', x: 0.495, y: 0.593,
-    description: 'The private Kaiser Permanente Sensory Room. Sensory bags are available on request.',
+    id: 'sensory-room', name: 'Sensory Room', category: 'accessible', x: 0.495, y: 0.593, approximate: true,
+    description: 'The private Kaiser Permanente Sensory Room. Sensory bags (headphones, fidget toys) are at the Answers Portal by Main 6; ID needed.',
     location: 'Ask an Arena Host for the way', walkMinutes: 6, wait: 'none', accessible: false,
     tags: [{ id: 'sensory_room', tone: 'note' }, { id: 'sensory_kits', tone: 'note' }],
   },
   {
+    id: 'elevators', name: 'Elevators', category: 'accessible', x: 0.282, y: 0.600, approximate: true,
+    description: 'Elevators go from the Main Entrance to every level, and escalators link the Main and Terrace levels in the main lobby. Guests with limited mobility go first.',
+    location: 'Ask an Arena Host for the nearest one', walkMinutes: 2, wait: 'none', accessible: true,
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'escalators', tone: 'note' }],
+  },
+  {
     id: 'infant-care-room', name: 'Infant Care Room', category: 'restroom', x: 0.378, y: 0.602,
     description: 'A private room for infant care. Universal restrooms are all around the arena.',
-    location: 'Main Level, Main 6', walkMinutes: 4, wait: 'none', accessible: false,
-    tags: [{ id: 'family_room', tone: 'note' }],
+    location: 'Main Level, Main 6', walkMinutes: 4, wait: 'none', accessible: true,
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'family_room', tone: 'note' }, { id: 'changing_table', tone: 'note' }],
+  },
+  {
+    id: 'infant-care-terrace', name: 'Infant Care Room Terrace', category: 'restroom', x: 0.548, y: 0.690,
+    description: 'A private room for infant care. Every restroom also has a baby changing station.',
+    location: 'Terrace Level, Terrace Wall 16', walkMinutes: 9, wait: 'none', accessible: true,
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'family_room', tone: 'note' }, { id: 'changing_table', tone: 'note' }],
   },
   {
     id: 'mobility-hub', name: 'Mobility Hub', category: 'parking', x: 0.917, y: 0.648,
-    description: 'Rideshare and taxi drop-off and pick-up, family drop-off and shuttles.',
-    location: 'East Garage, level 1', walkMinutes: 11, wait: 'long', accessible: false,
+    description: 'The only rideshare drop-off and pick-up. Also taxis, family drop-off and free shuttles (ADA vans available).',
+    location: 'East Garage, level 1 (3700 W Century Blvd.)', walkMinutes: 11, wait: 'long', accessible: false,
     tags: [{ id: 'rideshare', tone: 'note' }, { id: 'busy_before_events', tone: 'note' }],
   },
   {
     id: 'east-garage', name: 'East Garage', category: 'parking', x: 0.914, y: 0.407,
-    description: 'Standard parking; buy a pass ahead. Accessible spaces are sold first come, first served.',
-    location: 'Entrance on 102nd St.', walkMinutes: 12, wait: 'none', accessible: false,
-    tags: [{ id: 'permit_needed', tone: 'note' }],
+    description: 'Standard parking; buy a pass ahead. Accessible spaces can be bought with a parking pass, first come, first served.',
+    location: '3665 W 102nd St (entrance on 102nd St.)', walkMinutes: 12, wait: 'none', accessible: true,
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'pass_needed', tone: 'note' }],
   },
   {
     id: 'west-garage', name: 'West Garage', category: 'parking', x: 0.125, y: 0.505,
-    description: 'VIP parking across Prairie Ave.; buy a pass ahead.',
-    location: 'Entrance on Prairie Ave.', walkMinutes: 8, wait: 'none', accessible: false,
-    tags: [{ id: 'permit_needed', tone: 'note' }],
+    description: 'VIP parking across Prairie Ave.; buy a pass ahead. Accessible spaces can be bought with a parking pass, first come, first served.',
+    location: '10117 S Prairie Ave (entrance on Prairie Ave.)', walkMinutes: 8, wait: 'none', accessible: true,
+    tags: [{ id: 'accessible', tone: 'good' }, { id: 'pass_needed', tone: 'note' }],
   },
 ];
 
@@ -373,18 +392,73 @@ export function searchVenues(query: string, venues: Venue[] = VENUES, t: VenueT 
   });
 }
 
-/** "Accessibility" also matches any facility that is accessible, not only the services desk. */
+/**
+ * "Accessibility" also matches any facility that is accessible, not only the services desk, and
+ * "Lost & Found" any desk that takes lost items (a guest services desk with the `lost_items` tag).
+ * A sponsored stand only ever matches its own category (food): an ad never answers an
+ * accessibility or safety filter, though its page keeps the wheelchair badge.
+ */
 export function matchesCategory(f: Facility, category: FacilityCategory | null): boolean {
   if (!category) return true;
-  return f.category === category || (category === 'accessible' && f.accessible);
+  if (f.sponsor) return f.category === category;
+  return f.category === category
+    || (category === 'accessible' && f.accessible)
+    || (category === 'lost_found' && f.tags.some(tag => tag.id === 'lost_items'));
 }
 
-/** Matches name, description and location, in English and in `t`'s language (see searchKey). */
+/** Words people search for that no label says, in English (labels cover every language). */
+const SEARCH_ALIASES: Partial<Record<FacilityCategory, string>> = {
+  gate: 'entrance entry door',
+  restroom: 'bathroom toilet washroom wc',
+  first_aid: 'medical doctor nurse emt',
+  accessible: 'wheelchair disability disabled',
+  parking: 'car garage',
+};
+
+/**
+ * What search compares a facility against: name, description, location, category and tag labels,
+ * in English and in `t`'s language. A sponsored stand only has its own name, brand, offer and
+ * description plus its category's words, never tag or accessibility words, so an ad never answers
+ * "wheelchair" or "first aid".
+ */
+function searchText(f: Facility, t: VenueT, en: VenueT): string {
+  const category = `${categoryLabel(f.category, en)} ${categoryLabel(f.category, t)} ${SEARCH_ALIASES[f.category] ?? ''}`;
+  if (f.sponsor) {
+    return searchKey(`${f.name} ${f.description} ${f.sponsor.brand} ${f.sponsor.offer} ${facilityName(f, t)} ${facilityDescription(f, t)} ${facilityOffer(f, t)} ${category}`);
+  }
+  const labels = [
+    category,
+    ...f.tags.flatMap(tag => [tagLabel(tag, en), tagLabel(tag, t)]),
+    f.accessible ? `${categoryLabel('accessible', en)} ${categoryLabel('accessible', t)} ${SEARCH_ALIASES.accessible}` : '',
+  ];
+  return searchKey(`${f.name} ${f.description} ${f.location} ${facilityName(f, t)} ${facilityDescription(f, t)} ${facilityLocation(f, t)} ${labels.join(' ')}`);
+}
+
+// Each facility's search text per language, built on its first search: the list searches again on
+// every keystroke. Facilities are the same objects every call (facilitiesFor, venueFacilitiesFor).
+const searchTexts = new WeakMap<Facility, Map<string, string>>();
+
+function cachedSearchText(f: Facility, t: VenueT, en: VenueT): string {
+  let texts = searchTexts.get(f);
+  if (!texts) searchTexts.set(f, (texts = new Map()));
+  const language = languageOf(t);
+  let text = texts.get(language);
+  if (text === undefined) texts.set(language, (text = searchText(f, t, en)));
+  return text;
+}
+
+/**
+ * Matches name, description, location, category and tag labels, in English and in `t`'s language
+ * (see searchKey), so "restroom" finds the infant care room and "wheelchair" an escort desk.
+ * Sponsored stands match only their own words (see searchText).
+ */
 export function searchFacilities(facilities: Facility[], query: string, category: FacilityCategory | null, t: VenueT = venueT()): Facility[] {
   const words = searchWords(query);
+  if (!words.length) return facilities.filter(f => matchesCategory(f, category));
+  const en = venueT('en');
   return facilities.filter(f => {
     if (!matchesCategory(f, category)) return false;
-    const hay = searchKey(`${f.name} ${f.description} ${f.location} ${facilityName(f, t)} ${facilityDescription(f, t)} ${facilityLocation(f, t)}`);
+    const hay = cachedSearchText(f, t, en);
     return words.every(w => hay.includes(w));
   });
 }

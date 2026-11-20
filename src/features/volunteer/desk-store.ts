@@ -10,11 +10,18 @@ import { useSyncExternalStore } from 'react';
 import { onBeforeSignOut } from '@/lib/before-sign-out';
 
 import { appBackend } from './app-backend';
-import { AlreadyHelpingError, AlreadyTakenError, newId, RequestClosedError, type VolunteerBackend } from './backend';
+import { AlreadyHelpingError, AlreadyTakenError, newId, NotVerifiedError, RequestClosedError, type VolunteerBackend } from './backend';
 import type { Assignment, ChatMessage, IncomingRequest, RequestClosed } from './types';
 
-/** volunteer:desk.<key>, e.g. { key: 'cancelled', params: { name: 'Rosa' } } → "Rosa cancelled the request." */
-export type DeskNoticeKey = 'taken' | 'withdrawn' | 'acceptFailed' | 'cancelled' | 'done' | 'ended';
+/**
+ * volunteer:desk.<key>, e.g. { key: 'cancelled', params: { name: 'Rosa' } } → "Rosa cancelled the request."
+ * closed: called off without either of them (e.g. the visitor's account was deleted).
+ * handedBack: this volunteer tapped "Can't make it".
+ */
+export type DeskNoticeKey = 'taken' | 'withdrawn' | 'acceptFailed' | 'notVerified' | 'cancelled' | 'closed' | 'done' | 'ended' | 'handedBack';
+
+/** The other person ended it: the banner stays until dismissed, so it isn't missed on the way back from the chat. */
+export const STICKY_DESK_NOTICES: DeskNoticeKey[] = ['cancelled', 'closed', 'done'];
 
 /** A restore that failed (offline) tries again after this, doubling each time up to RESTORE_RETRY_MAX_MS. */
 export const RESTORE_RETRY_MS = 2000;
@@ -51,6 +58,8 @@ export function createDeskStore(backend: VolunteerBackend) {
   let senderLanguage: string | null = null;
   let stopChat: (() => void) | null = null;
   let retryTimer: ReturnType<typeof setTimeout> | null = null;
+  /** Requests this volunteer handed back ("Can't make it"): kept off their list, so they go to someone else. */
+  let handedBack = new Set<string>();
 
   const live = !!(backend.watchOpenRequests && backend.acceptRequest);
 
@@ -86,7 +95,7 @@ export function createDeskStore(backend: VolunteerBackend) {
     const a = state.assignment;
     if (!a || a.id !== requestId) return;
     leaveChat();
-    const key = how.byMe ? 'ended' : how.status;
+    const key: DeskNoticeKey = how.byMe ? 'ended' : how.status === 'done' ? 'done' : how.bySystem ? 'closed' : 'cancelled';
     set({ assignment: null, messages: [], unread: 0, notice: { tone: 'success', key, params: { name: a.visitorName } } });
   }
 
@@ -129,6 +138,7 @@ export function createDeskStore(backend: VolunteerBackend) {
     if (retryTimer) clearTimeout(retryTimer);
     retryTimer = null;
     generation += 1;
+    handedBack = new Set();
     state = INITIAL_DESK;
     listeners.forEach(l => l());
   }
@@ -169,7 +179,7 @@ export function createDeskStore(backend: VolunteerBackend) {
       const stop = backend.watchOpenRequests(open => {
         if (mine !== generation) return;
         const taken = state.assignment?.id;
-        set({ open: taken ? open.filter(r => r.id !== taken) : open });
+        set({ open: open.filter(r => r.id !== taken && !handedBack.has(r.id)) });
       });
       return () => {
         stop();
@@ -179,7 +189,8 @@ export function createDeskStore(backend: VolunteerBackend) {
 
     /**
      * Takes an open request. True when this volunteer got it; false when someone else did first
-     * ("already taken"), the visitor withdrew it ("withdrawn") or it failed (e.g. offline). When
+     * ("already taken"), the visitor withdrew it ("withdrawn"), LA28 hasn't verified this volunteer
+     * yet ("notVerified") or it failed (e.g. offline). When
      * this volunteer already has a request (accepted on another device), that one shows instead.
      */
     async accept(requestId: string): Promise<boolean> {
@@ -200,10 +211,11 @@ export function createDeskStore(backend: VolunteerBackend) {
           return false;
         }
         const gone = e instanceof AlreadyTakenError || e instanceof RequestClosedError;
+        const key = e instanceof NotVerifiedError ? 'notVerified' : e instanceof RequestClosedError ? 'withdrawn' : gone ? 'taken' : 'acceptFailed';
         set({
           accepting: null,
           open: gone ? state.open.filter(r => r.id !== requestId) : state.open,
-          notice: { tone: 'error', key: e instanceof RequestClosedError ? 'withdrawn' : gone ? 'taken' : 'acceptFailed' },
+          notice: { tone: 'error', key },
         });
         return false;
       }
@@ -238,6 +250,31 @@ export function createDeskStore(backend: VolunteerBackend) {
       if (!id) return;
       closed(id, { status: 'done', byMe: true });
       backend.endHelp(id).catch(() => {});
+    },
+
+    /**
+     * "Can't make it": hands the request back without finishing. It opens again for other
+     * volunteers (not this one), and the visitor's app goes back to searching instead of asking
+     * for a rating. False when the backend has no hand-back, or it failed (e.g. offline): the
+     * request stays, and the card says it didn't work.
+     */
+    async handBack(): Promise<boolean> {
+      const a = state.assignment;
+      if (!a || !backend.releaseRequest) return false;
+      const mine = generation;
+      try {
+        await backend.releaseRequest(a.id);
+      } catch {
+        return false;
+      }
+      if (mine !== generation || state.assignment?.id !== a.id) return false;
+      handedBack.add(a.id);
+      leaveChat();
+      set({
+        assignment: null, messages: [], unread: 0, open: state.open.filter(r => r.id !== a.id),
+        notice: { tone: 'success', key: 'handedBack', params: { name: a.visitorName } },
+      });
+      return true;
     },
 
     /**

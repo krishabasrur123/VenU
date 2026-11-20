@@ -7,8 +7,9 @@
     "roleQuestion": "방문객인가요, 자원봉사자인가요?",
     "signIn": "로그인",
     "socialTitle": "또는 다음으로 가입",
-    "socialSoon": "Google, Apple, Facebook 로그인은 곧 제공됩니다.",
-    "languageTitle": "앱 언어"
+    "languageTitle": "앱 언어",
+    "accountDeleted": "계정이 삭제되었습니다. 언제든 새로 만들 수 있어요.",
+    "signInKept": "프로필과 사진이 삭제되었습니다. 로그인 정보(이메일)는 아직 남아 있으니 VenU 팀에 삭제를 요청하세요."
   },
   "auth": {
     "languagePill": "앱 언어: {{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "계정이 없으신가요?",
     "signUp": "가입하기",
     "forgot": "비밀번호를 잊으셨나요?",
-    "forgotSoon": "비밀번호 재설정은 곧 제공됩니다.",
     "confirmNotice": "이메일에서 계정을 확인한 뒤 로그인하세요.",
+    "resetNotice": "비밀번호가 변경되었습니다. 새 비밀번호로 로그인하세요.",
     "submit": "로그인"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "이용 약관에 동의합니다",
     "submit": "계정 만들기"
   },
+  "forgot": {
+    "title": "비밀번호 찾기",
+    "intro": "사용자 이름이나 이메일을 입력하세요. 새 비밀번호를 정할 수 있는 링크를 이메일로 보내드려요.",
+    "identifier": "사용자 이름 또는 이메일",
+    "submit": "링크 보내기",
+    "resend": "다시 보내기",
+    "sent": "해당 사용자 이름이나 이메일로 된 계정이 있다면 링크를 보냈습니다. 받은편지함을 확인하세요.",
+    "useEmail": "아직 사용자 이름으로는 재설정할 수 없습니다. 이메일을 입력하세요.",
+    "remembered": "기억나셨나요?"
+  },
+  "reset": {
+    "title": "새 비밀번호",
+    "intro": "계정에 사용할 새 비밀번호를 정하세요.",
+    "password": "새 비밀번호",
+    "passwordPlaceholder": "새 비밀번호 입력",
+    "confirm": "비밀번호 확인",
+    "confirmPlaceholder": "한 번 더 입력",
+    "submit": "비밀번호 저장",
+    "checking": "링크 확인 중…",
+    "badLink": "사용할 수 없는 링크입니다. 새 링크를 요청하세요.",
+    "noLink": "비밀번호 재설정 이메일의 링크로 이 페이지를 여세요.",
+    "newLink": "새 링크 보내기"
+  },
+  "social": {
+    "notEnabled": "{{provider}} 로그인은 아직 준비되지 않았습니다. 이메일로 계정을 만드세요.",
+    "notEnabledAny": "해당 로그인 방식은 아직 준비되지 않았습니다. 이메일로 계정을 만드세요.",
+    "cancelled": "로그인이 취소되었습니다. 다시 시도하거나 이메일을 사용하세요.",
+    "failed": "그 계정으로 로그인하지 못했습니다. 다시 시도하거나 이메일을 사용하세요.",
+    "failedTitle": "로그인하지 못했습니다",
+    "signingIn": "로그인하는 중…"
+  },
   "validate": {
     "email": "올바른 이메일을 입력하세요.",
     "identifier": "사용자 이름이나 이메일을 입력하세요.",
     "usernameLength": "사용자 이름은 {{min}}–{{max}}자로 입력하세요.",
     "usernameChars": "사용자 이름에는 영문, 숫자, _, .만 쓸 수 있어요.",
     "passwordLength": "비밀번호는 {{min}}자 이상이어야 합니다.",
+    "passwordMatch": "비밀번호가 일치하지 않습니다.",
     "password": "비밀번호를 입력하세요.",
     "terms": "계속하려면 이용 약관에 동의하세요."
   },

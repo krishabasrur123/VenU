@@ -7,8 +7,9 @@
     "roleQuestion": "Visitor or volunteer?",
     "signIn": "Sign In",
     "socialTitle": "OR sign up using",
-    "socialSoon": "Google, Apple and Facebook sign-in are coming soon.",
-    "languageTitle": "App language"
+    "languageTitle": "App language",
+    "accountDeleted": "Your account is deleted. You can make a new one any time.",
+    "signInKept": "Your profile and photo are deleted. Your sign-in (email) still exists for now; ask the VenU team to remove it."
   },
   "auth": {
     "languagePill": "App language: {{language}}",
@@ -31,8 +32,8 @@
     "noAccount": "Don’t have an account?",
     "signUp": "Sign Up",
     "forgot": "Forgot Password?",
-    "forgotSoon": "Password reset is coming soon.",
     "confirmNotice": "Check your email to confirm your account, then sign in.",
+    "resetNotice": "Password changed. Sign in with your new password.",
     "submit": "Sign In"
   },
   "signUp": {
@@ -43,12 +44,44 @@
     "agreeLabel": "Agree with Terms & Conditions",
     "submit": "Create Account"
   },
+  "forgot": {
+    "title": "Forgot Password",
+    "intro": "Enter your username or email. We’ll email you a link to choose a new password.",
+    "identifier": "Username or email",
+    "submit": "Send Link",
+    "resend": "Send Again",
+    "sent": "If an account exists for that username or email, we sent it a link. Check your inbox.",
+    "useEmail": "Resetting by username isn’t available yet. Enter your email instead.",
+    "remembered": "Remembered it?"
+  },
+  "reset": {
+    "title": "New Password",
+    "intro": "Choose a new password for your account.",
+    "password": "New password",
+    "passwordPlaceholder": "Enter new password",
+    "confirm": "Confirm password",
+    "confirmPlaceholder": "Enter it again",
+    "submit": "Save Password",
+    "checking": "Checking your link…",
+    "badLink": "That link doesn’t work. Ask for a new one.",
+    "noLink": "Open this page from the link in your password reset email.",
+    "newLink": "Send a New Link"
+  },
+  "social": {
+    "notEnabled": "{{provider}} sign-in isn’t set up yet. Create an account with your email instead.",
+    "notEnabledAny": "That sign-in option isn’t set up yet. Create an account with your email instead.",
+    "cancelled": "Sign-in was cancelled. Try again, or use your email.",
+    "failed": "Couldn’t sign in with that account. Try again, or use your email.",
+    "failedTitle": "Couldn’t sign in",
+    "signingIn": "Signing you in…"
+  },
   "validate": {
     "email": "Enter a valid email.",
     "identifier": "Enter your username or email.",
     "usernameLength": "Use {{min}}–{{max}} characters for your username.",
     "usernameChars": "Use only letters, numbers, _ and . in your username.",
     "passwordLength": "Use at least {{min}} characters for your password.",
+    "passwordMatch": "The passwords don’t match.",
     "password": "Enter your password.",
     "terms": "Agree to the Terms & Conditions to continue."
   },

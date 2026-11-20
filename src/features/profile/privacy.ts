@@ -75,8 +75,7 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     key: 'keep',
     title: 'How long we keep it',
     points: [
-      'Your profile and photo: until you delete them (Profile → Delete my data).',
-      'Your sign-in email: until your account is closed. In-app account closing is coming; until then, ask the team.',
+      'Your account, profile and photo: until you delete them (Profile → Delete my data).',
       'Data from LA28 events is deleted after the Games end (date TBD by the team).',
       'Help requests, chats, ratings and facility reports count as event data.',
     ],
@@ -87,7 +86,7 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     points: [
       'Edit your profile any time from the Profile tab.',
       'Access needs are optional. Share only what helps.',
-      'Delete your data from Profile → Delete my data. It removes your profile and photo (not yet your sign-in email).',
+      'Delete your data from Profile → Delete my data. It removes your account and sign-in email, profile and photo; the people you chatted with keep the help request, without your messages.',
     ],
   },
 ];

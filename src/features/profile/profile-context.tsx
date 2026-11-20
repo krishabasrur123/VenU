@@ -2,9 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { AppState } from 'react-native';
 
+import { deleteAccount, forgetDeletedAccount } from '@/lib/account';
 import * as auth from '@/lib/auth';
+import { onBeforeSignOut } from '@/lib/before-sign-out';
 import { AVATAR_BUCKET, supabase } from '@/lib/supabase';
 
+import { carryOverDeviceSettings } from './device-settings';
+import { createSettingsSync } from './settings-sync';
 import {
   AVATAR_URL_TTL_S,
   createLocalStore,
@@ -15,11 +19,20 @@ import {
   type PendingUpload,
   type ProfileStore,
 } from './store';
-import type { Profile, ProfileDraft } from './types';
+import type { Profile, ProfileDraft, ProfileSettings } from './types';
 
 const store: ProfileStore = supabase
   ? createSupabaseStore(supabase, AVATAR_BUCKET)
   : createLocalStore(AsyncStorage);
+
+// Settings saved on their own (one app, one provider, like `store`). The provider plugs in what a
+// landed or refused save does to the screen.
+const syncHandlers: { saved(p: Profile): void; rejected(): void } = { saved: () => {}, rejected: () => {} };
+const sync = createSettingsSync({
+  save: (uid, settings) => store.saveSettings(uid, settings),
+  onSaved: p => syncHandlers.saved(p),
+  onRejected: () => syncHandlers.rejected(),
+});
 
 /** `error`: couldn't load (e.g. offline); the saved session is kept and `refresh()` retries. */
 type Status = 'loading' | 'signedOut' | 'ready' | 'error';
@@ -41,8 +54,23 @@ interface ProfileContextValue {
    * they are. Resolves null when another account signed in while it saved (that session wins).
    */
   saveAppLanguage(code: string): Promise<Profile | null>;
-  /** Deletes the profile and photos, then signs out (one step, so no screen sees "signed in, no profile"). */
-  deleteAll(): Promise<void>;
+  /**
+   * Changes settings that save on their own (Free / Busy / Off, notification switches): shows at once,
+   * saves in the background and retries offline (settings-sync.ts), e.g. saveSettings({ availability: 'busy' }).
+   */
+  saveSettings(settings: Partial<ProfileSettings>): void;
+  /**
+   * Re-reads the profile without a loading or error screen, e.g. to see `verified` once LA28 sets it.
+   * Keeps the photo URL when the photo hasn't changed.
+   */
+  recheck(): Promise<void>;
+  /**
+   * Deletes the account: its sign-in, profile and photos (the delete-account Edge Function), then
+   * forgets it on this device (one step, so no screen sees "signed in, no profile"). Resolves
+   * 'account', or 'dataOnly' when the function isn't deployed yet: the profile and photos are gone
+   * but the sign-in remains, and the screen says so.
+   */
+  deleteAll(): Promise<'account' | 'dataOnly'>;
   signOut(): Promise<void>;
 }
 
@@ -83,6 +111,8 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   // Bumped by every load and every sign-out, so a slow load that finishes after something newer
   // happened (a sign-out, a sign-in, another load) is discarded instead of overwriting it.
   const generation = useRef(0);
+  // The photo path on screen, for recheck() to tell whether the URL needs signing again.
+  const avatarPathRef = useRef<string | null>(null);
 
   const setSignedUrl = useCallback((url: string | null) => {
     signedAt.current = url ? Date.now() : 0;
@@ -95,8 +125,11 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       // Kept uploads belong to one account; never carry them into another session.
       if (s.userId !== userIdRef.current) pendingUploads.current = [];
       userIdRef.current = s.userId;
+      // Another account (or signed out) drops unsaved settings; the same account keeps them on top.
+      sync.setUser(s.userId);
+      avatarPathRef.current = s.profile?.avatarPath ?? null;
       setUserId(s.userId);
-      setProfile(s.profile);
+      setProfile(sync.overlay(s.profile));
       setSignedUrl(s.avatarUrl);
       setStatus(s.userId ? 'ready' : 'signedOut');
       setLoadError(null);
@@ -109,6 +142,16 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     applySession(SIGNED_OUT);
   }, [applySession]);
 
+  const saveSettings = useCallback(
+    (settings: Partial<ProfileSettings>) => {
+      const uid = userIdRef.current;
+      if (!uid) return;
+      setProfile(p => (p && p.id === uid ? { ...p, ...settings } : p));
+      sync.change(settings);
+    },
+    [],
+  );
+
   /**
    * Loads the session and applies it, unless something newer happened meanwhile.
    * `quiet` (background reloads: another tab, after a failed delete) keeps the current screen
@@ -119,7 +162,21 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       const mine = ++generation.current;
       try {
         const s = await loadSession();
-        if (mine === generation.current) applySession(s);
+        if (mine === generation.current) {
+          applySession(s);
+          // Settings saved on this device before they moved to the profile come along once
+          // (compared with what's on screen, so an unsaved change here wins).
+          const loaded = sync.overlay(s.profile);
+          if (loaded) {
+            void carryOverDeviceSettings(loaded, {
+              storage: AsyncStorage,
+              save: saveSettings,
+              idle: () => sync.idle(),
+              pending: () => sync.pending(),
+              isCurrent: () => userIdRef.current === loaded.id,
+            });
+          }
+        }
         return s.profile;
       } catch (e) {
         if (!quiet && mine === generation.current) {
@@ -129,10 +186,18 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         throw e;
       }
     },
-    [applySession],
+    [applySession, saveSettings],
   );
 
   const refresh = useCallback(() => load(false), [load]);
+
+  // A settings save that lands updates only the settings on screen, so it can't undo a profile form
+  // save or photo change made meanwhile. One the server refused: show what's stored.
+  useEffect(() => {
+    syncHandlers.saved = saved =>
+      setProfile(p => (p && p.id === saved.id ? { ...p, availability: saved.availability, notificationPrefs: saved.notificationPrefs } : p));
+    syncHandlers.rejected = () => void load(true).catch(() => {});
+  }, [load]);
 
   // Startup load. A failure (e.g. offline) is 'error', not 'signedOut', so a saved session isn't thrown away.
   useEffect(() => {
@@ -194,7 +259,8 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       generation.current += 1; // a same-user reload that started before this save mustn't put the old profile back
       // Same photo: keep the current URL (no extra round trip, no re-download).
       if (saved.avatarPath !== (profile?.avatarPath ?? null)) setSignedUrl(await urlFor(saved));
-      setProfile(saved);
+      avatarPathRef.current = saved.avatarPath;
+      setProfile(sync.overlay(saved));
       return saved;
     },
     [userId, profile, setSignedUrl],
@@ -206,27 +272,63 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       const saved = await setAppLanguageIfCurrent(store, userId, code, () => userIdRef.current);
       if (!saved) return null;
       generation.current += 1;
-      setProfile(saved);
+      setProfile(sync.overlay(saved));
       return saved;
     },
     [userId],
   );
 
-  const deleteAll = useCallback(async () => {
-    if (!userId) return;
+  const recheck = useCallback(async () => {
+    const uid = userIdRef.current;
+    if (!uid) return;
+    const mine = generation.current;
+    const fresh = await store.get(uid);
+    // Something newer happened (a load, a save, a sign-out): that wins.
+    if (!fresh || mine !== generation.current || userIdRef.current !== uid) return;
+    if (fresh.avatarPath !== avatarPathRef.current) {
+      const url = await urlFor(fresh);
+      if (mine !== generation.current || userIdRef.current !== uid) return;
+      setSignedUrl(url);
+    }
+    avatarPathRef.current = fresh.avatarPath;
+    // Settings stay as shown: a settings save may have landed while this read was out.
+    setProfile(p => (p && p.id === uid ? { ...fresh, availability: p.availability, notificationPrefs: p.notificationPrefs } : p));
+  }, [setSignedUrl]);
+
+  // An offline settings save tries again on returning to the app, and gets a last go before sign-out
+  // (while the session still allows it; sign-out waits a few seconds at most).
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', state => {
+      if (state === 'active') void sync.retry();
+    });
+    const off = onBeforeSignOut(() => sync.idle());
+    return () => {
+      sub.remove();
+      off();
+    };
+  }, []);
+
+  const deleteAll = useCallback(async (): Promise<'account' | 'dataOnly'> => {
+    if (!userId) return 'account';
     // Any kept upload is in the folder this sweeps, so it can't be reused afterwards either way.
     pendingUploads.current = [];
+    let outcome: Awaited<ReturnType<typeof deleteAccount>>;
     try {
-      await store.deleteAll(userId);
+      outcome = await deleteAccount();
+      // Not deployed yet (or local mode): delete what the app can reach itself.
+      if (outcome !== 'deleted') await store.deleteAll(userId);
     } catch (e) {
       // Part of it may be gone (e.g. the photo). Show what's actually there now, quietly, so the
       // Profile screen stays up to report the failure even if this reload fails too.
       await load(true).catch(() => {});
       throw e;
     }
-    // The data is gone; a sign-out hiccup mustn't leave a signed-in user with no profile.
-    await auth.signOut().catch(() => {});
+    // The data is gone; a sign-out hiccup mustn't leave a signed-in user with no profile. A deleted
+    // account's server session went with it, so only this device's copy is dropped.
+    if (outcome === 'deleted') await forgetDeletedAccount();
+    else await auth.signOut().catch(() => {});
     goSignedOut();
+    return outcome === 'notDeployed' ? 'dataOnly' : 'account';
   }, [userId, load, goSignedOut]);
 
   const signOut = useCallback(async () => {
@@ -235,8 +337,8 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   }, [goSignedOut]);
 
   const value = useMemo(
-    () => ({ status, loadError, userId, profile, avatarUrl, refresh, save, saveAppLanguage, deleteAll, signOut }),
-    [status, loadError, userId, profile, avatarUrl, refresh, save, saveAppLanguage, deleteAll, signOut],
+    () => ({ status, loadError, userId, profile, avatarUrl, refresh, save, saveAppLanguage, saveSettings, recheck, deleteAll, signOut }),
+    [status, loadError, userId, profile, avatarUrl, refresh, save, saveAppLanguage, saveSettings, recheck, deleteAll, signOut],
   );
   return <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>;
 }

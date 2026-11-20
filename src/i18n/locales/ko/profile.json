@@ -15,13 +15,14 @@
     "help": "도움말 및 의견",
     "terms": "이용 약관",
     "signOutFailed": "로그아웃하지 못했습니다. {{reason}}",
-    "deleteWarning": "프로필과 사진이 영구 삭제됩니다. 나중에 새로 만들 수 있어요.",
+    "deleteWarning": "계정, 프로필, 사진이 영구 삭제됩니다. 이 계정으로 다시 로그인할 수 없어요.",
     "deleteFailed": "데이터를 모두 삭제하지 못했습니다. {{reason}}",
     "deleteData": "내 데이터 삭제"
   },
   "edit": {
     "title": "프로필 편집",
     "subtitle": "변경 사항은 다음 도움 요청부터 적용됩니다.",
+    "subtitleVolunteer": "다음에 도움을 줄 때부터 방문객에게 변경 사항이 보여요.",
     "submit": "변경 사항 저장",
     "discardTitle": "저장하지 않고 나갈까요? 변경 내용이 사라집니다.",
     "keepEditing": "계속 수정",
@@ -207,7 +208,8 @@
     "placeholder": "예: 햇빛 아래에서 지도가 잘 안 보였어요",
     "feedbackLabel": "의견",
     "send": "의견 보내기",
-    "empty": "먼저 몇 마디 적어 주세요."
+    "empty": "먼저 몇 마디 적어 주세요.",
+    "sendFailed": "의견을 보내지 못했어요. {{reason}}"
   },
   "notifications": {
     "title": "알림",
@@ -216,7 +218,9 @@
     "options": {
       "volunteer": {
         "label": "자원봉사자 소식",
-        "hint": "예: Daniel이 수락하고 오는 중입니다"
+        "hint": "예: Daniel이 수락하고 오는 중입니다",
+        "labelVolunteer": "도움 요청",
+        "hintVolunteer": "예: 근처 방문객이 도움을 요청했어요"
       },
       "chat": {
         "label": "채팅 메시지",

@@ -17,6 +17,7 @@ import { useT } from '@/i18n';
 import { HelpIcon } from './help-icon';
 import { MeetPlaceText } from './meet-place';
 import { NoteBanner } from './note-banner';
+import { SponsorBanner } from './sponsor-banner';
 
 /** `notice`: why it's searching again, e.g. "Your volunteer had to leave. Finding someone else." */
 export function SearchingView({ request, notice }: { request: HelpRequest; notice?: Notice | null }) {
@@ -58,6 +59,9 @@ export function SearchingView({ request, notice }: { request: HelpRequest; notic
       <RequestSummary request={request} />
 
       <Button label={t('cancelRequest')} variant="link" onPress={volunteerRequests.cancel} style={styles.cancel} />
+
+      {/* The one ad slot here: after Cancel, in the flow, so it never covers the request or the notice. */}
+      <SponsorBanner />
     </View>
   );
 }

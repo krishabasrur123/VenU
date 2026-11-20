@@ -105,8 +105,8 @@ export interface RequestDraft {
  */
 export type RequestStatus = 'idle' | 'searching' | 'notFound' | 'matched' | 'done';
 
-/** volunteer:notice.<key>. */
-export type NoticeKey = 'thanks' | 'searchFailed' | 'volunteerLeft';
+/** volunteer:notice.<key>. volunteerEnded: the volunteer ended the chat, shown above the rating. */
+export type NoticeKey = 'thanks' | 'searchFailed' | 'volunteerLeft' | 'volunteerEnded';
 
 export interface Notice {
   tone: 'success' | 'error';
@@ -162,8 +162,12 @@ export interface Assignment {
 /** How a request ended: called off ('cancelled') or the help happened ('done'). */
 export type ClosedStatus = 'cancelled' | 'done';
 
-/** A request closing, as the backend reports it. `byMe`: this device's user closed it. */
+/**
+ * A request closing, as the backend reports it. `byMe`: this device's user closed it. `bySystem`:
+ * neither person did (e.g. the visitor's account was deleted), so nobody is named as cancelling.
+ */
 export interface RequestClosed {
   status: ClosedStatus;
   byMe: boolean;
+  bySystem?: boolean;
 }
