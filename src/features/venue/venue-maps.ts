@@ -63,19 +63,20 @@ const MAPS: Readonly<Record<string, VenueMap>> = {
     widthMeters: 900,
     arrival: 'main-entrance',
   },
-  // cryptoarena.com publishes no static map or seating chart image (checked 2026-11-16), only the
-  // interactive Wayfyndr map, so the schematic arena stands in. The schematic is a 400×400 square;
-  // the arena building occupies x 35–365, y 55–345. Focus tightened to show the building plus a
-  // little margin on each side, leaving out the empty corners of the square viewport. The arena
-  // block (Chick Hearn Ct. north, Figueroa east, 12th St. south, Georgia west) is roughly 260 m
-  // across the building itself; the full schematic square covers ~350 m to reach the street pins.
+  // Seating blueprint (525×392) bundled as a local asset — use the special "local:" prefix so
+  // venue-map-view.tsx can resolve it via require() without polluting this plain TS module with
+  // a React Native require() call that breaks Jest.
   'crypto-arena': {
     source: 'Crypto.com Arena',
     pageUrl: 'https://visit.cryptoarena.com/map',
-    image: null,
+    image: {
+      url: 'local:crypto-arena-map',
+      width: 525,
+      height: 392,
+    },
     shape: 'arena',
-    focus: [0.04, 0.08, 0.96, 0.92],
-    widthMeters: 350,
+    focus: [0.05, 0.03, 0.95, 0.97],
+    widthMeters: 260,
     arrival: 'star-plaza-entrance',
   },
 };
