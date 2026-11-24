@@ -63,19 +63,21 @@ const MAPS: Readonly<Record<string, VenueMap>> = {
     widthMeters: 900,
     arrival: 'main-entrance',
   },
-  // Seating blueprint (525×392) bundled as a local asset — use the special "local:" prefix so
+  // Seating blueprint (1425×1104) bundled as a local asset — use the special "local:" prefix so
   // venue-map-view.tsx can resolve it via require() without polluting this plain TS module with
-  // a React Native require() call that breaks Jest.
+  // a React Native require() call that breaks Jest. North is up (compass shown top-left).
+  // Chick Hearn Way runs along the top, Figueroa St. along the bottom-right, Georgia St. to the
+  // left. Entrances, Guest Services and restroom icons are labelled on the image itself.
   'crypto-arena': {
     source: 'Crypto.com Arena',
     pageUrl: 'https://visit.cryptoarena.com/map',
     image: {
       url: 'local:crypto-arena-map',
-      width: 525,
-      height: 392,
+      width: 1425,
+      height: 1104,
     },
     shape: 'arena',
-    focus: [0.05, 0.03, 0.95, 0.97],
+    focus: [0.08, 0.04, 0.92, 0.96],
     widthMeters: 260,
     arrival: 'star-plaza-entrance',
   },

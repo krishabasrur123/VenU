@@ -45,7 +45,7 @@ const NATIVE_LTR = Platform.OS === 'web' ? null : ({ direction: 'ltr' } as const
 
 /** Bundled local map images keyed by the 'local:…' sentinel used in venue-maps.ts. */
 const LOCAL_IMAGES: Record<string, number> = {
-  'local:crypto-arena-map': require('../../assets/images/StaplesCenter_Basketball-Lakers-RO_2021-06-02_2021-06-02_0830_06022021_083815_SVGC_tn.png'),
+  'local:crypto-arena-map': require('../../../assets/images/Crypto.com Arena Seating Blueprint.png'),
 };
 
 /** Resolves a VenueMapImage to an expo-image source: a require() number for locals, a URI object for remotes. */
