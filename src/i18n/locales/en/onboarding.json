@@ -33,6 +33,10 @@
     "forgot": "Forgot Password?",
     "forgotSoon": "Password reset is coming soon.",
     "confirmNotice": "Check your email to confirm your account, then sign in.",
+    "confirmBlocked": "You need to verify your email before signing in.",
+    "resend": "Resend confirmation email",
+    "resendSent": "Email sent — check your inbox.",
+    "resendError": "Couldn't resend. Try again.",
     "submit": "Sign In"
   },
   "signUp": {
