@@ -37,9 +37,22 @@ export async function signIn(identifier: string, password: string): Promise<Auth
   return signInByEmail(supabase, typed, password);
 }
 
+async function checkEmailConfirmed(client: SupabaseClient): Promise<string | null> {
+  const { data } = await client.auth.getUser();
+  if (data.user?.email_confirmed_at) return null; // confirmed — no problem
+  // Not confirmed: sign them back out so the session doesn't persist
+  await client.auth.signOut({ scope: 'local' });
+  return data.user?.email ?? null; // return email so the UI can pre-fill it
+}
+
 async function signInByEmail(client: SupabaseClient, email: string, password: string): Promise<AuthResult> {
   const { error } = await client.auth.signInWithPassword({ email, password });
-  return error ? { ok: false, error: friendlyError(error) } : { ok: true, email };
+  if (error) return { ok: false, error: friendlyError(error) };
+  const unconfirmedEmail = await checkEmailConfirmed(client);
+  if (unconfirmedEmail !== null) {
+    return { ok: true, needsConfirmation: true, email: unconfirmedEmail };
+  }
+  return { ok: true, email };
 }
 
 interface FunctionSession {
@@ -61,6 +74,10 @@ async function signInByUsername(client: SupabaseClient, username: string, passwo
   if (typeof data?.access_token !== 'string' || typeof data.refresh_token !== 'string') return { ok: false, error: friendlyError(null) };
   const set = await client.auth.setSession({ access_token: data.access_token, refresh_token: data.refresh_token });
   if (set.error) return { ok: false, error: friendlyError(set.error) };
+  const unconfirmedEmail = await checkEmailConfirmed(client);
+  if (unconfirmedEmail !== null) {
+    return { ok: true, needsConfirmation: true, email: unconfirmedEmail };
+  }
   return { ok: true, email: set.data.user?.email ?? undefined };
 }
 
@@ -101,6 +118,16 @@ export async function signUp(email: string, password: string, username: string):
   }
   // With email confirmation on, Supabase returns a user but no session yet.
   return { ok: true, needsConfirmation: !data.session, email: email.trim() };
+}
+
+/**
+ * Resend the confirmation email for an unconfirmed account.
+ * Supabase rate-limits this automatically.
+ */
+export async function resendConfirmation(email: string): Promise<{ ok: boolean; error?: string }> {
+  if (!supabase) return { ok: true };
+  const { error } = await supabase.auth.resend({ type: 'signup', email: email.trim() });
+  return error ? { ok: false, error: friendlyError(error) } : { ok: true };
 }
 
 export async function signOut(): Promise<void> {

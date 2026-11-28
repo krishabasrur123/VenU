@@ -33,6 +33,10 @@
     "signUp": "Mag-sign Up",
     "forgot": "Nakalimutan ang Password?",
     "confirmNotice": "Tingnan ang iyong email para kumpirmahin ang account, saka mag-sign in.",
+    "confirmBlocked": "Kailangan mong i-verify ang iyong email bago mag-sign in.",
+    "resend": "Ipadala muli ang email ng kumpirmasyon",
+    "resendSent": "Naipadala na ang email — tingnan ang iyong inbox.",
+    "resendError": "Hindi maipadala muli. Subukang muli.",
     "resetNotice": "Napalitan na ang password. Mag-sign in gamit ang bago mong password.",
     "submit": "Mag-sign In"
   },

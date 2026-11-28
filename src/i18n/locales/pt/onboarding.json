@@ -33,6 +33,10 @@
     "signUp": "Cadastre-se",
     "forgot": "Esqueceu a senha?",
     "confirmNotice": "Confira seu e-mail para confirmar a conta e depois entre.",
+    "confirmBlocked": "Você precisa confirmar seu e-mail antes de entrar.",
+    "resend": "Reenviar e-mail de confirmação",
+    "resendSent": "E-mail enviado — confira sua caixa de entrada.",
+    "resendError": "Não foi possível reenviar. Tente novamente.",
     "resetNotice": "Senha alterada. Entre com sua nova senha.",
     "submit": "Entrar"
   },

@@ -23,7 +23,7 @@ import { facilityName } from './labels';
 import { clampView, contentSize, mapUpdate, zoomAt, type Box, type MapLayout, type MapRect, type MapView } from './map-geometry';
 import { VenueDrawing } from './stadium-map';
 import type { Facility } from './types';
-import { mapAspect, type VenueMap } from './venue-maps';
+import { mapAspect, type VenueMap, type VenueMapImage } from './venue-maps';
 
 const PIN = 30;
 const PIN_BIG = 40;
@@ -42,6 +42,17 @@ export const MAP_CARD_SPACE = 104;
 
 // Not in a StyleSheet: react-native-web rejects the `direction` style.
 const NATIVE_LTR = Platform.OS === 'web' ? null : ({ direction: 'ltr' } as const);
+
+/** Bundled local map images keyed by the 'local:…' sentinel used in venue-maps.ts. */
+const LOCAL_IMAGES: Record<string, number> = {
+  'local:crypto-arena-map': require('../../../assets/images/Crypto.com Arena Seating Blueprint.png'),
+};
+
+/** Resolves a VenueMapImage to an expo-image source: a require() number for locals, a URI object for remotes. */
+function mapImageSource(image: VenueMapImage) {
+  if (image.url.startsWith('local:')) return LOCAL_IMAGES[image.url] ?? null;
+  return { uri: image.url, width: image.width, height: image.height };
+}
 
 export interface VenueMapViewProps {
   map: VenueMap;
@@ -221,7 +232,7 @@ export function VenueMapView(props: VenueMapViewProps) {
             {map.image ? (
               <Image
                 key={attempt}
-                source={{ uri: map.image.url, width: map.image.width, height: map.image.height }}
+                source={mapImageSource(map.image)}
                 style={{ width: content.w, height: content.h }}
                 contentFit="fill"
                 transition={150}
