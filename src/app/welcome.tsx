@@ -2,7 +2,7 @@ import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { LogoMark } from '@/components/wordmark';
+import { LogoReveal } from '@/components/logo-reveal';
 import { Colors, Face, Radius, Shadow, Spacing, Type } from '@/constants/theme';
 import { WelcomeLanguagePill } from '@/features/auth/auth-ui';
 import { OnboardingScreen, PrimaryAction } from '@/features/auth/onboarding-screen';
@@ -47,7 +47,7 @@ export default function WelcomeScreen() {
       pill={<WelcomeLanguagePill />}
       actions={<PrimaryAction label={tc('actions.continue')} onPress={() => void next()} disabled={!role} />}>
       <View style={styles.hero}>
-        <LogoMark size={100} />
+        <LogoReveal size={100} />
         <Text style={styles.name} accessibilityRole="header">VenU</Text>
       </View>
 

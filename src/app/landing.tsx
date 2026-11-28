@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Button } from '@/components/button';
-import { LogoMark } from '@/components/wordmark';
+import { LogoReveal } from '@/components/logo-reveal';
 import { Colors, Face, Spacing, Type } from '@/constants/theme';
 import type { OAuthProvider } from '@/features/auth/auth-redirect';
 import { SocialButtons, WelcomeLanguagePill } from '@/features/auth/auth-ui';
@@ -48,7 +48,7 @@ export default function LandingScreen() {
   return (
     <OnboardingScreen pill={<WelcomeLanguagePill />}>
       <View style={styles.hero}>
-        <LogoMark size={100} />
+        <LogoReveal size={100} />
         <Text style={styles.name} accessibilityRole="header">VenU</Text>
       </View>
 
