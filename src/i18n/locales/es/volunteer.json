@@ -78,6 +78,7 @@
     "title": "Buscando voluntario",
     "subtitle": "Suele tardar menos de un minuto · Quédate donde estás",
     "askedFor": "Pediste",
+    "helpInLabel": "Ayuda en:",
     "notFoundTitle": "Ahora mismo no hay voluntarios libres",
     "notFoundBody": "No había nadie libre, así que retiramos tu solicitud. Busca de nuevo o llama al personal del recinto para pedir ayuda.",
     "keepSearching": "Buscar de nuevo"

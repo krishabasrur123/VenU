@@ -1,62 +1,52 @@
 /**
- * Between Send Request and "Volunteer found" (not in Figma): a pulsing pin, what you asked for,
- * and Cancel.
+ * Between Send Request and "Volunteer found" (Figma 554:5535 Finding a Volunteer): where they are,
+ * the VenU heart drawing itself over and over while the search runs, what they asked for (help
+ * type, "Help in:" languages, their note), Cancel, then the one sponsor slot.
  */
-import { useEffect, useState } from 'react';
-import { Animated, Easing, Platform, StyleSheet, Text, View } from 'react-native';
-import Svg, { Circle, Path } from 'react-native-svg';
+import { StyleSheet, Text, View } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
 
 import { Button } from '@/components/button';
+import { LogoReveal } from '@/components/logo-reveal';
 import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
-import { isolatedLanguageName } from '@/features/profile/options';
+import { meetSpotLabel, meetVenueName } from '@/features/volunteer/meet-point';
 import { HELP_TYPES } from '@/features/volunteer/mock';
 import { volunteerRequests } from '@/features/volunteer/request-store';
-import type { HelpRequest, Notice } from '@/features/volunteer/types';
+import type { HelpRequest, MeetPoint, Notice } from '@/features/volunteer/types';
 import { useT } from '@/i18n';
 
+import { AppLanguagePill } from './app-language-pill';
 import { HelpIcon } from './help-icon';
-import { MeetPlaceText } from './meet-place';
 import { NoteBanner } from './note-banner';
+import { LanguageChips } from './skill-chips';
 import { SponsorBanner } from './sponsor-banner';
+import { useStartAligned } from './start-aligned';
 
 /** `notice`: why it's searching again, e.g. "Your volunteer had to leave. Finding someone else." */
 export function SearchingView({ request, notice }: { request: HelpRequest; notice?: Notice | null }) {
   const t = useT('volunteer');
-  const [pulse] = useState(() => new Animated.Value(0));
-  useEffect(() => {
-    const loop = Animated.loop(
-      Animated.timing(pulse, { toValue: 1, duration: 1600, easing: Easing.out(Easing.ease), useNativeDriver: Platform.OS !== 'web' }),
-    );
-    loop.start();
-    return () => loop.stop();
-  }, [pulse]);
 
   return (
     <View style={styles.page}>
       {notice ? (
         <NoteBanner tone={notice.tone} text={t(`notice.${notice.key}`, { name: notice.params?.name ?? '' })} onDismiss={volunteerRequests.dismissNotice} />
       ) : null}
-      <View style={styles.titles}>
-        <Text style={styles.title} accessibilityRole="header">{t('searching.title')}</Text>
-        <Text style={styles.subtitle} accessibilityLiveRegion="polite">{t('searching.subtitle')}</Text>
-      </View>
-
-      <View style={styles.radar} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-        <Animated.View
-          style={[
-            styles.ring,
-            { opacity: pulse.interpolate({ inputRange: [0, 1], outputRange: [0.5, 0] }), transform: [{ scale: pulse.interpolate({ inputRange: [0, 1], outputRange: [0.4, 1] }) }] },
-          ]}
-        />
-        <View style={styles.pin}>
-          <Svg width={34} height={40} viewBox="0 0 24 28" aria-hidden>
-            <Path d="M12 1.5C6.8 1.5 2.5 5.6 2.5 10.8c0 6.6 8 14.2 8.6 14.8.5.5 1.3.5 1.8 0 .6-.6 8.6-8.2 8.6-14.8C21.5 5.6 17.2 1.5 12 1.5z" fill={Colors.onPrimary} />
-            <Circle cx="12" cy="10.8" r="3.4" fill={Colors.primary} />
-          </Svg>
+      <View style={styles.header}>
+        <AppLanguagePill />
+        <View style={styles.titles}>
+          <Text style={styles.title} accessibilityRole="header">{t('searching.title')}</Text>
+          <Text style={styles.subtitle} accessibilityLiveRegion="polite">{t('searching.subtitle')}</Text>
         </View>
       </View>
 
-      <RequestSummary request={request} />
+      <MeetCard point={request.location} />
+
+      {/* The waiting visual: draw, hold, fade, redraw. Still with Reduce Motion on. */}
+      <View style={styles.logo}>
+        <LogoReveal size={140} loop />
+      </View>
+
+      <AskedCard request={request} />
 
       <Button label={t('cancelRequest')} variant="link" onPress={volunteerRequests.cancel} style={styles.cancel} />
 
@@ -68,40 +58,104 @@ export function SearchingView({ request, notice }: { request: HelpRequest; notic
 
 /** Where they are and what they asked for; also under "No volunteer is free right now". */
 export function RequestSummary({ request }: { request: HelpRequest }) {
+  return (
+    <>
+      <MeetCard point={request.location} />
+      <AskedCard request={request} />
+    </>
+  );
+}
+
+/** Solid map pin, as on the volunteer home's location card. */
+function Pin() {
+  return (
+    <Svg width={30} height={30} viewBox="0 0 24 24" aria-hidden>
+      <Path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z" fill={Colors.ink} />
+    </Svg>
+  );
+}
+
+/** "Near Entry 4" over "SoFi Stadium", or just the venue when no spot was chosen. */
+function MeetCard({ point }: { point: MeetPoint }) {
+  const t = useT('volunteer');
+  const tv = useT('venue');
+  const near = meetSpotLabel(point, tv, t);
+  const venue = meetVenueName(point);
+  const startAligned = useStartAligned();
+  return (
+    <View style={styles.meet} accessible accessibilityLabel={near ? t('home.locationLabel', { place: near, venue }) : venue}>
+      <Pin />
+      <View style={styles.meetText}>
+        <Text style={[styles.spot, startAligned]}>{near ?? venue}</Text>
+        {near ? <Text style={[styles.venue, startAligned]}>{venue}</Text> : null}
+      </View>
+    </View>
+  );
+}
+
+/** "You asked for" each help type, "Help in:" the request's language, and the note in quotes. */
+function AskedCard({ request }: { request: HelpRequest }) {
   const t = useT('volunteer');
   const asked = HELP_TYPES.filter(id => request.helpTypes.includes(id));
   return (
-    <>
-      <MeetPlaceText point={request.location} style={styles.where} />
-
-      <View style={styles.summary}>
-        <Text style={styles.summaryLabel}>{t('searching.askedFor')}</Text>
+    <View style={styles.summary}>
+      <View style={styles.group}>
+        <Text style={styles.label}>{t('searching.askedFor')}</Text>
         {asked.map(id => (
           <View key={id} style={styles.askedRow}>
-            <HelpIcon type={id} size={22} />
-            <Text style={Type.body}>{t(`helpTypes.${id}`)}</Text>
+            <HelpIcon type={id} size={26} />
+            <Text style={styles.askedText}>{t(`helpTypes.${id}`)}</Text>
           </View>
         ))}
-        <Text style={styles.meta}>{t('helpIn', { language: isolatedLanguageName(request.language) })}</Text>
-        {request.note ? <Text style={styles.note}>{t('quoted', { text: request.note })}</Text> : null}
       </View>
-    </>
+      <View style={styles.group}>
+        <Text style={styles.label}>{t('searching.helpInLabel')}</Text>
+        <LanguageChips codes={[request.language]} />
+      </View>
+      {request.note ? <Text style={styles.note}>{t('quoted', { text: request.note })}</Text> : null}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   page: { gap: Spacing.xl, alignItems: 'stretch' },
-  titles: { gap: 5, paddingTop: 18 },
+  header: { gap: Spacing.xs },
+  titles: { gap: 5 },
   title: { ...Type.title, fontSize: 26, lineHeight: 32 },
   subtitle: { fontFamily: Fonts.text, fontSize: 14, lineHeight: 18, color: Colors.text },
-  radar: { height: 200, alignItems: 'center', justifyContent: 'center' },
-  ring: { position: 'absolute', width: 200, height: 200, borderRadius: 100, backgroundColor: Colors.primary },
-  pin: { width: 72, height: 72, borderRadius: 36, backgroundColor: Colors.primary, alignItems: 'center', justifyContent: 'center' },
-  where: { ...Type.bodyStrong, textAlign: 'center' },
-  summary: { gap: Spacing.sm, padding: Spacing.lg, borderRadius: Radius.md, backgroundColor: Colors.surfaceAlt },
-  summaryLabel: { ...Type.label },
-  askedRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
-  meta: { ...Type.caption, marginTop: Spacing.xs },
-  note: { ...Type.caption, color: Colors.text },
+  // Figma: white card, 1px grey outline, radius 10, the pin then two lines.
+  meet: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.lg,
+    minHeight: 62,
+    paddingHorizontal: Spacing.xl,
+    paddingVertical: Spacing.md,
+    borderRadius: Radius.md,
+    borderWidth: 1,
+    borderColor: Colors.controlBorder,
+    backgroundColor: Colors.surface,
+  },
+  meetText: { flex: 1, gap: 2 },
+  spot: { ...Type.bodyStrong },
+  venue: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 16, color: Colors.text },
+  logo: { alignItems: 'center', paddingVertical: Spacing.lg },
+  summary: { gap: Spacing.lg, padding: Spacing.lg, borderRadius: Radius.md, borderWidth: 1, borderColor: Colors.controlBorder, backgroundColor: Colors.surface },
+  group: { gap: Spacing.sm },
+  label: { ...Type.body, fontSize: 16, lineHeight: 21 },
+  // Figma: each help type as an outlined row, icon then label.
+  askedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.lg,
+    minHeight: 44,
+    paddingHorizontal: Spacing.xl,
+    paddingVertical: Spacing.sm,
+    borderRadius: Radius.md,
+    borderWidth: 1,
+    borderColor: Colors.controlBorder,
+  },
+  askedText: { ...Type.body, flex: 1 },
+  note: { ...Type.body, color: Colors.text },
   cancel: { alignSelf: 'center' },
 });

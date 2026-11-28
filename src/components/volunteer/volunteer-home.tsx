@@ -8,9 +8,7 @@ import { AppState, Pressable, StyleSheet, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
-import { labelFor, TRAININGS } from '@/features/profile/options';
 import { useProfile } from '@/features/profile/profile-context';
-import { uiLanguageName } from '@/features/profile/summary';
 import type { Profile } from '@/features/profile/types';
 import { useWhereAmI } from '@/features/venue/current';
 import { getVenue } from '@/features/venue/mock';
@@ -23,6 +21,7 @@ import { AppLanguagePill } from './app-language-pill';
 import { EmergencyCard } from './emergency-card';
 import { IncomingRequests } from './incoming-requests';
 import { DeskBanner } from './note-banner';
+import { LanguageChips, TrainingChips } from './skill-chips';
 import { useStartAligned } from './start-aligned';
 import { StatusCard } from './status-card';
 
@@ -135,7 +134,6 @@ function LocationCard() {
 function HelpWithCard({ profile }: { profile: HomeProfile }) {
   const t = useT('volunteer');
   const tc = useT('common');
-  const tp = useT('profile');
   const { languages, mainLanguage, trainings } = profile;
   const fluent = [mainLanguage, ...languages.filter(l => l !== mainLanguage)].filter(l => languages.includes(l));
 
@@ -154,27 +152,16 @@ function HelpWithCard({ profile }: { profile: HomeProfile }) {
 
       <View style={styles.group}>
         <Text style={styles.overline}>{t('home.languages')}</Text>
-        <Tags labels={fluent.map(code => uiLanguageName(code, tp))} />
+        <LanguageChips codes={fluent} />
       </View>
       <View style={styles.group}>
         <Text style={styles.overline}>{t('home.training')}</Text>
         {trainings.length ? (
-          <Tags labels={trainings.map(skill => labelFor(TRAININGS, skill, tp))} />
+          <TrainingChips trainings={trainings} />
         ) : (
           <Text style={Type.caption}>{t('home.noTraining')}</Text>
         )}
       </View>
-    </View>
-  );
-}
-
-/** Same chips as the profile's summary tags. */
-function Tags({ labels }: { labels: string[] }) {
-  return (
-    <View style={styles.tags}>
-      {labels.map(label => (
-        <Text key={label} style={styles.tag}>{label}</Text>
-      ))}
     </View>
   );
 }
@@ -206,18 +193,8 @@ const styles = StyleSheet.create({
   cardTitle: { ...Type.bodyStrong, flexShrink: 1 },
   editTarget: { minHeight: 44, minWidth: 44, alignItems: 'center', justifyContent: 'center', marginVertical: -Spacing.md },
   edit: { ...Type.body, color: Colors.primary, textDecorationLine: 'underline' },
-  group: { gap: 6 },
+  group: { gap: Spacing.sm },
   overline: { ...Type.overline },
-  tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  tag: {
-    ...Type.caption,
-    color: Colors.text,
-    backgroundColor: Colors.bg,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: Radius.sm,
-    overflow: 'hidden',
-  },
 
   paused: { ...Type.caption, padding: Spacing.md, borderRadius: Radius.md, backgroundColor: Colors.surfaceAlt },
 });

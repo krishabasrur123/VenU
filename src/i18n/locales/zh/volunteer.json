@@ -78,6 +78,7 @@
     "title": "正在寻找志愿者",
     "subtitle": "通常不到一分钟 · 请留在原地",
     "askedFor": "你请求的帮助",
+    "helpInLabel": "帮助语言：",
     "notFoundTitle": "目前没有空闲的志愿者",
     "notFoundBody": "没有空闲的志愿者，所以你的请求已撤回。可以重新寻找，或致电场馆工作人员寻求帮助。",
     "keepSearching": "重新寻找"

@@ -78,6 +78,7 @@
     "title": "Recherche d’un bénévole",
     "subtitle": "En général moins d’une minute · Restez où vous êtes",
     "askedFor": "Vous avez demandé",
+    "helpInLabel": "Aide en :",
     "notFoundTitle": "Aucun bénévole n’est disponible pour l’instant",
     "notFoundBody": "Personne n’était libre, votre demande a donc été retirée. Relancez la recherche ou appelez le personnel du site pour obtenir de l’aide.",
     "keepSearching": "Chercher à nouveau"

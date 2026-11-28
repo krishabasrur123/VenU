@@ -78,6 +78,7 @@
     "title": "Finding a volunteer",
     "subtitle": "Usually under a minute · Stay where you are",
     "askedFor": "You asked for",
+    "helpInLabel": "Help in:",
     "notFoundTitle": "No volunteer is free right now",
     "notFoundBody": "Nobody was free, so your request was withdrawn. Search again, or call venue staff for help.",
     "keepSearching": "Search again"
