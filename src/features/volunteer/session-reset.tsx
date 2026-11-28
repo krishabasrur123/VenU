@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import { useProfile } from '@/features/profile/profile-context';
 import { profileChatLanguage } from '@/features/translate/languages';
+import { setTranslationOwner } from '@/features/translate/service';
 import { setWhereAmIOwner } from '@/features/venue/current';
 
 import { volunteerDesk } from './desk-store';
@@ -16,15 +17,17 @@ export function VolunteerSessionReset() {
   const isVolunteer = profile?.role === 'volunteer';
   useEffect(() => {
     // 'loading' and 'error' keep the session (and the request) as it was.
-    // The venue and spot belong to the account too, so the next person on this phone starts fresh.
+    // The venue and spot (and kept chat translations) belong to the account too, so the next person on this phone starts fresh.
     if (status === 'signedOut') {
       void volunteerRequests.setUser(null);
       void volunteerDesk.setUser(null);
       setWhereAmIOwner(null);
+      setTranslationOwner(null);
     } else if (status === 'ready') {
       void volunteerRequests.setUser(userId);
       void volunteerDesk.setUser(userId, isVolunteer);
       setWhereAmIOwner(userId);
+      setTranslationOwner(userId);
     }
   }, [status, userId, isVolunteer]);
   useEffect(() => {

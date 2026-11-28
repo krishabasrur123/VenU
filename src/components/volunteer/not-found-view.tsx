@@ -1,6 +1,6 @@
 /**
- * "No volunteer is free right now" (user flow: Volunteer Not Found): the search ran out of time.
- * The request stays; Keep searching sends it again, or call venue staff, or cancel.
+ * "No volunteer is free right now" (user flow: Volunteer Not Found): the search ran out of time and
+ * the request was withdrawn. Search again sends it anew, or call venue staff, or cancel.
  */
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';

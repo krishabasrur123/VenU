@@ -7,7 +7,7 @@ import { useId, useRef, type ComponentRef } from 'react';
 import { AccessibilityInfo, Modal, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Button } from '@/components/button';
-import { Colors, Fonts, Radius, Shadow, Spacing, Type, WEB_COLUMN_MAX } from '@/constants/theme';
+import { Colors, Face, Radius, Shadow, Spacing, Type, WEB_COLUMN_MAX } from '@/constants/theme';
 import { dial } from '@/features/venue/contacts';
 import { useWhereAmI } from '@/features/venue/current';
 import { useT } from '@/i18n';
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   closeGlyph: { fontSize: 30, lineHeight: 32, color: Colors.ink },
   body: { ...Type.body, marginBottom: Spacing.xs },
   call911: { minHeight: 52, borderRadius: Radius.md, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20, backgroundColor: Colors.danger },
-  call911Label: { ...Type.buttonLarge, fontFamily: Fonts.displayMedium, color: Colors.onPrimary },
+  call911Label: { ...Type.buttonLarge, ...Face.displayMedium, color: Colors.onPrimary },
   pressed: { opacity: 0.85 },
   dismiss: { alignSelf: 'center' },
 });

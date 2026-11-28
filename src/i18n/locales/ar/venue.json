@@ -18,6 +18,9 @@
     "assistTitle": "تحتاج إلى مساعدة؟",
     "assistBody": "تواصل مع متطوع",
     "assistLabel": "تحتاج إلى مساعدة؟ تواصل مع متطوع",
+    "assistTitleVolunteer": "مستعد للمساعدة؟",
+    "assistBodyVolunteer": "اطّلع على الطلبات القريبة منك",
+    "assistLabelVolunteer": "مستعد للمساعدة؟ اطّلع على الطلبات القريبة منك",
     "empty": "لا يوجد مكان يطابق «{{query}}». جرّب اسم مدينة، مثل Inglewood.",
     "cardHint": "يفتح الخريطة والمرافق"
   },
@@ -354,12 +357,12 @@
     "imHereHint": "يُستخدم هذا المكان موقعًا لك عند طلب المساعدة",
     "isHere": "موقعك",
     "reports": "البلاغات",
-    "results_zero": "لا توجد نتائج",
-    "results_one": "نتيجة واحدة",
-    "results_two": "نتيجتان",
-    "results_few": "{{number}} نتائج",
-    "results_many": "{{number}} نتيجة",
-    "results_other": "{{number}} نتيجة",
+    "reportCount_zero": "لا توجد بلاغات",
+    "reportCount_one": "بلاغ واحد",
+    "reportCount_two": "بلاغان",
+    "reportCount_few": "{{number}} بلاغات",
+    "reportCount_many": "{{number}} بلاغًا",
+    "reportCount_other": "{{number}} بلاغ",
     "noReports": "لا توجد بلاغات بعد. كن أول من يشارك ما وجده.",
     "addReport": "أضف بلاغك"
   },
@@ -389,7 +392,12 @@
     "authorFallback": "زائر VenU",
     "submitted": "أُرسل في {{date}}",
     "originalLanguage": "اللغة الأصلية: {{language}}",
-    "noBody": "لا توجد تفاصيل."
+    "noBody": "لا توجد تفاصيل.",
+    "delete": "حذف بلاغي",
+    "deleteConfirm": "هل تريد حذف هذا البلاغ؟ لن يراه زوار هذا المكان بعد الآن.",
+    "deleteKeep": "الإبقاء عليه",
+    "deleteYes": "حذف",
+    "deleteFailed": "تعذّر حذف البلاغ. {{reason}}"
   },
   "form": {
     "title": "إضافة بلاغ",

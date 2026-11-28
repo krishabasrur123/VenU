@@ -9,9 +9,10 @@
 // on IP Address Forwarding (Authentication > Rate Limits); it needs a secret key (sb_secret_…),
 // which this uses when the project has one. After deploying, check the function's logs: once per
 // cold start it says which source it used ("…caller's Cf-Connecting-Ip" or "no Cf-Connecting-Ip…").
-// Contract: handler.ts.
+// Contract: handler.ts. Files: index.ts, handler.ts, deno.json and ../_shared/edge.ts (see there for the dashboard).
 import { createClient } from '@supabase/supabase-js';
 
+import { serverKey } from '../_shared/edge.ts';
 import { createHandler, httpPasswordGrant } from './handler.ts';
 
 // The Deno globals this file uses, so the app's `tsc` can check it too (no Deno types in the repo).
@@ -22,19 +23,8 @@ declare const Deno: {
 
 const env = (name: string) => Deno.env.get(name);
 
-/** The project's default secret key (sb_secret_…), else the legacy service_role key. */
-function serverKey(): string {
-  try {
-    const secret = (JSON.parse(env('SUPABASE_SECRET_KEYS') ?? '{}') as Record<string, string>).default;
-    if (secret) return secret;
-  } catch {
-    // Not set or not JSON: use the legacy key.
-  }
-  return env('SUPABASE_SERVICE_ROLE_KEY') ?? '';
-}
-
 const url = env('SUPABASE_URL') ?? '';
-const key = serverKey();
+const key = serverKey(env);
 if (!url || !key) console.error('username-sign-in: SUPABASE_URL or a server key is missing; sign-ins will fail');
 
 const admin = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });

@@ -1,5 +1,5 @@
 // What a chat bubble shows for one message, in the reader's language.
-import { useCallback, useEffect, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 
 import { useProfile } from '@/features/profile/profile-context';
 import type { ChatMessage } from '@/features/volunteer/types';
@@ -30,13 +30,19 @@ export function useReaderLanguage(): string {
   return profile ? profileChatLanguage(profile) : chatLanguage([language]);
 }
 
+/**
+ * Anything translated like a chat message: a message, or a visitor's request note or a facility
+ * report, under an id of its own, e.g. { id: 'note:req-1', from: 'them', text: 'Hola, estoy en la puerta 5' }.
+ */
+export type Translatable = Pick<ChatMessage, 'id' | 'from' | 'text' | 'lang'>;
+
 /** Messages that never need a request: yours, empty ones, ones already in the reader's language. */
-export function needsTranslation(message: ChatMessage, reader: string): boolean {
+export function needsTranslation(message: Translatable, reader: string): boolean {
   if (message.from === 'me' || !message.text.trim()) return false;
   return !message.lang || chatLanguage([message.lang]) !== reader;
 }
 
-export function viewOf(entry: Entry | undefined, message: ChatMessage, reader: string): MessageTranslation {
+export function viewOf(entry: Entry | undefined, message: Translatable, reader: string): MessageTranslation {
   if (!needsTranslation(message, reader)) return { kind: 'original' };
   if (!entry || entry.status === 'loading') return { kind: 'loading' };
   if (entry.status === 'error') return { kind: 'failed' };
@@ -51,7 +57,7 @@ export function viewOf(entry: Entry | undefined, message: ChatMessage, reader: s
 
 /** The bubble's view of `message`, and `retry` for the "Try again" tap. */
 export function useMessageTranslation(
-  message: ChatMessage,
+  message: Translatable,
   reader: string,
   cache: TranslationCache = translationCache,
 ): { view: MessageTranslation; retry: () => void } {
@@ -65,4 +71,29 @@ export function useMessageTranslation(
   }, [cache, needed, id, text, lang, reader]);
   const retry = useCallback(() => cache.retry(id, reader), [cache, id, reader]);
   return { view: viewOf(entry, message, reader), retry };
+}
+
+/**
+ * The text to show for `view`: the translation (with "…" when only its start was translated), or
+ * `text` as written while `original` is on or there's no translation.
+ * e.g. shownText({ kind: 'translated', text: 'Hi', source: 'es', partial: false }, 'Hola', false) → 'Hi'
+ */
+export function shownText(view: MessageTranslation, text: string, original: boolean): string {
+  if (view.kind !== 'translated' || original) return text;
+  return view.partial ? `${view.text}…` : view.text;
+}
+
+/**
+ * `item` in the reader's language, with a "Show original" switch: the text to show (the translation,
+ * or the original while switched or when there's none), the view for TranslationNote, and the switch.
+ */
+export function useTranslatedText(
+  item: Translatable,
+  reader: string,
+  cache: TranslationCache = translationCache,
+): { text: string; view: MessageTranslation; original: boolean; toggle: () => void; retry: () => void } {
+  const { view, retry } = useMessageTranslation(item, reader, cache);
+  const [original, setOriginal] = useState(false);
+  const toggle = useCallback(() => setOriginal(o => !o), []);
+  return { text: shownText(view, item.text, original), view, original, toggle, retry };
 }

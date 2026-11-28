@@ -1,4 +1,5 @@
-// VolunteerBackend on Supabase: help_requests and messages (supabase/migrations/20261117010000_help_requests_chat.sql).
+// VolunteerBackend on Supabase: help_requests and messages (supabase/migrations/20261117010000_help_requests_chat.sql),
+// and ratings / problem reports after help in help_feedback (20261118010000_reports_feedback.sql).
 // A stand-in for real matching: the visitor opens a request, every free volunteer sees it, and the
 // first to Accept gets it (accept_help_request is atomic). Changes arrive over Realtime; if the
 // channel doesn't reach SUBSCRIBED (e.g. the local mock server has no Realtime), it polls every 2 s.
@@ -11,9 +12,11 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { chatLanguage } from '@/features/translate/languages';
 import { languageName } from '@/features/profile/options';
 
-import { abortError, AlreadyHelpingError, AlreadyTakenError, RequestClosedError, type VolunteerBackend } from './backend';
+import { abortError, AlreadyHelpingError, AlreadyTakenError, NotVerifiedError, RequestClosedError, type VolunteerBackend } from './backend';
 import { HELP_TYPES } from './mock';
-import type { Assignment, ChatMessage, ClosedStatus, HelpRequest, HelpTypeId, IncomingRequest, Match, SkillCode, Volunteer } from './types';
+import type {
+  Assignment, ChatMessage, ClosedStatus, Feedback, HelpRequest, HelpTypeId, IncomingRequest, Match, ProblemReport, SkillCode, Volunteer,
+} from './types';
 
 export type RequestStatusRow = 'open' | 'matched' | 'cancelled' | 'done';
 
@@ -57,6 +60,24 @@ export interface MessageRow {
 
 export type NewMessageRow = Pick<MessageRow, 'request_id' | 'text' | 'language'>;
 
+/**
+ * What the visitor's app inserts into help_feedback after help: stars ('rating') or "Report a
+ * problem" ('problem'). The database fills in the author (the session) and time.
+ */
+export interface NewFeedbackRow {
+  request_id: string;
+  kind: 'rating' | 'problem';
+  /** 1–5 for a rating, null for a problem report. */
+  stars: number | null;
+  tags: string[];
+  /** e.g. 'no_show' for a problem report, null for a rating. */
+  problem: string | null;
+  note: string;
+}
+
+/** help_feedback.note's limit. */
+export const FEEDBACK_NOTE_MAX = 1000;
+
 export type WatchSpec = { table: 'help_requests'; filter?: string } | { table: 'messages'; filter: string };
 
 /** The few database calls the backend makes. supabaseHelpDb() is the real one. */
@@ -76,11 +97,18 @@ export interface HelpDb {
    */
   accept(id: string): Promise<RequestRow>;
   close(id: string, status: ClosedStatus): Promise<void>;
+  /**
+   * withdraw_open_request: cancels the request only while it's still open, and returns it either
+   * way ('matched' when a volunteer took it first); null when it isn't the caller's.
+   */
+  withdraw(id: string): Promise<RequestRow | null>;
   /** release_help_request: the matched volunteer hands the request back, and it's open again. */
   release(id: string): Promise<void>;
   /** The messages on a request you may read, oldest first; with `sinceIso`, only those created at or after it. */
   messages(requestId: string, sinceIso?: string): Promise<MessageRow[]>;
   sendMessage(row: NewMessageRow): Promise<void>;
+  /** Saves a rating or problem report; a rating already saved for this request (a retried Submit) is fine. */
+  insertFeedback(row: NewFeedbackRow): Promise<void>;
   /**
    * Realtime changes to `spec`'s rows: `onRow` gets the new row (null for a delete), `onLive` whether
    * the channel is subscribed (true) or failed / closed (false). Returns a function that leaves.
@@ -204,6 +232,15 @@ export function rowToMessage(row: MessageRow, me: string): ChatMessage {
 }
 
 const isClosed = (s: RequestStatusRow): s is ClosedStatus => s === 'cancelled' || s === 'done';
+
+/** e.g. 4 stars, ['patient'], ' Thanks ' → { kind: 'rating', stars: 4, tags: ['patient'], problem: null, note: 'Thanks' }. */
+export function feedbackToRow(f: Feedback): NewFeedbackRow {
+  return { request_id: f.requestId, kind: 'rating', stars: f.stars, tags: f.tags, problem: null, note: f.note.trim().slice(0, FEEDBACK_NOTE_MAX) };
+}
+
+export function problemToRow(r: ProblemReport): NewFeedbackRow {
+  return { request_id: r.requestId, kind: 'problem', stars: null, tags: [], problem: r.kind, note: r.note.trim().slice(0, FEEDBACK_NOTE_MAX) };
+}
 
 // ---- live updates
 
@@ -346,6 +383,12 @@ export function createLiveBackend(db: HelpDb): VolunteerBackend {
     cancelRequest: requestId => close(requestId, 'cancelled'),
     endHelp: requestId => close(requestId, 'done'),
 
+    async withdrawRequest(requestId) {
+      await inserting.get(requestId)?.catch(() => {});
+      const row = await db.withdraw(requestId);
+      return row?.status === 'matched' ? rowToMatch(row) : null;
+    },
+
     async sendMessage(requestId, text, lang) {
       await db.sendMessage({ request_id: requestId, text, language: lang ?? null });
     },
@@ -381,7 +424,7 @@ export function createLiveBackend(db: HelpDb): VolunteerBackend {
         return watchRow(requestId, row => {
           if (told || !isClosed(row.status)) return;
           told = true;
-          listener({ status: row.status, byMe: row.closed_by === me });
+          listener({ status: row.status, byMe: row.closed_by === me, bySystem: row.closed_by == null });
         });
       });
     },
@@ -397,9 +440,12 @@ export function createLiveBackend(db: HelpDb): VolunteerBackend {
       });
     },
 
-    // Feedback and problem reports have no tables yet; the matching service will own them.
-    async submitFeedback() {},
-    async reportProblem() {},
+    async submitFeedback(feedback) {
+      await db.insertFeedback(feedbackToRow(feedback));
+    },
+    async reportProblem(report) {
+      await db.insertFeedback(problemToRow(report));
+    },
 
     watchOpenRequests(listener) {
       let latest = 0;
@@ -482,6 +528,7 @@ export function supabaseHelpDb(client: SupabaseClient): HelpDb {
     async accept(id) {
       const { data, error } = await client.rpc('accept_help_request', { p_request_id: id });
       if (error) {
+        if (/not_verified/.test(error.message)) throw new NotVerifiedError();
         if (/already_helping/.test(error.message)) throw new AlreadyHelpingError();
         if (/request_closed/.test(error.message)) throw new RequestClosedError();
         if (/already_taken/.test(error.message)) throw new AlreadyTakenError();
@@ -492,6 +539,13 @@ export function supabaseHelpDb(client: SupabaseClient): HelpDb {
     async close(id, status) {
       const { error } = await client.rpc('close_help_request', { p_request_id: id, p_status: status });
       if (error) fail(error);
+    },
+    async withdraw(id) {
+      const { data, error } = await client.rpc('withdraw_open_request', { p_request_id: id });
+      if (error) fail(error);
+      // A function returning a row type answers a null row as an object of nulls.
+      const row = data as RequestRow | null;
+      return row?.id ? row : null;
     },
     async release(id) {
       const { error } = await client.rpc('release_help_request', { p_request_id: id });
@@ -507,6 +561,11 @@ export function supabaseHelpDb(client: SupabaseClient): HelpDb {
     async sendMessage(row) {
       const { error } = await client.from('messages').insert(row);
       if (error) fail(error);
+    },
+    async insertFeedback(row) {
+      // No .select(): problem reports can't be read back (insert-only), so ask for nothing back.
+      const { error } = await client.from('help_feedback').insert(row);
+      if (error && !(error.code === '23505' && row.kind === 'rating')) fail(error); // 23505: rated already
     },
     subscribe<Row>(spec: WatchSpec, onRow: (row: Row | null) => void, onLive: (live: boolean) => void) {
       const filter = spec.filter ? { filter: spec.filter } : {};

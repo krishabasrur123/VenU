@@ -18,6 +18,9 @@
     "assistTitle": "¿Necesitas ayuda?",
     "assistBody": "Habla con un voluntario",
     "assistLabel": "¿Necesitas ayuda? Habla con un voluntario",
+    "assistTitleVolunteer": "¿Quieres ayudar?",
+    "assistBodyVolunteer": "Mira las solicitudes cerca de ti",
+    "assistLabelVolunteer": "¿Quieres ayudar? Mira las solicitudes cerca de ti",
     "empty": "Ninguna sede coincide con «{{query}}». Prueba con una ciudad, como Inglewood.",
     "cardHint": "Abre el mapa y los servicios"
   },
@@ -351,9 +354,9 @@
     "imHereHint": "Usa este lugar como tu ubicación al pedir ayuda",
     "isHere": "Tu ubicación",
     "reports": "Reportes",
-    "results_one": "{{number}} resultado",
-    "results_many": "{{number}} de resultados",
-    "results_other": "{{number}} resultados",
+    "reportCount_one": "{{number}} reporte",
+    "reportCount_many": "{{number}} de reportes",
+    "reportCount_other": "{{number}} reportes",
     "noReports": "Aún no hay reportes. Sé el primero en contar lo que encontraste.",
     "addReport": "Agrega tu reporte"
   },
@@ -383,7 +386,12 @@
     "authorFallback": "Visitante de VenU",
     "submitted": "Enviado el {{date}}",
     "originalLanguage": "Idioma original: {{language}}",
-    "noBody": "Sin detalles."
+    "noBody": "Sin detalles.",
+    "delete": "Eliminar mi reporte",
+    "deleteConfirm": "¿Eliminar este reporte? Los visitantes de este recinto ya no lo verán.",
+    "deleteKeep": "Conservarlo",
+    "deleteYes": "Eliminar",
+    "deleteFailed": "No se pudo eliminar el reporte. {{reason}}"
   },
   "form": {
     "title": "Agregar reporte",

@@ -18,6 +18,9 @@
     "assistTitle": "Kailangan ng Tulong?",
     "assistBody": "Kumonekta sa isang boluntaryo",
     "assistLabel": "Kailangan ng tulong? Kumonekta sa isang boluntaryo",
+    "assistTitleVolunteer": "Handa nang Tumulong?",
+    "assistBodyVolunteer": "Tingnan ang mga request malapit sa iyo",
+    "assistLabelVolunteer": "Handa nang tumulong? Tingnan ang mga request malapit sa iyo",
     "empty": "Walang lugar na tugma sa “{{query}}”. Subukan ang isang lungsod, gaya ng Inglewood.",
     "cardHint": "Binubuksan ang mapa at mga pasilidad"
   },
@@ -350,8 +353,8 @@
     "imHereHint": "Gagamitin ang lugar na ito bilang lokasyon mo kapag humingi ka ng tulong",
     "isHere": "Lokasyon mo",
     "reports": "Mga Ulat",
-    "results_one": "{{number}} resulta",
-    "results_other": "{{number}} resulta",
+    "reportCount_one": "{{number}} ulat",
+    "reportCount_other": "{{number}} ulat",
     "noReports": "Wala pang ulat. Ikaw na ang unang magbahagi ng nakita mo.",
     "addReport": "Magdagdag ng Ulat"
   },
@@ -381,7 +384,12 @@
     "authorFallback": "Bisita ng VenU",
     "submitted": "Ipinadala noong {{date}}",
     "originalLanguage": "Orihinal na wika: {{language}}",
-    "noBody": "Walang idinagdag na detalye."
+    "noBody": "Walang idinagdag na detalye.",
+    "delete": "Burahin ang ulat ko",
+    "deleteConfirm": "Burahin ang ulat na ito? Hindi na ito makikita ng mga bisita sa venue na ito.",
+    "deleteKeep": "Huwag burahin",
+    "deleteYes": "Burahin",
+    "deleteFailed": "Hindi mabura ang ulat. {{reason}}"
   },
   "form": {
     "title": "Magdagdag ng ulat",

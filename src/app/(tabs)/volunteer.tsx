@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PageGradient } from '@/components/page-gradient';
 import { NAV_BAR_CLEARANCE } from '@/components/tab-bar';
@@ -23,6 +23,8 @@ export default function VolunteerScreen() {
   const { profile } = useProfile();
   const state = useVolunteerRequest();
   const restored = useVolunteerRestored();
+  // The tab bar floats above the home indicator, so the last button must clear both.
+  const { bottom } = useSafeAreaInsets();
   // The tabs layout only renders tabs for a signed-in user with a profile. Until a saved request
   // has been read back (a moment after start), show nothing rather than flash the empty form.
   if (!profile || !restored) return null;
@@ -36,7 +38,7 @@ export default function VolunteerScreen() {
   else if (status === 'searching' && request) body = <SearchingView request={request} notice={state.notice} />;
   else if (status === 'notFound' && request) body = <NotFoundView request={request} />;
   else if (status === 'matched' && request && match) body = <MatchView request={request} match={match} unread={state.unread} />;
-  else if (status === 'done' && match) body = <FeedbackView match={match} />;
+  else if (status === 'done' && match) body = <FeedbackView match={match} notice={state.notice} />;
   else {
     body = <RequestForm visitorName={profile.firstName} defaultLanguage={profile.mainLanguage || 'en'} notice={state.notice} draft={state.draft} />;
     onForm = true;
@@ -49,7 +51,7 @@ export default function VolunteerScreen() {
       <ScrollView
         key={isVolunteer ? 'volunteer' : status} // each step starts at the top
         style={styles.scroll}
-        contentContainerStyle={[styles.content, bleed && styles.bleed]}
+        contentContainerStyle={[styles.content, { paddingBottom: NAV_BAR_CLEARANCE + bottom }, bleed && styles.bleed]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
         {body}
@@ -61,6 +63,6 @@ export default function VolunteerScreen() {
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: Colors.bg },
   scroll: { flex: 1 },
-  content: { paddingHorizontal: Spacing.gutter, paddingTop: Spacing.sm, paddingBottom: NAV_BAR_CLEARANCE },
+  content: { paddingHorizontal: Spacing.gutter, paddingTop: Spacing.sm },
   bleed: { paddingHorizontal: 0 },
 });

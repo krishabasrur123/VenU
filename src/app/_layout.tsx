@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { WEB_COLUMN_MAX } from '@/constants/theme';
+import { FontWeights, WEB_COLUMN_MAX } from '@/constants/theme';
 import { ProfileProvider } from '@/features/profile/profile-context';
 import { VolunteerSessionReset } from '@/features/volunteer/session-reset';
 import { LanguageSync } from '@/i18n/language-sync';
@@ -15,10 +15,16 @@ import { LanguageSync } from '@/i18n/language-sync';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  // Names must match Fonts in constants/theme.ts.
+  // Names must match Fonts in constants/theme.ts. `weight` only reaches the web @font-face: with it, a
+  // face drawn at its own fontWeight (Face in theme.ts) is a straight match, never a faked bold.
   const [fontsLoaded, fontError] = useFonts({
-    Alexandria_400Regular, Alexandria_500Medium, Alexandria_600SemiBold,
-    AlbertSans_400Regular, AlbertSans_500Medium, AlbertSans_600SemiBold, AlbertSans_700Bold,
+    Alexandria_400Regular: { uri: Alexandria_400Regular, weight: FontWeights.display },
+    Alexandria_500Medium: { uri: Alexandria_500Medium, weight: FontWeights.displayMedium },
+    Alexandria_600SemiBold: { uri: Alexandria_600SemiBold, weight: FontWeights.displaySemiBold },
+    AlbertSans_400Regular: { uri: AlbertSans_400Regular, weight: FontWeights.text },
+    AlbertSans_500Medium: { uri: AlbertSans_500Medium, weight: FontWeights.textMedium },
+    AlbertSans_600SemiBold: { uri: AlbertSans_600SemiBold, weight: FontWeights.textSemiBold },
+    AlbertSans_700Bold: { uri: AlbertSans_700Bold, weight: FontWeights.textBold },
   });
   const ready = fontsLoaded || !!fontError; // a font that fails to load falls back to the system font
   // The column's edge lines only make sense when there's backdrop beside it; on a phone they're stray lines.

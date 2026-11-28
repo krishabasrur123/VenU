@@ -2,6 +2,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 
 import { draftForRole, nextStep, stepErrors, STEP_FIELDS } from '../setup-draft';
 import { emptyDraft } from '../types';
+import { FIRST_NAME_MAX, firstNameFrom } from '../validate';
 
 jest.mock('expo-router', () => ({ router: { push: jest.fn() } }));
 jest.mock('@react-native-async-storage/async-storage', () =>
@@ -45,6 +46,31 @@ describe('setup steps', () => {
 describe('draftForRole', () => {
   it('starts a blank draft with the primary language and the Create Account name', () => {
     expect(draftForRole('visitor', null, 'ar', 'Rosa')).toEqual({ ...emptyDraft('visitor', 'ar'), firstName: 'Rosa' });
+  });
+
+  it('prefills only the first word of the Create Account name, never the surname', () => {
+    expect(draftForRole('visitor', null, 'es', 'Lucia Vistest').firstName).toBe('Lucia');
+    expect(draftForRole('volunteer', null, 'en', '  Victor   Lane ').firstName).toBe('Victor');
+    expect(draftForRole('visitor', null, 'en', '').firstName).toBe('');
+  });
+
+  it('keeps a two-word first name typed in the First name field', () => {
+    const typed = { ...visitor, firstName: 'Mary Ann' };
+    expect(draftForRole('volunteer', typed, 'en', 'Mary Ann Smith').firstName).toBe('Mary Ann');
+    expect(stepErrors('photo', { ...volunteer, firstName: 'Mary Ann' })).toEqual({});
+  });
+});
+
+describe('firstNameFrom', () => {
+  it.each([
+    ['Lucia Vistest', 'Lucia'],
+    ['  Rosa  ', 'Rosa'],
+    ['Rosa\tMaría López', 'Rosa'],
+    ['', ''],
+    ['   ', ''],
+    ['A'.repeat(50) + ' B', 'A'.repeat(FIRST_NAME_MAX)],
+  ])('%p → %p', (full, want) => {
+    expect(firstNameFrom(full)).toBe(want);
   });
 
   it('switching role keeps the languages and name but starts the role questions over', () => {

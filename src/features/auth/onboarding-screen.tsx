@@ -1,6 +1,6 @@
 /**
- * The Onboarding 2.0 page (Figma 473:31894): the cream-to-blue gradient, the language pill in the
- * top corner, a semibold title (start-aligned for setup steps, centred on Create Account / Sign In),
+ * The Onboarding 2.0 page (Figma 473:31894, 530:10212): the cream-to-blue gradient with its soft
+ * shapes, the language pill in the top corner, a semibold title (start-aligned for setup steps, centred on Create Account / Sign In),
  * the content, and the actions pinned to the bottom (a dark 265pt button, a footer prompt).
  * e.g. <OnboardingScreen pill={<WelcomeLanguagePill />} title="Choose your languages"
  *        subtitle="To help you communicate with volunteers." actions={<PrimaryAction … />}>…</OnboardingScreen>
@@ -11,7 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/button';
 import { PageGradient } from '@/components/page-gradient';
-import { Colors, Fonts, Spacing } from '@/constants/theme';
+import { Colors, Face, Fonts, Spacing } from '@/constants/theme';
 
 interface OnboardingScreenProps {
   /** The corner language pill (signed out: WelcomeLanguagePill; during setup: AppLanguagePill). */
@@ -30,7 +30,7 @@ interface OnboardingScreenProps {
 export function OnboardingScreen({ pill, back, title, subtitle, centered = false, children, actions }: OnboardingScreenProps) {
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      <PageGradient />
+      <PageGradient shapes />
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
           <View style={styles.topRow}>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   header: { gap: Spacing.sm, marginTop: 56, marginBottom: Spacing.xxl },
   headerUnderBack: { marginTop: Spacing.xxl },
   headerCentered: { alignItems: 'center', marginTop: 72 },
-  title: { fontFamily: Fonts.displaySemiBold, fontSize: 25, lineHeight: 30, color: Colors.text },
+  title: { ...Face.displaySemiBold, fontSize: 25, lineHeight: 30, color: Colors.text },
   subtitle: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 17, color: Colors.text },
   centerText: { textAlign: 'center' },
   spacer: { flexGrow: 1, minHeight: Spacing.xl },

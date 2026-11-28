@@ -18,6 +18,9 @@
     "assistTitle": "お困りですか？",
     "assistBody": "ボランティアに相談する",
     "assistLabel": "お困りですか？ボランティアに相談する",
+    "assistTitleVolunteer": "手助けしますか？",
+    "assistBodyVolunteer": "近くのリクエストを見る",
+    "assistLabelVolunteer": "手助けしますか？近くのリクエストを見る",
     "empty": "「{{query}}」に一致する会場はありません。Inglewood などの都市名で試してください。",
     "cardHint": "地図と施設を開きます"
   },
@@ -349,7 +352,7 @@
     "imHereHint": "助けを求めるときに、ここを現在地として使います",
     "isHere": "現在地",
     "reports": "レポート",
-    "results_other": "{{number}}件",
+    "reportCount_other": "レポート{{number}}件",
     "noReports": "レポートはまだありません。最初に気づいたことを共有しましょう。",
     "addReport": "レポートを追加"
   },
@@ -379,7 +382,12 @@
     "authorFallback": "VenUの来場者",
     "submitted": "{{date}} に送信",
     "originalLanguage": "原文の言語：{{language}}",
-    "noBody": "詳細はありません。"
+    "noBody": "詳細はありません。",
+    "delete": "自分のレポートを削除",
+    "deleteConfirm": "このレポートを削除しますか？この会場の来場者には表示されなくなります。",
+    "deleteKeep": "残す",
+    "deleteYes": "削除",
+    "deleteFailed": "レポートを削除できませんでした。{{reason}}"
   },
   "form": {
     "title": "レポートを追加",

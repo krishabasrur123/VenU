@@ -16,9 +16,10 @@ import { Platform, Pressable, StyleSheet, Text, View, type LayoutChangeEvent } f
 import Svg, { Path } from 'react-native-svg';
 
 import { FigmaIcon } from '@/components/icons/figma-icon';
-import { Colors, Fonts, Spacing } from '@/constants/theme';
+import { TranslationNote } from '@/components/translation-note';
+import { Colors, Face, Fonts, Spacing } from '@/constants/theme';
 import { uiLanguageName } from '@/features/profile/summary';
-import { isRealProvider, useMessageTranslation, useReaderLanguage, useTranslationProvider, type MessageTranslation } from '@/features/translate';
+import { isRealProvider, useReaderLanguage, useTranslatedText, useTranslationProvider } from '@/features/translate';
 import { formatClock } from '@/features/volunteer/format';
 import type { ChatMessage } from '@/features/volunteer/types';
 import { useLayoutRtl, useT } from '@/i18n';
@@ -73,11 +74,9 @@ export function ChatBubble({ message, recipient, senderName, onListen, onRetry }
   };
   const time = formatClock(message.sentAt);
   const reader = useReaderLanguage();
-  const { view: translation, retry } = useMessageTranslation(message, reader);
+  const { text, view: translation, original, toggle, retry } = useTranslatedText(message, reader);
   const provider = useTranslationProvider();
-  const [original, setOriginal] = useState(false);
   const translated = translation.kind === 'translated' && !original ? translation : null;
-  const text = translated ? (translated.partial ? `${translated.text}…` : translated.text) : message.text;
   const recipientLanguage = recipient && recipient.language !== reader ? uiLanguageName(recipient.language, tp) : null;
   const hint = !mine || failed || !recipient || !recipientLanguage
     ? null
@@ -135,9 +134,9 @@ export function ChatBubble({ message, recipient, senderName, onListen, onRetry }
       ) : null}
       {!mine ? (
         <View style={styles.footer}>
-          <TranslationNote translation={translation} reader={reader} original={original} onToggle={() => setOriginal(o => !o)} onRetry={retry} />
+          <TranslationNote translation={translation} reader={reader} original={original} onToggle={toggle} onRetry={retry} />
           {onListen ? (
-            <Pressable onPress={onListen} accessibilityRole="button" accessibilityLabel={t('bubble.listenLabel')} style={styles.listen}>
+            <Pressable onPress={onListen} accessibilityRole="button" accessibilityLabel={t('bubble.listenLabel')} hitSlop={6} style={styles.listen}>
               <FigmaIcon name="volume" size={16} color={Colors.primary} />
               <Text style={styles.listenText}>{t('bubble.listen')}</Text>
             </Pressable>
@@ -146,66 +145,6 @@ export function ChatBubble({ message, recipient, senderName, onListen, onRetry }
       ) : null}
     </View>
   );
-}
-
-/** The line under an incoming bubble: the translation toggle, or why the original is showing. */
-function TranslationNote({ translation, reader, original, onToggle, onRetry }: {
-  translation: MessageTranslation;
-  reader: string;
-  original: boolean;
-  onToggle: () => void;
-  onRetry: () => void;
-}) {
-  const t = useT('volunteer');
-  const tp = useT('profile'); // language names in the UI language
-  switch (translation.kind) {
-    case 'original':
-      return null;
-    case 'loading':
-      return <Text style={styles.note}>{t('translation.translating')}</Text>;
-    case 'failed':
-      return (
-        <Pressable
-          onPress={onRetry}
-          accessibilityRole="button"
-          accessibilityLabel={t('translation.tryAgainLabel')}
-          hitSlop={6}
-          style={({ pressed }) => [styles.toggle, pressed && styles.pressed]}>
-          <Text style={styles.note}>
-            {t('translation.failed')}
-            {' · '}
-            <Text style={styles.noteLink}>{t('translation.tryAgain')}</Text>
-          </Text>
-        </Pressable>
-      );
-    case 'unsupported':
-      return <Text style={styles.note}>{t('translation.unsupported', { language: uiLanguageName(reader, tp) })}</Text>;
-    case 'unavailable':
-      return <Text style={styles.note}>{t('translation.notSetUp')}</Text>;
-    case 'translated': {
-      const language = translation.source ? uiLanguageName(translation.source, tp) : null;
-      const translatedNote = language
-        ? translation.partial ? t('translation.partial', { language }) : t('translation.translatedFrom', { language })
-        : t('translation.translated');
-      const status = original
-        ? language ? t('translation.originalIn', { language }) : t('translation.original')
-        : translatedNote;
-      return (
-        <Pressable
-          onPress={onToggle}
-          accessibilityRole="button"
-          accessibilityLabel={original ? t('translation.showTranslationLabel') : t('translation.showOriginalLabel')}
-          hitSlop={6}
-          style={({ pressed }) => [styles.toggle, pressed && styles.pressed]}>
-          <Text style={styles.note}>
-            {status}
-            {' · '}
-            <Text style={styles.noteLink}>{original ? t('translation.showTranslation') : t('translation.showOriginal')}</Text>
-          </Text>
-        </Pressable>
-      );
-    }
-  }
 }
 
 const styles = StyleSheet.create({
@@ -231,14 +170,15 @@ const styles = StyleSheet.create({
   meta: { marginStart: 'auto', flexDirection: 'row', alignItems: 'center', gap: 4 },
   time: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 16, color: MUTED_TIME },
   timeMine: { color: Colors.onPrimary },
-  listen: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 32, paddingEnd: Spacing.sm },
+  // Fits beside "Translated from Spanish · Show original" in English; hitSlop keeps the target wide.
+  listen: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 32, paddingEnd: 4 },
   listenText: { fontFamily: Fonts.text, fontSize: 13, color: Colors.primary },
   // Starts in line with the incoming bubbles' text, like "Daniel is typing…".
   footer: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: Spacing.md, paddingStart: TAIL + 2 },
   toggle: { minHeight: 32, justifyContent: 'center' },
   pressed: { opacity: 0.6 },
   note: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 16, color: Colors.textMuted },
-  noteLink: { fontFamily: Fonts.textSemiBold, color: Colors.primary },
+  noteLink: { ...Face.textSemiBold, color: Colors.primary },
   hint: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 16, color: Colors.textMuted, alignSelf: 'flex-end', marginTop: 6, paddingEnd: TAIL + 2 },
   // Under your bubble, on the same edge as the hint it replaces.
   failed: { alignSelf: 'flex-end', paddingEnd: TAIL + 2 },

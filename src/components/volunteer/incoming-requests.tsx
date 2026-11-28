@@ -1,7 +1,8 @@
 /**
  * "Incoming requests" on a volunteer's Volunteer tab. With live matching (Supabase): open requests
- * nearby as they come in, each with Accept, which opens the chat with that visitor. Without it
- * (local mode): example requests and a note that matching isn't live yet.
+ * nearby as they come in, each with Accept, which opens the chat with that visitor. Until LA28
+ * verifies the volunteer, Accept is off and a "Waiting for verification" note says why. Without live
+ * matching (local mode): example requests and a note that matching isn't live yet.
  */
 import { router } from 'expo-router';
 import { useEffect } from 'react';
@@ -9,6 +10,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Button } from '@/components/button';
 import { Colors, Fonts, Radius, Shadow, Spacing, Type } from '@/constants/theme';
+import { useProfile } from '@/features/profile/profile-context';
 import { isolate } from '@/features/profile/options';
 import { uiLanguageName } from '@/features/profile/summary';
 import { useVolunteerDesk, volunteerDesk } from '@/features/volunteer/desk-store';
@@ -22,9 +24,11 @@ import { HelpIcon } from './help-icon';
 import { Hint, useHint } from './hint';
 import { MeetPlaceText } from './meet-place';
 import { DeskBanner } from './note-banner';
+import { RequestNote } from './request-note';
 
-export function IncomingRequests() {
-  return volunteerDesk.live ? <LiveRequests /> : <ExampleRequests />;
+/** `verified`: from the volunteer's profile; false keeps Accept off (the server refuses it too). */
+export function IncomingRequests({ verified = true }: { verified?: boolean }) {
+  return volunteerDesk.live ? <LiveRequests verified={verified} /> : <ExampleRequests />;
 }
 
 function Titles() {
@@ -38,13 +42,16 @@ function Titles() {
 }
 
 /** Open requests from the backend, kept up to date while on screen. */
-function LiveRequests() {
+function LiveRequests({ verified }: { verified: boolean }) {
   const t = useT('volunteer');
+  const { recheck } = useProfile();
   const { open, accepting, assignment, notice } = useVolunteerDesk();
   useEffect(() => volunteerDesk.watchOpen(), []);
 
   async function accept(id: string) {
     await volunteerDesk.accept(id);
+    // Refused as unverified (LA28 took it back since this screen loaded): show the note.
+    if (volunteerDesk.getState().notice?.key === 'notVerified') void recheck().catch(() => {});
     // The chat it got, or (already helping someone, from another device) the one it already had.
     const current = volunteerDesk.getState().assignment?.id;
     if (current) router.push({ pathname: '/chat/[id]', params: { id: current } });
@@ -53,6 +60,12 @@ function LiveRequests() {
   return (
     <View style={styles.page}>
       <Titles />
+      {verified ? null : (
+        <View style={styles.preview}>
+          <Text style={styles.waitTitle}>{t('incoming.waitTitle')}</Text>
+          <Text style={styles.previewText}>{t('incoming.waitBody')}</Text>
+        </View>
+      )}
       {notice?.tone === 'error' ? <DeskBanner notice={notice} /> : null}
       {open.length === 0 ? <Text style={styles.empty}>{t('incoming.empty')}</Text> : null}
       {open.map(r => (
@@ -61,8 +74,8 @@ function LiveRequests() {
             label={t('incoming.accept')}
             variant="outline"
             loading={accepting === r.id}
-            // One request at a time: finish (or end) the current chat first.
-            disabled={!!assignment || (accepting !== null && accepting !== r.id)}
+            // One request at a time: finish (or end) the current chat first. Unverified: not yet.
+            disabled={!verified || !!assignment || (accepting !== null && accepting !== r.id)}
             onPress={() => void accept(r.id)}
           />
         </RequestCard>
@@ -114,7 +127,8 @@ function RequestCard({ request: r, children }: { request: IncomingRequest; child
               ? t('incoming.meta', { distance: formatDistance(r.distanceFeet, lng), minutes, language })
               : t('incoming.metaLive', { minutes, language })}
           </Text>
-          {r.note ? <Text style={styles.note}>{t('quoted', { text: r.note })}</Text> : null}
+          {/* In the volunteer's language, so they can read it before accepting. */}
+          {r.note ? <RequestNote requestId={r.id} note={r.note} lang={r.language} style={styles.note} /> : null}
         </View>
       </View>
       {children}
@@ -127,7 +141,8 @@ const styles = StyleSheet.create({
   titles: { gap: 5, paddingTop: 18, marginBottom: Spacing.sm },
   title: { ...Type.title, fontSize: 26, lineHeight: 32 },
   subtitle: { fontFamily: Fonts.text, fontSize: 14, lineHeight: 18, color: Colors.text },
-  preview: { padding: Spacing.md, borderRadius: Radius.md, backgroundColor: Colors.surfaceAlt },
+  preview: { gap: 2, padding: Spacing.md, borderRadius: Radius.md, backgroundColor: Colors.surfaceAlt },
+  waitTitle: { ...Type.bodyStrong },
   previewText: { ...Type.caption, color: Colors.text },
   empty: { ...Type.caption, padding: Spacing.md, borderRadius: Radius.md, backgroundColor: Colors.surfaceAlt },
   card: {

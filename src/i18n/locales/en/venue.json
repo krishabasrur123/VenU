@@ -18,6 +18,9 @@
     "assistTitle": "Need Assistance?",
     "assistBody": "Connect with a volunteer",
     "assistLabel": "Need assistance? Connect with a volunteer",
+    "assistTitleVolunteer": "Ready to Help?",
+    "assistBodyVolunteer": "See requests near you",
+    "assistLabelVolunteer": "Ready to help? See requests near you",
     "empty": "No venue matches “{{query}}”. Try a city, like Inglewood.",
     "cardHint": "Opens the map and facilities"
   },
@@ -350,8 +353,8 @@
     "imHereHint": "Uses this spot as your location when you ask for help",
     "isHere": "Your location",
     "reports": "Reports",
-    "results_one": "{{number}} result",
-    "results_other": "{{number}} results",
+    "reportCount_one": "{{number}} report",
+    "reportCount_other": "{{number}} reports",
     "noReports": "No reports yet. Be the first to share what you found.",
     "addReport": "Add Your Own Report"
   },
@@ -381,7 +384,12 @@
     "authorFallback": "VenU visitor",
     "submitted": "Submitted {{date}}",
     "originalLanguage": "Original language: {{language}}",
-    "noBody": "No details added."
+    "noBody": "No details added.",
+    "delete": "Delete my report",
+    "deleteConfirm": "Delete this report? Visitors at this venue won’t see it any more.",
+    "deleteKeep": "Keep it",
+    "deleteYes": "Delete",
+    "deleteFailed": "Couldn’t delete the report. {{reason}}"
   },
   "form": {
     "title": "Add report",

@@ -32,3 +32,18 @@ if (supabase && Platform.OS !== 'web') {
 }
 
 export const AVATAR_BUCKET = 'avatars';
+
+/** The project's URL and publishable key (null in local mode), for the few Auth calls supabase-js has no method for. */
+export const supabaseConfig = url && anonKey ? { url, anonKey } : null;
+
+/**
+ * A client that keeps its session in memory only and never touches the app's stored one, e.g. for a
+ * password-reset link: setting the new password mustn't sign this device in (or swap the account
+ * another tab has open). Null in local mode.
+ */
+export function createDetachedClient(): SupabaseClient | null {
+  if (!url || !anonKey) return null;
+  return createClient(url, anonKey, {
+    auth: { storageKey: 'venu-detached', persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  });
+}
