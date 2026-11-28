@@ -2,10 +2,12 @@
  * The VenU heart drawing itself (Figma "Logo • drawn-stroke reveal", 541:3687): each outline draws on
  * with a stroke-dash offset over LOGO_DRAW_MS, easing out, then the gradient fill fades in. `loop`
  * repeats it (draw, hold, fade, redraw) for a waiting screen. With Reduce Motion on, the finished logo
- * shows at once and stays still. Decorative, like LogoMark: the title beside it names the screen.
- * e.g. <LogoReveal size={100} /> on role choice; <LogoReveal size={140} loop /> while searching.
+ * shows at once and stays still. `paused` stops the clock (a screen out of focus passes it, so a
+ * hidden loop doesn't keep rendering); it starts over when unpaused. Decorative, like LogoMark: the
+ * title beside it names the screen.
+ * e.g. <LogoReveal size={100} /> on role choice; <LogoReveal size={140} loop paused={!focused} /> while searching.
  */
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useState, useSyncExternalStore } from 'react';
 import { AccessibilityInfo, View } from 'react-native';
 import Svg, { Defs, G, LinearGradient, Path, Stop } from 'react-native-svg';
 
@@ -24,29 +26,46 @@ const VIEW_W = LOGO_HEART_SIZE.width + PAD * 2;
 const VIEW_H = LOGO_HEART_SIZE.height + PAD * 2;
 const NOTHING: LogoFrame = { draw: 0, fill: 0, opacity: 1 };
 
-/** Whether Reduce Motion is on: null until the system answers (a moment after mount). */
-export function useReduceMotion(): boolean | null {
-  const [reduce, setReduce] = useState<boolean | null>(null);
-  useEffect(() => {
-    let live = true;
-    AccessibilityInfo.isReduceMotionEnabled()
-      .then(on => { if (live) setReduce(on); })
-      .catch(() => { if (live) setReduce(false); });
-    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', on => setReduce(on));
-    return () => {
-      live = false;
-      sub.remove();
-    };
-  }, []);
-  return reduce;
+// Reduce Motion, read once for every logo on screen. One shared system listener: react-native-web
+// keys 'reduceMotionChanged' handlers by their source text, so a listener per logo (all the same
+// arrow function) would overwrite one another, and removing one would remove the other's.
+let reduceMotion: boolean | null = null;
+const reduceListeners = new Set<() => void>();
+let reduceSub: { remove: () => void } | null = null;
+
+function setReduceMotion(on: boolean) {
+  if (reduceMotion === on) return;
+  reduceMotion = on;
+  reduceListeners.forEach(listener => listener());
 }
 
-/** The current frame, ticking on animation frames until the reveal ends (or forever with `loop`). */
-function useLogoFrame(loop: boolean): LogoFrame {
+function subscribeReduceMotion(listener: () => void) {
+  reduceListeners.add(listener);
+  if (!reduceSub) {
+    reduceSub = AccessibilityInfo.addEventListener('reduceMotionChanged', setReduceMotion);
+    // Asked again on each first subscriber, in case it changed while no logo was listening.
+    AccessibilityInfo.isReduceMotionEnabled().then(setReduceMotion, () => setReduceMotion(reduceMotion ?? false));
+  }
+  return () => {
+    reduceListeners.delete(listener);
+    if (!reduceListeners.size && reduceSub) {
+      reduceSub.remove();
+      reduceSub = null;
+    }
+  };
+}
+
+/** Whether Reduce Motion is on: null until the system first answers (a moment after mount). */
+export function useReduceMotion(): boolean | null {
+  return useSyncExternalStore(subscribeReduceMotion, () => reduceMotion, () => null);
+}
+
+/** The current frame, ticking on animation frames until the reveal ends (or forever with `loop`), unless paused. */
+function useLogoFrame(loop: boolean, paused: boolean): LogoFrame {
   const reduce = useReduceMotion();
   const [frame, setFrame] = useState<LogoFrame>(NOTHING);
   useEffect(() => {
-    if (reduce !== false) return;
+    if (reduce !== false || paused) return;
     let raf = 0;
     const start = Date.now();
     const tick = () => {
@@ -58,15 +77,15 @@ function useLogoFrame(loop: boolean): LogoFrame {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [reduce, loop]);
+  }, [reduce, loop, paused]);
   if (reduce) return LOGO_DONE;
   return frame;
 }
 
-export function LogoReveal({ size = 100, loop = false }: { size?: number; loop?: boolean }) {
+export function LogoReveal({ size = 100, loop = false, paused = false }: { size?: number; loop?: boolean; paused?: boolean }) {
   // Gradient ids share one namespace on web, so each logo gets its own.
   const id = `logo-reveal-${useId().replace(/:/g, '')}`;
-  const { draw, fill, opacity } = useLogoFrame(loop);
+  const { draw, fill, opacity } = useLogoFrame(loop, paused);
   const height = (size * VIEW_H) / VIEW_W;
   const strokeWidth = DRAW_STROKE + (LOGO_HEART_STROKE - DRAW_STROKE) * fill;
 

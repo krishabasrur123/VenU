@@ -3,6 +3,7 @@
  * the VenU heart drawing itself over and over while the search runs, what they asked for (help
  * type, "Help in:" languages, their note), Cancel, then the one sponsor slot.
  */
+import { useIsFocused } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
@@ -25,6 +26,8 @@ import { useStartAligned } from './start-aligned';
 /** `notice`: why it's searching again, e.g. "Your volunteer had to leave. Finding someone else." */
 export function SearchingView({ request, notice }: { request: HelpRequest; notice?: Notice | null }) {
   const t = useT('volunteer');
+  // Opening the sponsor's stand leaves this tab mounted underneath: stop the loop while it's hidden.
+  const focused = useIsFocused();
 
   return (
     <View style={styles.page}>
@@ -43,7 +46,7 @@ export function SearchingView({ request, notice }: { request: HelpRequest; notic
 
       {/* The waiting visual: draw, hold, fade, redraw. Still with Reduce Motion on. */}
       <View style={styles.logo}>
-        <LogoReveal size={140} loop />
+        <LogoReveal size={140} loop paused={!focused} />
       </View>
 
       <AskedCard request={request} />

@@ -60,8 +60,17 @@ describe('logoFrame', () => {
 });
 
 describe('LogoReveal', () => {
+  // Every root is unmounted after each test, so the shared Reduce Motion listener starts afresh.
+  const roots: ReturnType<typeof createRoot>[] = [];
+  const mount = async (node: React.ReactElement) => {
+    const root = createRoot();
+    roots.push(root);
+    await act(async () => { root.render(node); });
+    return root;
+  };
   beforeEach(() => { jest.useFakeTimers(); });
-  afterEach(() => {
+  afterEach(async () => {
+    await act(async () => { roots.splice(0).forEach(r => r.unmount()); });
     jest.useRealTimers();
     jest.restoreAllMocks();
   });
@@ -69,16 +78,14 @@ describe('LogoReveal', () => {
   it('with Reduce Motion on, shows the finished logo at once and never animates', async () => {
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true);
     const raf = jest.spyOn(global, 'requestAnimationFrame');
-    const root = createRoot();
-    await act(async () => { root.render(<LogoReveal />); });
+    const root = await mount(<LogoReveal />);
     expect(state(root.container)).toEqual({ outlines: 6, drawn: true, hidden: false, fill: 1 });
     expect(raf).not.toHaveBeenCalled();
   });
 
   it('otherwise starts empty and is finished after the reveal', async () => {
     jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
-    const root = createRoot();
-    await act(async () => { root.render(<LogoReveal />); });
+    const root = await mount(<LogoReveal />);
     expect(state(root.container)).toMatchObject({ outlines: 6, hidden: true, fill: 0 });
 
     await act(async () => { jest.advanceTimersByTime(LOGO_DRAW_MS / 2); });
@@ -86,5 +93,46 @@ describe('LogoReveal', () => {
 
     await act(async () => { jest.advanceTimersByTime(LOGO_REVEAL_MS); });
     expect(state(root.container)).toEqual({ outlines: 6, drawn: true, hidden: false, fill: 1 });
+  });
+
+  it('stops the loop while paused (its screen out of focus) and starts over when unpaused', async () => {
+    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
+    const raf = jest.spyOn(global, 'requestAnimationFrame');
+    const root = await mount(<LogoReveal loop paused />);
+    await act(async () => { jest.advanceTimersByTime(LOGO_LOOP_MS * 2); });
+    expect(raf).not.toHaveBeenCalled();
+    expect(state(root.container)).toMatchObject({ hidden: true, fill: 0 });
+
+    await act(async () => { root.render(<LogoReveal loop paused={false} />); });
+    await act(async () => { jest.advanceTimersByTime(LOGO_REVEAL_MS); });
+    expect(state(root.container)).toMatchObject({ drawn: true, fill: 1 });
+
+    // Pausing again cancels the pending frame: no more ticks however long it stays hidden.
+    await act(async () => { root.render(<LogoReveal loop paused />); });
+    raf.mockClear();
+    await act(async () => { jest.advanceTimersByTime(LOGO_LOOP_MS * 2); });
+    expect(raf).not.toHaveBeenCalled();
+  });
+
+  it('shares one Reduce Motion listener between logos, which outlives either one', async () => {
+    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
+    const remove = jest.fn();
+    let changed: ((on: boolean) => void) | undefined;
+    const add = jest.spyOn(AccessibilityInfo, 'addEventListener').mockImplementation(((_event: string, handler: (on: boolean) => void) => {
+      changed = handler;
+      return { remove };
+    }) as never);
+    add.mockClear(); // React Native's jest setup already mocks it, so the spy carries earlier tests' calls
+    const first = await mount(<LogoReveal />);
+    const second = await mount(<LogoReveal />);
+    expect(add).toHaveBeenCalledTimes(1);
+
+    await act(async () => { first.unmount(); });
+    expect(remove).not.toHaveBeenCalled();
+    await act(async () => { changed!(true); }); // Reduce Motion turned on while the second still shows
+    expect(state(second.container)).toEqual({ outlines: 6, drawn: true, hidden: false, fill: 1 });
+
+    await act(async () => { second.unmount(); });
+    expect(remove).toHaveBeenCalledTimes(1);
   });
 });
