@@ -13,6 +13,7 @@ import { formatList, formatNumber } from '@/i18n/format';
 import { en } from '@/i18n/locales';
 
 import type { Facility, FacilityCategory, FacilityTag, Venue } from './types';
+import type { VenueMapLayer } from './venue-maps';
 
 export type VenueT = TFunction<'venue'>;
 
@@ -64,6 +65,18 @@ export function facilityOffer(f: Facility, t: VenueT = venueT()): string {
   if (!f.sponsor) return '';
   const id = f.id;
   return isKnown(id) && 'offer' in FACILITY_TEXT[id] ? t(`facilityText.${id}.offer` as never) : f.sponsor.offer;
+}
+
+/**
+ * A map layer's name, as the layer toggle and the walking steps say it.
+ * e.g. layerLabel({ kind: 'outside' }) → 'Outside'; layerLabel({ kind: 'level', level: 3 }) → 'Level 3'
+ * (in the language's own digits, as walkLabel does)
+ */
+export function layerLabel(layer: Pick<VenueMapLayer, 'kind' | 'level'>, t: VenueT = venueT()): string {
+  if (layer.kind === 'level' && layer.level !== undefined) {
+    return t('map.layers.level', { number: formatNumber(layer.level, undefined, languageOf(t)) });
+  }
+  return t('map.layers.outside');
 }
 
 /** Longest search text echoed back in an empty-results line before it's cut with "…". */

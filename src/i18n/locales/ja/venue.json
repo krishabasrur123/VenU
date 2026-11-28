@@ -83,7 +83,12 @@
     "label": "施設のピンが付いた{{venue}}のマップ。ドラッグで移動、ピンチまたはズームボタンで拡大・縮小できます。",
     "you": "現在地",
     "start": "出発地",
-    "cardHint": "下のパネルで開きます"
+    "cardHint": "下のパネルで開きます",
+    "layers": {
+      "label": "地図のレイヤー",
+      "outside": "屋外",
+      "level": "{{number}}階"
+    }
   },
   "officialMap": {
     "attribution": "地図：{{source}}",
@@ -174,54 +179,174 @@
       "location": "メインコンコース、Figueroa 側",
       "offer": "VenU で Coca-Cola のドリンクが全品 $1 引き"
     },
+    "entry-1": {
+      "name": "1番入口",
+      "description": "北側の入口。透明バッグは 12×6×12 インチまで、小さなバッグは 4.5×6.5 インチまでです。すべての入口にバリアフリーの通路があり、無料の車いす介助を受けられます。",
+      "location": "北側、Touchdown Drive 沿い"
+    },
+    "entry-2": {
+      "name": "2番入口",
+      "description": "北側の入口で、アメリカンフットボールの試合では終了まで開いています。透明バッグは 12×6×12 インチまで、小さなバッグは 4.5×6.5 インチまでです。",
+      "location": "北側、Touchdown Drive 沿い"
+    },
     "entry-3": {
       "name": "3番入口",
-      "description": "北側の入口。すべての入口にバリアフリーの通路があり、無料の車いす介助を受けられます。",
+      "description": "北側の入口で、アメリカンフットボールの試合では終了まで開いています。すべての入口にバリアフリーの通路があり、無料の車いす介助を受けられます。",
       "location": "北側"
     },
     "entry-4": {
       "name": "4番入口",
-      "description": "中にアクセシビリティ案内台と待合椅子がある北側の入口です。",
+      "description": "北側の入口で、入ってすぐのところにアクセシビリティ案内台と待合椅子があります。透明バッグは 12×6×12 インチまで、小さなバッグは 4.5×6.5 インチまでです。",
       "location": "北側"
+    },
+    "entry-5": {
+      "name": "5番入口",
+      "description": "北西側の入口で、グリーンゾーン（駐車場 A・B）に最も近い入口です。すべての入口にバリアフリーの通路があり、無料の車いす介助を受けられます。",
+      "location": "北西側"
     },
     "entry-6": {
       "name": "6番入口",
-      "description": "VIP・プレミアムチケットをお持ちの方向けの西側の入口です。",
+      "description": "VIP・プレミアムチケットをお持ちの方向けの西側の入口で、アメリカンフットボールの試合では終了まで開いています。",
       "location": "西側"
+    },
+    "entry-7": {
+      "name": "7番入口",
+      "description": "VIP・プレミアムチケットをお持ちの方向けの西側の入口で、アメリカンフットボールの試合では終了まで開いています。ブルーゾーン（駐車場 N）に最も近い入口です。",
+      "location": "西側、Champions Way 沿い"
     },
     "entry-8": {
       "name": "8番入口",
-      "description": "中にアクセシビリティ案内台と待合椅子がある南側の入口です。",
+      "description": "南側の入口で、入ってすぐのところにアクセシビリティ案内台と待合椅子があります。8B 入口はアメリカンフットボールの試合では終了まで開いています。",
       "location": "南側"
+    },
+    "entry-9": {
+      "name": "9番入口",
+      "description": "南側の入口（9A〜9D ゲート）で、パープルゾーン（駐車場 K・L）に最も近い入口です。すべての入口にバリアフリーの通路があり、無料の車いす介助を受けられます。",
+      "location": "南側、湖のそば"
     },
     "entry-10": {
       "name": "10番入口",
-      "description": "中にアクセシビリティ案内台と待合椅子がある南側の入口です。",
-      "location": "南側"
+      "description": "南東側の入口で、入ってすぐのところにアクセシビリティ案内台と待合椅子があります。10B 入口はアメリカンフットボールの試合では終了まで開いています。",
+      "location": "南東側、Stadium Drive 沿い"
     },
     "entry-11": {
       "name": "11番入口",
-      "description": "VIP・プレミアムチケットをお持ちの方向けの東側の入口です。",
+      "description": "VIP・プレミアムチケットをお持ちの方向けの東側の入口で、アメリカンフットボールの試合では終了まで開いています。",
       "location": "東側"
+    },
+    "entry-12": {
+      "name": "12番入口",
+      "description": "VIP・プレミアムチケットをお持ちの方向けの北東側の入口で、アメリカンフットボールの試合では終了まで開いています。",
+      "location": "北東側"
+    },
+    "podium-entry-4": {
+      "name": "アクセシビリティ案内台（4番入口）",
+      "description": "モビリティアンバサダーが、座席までとイベント後の帰りの無料車いす介助を手配します。待合椅子あり。車いすはイベント中の貸し出しや駐車場への持ち出しはできません。",
+      "location": "4番入口を入ってすぐ"
+    },
+    "podium-entry-8": {
+      "name": "アクセシビリティ案内台（8番入口）",
+      "description": "モビリティアンバサダーが、座席までとイベント後の帰りの無料車いす介助を手配します。待合椅子あり。車いすはイベント中の貸し出しや駐車場への持ち出しはできません。",
+      "location": "8番入口を入ってすぐ"
+    },
+    "podium-entry-10": {
+      "name": "アクセシビリティ案内台（10番入口）",
+      "description": "モビリティアンバサダーが、座席までとイベント後の帰りの無料車いす介助を手配します。待合椅子あり。車いすはイベント中の貸し出しや駐車場への持ち出しはできません。",
+      "location": "10番入口を入ってすぐ"
+    },
+    "rideshare-kareem": {
+      "name": "配車サービス降車場",
+      "description": "Uber、Lyft、タクシー、バス、シャトルは北行き側の歩道沿いで降車します。乗車は Kareem Court と Manchester Boulevard の交差点です。電車の場合：Metro C ラインまたは K ラインで LAX/Metro Transit Center へ行き、Bus Bay 8 から試合日のシャトルに乗ります。",
+      "location": "Kareem Court（Pincay Drive と Manchester Boulevard の間）"
+    },
+    "accessible-drop-off": {
+      "name": "バリアフリー乗降場",
+      "description": "障がいのある方の乗り降り用。Prairie Avenue を北へ進み、Arbor Vitae Street から入ります。出るときは Touchdown Drive を通ります。",
+      "location": "District Drive（Champions Way と Touchdown Drive の間）"
+    },
+    "brown-zone": {
+      "name": "ブラウンゾーン",
+      "description": "駐車場 C・D。1〜5番・12番入口に最も近い駐車エリアです。どの駐車場にも ADA 区画（障がい者用駐車許可証が必要）があり、先着順です。一部のイベントではバリアフリーの無料シャトルが運行します。",
+      "location": "3919 Pincay Drive"
+    },
+    "green-zone": {
+      "name": "グリーンゾーン",
+      "description": "駐車場 A・B。5番・6番入口に最も近い駐車エリアです。どの駐車場にも ADA 区画（障がい者用駐車許可証が必要）があり、先着順です。一部のイベントではバリアフリーの無料シャトルが運行します。",
+      "location": "800 Prairie Avenue"
+    },
+    "blue-zone": {
+      "name": "ブルーゾーン",
+      "description": "駐車場 N。7番・8番入口に最も近い駐車エリアです。どの駐車場にも ADA 区画（障がい者用駐車許可証が必要）があり、先着順です。一部のイベントではバリアフリーの無料シャトルが運行します。",
+      "location": "1100 Prairie Avenue"
+    },
+    "purple-zone": {
+      "name": "パープルゾーン",
+      "description": "駐車場 K・L。9番入口に最も近い駐車エリアです。どの駐車場にも ADA 区画（障がい者用駐車許可証が必要）があり、先着順です。一部のイベントではバリアフリーの無料シャトルが運行します。",
+      "location": "3801 West Century Boulevard"
+    },
+    "orange-zone": {
+      "name": "オレンジゾーン",
+      "description": "駐車場 E〜H。10・11・12番入口に最も近い駐車エリアです。どの駐車場にも ADA 区画（障がい者用駐車許可証が必要）があり、先着順です。一部のイベントではバリアフリーの無料シャトルが運行します。",
+      "location": "3695 Pincay Drive"
+    },
+    "service-animal-relief": {
+      "name": "サービスアニマル用トイレ",
+      "description": "サービスアニマル（犬とミニチュアホース）は入場できますが、エモーショナルサポートアニマルは入場できません。トイレエリアまではスタッフが案内します。",
+      "location": "Guest Experience のスタッフに道を聞いてください"
     },
     "guest-services-ne": {
       "name": "ゲストサービス（北東）",
-      "description": "お問い合わせ、落とし物、補聴支援機器、無料の感覚過敏キット、センサリールーム。",
-      "location": "3階、北東コンコース"
+      "description": "落とし物、無料の補聴支援機器とヘッドホン（身分証を預かります）、無料の感覚過敏キット、移動補助具の預かり、センサリールーム。",
+      "location": "3階、北東コンコース、Pechanga VIP Lobby のそば"
+    },
+    "sensory-room-ne": {
+      "name": "センサリールーム（北東）",
+      "description": "音や光、人混みから離れて休める静かな部屋です。1回15分、先着順。隣のゲストサービス窓口でお尋ねください。",
+      "location": "3階、北東ゲストサービスセンター内"
+    },
+    "guest-services-n": {
+      "name": "ゲストサービス（北）",
+      "description": "落とし物、無料の補聴支援機器（身分証を預かります）、無料の感覚過敏キット、迷子防止リストバンド、バリアフリー席への移動。",
+      "location": "3階、北コンコース、Pro Shop のそば"
+    },
+    "guest-services-se": {
+      "name": "ゲストサービス（南東）",
+      "description": "落とし物、無料の補聴支援機器（身分証を預かります）、無料の感覚過敏キット、道案内。",
+      "location": "3階、南東、SoFi VIP Lobby のそば"
     },
     "guest-services-sw": {
       "name": "ゲストサービス（南西）",
-      "description": "Corona Beach Club 内。落とし物、補聴支援機器、無料の感覚過敏キット、センサリールーム。",
+      "description": "Corona Beach Club 内。落とし物、無料の補聴支援機器とヘッドホン（身分証を預かります）、無料の感覚過敏キット、センサリールーム。",
       "location": "3階、南西コンコース"
     },
-    "first-aid-se": {
-      "name": "救護室（南東）",
-      "description": "救急隊員が常駐。案内係やスタッフに声をかければ呼んでもらえます。",
-      "location": "1階、南東コンコース"
+    "sensory-room-sw": {
+      "name": "センサリールーム（南西）",
+      "description": "音や光、人混みから離れて休める静かな部屋です。1回15分、先着順。隣のゲストサービス窓口でお尋ねください。",
+      "location": "3階、南西ゲストサービスセンター内"
+    },
+    "first-aid-ne": {
+      "name": "救護室（北東）",
+      "description": "救急隊員が常駐。案内係やスタッフに声をかければ呼んでもらえます。個室で授乳もできます。",
+      "location": "3階、北東コンコース"
     },
     "first-aid-nw": {
       "name": "救護室（北西）",
-      "description": "救急隊員が常駐。案内係やスタッフに声をかければ呼んでもらえます。",
+      "description": "救急隊員が常駐。案内係やスタッフに声をかければ呼んでもらえます。個室で授乳もできます。",
+      "location": "3階、北西コンコース。スタッフに道を聞いてください"
+    },
+    "first-aid-se": {
+      "name": "救護室（1階）",
+      "description": "救急隊員が常駐。案内係やスタッフに声をかければ呼んでもらえます。2階・3階・6階・8階にも救護室があります。",
+      "location": "1階（イベントフロア）、南東コンコース。スタッフに道を聞いてください"
+    },
+    "elevator-north": {
+      "name": "エレベーター（北）",
+      "description": "障がいのある方が優先で、同伴者は3人まで（混雑時は1人）。エレベーターとエスカレーターで全フロアに行けます。",
+      "location": "3階、北コンコース、207 セクションのそば"
+    },
+    "elevator-northwest": {
+      "name": "エレベーター（北西）",
+      "description": "障がいのある方が優先で、同伴者は3人まで（混雑時は1人）。エレベーターとエスカレーターで全フロアに行けます。",
       "location": "3階、北西コンコース"
     },
     "pedestrian-ramp": {
@@ -229,35 +354,65 @@
       "description": "スタジアム唯一の歩行者用スロープ。7階を除く全フロアにつながっています。",
       "location": "南東側、エンドゾーンの裏"
     },
+    "restrooms-n": {
+      "name": "トイレ（北）",
+      "description": "すべてのトイレがバリアフリーで、おむつ交換台があります。家族用トイレは各階にあります。",
+      "location": "3階、北コンコース、205 セクション付近"
+    },
+    "restrooms-sw": {
+      "name": "トイレ（南西）",
+      "description": "すべてのトイレがバリアフリーで、おむつ交換台があります。家族用トイレは各階にあります。",
+      "location": "3階、南西コンコース、C223 セクション付近"
+    },
+    "first-aid-se-6": {
+      "name": "救護室（南東）",
+      "description": "救急隊員が常駐。案内係やスタッフに声をかければ呼んでもらえます。個室で授乳もできます。",
+      "location": "6階、南東コンコース、342 セクション付近"
+    },
+    "first-aid-sw-6": {
+      "name": "救護室（南西）",
+      "description": "救急隊員が常駐。案内係やスタッフに声をかければ呼んでもらえます。個室で授乳もできます。",
+      "location": "6階、南西コンコース、330 セクション付近"
+    },
+    "guest-services-ne-6": {
+      "name": "ゲストサービス（6階北東）",
+      "description": "落とし物、無料の補聴支援機器（身分証を預かります）、無料の感覚過敏キット、バリアフリー席への移動。",
+      "location": "6階、北東、Pechanga VIP Lobby のそば"
+    },
+    "guest-services-se-6": {
+      "name": "ゲストサービス（6階南東）",
+      "description": "落とし物、無料の補聴支援機器（身分証を預かります）、無料の感覚過敏キット、バリアフリー席への移動。",
+      "location": "6階、南東、SoFi VIP Lobby のそば"
+    },
+    "adult-changing": {
+      "name": "大人用おむつ交換台",
+      "description": "大人用のおむつ交換台で、8番エレベーターの近くにあります。見つからない場合は Guest Experience の係員にお尋ねください。",
+      "location": "6階、329 セクション付近"
+    },
     "lactation-suite": {
       "name": "授乳室",
-      "description": "Mamava の個室授乳ポッド。家族用トイレは各階にあります。",
-      "location": "4階、南側"
+      "description": "Mamava の個室授乳室。椅子と電源があり、4階南側、6階、8階にあります。救護室や家族用トイレも利用できます。",
+      "location": "最寄りの場所はゲストサービスに聞いてください"
     },
-    "rideshare-kareem": {
-      "name": "配車サービス降車場",
-      "description": "Uber、Lyft、タクシーの降車場。乗車は Kareem Court と Manchester Boulevard の交差点です。",
-      "location": "Kareem Court（Pincay Drive と Manchester Boulevard の間）"
+    "hydration-ne": {
+      "name": "給水ステーション（北東）",
+      "description": "無料のろ過水。空の透明で金属製でない再利用ボトル（20オンスまで）を1本持ち込んで、ここで給水できます。",
+      "location": "6階、北東コンコース、304 セクション付近"
     },
-    "accessible-drop-off": {
-      "name": "バリアフリー乗降場",
-      "description": "障がいのある方の乗り降り用。Prairie Avenue を北へ進み、Arbor Vitae Street から入ります。",
-      "location": "District Drive（Champions Way と Touchdown Drive の間）"
+    "hydration-sw": {
+      "name": "給水ステーション（南西）",
+      "description": "無料のろ過水。空の透明で金属製でない再利用ボトル（20オンスまで）を1本持ち込んで、ここで給水できます。",
+      "location": "6階、南西コンコース、329 セクション付近"
     },
-    "brown-zone": {
-      "name": "ブラウンゾーン",
-      "description": "1〜5番・12番入口に最も近い駐車エリア。どの駐車場にも ADA 区画があり、先着順です。",
-      "location": "3919 Pincay Drive"
+    "restrooms-nw": {
+      "name": "トイレ（北西）",
+      "description": "すべてのトイレがバリアフリーで、おむつ交換台があります。家族用トイレは各階にあります。",
+      "location": "6階、北西コンコース、316 セクション付近"
     },
-    "blue-zone": {
-      "name": "ブルーゾーン",
-      "description": "7番・8番入口に最も近い駐車エリア。どの駐車場にも ADA 区画があり、先着順です。",
-      "location": "1100 Prairie Avenue"
-    },
-    "orange-zone": {
-      "name": "オレンジゾーン",
-      "description": "10・11・12番入口に最も近い駐車エリア。どの駐車場にも ADA 区画があり、先着順です。",
-      "location": "3695 Pincay Drive"
+    "restrooms-se": {
+      "name": "トイレ（南東）",
+      "description": "すべてのトイレがバリアフリーで、おむつ交換台があります。家族用トイレは各階にあります。",
+      "location": "6階、南東コンコース、341 セクション付近"
     },
     "kobe-bryant-entrance": {
       "name": "Kobe Bryant 入口",
@@ -472,6 +627,8 @@
     "steps_other": "約{{number}}歩",
     "stepStart": "{{from}}から出発します。",
     "stepHead": "{{direction}}へ約{{meters}}m進みます。",
+    "stepLevel": "エレベーターかエスカレーターで{{level}}へ移動します。",
+    "stepOut": "最寄りの出口から外に出ます。",
     "stepArrive": "{{name}}：{{location}}。",
     "here": "すでにここにいます。",
     "end": "ルートを終了",

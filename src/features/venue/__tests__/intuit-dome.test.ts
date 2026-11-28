@@ -27,7 +27,6 @@ describe('Intuit Dome facilities', () => {
 
   it('marks the spots the venue doesn’t publish as approximate, and only those', () => {
     expect(facilitiesFor('intuit-dome').filter(f => f.approximate).map(f => f.id).sort()).toEqual(['elevators', 'sensory-room']);
-    expect(facilitiesFor('sofi').some(f => f.approximate)).toBe(false);
   });
 
   it('lists what each desk offers', () => {

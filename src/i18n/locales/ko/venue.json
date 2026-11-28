@@ -83,7 +83,12 @@
     "label": "시설 핀이 표시된 {{venue}} 지도. 드래그해서 이동하고, 두 손가락이나 확대 버튼으로 확대·축소하세요.",
     "you": "내 위치",
     "start": "출발",
-    "cardHint": "아래 패널에서 엽니다"
+    "cardHint": "아래 패널에서 엽니다",
+    "layers": {
+      "label": "지도 레이어",
+      "outside": "야외",
+      "level": "{{number}}층"
+    }
   },
   "officialMap": {
     "attribution": "지도: {{source}}",
@@ -174,54 +179,174 @@
       "location": "메인 콘코스, Figueroa 쪽",
       "offer": "VenU로 모든 Coca-Cola 음료 $1 할인"
     },
+    "entry-1": {
+      "name": "1번 입구",
+      "description": "북쪽 입구. 투명 가방은 12×6×12인치까지, 작은 가방은 4.5×6.5인치까지 가능합니다. 모든 입구에 무장애 통로가 있고 무료 휠체어 동행 서비스를 제공합니다.",
+      "location": "북쪽, Touchdown Drive"
+    },
+    "entry-2": {
+      "name": "2번 입구",
+      "description": "북쪽 입구로, 미식축구 경기 때는 끝날 때까지 열려 있습니다. 투명 가방은 12×6×12인치까지, 작은 가방은 4.5×6.5인치까지 가능합니다.",
+      "location": "북쪽, Touchdown Drive"
+    },
     "entry-3": {
       "name": "3번 입구",
-      "description": "북쪽 입구. 모든 입구에 무장애 통로가 있고 무료 휠체어 동행 서비스를 제공합니다.",
+      "description": "북쪽 입구로, 미식축구 경기 때는 끝날 때까지 열려 있습니다. 모든 입구에 무장애 통로가 있고 무료 휠체어 동행 서비스를 제공합니다.",
       "location": "북쪽"
     },
     "entry-4": {
       "name": "4번 입구",
-      "description": "안쪽에 접근성 안내 데스크와 대기 의자가 있는 북쪽 입구입니다.",
+      "description": "북쪽 입구로, 들어가자마자 접근성 안내 데스크와 대기 의자가 있습니다. 투명 가방은 12×6×12인치까지, 작은 가방은 4.5×6.5인치까지 가능합니다.",
       "location": "북쪽"
+    },
+    "entry-5": {
+      "name": "5번 입구",
+      "description": "북서쪽 입구로, 그린 존(A·B 주차장)에서 가장 가깝습니다. 모든 입구에 무장애 통로가 있고 무료 휠체어 동행 서비스를 제공합니다.",
+      "location": "북서쪽"
     },
     "entry-6": {
       "name": "6번 입구",
-      "description": "VIP 및 프리미엄 티켓 소지자용 서쪽 입구입니다.",
+      "description": "VIP 및 프리미엄 티켓 소지자용 서쪽 입구로, 미식축구 경기 때는 끝날 때까지 열려 있습니다.",
       "location": "서쪽"
+    },
+    "entry-7": {
+      "name": "7번 입구",
+      "description": "VIP 및 프리미엄 티켓 소지자용 서쪽 입구로, 미식축구 경기 때는 끝날 때까지 열려 있습니다. 블루 존(N 주차장)에서 가장 가깝습니다.",
+      "location": "서쪽, Champions Way"
     },
     "entry-8": {
       "name": "8번 입구",
-      "description": "안쪽에 접근성 안내 데스크와 대기 의자가 있는 남쪽 입구입니다.",
+      "description": "남쪽 입구로, 들어가자마자 접근성 안내 데스크와 대기 의자가 있습니다. 8B 입구는 미식축구 경기 때 끝날 때까지 열려 있습니다.",
       "location": "남쪽"
+    },
+    "entry-9": {
+      "name": "9번 입구",
+      "description": "남쪽 입구(9A~9D 게이트)로, 퍼플 존(K·L 주차장)에서 가장 가깝습니다. 모든 입구에 무장애 통로가 있고 무료 휠체어 동행 서비스를 제공합니다.",
+      "location": "남쪽, 호수 옆"
     },
     "entry-10": {
       "name": "10번 입구",
-      "description": "안쪽에 접근성 안내 데스크와 대기 의자가 있는 남쪽 입구입니다.",
-      "location": "남쪽"
+      "description": "남동쪽 입구로, 들어가자마자 접근성 안내 데스크와 대기 의자가 있습니다. 10B 입구는 미식축구 경기 때 끝날 때까지 열려 있습니다.",
+      "location": "남동쪽, Stadium Drive"
     },
     "entry-11": {
       "name": "11번 입구",
-      "description": "VIP 및 프리미엄 티켓 소지자용 동쪽 입구입니다.",
+      "description": "VIP 및 프리미엄 티켓 소지자용 동쪽 입구로, 미식축구 경기 때는 끝날 때까지 열려 있습니다.",
       "location": "동쪽"
+    },
+    "entry-12": {
+      "name": "12번 입구",
+      "description": "VIP 및 프리미엄 티켓 소지자용 북동쪽 입구로, 미식축구 경기 때는 끝날 때까지 열려 있습니다.",
+      "location": "북동쪽"
+    },
+    "podium-entry-4": {
+      "name": "접근성 안내 데스크 4",
+      "description": "모빌리티 앰배서더가 좌석까지, 그리고 행사 후 돌아올 때 무료 휠체어 동행을 준비해 드립니다. 대기 의자가 있습니다. 휠체어는 행사 동안 대여하거나 주차장으로 가져갈 수 없습니다.",
+      "location": "4번 입구 들어가자마자"
+    },
+    "podium-entry-8": {
+      "name": "접근성 안내 데스크 8",
+      "description": "모빌리티 앰배서더가 좌석까지, 그리고 행사 후 돌아올 때 무료 휠체어 동행을 준비해 드립니다. 대기 의자가 있습니다. 휠체어는 행사 동안 대여하거나 주차장으로 가져갈 수 없습니다.",
+      "location": "8번 입구 들어가자마자"
+    },
+    "podium-entry-10": {
+      "name": "접근성 안내 데스크 10",
+      "description": "모빌리티 앰배서더가 좌석까지, 그리고 행사 후 돌아올 때 무료 휠체어 동행을 준비해 드립니다. 대기 의자가 있습니다. 휠체어는 행사 동안 대여하거나 주차장으로 가져갈 수 없습니다.",
+      "location": "10번 입구 들어가자마자"
+    },
+    "rideshare-kareem": {
+      "name": "차량 호출 하차장",
+      "description": "Uber, Lyft, 택시, 버스, 셔틀은 북쪽 방향 연석에서 내려 줍니다. 승차는 Kareem Court와 Manchester Boulevard에서 합니다. 기차 이용 시: Metro C 또는 K Line을 타고 LAX/Metro Transit Center까지 간 뒤 Bus Bay 8에서 경기일 셔틀을 타세요.",
+      "location": "Kareem Court, Pincay Drive와 Manchester Boulevard 사이"
+    },
+    "accessible-drop-off": {
+      "name": "장애인 승하차장",
+      "description": "장애인 승객을 내려 주고 태우는 곳입니다. Prairie Avenue 북쪽 방향에서 Arbor Vitae Street로 들어오고, 나갈 때는 Touchdown Drive를 이용하세요.",
+      "location": "District Drive, Champions Way와 Touchdown Drive 사이"
+    },
+    "brown-zone": {
+      "name": "브라운 존",
+      "description": "C·D 주차장으로, 1~5번, 12번 입구에서 가장 가깝습니다. 모든 주차장에 ADA 주차면(장애인 주차 표지 필요)이 있으며 선착순입니다. 일부 행사에는 무장애 무료 셔틀이 운행합니다.",
+      "location": "3919 Pincay Drive"
+    },
+    "green-zone": {
+      "name": "그린 존",
+      "description": "A·B 주차장으로, 5번, 6번 입구에서 가장 가깝습니다. 모든 주차장에 ADA 주차면(장애인 주차 표지 필요)이 있으며 선착순입니다. 일부 행사에는 무장애 무료 셔틀이 운행합니다.",
+      "location": "800 Prairie Avenue"
+    },
+    "blue-zone": {
+      "name": "블루 존",
+      "description": "N 주차장으로, 7번, 8번 입구에서 가장 가깝습니다. 모든 주차장에 ADA 주차면(장애인 주차 표지 필요)이 있으며 선착순입니다. 일부 행사에는 무장애 무료 셔틀이 운행합니다.",
+      "location": "1100 Prairie Avenue"
+    },
+    "purple-zone": {
+      "name": "퍼플 존",
+      "description": "K·L 주차장으로, 9번 입구에서 가장 가깝습니다. 모든 주차장에 ADA 주차면(장애인 주차 표지 필요)이 있으며 선착순입니다. 일부 행사에는 무장애 무료 셔틀이 운행합니다.",
+      "location": "3801 West Century Boulevard"
+    },
+    "orange-zone": {
+      "name": "오렌지 존",
+      "description": "E~H 주차장으로, 10번, 11번, 12번 입구에서 가장 가깝습니다. 모든 주차장에 ADA 주차면(장애인 주차 표지 필요)이 있으며 선착순입니다. 일부 행사에는 무장애 무료 셔틀이 운행합니다.",
+      "location": "3695 Pincay Drive"
+    },
+    "service-animal-relief": {
+      "name": "서비스 동물 배변 구역",
+      "description": "서비스 동물(개와 미니어처 호스)은 환영하지만 정서 지원 동물은 들어올 수 없습니다. 직원이 배변 구역까지 안내해 드립니다.",
+      "location": "Guest Experience 직원에게 길을 물어보세요"
     },
     "guest-services-ne": {
       "name": "관람객 서비스센터 북동",
-      "description": "문의, 분실물, 보청 보조기기, 무료 감각 키트와 감각실.",
-      "location": "3층, 북동쪽 콘코스"
+      "description": "분실물, 무료 보청 보조기기와 헤드폰(신분증 보관), 무료 감각 키트, 이동 보조기기 보관, 감각실.",
+      "location": "3층, 북동쪽 콘코스, Pechanga VIP Lobby 옆"
+    },
+    "sensory-room-ne": {
+      "name": "감각실 북동",
+      "description": "소리, 조명, 인파를 피해 쉴 수 있는 조용한 방으로, 15분씩 선착순으로 이용합니다. 바로 옆 관람객 서비스 데스크에 문의하세요.",
+      "location": "3층, 북동쪽 관람객 서비스센터 안"
+    },
+    "guest-services-n": {
+      "name": "관람객 서비스센터 북",
+      "description": "분실물, 무료 보청 보조기기(신분증 보관), 무료 감각 키트, 미아 방지 팔찌, 무장애 좌석으로 자리 변경.",
+      "location": "3층, 북쪽 콘코스, Pro Shop 옆"
+    },
+    "guest-services-se": {
+      "name": "관람객 서비스센터 남동",
+      "description": "분실물, 무료 보청 보조기기(신분증 보관), 무료 감각 키트, 길 안내.",
+      "location": "3층, 남동쪽, SoFi VIP Lobby 옆"
     },
     "guest-services-sw": {
       "name": "관람객 서비스센터 남서",
-      "description": "Corona Beach Club 안에 있습니다. 분실물, 보청 보조기기, 무료 감각 키트와 감각실.",
+      "description": "Corona Beach Club 안에 있습니다. 분실물, 무료 보청 보조기기와 헤드폰(신분증 보관), 무료 감각 키트, 감각실.",
       "location": "3층, 남서쪽 콘코스"
     },
-    "first-aid-se": {
-      "name": "응급처치실 남동",
-      "description": "응급구조사가 상주합니다. 안내원이나 직원 누구에게나 요청하면 불러 드립니다.",
-      "location": "1층, 남동쪽 콘코스"
+    "sensory-room-sw": {
+      "name": "감각실 남서",
+      "description": "소리, 조명, 인파를 피해 쉴 수 있는 조용한 방으로, 15분씩 선착순으로 이용합니다. 바로 옆 관람객 서비스 데스크에 문의하세요.",
+      "location": "3층, 남서쪽 관람객 서비스센터 안"
+    },
+    "first-aid-ne": {
+      "name": "응급처치실 북동",
+      "description": "응급구조사가 상주합니다. 안내원이나 직원 누구에게나 요청하면 불러 드립니다. 이곳에서 따로 수유도 할 수 있습니다.",
+      "location": "3층, 북동쪽 콘코스"
     },
     "first-aid-nw": {
       "name": "응급처치실 북서",
-      "description": "응급구조사가 상주합니다. 안내원이나 직원 누구에게나 요청하면 불러 드립니다.",
+      "description": "응급구조사가 상주합니다. 안내원이나 직원 누구에게나 요청하면 불러 드립니다. 이곳에서 따로 수유도 할 수 있습니다.",
+      "location": "3층, 북서쪽 콘코스. 직원에게 길을 물어보세요"
+    },
+    "first-aid-se": {
+      "name": "응급처치실 1층",
+      "description": "응급구조사가 상주합니다. 안내원이나 직원 누구에게나 요청하면 불러 드립니다. 2층, 3층, 6층, 8층에도 응급처치실이 있습니다.",
+      "location": "1층(이벤트 층), 남동쪽 콘코스. 직원에게 길을 물어보세요"
+    },
+    "elevator-north": {
+      "name": "엘리베이터 북",
+      "description": "장애가 있는 관람객이 먼저 타며, 동행은 3명까지(혼잡 시간에는 1명) 가능합니다. 엘리베이터와 에스컬레이터로 모든 층에 갈 수 있습니다.",
+      "location": "3층, 북쪽 콘코스, 207 구역 옆"
+    },
+    "elevator-northwest": {
+      "name": "엘리베이터 북서",
+      "description": "장애가 있는 관람객이 먼저 타며, 동행은 3명까지(혼잡 시간에는 1명) 가능합니다. 엘리베이터와 에스컬레이터로 모든 층에 갈 수 있습니다.",
       "location": "3층, 북서쪽 콘코스"
     },
     "pedestrian-ramp": {
@@ -229,35 +354,65 @@
       "description": "경기장의 유일한 보행자 경사로로, 7층을 제외한 모든 층으로 이어집니다.",
       "location": "남동쪽, 엔드존 뒤"
     },
+    "restrooms-n": {
+      "name": "화장실 북",
+      "description": "모든 화장실은 무장애 시설이며 아기 기저귀 교환대가 있습니다. 가족 화장실은 모든 층에 있습니다.",
+      "location": "3층, 북쪽 콘코스, 205 구역 근처"
+    },
+    "restrooms-sw": {
+      "name": "화장실 남서",
+      "description": "모든 화장실은 무장애 시설이며 아기 기저귀 교환대가 있습니다. 가족 화장실은 모든 층에 있습니다.",
+      "location": "3층, 남서쪽 콘코스, C223 구역 근처"
+    },
+    "first-aid-se-6": {
+      "name": "응급처치실 남동",
+      "description": "응급구조사가 상주합니다. 안내원이나 직원 누구에게나 요청하면 불러 드립니다. 이곳에서 따로 수유도 할 수 있습니다.",
+      "location": "6층, 남동쪽 콘코스, 342 구역 근처"
+    },
+    "first-aid-sw-6": {
+      "name": "응급처치실 남서",
+      "description": "응급구조사가 상주합니다. 안내원이나 직원 누구에게나 요청하면 불러 드립니다. 이곳에서 따로 수유도 할 수 있습니다.",
+      "location": "6층, 남서쪽 콘코스, 330 구역 근처"
+    },
+    "guest-services-ne-6": {
+      "name": "관람객 서비스센터 6층 북동",
+      "description": "분실물, 무료 보청 보조기기(신분증 보관), 무료 감각 키트, 무장애 좌석으로 자리 변경.",
+      "location": "6층, 북동쪽, Pechanga VIP Lobby 옆"
+    },
+    "guest-services-se-6": {
+      "name": "관람객 서비스센터 6층 남동",
+      "description": "분실물, 무료 보청 보조기기(신분증 보관), 무료 감각 키트, 무장애 좌석으로 자리 변경.",
+      "location": "6층, 남동쪽, SoFi VIP Lobby 옆"
+    },
+    "adult-changing": {
+      "name": "성인용 기저귀 교환대",
+      "description": "8번 엘리베이터 근처에 있는 성인용 기저귀 교환대입니다. 찾기 어려우면 Guest Experience 담당자에게 문의하세요.",
+      "location": "6층, 329 구역 근처"
+    },
     "lactation-suite": {
       "name": "수유실",
-      "description": "Mamava 개인 수유 부스. 가족 화장실은 모든 층에 있습니다.",
-      "location": "4층, 남쪽"
+      "description": "좌석과 전원이 있는 Mamava 개인 수유실이 4층 남쪽, 6층, 8층에 있습니다. 응급처치실이나 가족 화장실도 이용할 수 있습니다.",
+      "location": "가장 가까운 곳은 관람객 서비스센터에 물어보세요"
     },
-    "rideshare-kareem": {
-      "name": "차량 호출 하차장",
-      "description": "Uber, Lyft, 택시 하차장입니다. 승차는 Kareem Court와 Manchester Boulevard 교차로에서 합니다.",
-      "location": "Kareem Court, Pincay Drive와 Manchester Boulevard 사이"
+    "hydration-ne": {
+      "name": "급수대 북동",
+      "description": "무료 정수입니다. 비어 있는 투명한 비금속 재사용 물병(20온스 이하) 하나를 가져와 여기서 채울 수 있습니다.",
+      "location": "6층, 북동쪽 콘코스, 304 구역 근처"
     },
-    "accessible-drop-off": {
-      "name": "장애인 승하차장",
-      "description": "장애인 승객을 내려 주고 태우는 곳입니다. Prairie Avenue 북쪽 방향에서 Arbor Vitae Street로 들어오세요.",
-      "location": "District Drive, Champions Way와 Touchdown Drive 사이"
+    "hydration-sw": {
+      "name": "급수대 남서",
+      "description": "무료 정수입니다. 비어 있는 투명한 비금속 재사용 물병(20온스 이하) 하나를 가져와 여기서 채울 수 있습니다.",
+      "location": "6층, 남서쪽 콘코스, 329 구역 근처"
     },
-    "brown-zone": {
-      "name": "브라운 존",
-      "description": "1~5번, 12번 입구에서 가장 가까운 주차 구역. 모든 주차장에 ADA 주차면이 있으며 선착순입니다.",
-      "location": "3919 Pincay Drive"
+    "restrooms-nw": {
+      "name": "화장실 북서",
+      "description": "모든 화장실은 무장애 시설이며 아기 기저귀 교환대가 있습니다. 가족 화장실은 모든 층에 있습니다.",
+      "location": "6층, 북서쪽 콘코스, 316 구역 근처"
     },
-    "blue-zone": {
-      "name": "블루 존",
-      "description": "7번, 8번 입구에서 가장 가까운 주차 구역. 모든 주차장에 ADA 주차면이 있으며 선착순입니다.",
-      "location": "1100 Prairie Avenue"
-    },
-    "orange-zone": {
-      "name": "오렌지 존",
-      "description": "10번, 11번, 12번 입구에서 가장 가까운 주차 구역. 모든 주차장에 ADA 주차면이 있으며 선착순입니다.",
-      "location": "3695 Pincay Drive"
+    "restrooms-se": {
+      "name": "화장실 남동",
+      "description": "모든 화장실은 무장애 시설이며 아기 기저귀 교환대가 있습니다. 가족 화장실은 모든 층에 있습니다.",
+      "location": "6층, 남동쪽 콘코스, 341 구역 근처"
     },
     "kobe-bryant-entrance": {
       "name": "Kobe Bryant 입구",
@@ -472,6 +627,8 @@
     "steps_other": "약 {{number}}걸음",
     "stepStart": "{{from}}에서 출발하세요.",
     "stepHead": "{{direction}}쪽으로 약 {{meters}}m 가세요.",
+    "stepLevel": "엘리베이터나 에스컬레이터를 타고 {{level}}으로 가세요.",
+    "stepOut": "가장 가까운 출구로 가서 밖으로 나가세요.",
     "stepArrive": "{{name}}: {{location}}.",
     "here": "이미 여기에 있어요.",
     "end": "경로 종료",

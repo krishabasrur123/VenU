@@ -48,8 +48,8 @@ describe('routeFor', () => {
   });
 
   it('heads the right way on the north-up map, with a plausible walk', () => {
-    // Entry 4 (north-west of the bowl) to First Aid SE: south-east, a few minutes.
-    const route = routeFor(sofi, facilities, nowhere, 'sofi', 'first-aid-se')!;
+    // Entry 4 (north-west of the bowl) to Entry 10 (south-east): south-east, a few minutes.
+    const route = routeFor(sofi, facilities, nowhere, 'sofi', 'entry-10')!;
     expect(route.walk.heading).toBe('se');
     expect(route.walk.minutes).toBeGreaterThanOrEqual(2);
     expect(route.walk.minutes).toBeLessThanOrEqual(10);
@@ -67,12 +67,14 @@ describe('routeFor', () => {
 describe('startMarker', () => {
   it('says "You" only at a spot the visitor set', () => {
     const route = routeFor(sofi, facilities, { venueId: 'sofi', facilityId: 'entry-11' }, 'sofi', 'blue-zone');
-    expect(startMarker(route)).toEqual({ kind: 'you', at: facilities.find(f => f.id === 'entry-11') });
+    const at = facilities.find(f => f.id === 'entry-11')!;
+    expect(startMarker(route)).toEqual({ kind: 'you', at, point: { x: at.x, y: at.y } });
   });
 
   it('tags the main way in "Start" (its pin stays) until they do', () => {
     const route = routeFor(sofi, facilities, nowhere, 'sofi', 'blue-zone');
-    expect(startMarker(route)).toEqual({ kind: 'start', at: facilities.find(f => f.id === 'entry-4') });
+    const at = facilities.find(f => f.id === 'entry-4')!;
+    expect(startMarker(route)).toEqual({ kind: 'start', at, point: { x: at.x, y: at.y } });
   });
 
   it('marks nothing without a walk', () => {

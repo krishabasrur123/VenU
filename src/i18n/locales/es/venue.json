@@ -83,7 +83,12 @@
     "label": "Mapa de {{venue}} con los servicios marcados. Arrastra para moverlo; pellizca o usa los botones para hacer zoom.",
     "you": "Tú",
     "start": "Inicio",
-    "cardHint": "Lo abre en el panel de abajo"
+    "cardHint": "Lo abre en el panel de abajo",
+    "layers": {
+      "label": "Capa del mapa",
+      "outside": "Exterior",
+      "level": "Nivel {{number}}"
+    }
   },
   "officialMap": {
     "attribution": "Mapa: {{source}}",
@@ -176,54 +181,174 @@
       "location": "Explanada principal, lado de Figueroa",
       "offer": "$1 de descuento en cualquier bebida Coca-Cola con VenU"
     },
+    "entry-1": {
+      "name": "Entrada 1",
+      "description": "Entrada norte. Bolsos transparentes de hasta 12×6×12 in, o un bolso pequeño de hasta 4.5×6.5 in. Todas las entradas tienen un camino accesible y acompañamiento gratuito en silla de ruedas.",
+      "location": "Lado norte, en Touchdown Drive"
+    },
+    "entry-2": {
+      "name": "Entrada 2",
+      "description": "Entrada norte, abierta hasta el final en los partidos de fútbol americano. Bolsos transparentes de hasta 12×6×12 in, o un bolso pequeño de hasta 4.5×6.5 in.",
+      "location": "Lado norte, en Touchdown Drive"
+    },
     "entry-3": {
       "name": "Entrada 3",
-      "description": "Entrada norte. Todas las entradas tienen un camino accesible y acompañamiento gratuito en silla de ruedas.",
+      "description": "Entrada norte, abierta hasta el final en los partidos de fútbol americano. Todas las entradas tienen un camino accesible y acompañamiento gratuito en silla de ruedas.",
       "location": "Lado norte"
     },
     "entry-4": {
       "name": "Entrada 4",
-      "description": "Entrada norte con un punto de atención de accesibilidad y sillas de espera adentro.",
+      "description": "Entrada norte con un punto de atención de accesibilidad y sillas de espera justo al entrar. Bolsos transparentes de hasta 12×6×12 in, o un bolso pequeño de hasta 4.5×6.5 in.",
       "location": "Lado norte"
+    },
+    "entry-5": {
+      "name": "Entrada 5",
+      "description": "Entrada noroeste, la más cercana a la Zona Verde (Lotes A y B). Todas las entradas tienen un camino accesible y acompañamiento gratuito en silla de ruedas.",
+      "location": "Lado noroeste"
     },
     "entry-6": {
       "name": "Entrada 6",
-      "description": "Entrada oeste para boletos VIP y premium.",
+      "description": "Entrada oeste para boletos VIP y premium, abierta hasta el final en los partidos de fútbol americano.",
       "location": "Lado oeste"
+    },
+    "entry-7": {
+      "name": "Entrada 7",
+      "description": "Entrada oeste para boletos VIP y premium, abierta hasta el final en los partidos de fútbol americano. Es la más cercana a la Zona Azul (Lote N).",
+      "location": "Lado oeste, en Champions Way"
     },
     "entry-8": {
       "name": "Entrada 8",
-      "description": "Entrada sur con un punto de atención de accesibilidad y sillas de espera adentro.",
+      "description": "Entrada sur con un punto de atención de accesibilidad y sillas de espera justo al entrar. La Entrada 8B sigue abierta hasta el final en los partidos de fútbol americano.",
       "location": "Lado sur"
+    },
+    "entry-9": {
+      "name": "Entrada 9",
+      "description": "Entrada sur (puertas 9A a 9D), la más cercana a la Zona Morada (Lotes K y L). Todas las entradas tienen un camino accesible y acompañamiento gratuito en silla de ruedas.",
+      "location": "Lado sur, junto al lago"
     },
     "entry-10": {
       "name": "Entrada 10",
-      "description": "Entrada sur con un punto de atención de accesibilidad y sillas de espera adentro.",
-      "location": "Lado sur"
+      "description": "Entrada sureste con un punto de atención de accesibilidad y sillas de espera justo al entrar. La Entrada 10B sigue abierta hasta el final en los partidos de fútbol americano.",
+      "location": "Lado sureste, en Stadium Drive"
     },
     "entry-11": {
       "name": "Entrada 11",
-      "description": "Entrada este para boletos VIP y premium.",
+      "description": "Entrada este para boletos VIP y premium, abierta hasta el final en los partidos de fútbol americano.",
       "location": "Lado este"
+    },
+    "entry-12": {
+      "name": "Entrada 12",
+      "description": "Entrada noreste para boletos VIP y premium, abierta hasta el final en los partidos de fútbol americano.",
+      "location": "Lado noreste"
+    },
+    "podium-entry-4": {
+      "name": "Punto de accesibilidad 4",
+      "description": "Los Embajadores de Movilidad organizan un acompañamiento gratuito en silla de ruedas hasta tu asiento y de regreso después del evento. Sillas de espera. No se prestan sillas de ruedas durante el evento ni se pueden llevar a los estacionamientos.",
+      "location": "Justo al pasar la Entrada 4"
+    },
+    "podium-entry-8": {
+      "name": "Punto de accesibilidad 8",
+      "description": "Los Embajadores de Movilidad organizan un acompañamiento gratuito en silla de ruedas hasta tu asiento y de regreso después del evento. Sillas de espera. No se prestan sillas de ruedas durante el evento ni se pueden llevar a los estacionamientos.",
+      "location": "Justo al pasar la Entrada 8"
+    },
+    "podium-entry-10": {
+      "name": "Punto de accesibilidad 10",
+      "description": "Los Embajadores de Movilidad organizan un acompañamiento gratuito en silla de ruedas hasta tu asiento y de regreso después del evento. Sillas de espera. No se prestan sillas de ruedas durante el evento ni se pueden llevar a los estacionamientos.",
+      "location": "Justo al pasar la Entrada 10"
+    },
+    "rideshare-kareem": {
+      "name": "Descenso de viajes compartidos",
+      "description": "Uber, Lyft, taxis, autobuses y shuttles dejan pasajeros en la acera en dirección norte. La recogida es en Kareem Court y Manchester Boulevard. En tren: Línea C o K de Metro hasta LAX/Metro Transit Center y luego el shuttle de los días de partido desde Bus Bay 8.",
+      "location": "Kareem Court, entre Pincay Drive y Manchester Boulevard"
+    },
+    "accessible-drop-off": {
+      "name": "Descenso accesible",
+      "description": "Para dejar y recoger a personas con discapacidad. Entra por Prairie Avenue en dirección norte y sigue por Arbor Vitae Street; sal por Touchdown Drive.",
+      "location": "District Drive, entre Champions Way y Touchdown Drive"
+    },
+    "brown-zone": {
+      "name": "Zona Marrón",
+      "description": "Lotes C y D, los más cercanos a las Entradas 1–5 y 12. Hay plazas ADA (con permiso de discapacidad) en todos los lotes, por orden de llegada. Hay un transporte de cortesía accesible en algunos eventos.",
+      "location": "3919 Pincay Drive"
+    },
+    "green-zone": {
+      "name": "Zona Verde",
+      "description": "Lotes A y B, los más cercanos a las Entradas 5 y 6. Hay plazas ADA (con permiso de discapacidad) en todos los lotes, por orden de llegada. Hay un transporte de cortesía accesible en algunos eventos.",
+      "location": "800 Prairie Avenue"
+    },
+    "blue-zone": {
+      "name": "Zona Azul",
+      "description": "Lote N, el más cercano a las Entradas 7 y 8. Hay plazas ADA (con permiso de discapacidad) en todos los lotes, por orden de llegada. Hay un transporte de cortesía accesible en algunos eventos.",
+      "location": "1100 Prairie Avenue"
+    },
+    "purple-zone": {
+      "name": "Zona Morada",
+      "description": "Lotes K y L, los más cercanos a la Entrada 9. Hay plazas ADA (con permiso de discapacidad) en todos los lotes, por orden de llegada. Hay un transporte de cortesía accesible en algunos eventos.",
+      "location": "3801 West Century Boulevard"
+    },
+    "orange-zone": {
+      "name": "Zona Naranja",
+      "description": "Lotes E a H, los más cercanos a las Entradas 10, 11 y 12. Hay plazas ADA (con permiso de discapacidad) en todos los lotes, por orden de llegada. Hay un transporte de cortesía accesible en algunos eventos.",
+      "location": "3695 Pincay Drive"
+    },
+    "service-animal-relief": {
+      "name": "Área de alivio para animales de servicio",
+      "description": "Los animales de servicio (perros y caballos miniatura) son bienvenidos; los animales de apoyo emocional no. El personal te indicará el camino al área de alivio.",
+      "location": "Pide indicaciones al personal de Guest Experience"
     },
     "guest-services-ne": {
       "name": "Atención al visitante NE",
-      "description": "Preguntas, objetos perdidos, audición asistida, kits sensoriales gratis y una sala sensorial.",
-      "location": "Nivel 3, explanada noreste"
+      "description": "Objetos perdidos, audición asistida y audífonos gratis (se retiene una identificación), kits sensoriales gratis, guardado de dispositivos de movilidad y una sala sensorial.",
+      "location": "Nivel 3, explanada noreste, junto al Pechanga VIP Lobby"
+    },
+    "sensory-room-ne": {
+      "name": "Sala sensorial NE",
+      "description": "Una sala tranquila para descansar del ruido, las luces y las multitudes, en turnos de 15 minutos, por orden de llegada. Pregunta en el mostrador de Atención al visitante de al lado.",
+      "location": "Nivel 3, dentro del Centro de Atención al visitante noreste"
+    },
+    "guest-services-n": {
+      "name": "Atención al visitante N",
+      "description": "Objetos perdidos, audición asistida gratis (se retiene una identificación), kits sensoriales gratis, pulseras para localizar niños y cambios a asientos accesibles.",
+      "location": "Nivel 3, explanada norte, junto a la Pro Shop"
+    },
+    "guest-services-se": {
+      "name": "Atención al visitante SE",
+      "description": "Objetos perdidos, audición asistida gratis (se retiene una identificación), kits sensoriales gratis e indicaciones.",
+      "location": "Nivel 3, sureste, junto al SoFi VIP Lobby"
     },
     "guest-services-sw": {
       "name": "Atención al visitante SO",
-      "description": "Dentro del Corona Beach Club. Objetos perdidos, audición asistida, kits sensoriales gratis y una sala sensorial.",
+      "description": "Dentro del Corona Beach Club. Objetos perdidos, audición asistida y audífonos gratis (se retiene una identificación), kits sensoriales gratis y una sala sensorial.",
       "location": "Nivel 3, explanada suroeste"
     },
-    "first-aid-se": {
-      "name": "Primeros auxilios SE",
-      "description": "Paramédicos en el estadio. Cualquier acomodador o empleado puede llamarlos.",
-      "location": "Nivel 1, explanada sureste"
+    "sensory-room-sw": {
+      "name": "Sala sensorial SO",
+      "description": "Una sala tranquila para descansar del ruido, las luces y las multitudes, en turnos de 15 minutos, por orden de llegada. Pregunta en el mostrador de Atención al visitante de al lado.",
+      "location": "Nivel 3, dentro del Centro de Atención al visitante suroeste"
+    },
+    "first-aid-ne": {
+      "name": "Primeros auxilios NE",
+      "description": "Paramédicos en el estadio. Cualquier acomodador o empleado puede llamarlos. También puedes amamantar aquí en privado.",
+      "location": "Nivel 3, explanada noreste"
     },
     "first-aid-nw": {
       "name": "Primeros auxilios NO",
-      "description": "Paramédicos en el estadio. Cualquier acomodador o empleado puede llamarlos.",
+      "description": "Paramédicos en el estadio. Cualquier acomodador o empleado puede llamarlos. También puedes amamantar aquí en privado.",
+      "location": "Nivel 3, explanada noroeste; pide indicaciones al personal"
+    },
+    "first-aid-se": {
+      "name": "Primeros auxilios Nivel 1",
+      "description": "Paramédicos en el estadio. Cualquier acomodador o empleado puede llamarlos. También hay salas de primeros auxilios en los Niveles 2, 3, 6 y 8.",
+      "location": "Nivel 1 (nivel del evento), explanada sureste; pide indicaciones al personal"
+    },
+    "elevator-north": {
+      "name": "Elevador N",
+      "description": "Las personas con discapacidad suben primero, con hasta tres acompañantes (uno en horas pico). Los elevadores y las escaleras mecánicas llegan a todos los niveles.",
+      "location": "Nivel 3, explanada norte, junto a la sección 207"
+    },
+    "elevator-northwest": {
+      "name": "Elevador NO",
+      "description": "Las personas con discapacidad suben primero, con hasta tres acompañantes (uno en horas pico). Los elevadores y las escaleras mecánicas llegan a todos los niveles.",
       "location": "Nivel 3, explanada noroeste"
     },
     "pedestrian-ramp": {
@@ -231,35 +356,65 @@
       "description": "La única rampa peatonal del estadio. Llega a todos los niveles excepto el 7.",
       "location": "Lado sureste, detrás de la zona de anotación"
     },
+    "restrooms-n": {
+      "name": "Baños N",
+      "description": "Todos los baños son accesibles y tienen cambiador para bebés. Hay baños familiares en todos los niveles.",
+      "location": "Nivel 3, explanada norte, cerca de la sección 205"
+    },
+    "restrooms-sw": {
+      "name": "Baños SO",
+      "description": "Todos los baños son accesibles y tienen cambiador para bebés. Hay baños familiares en todos los niveles.",
+      "location": "Nivel 3, explanada suroeste, cerca de la sección C223"
+    },
+    "first-aid-se-6": {
+      "name": "Primeros auxilios SE",
+      "description": "Paramédicos en el estadio. Cualquier acomodador o empleado puede llamarlos. También puedes amamantar aquí en privado.",
+      "location": "Nivel 6, explanada sureste, cerca de la sección 342"
+    },
+    "first-aid-sw-6": {
+      "name": "Primeros auxilios SO",
+      "description": "Paramédicos en el estadio. Cualquier acomodador o empleado puede llamarlos. También puedes amamantar aquí en privado.",
+      "location": "Nivel 6, explanada suroeste, cerca de la sección 330"
+    },
+    "guest-services-ne-6": {
+      "name": "Atención al visitante Nivel 6 NE",
+      "description": "Objetos perdidos, audición asistida gratis (se retiene una identificación), kits sensoriales gratis y cambios a asientos accesibles.",
+      "location": "Nivel 6, noreste, junto al Pechanga VIP Lobby"
+    },
+    "guest-services-se-6": {
+      "name": "Atención al visitante Nivel 6 SE",
+      "description": "Objetos perdidos, audición asistida gratis (se retiene una identificación), kits sensoriales gratis y cambios a asientos accesibles.",
+      "location": "Nivel 6, sureste, junto al SoFi VIP Lobby"
+    },
+    "adult-changing": {
+      "name": "Cambiador para adultos",
+      "description": "Un cambiador para adultos, cerca del elevador 8. Si no lo encuentras, pregunta a un representante de Guest Experience.",
+      "location": "Nivel 6, cerca de la sección 329"
+    },
     "lactation-suite": {
-      "name": "Sala de lactancia",
-      "description": "Cabina privada de lactancia Mamava. Hay baños familiares en todos los niveles.",
-      "location": "Nivel 4, sur"
+      "name": "Salas de lactancia",
+      "description": "Salas de lactancia privadas Mamava con asientos y enchufes, en el Nivel 4 Sur, el Nivel 6 y el Nivel 8. También sirve cualquier sala de primeros auxilios o baño familiar.",
+      "location": "Pregunta en Atención al visitante por la más cercana"
     },
-    "rideshare-kareem": {
-      "name": "Descenso de viajes compartidos",
-      "description": "Para Uber, Lyft y taxis. La recogida es en Kareem Court y Manchester Boulevard.",
-      "location": "Kareem Court, entre Pincay Drive y Manchester Boulevard"
+    "hydration-ne": {
+      "name": "Estación de hidratación NE",
+      "description": "Agua filtrada gratis. Puedes traer una botella reutilizable vacía, transparente y no metálica de hasta 20 oz para llenarla aquí.",
+      "location": "Nivel 6, explanada noreste, cerca de la sección 304"
     },
-    "accessible-drop-off": {
-      "name": "Descenso accesible",
-      "description": "Para dejar y recoger a personas con discapacidad. Entra por Prairie Avenue hacia el norte y sigue por Arbor Vitae Street.",
-      "location": "District Drive, entre Champions Way y Touchdown Drive"
+    "hydration-sw": {
+      "name": "Estación de hidratación SO",
+      "description": "Agua filtrada gratis. Puedes traer una botella reutilizable vacía, transparente y no metálica de hasta 20 oz para llenarla aquí.",
+      "location": "Nivel 6, explanada suroeste, cerca de la sección 329"
     },
-    "brown-zone": {
-      "name": "Zona Marrón",
-      "description": "Estacionamiento más cercano a las Entradas 1–5 y 12. Hay plazas ADA en todos los lotes, por orden de llegada.",
-      "location": "3919 Pincay Drive"
+    "restrooms-nw": {
+      "name": "Baños NO",
+      "description": "Todos los baños son accesibles y tienen cambiador para bebés. Hay baños familiares en todos los niveles.",
+      "location": "Nivel 6, explanada noroeste, cerca de la sección 316"
     },
-    "blue-zone": {
-      "name": "Zona Azul",
-      "description": "Estacionamiento más cercano a las Entradas 7 y 8. Hay plazas ADA en todos los lotes, por orden de llegada.",
-      "location": "1100 Prairie Avenue"
-    },
-    "orange-zone": {
-      "name": "Zona Naranja",
-      "description": "Estacionamiento más cercano a las Entradas 10, 11 y 12. Hay plazas ADA en todos los lotes, por orden de llegada.",
-      "location": "3695 Pincay Drive"
+    "restrooms-se": {
+      "name": "Baños SE",
+      "description": "Todos los baños son accesibles y tienen cambiador para bebés. Hay baños familiares en todos los niveles.",
+      "location": "Nivel 6, explanada sureste, cerca de la sección 341"
     },
     "kobe-bryant-entrance": {
       "name": "Entrada Kobe Bryant",
@@ -478,6 +633,8 @@
     "steps_other": "unos {{number}} pasos",
     "stepStart": "Empieza en {{from}}.",
     "stepHead": "Ve hacia el {{direction}} unos {{meters}} m.",
+    "stepLevel": "Toma un elevador o una escalera mecánica hasta el {{level}}.",
+    "stepOut": "Ve a la salida más cercana y sal al exterior.",
     "stepArrive": "{{name}}: {{location}}.",
     "here": "Ya estás aquí.",
     "end": "Terminar ruta",

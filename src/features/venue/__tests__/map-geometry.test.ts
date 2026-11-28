@@ -119,9 +119,9 @@ describe('pinsFor', () => {
   });
 
   it('shows only the chip\'s category, the same facilities the list shows', () => {
-    expect(pinsFor(sofi, 'restroom').map(f => f.id)).toEqual(['lactation-suite']);
+    expect(pinsFor(sofi, 'restroom').map(f => f.id)).toEqual(['restrooms-n', 'restrooms-sw', 'adult-changing', 'lactation-suite', 'restrooms-nw', 'restrooms-se']);
     expect(pinsFor(facilitiesFor('crypto-arena'), 'restroom').map(f => f.id)).toEqual(['restroom-m23', 'restroom-u31']);
-    expect(pinsFor(sofi, 'first_aid').map(f => f.id)).toEqual(['first-aid-se', 'first-aid-nw']);
+    expect(pinsFor(sofi, 'first_aid').map(f => f.id)).toEqual(['first-aid-ne', 'first-aid-nw', 'first-aid-se', 'first-aid-se-6', 'first-aid-sw-6']);
   });
 
   it('counts accessible facilities as Accessibility, like the list', () => {
@@ -131,11 +131,11 @@ describe('pinsFor', () => {
   });
 
   it('keeps the open facility and a route\'s ends whatever the chip', () => {
-    expect(pinsFor(sofi, 'restroom', ['entry-4', null, undefined]).map(f => f.id)).toEqual(['entry-4', 'lactation-suite']);
+    expect(pinsFor(facilitiesFor('crypto-arena'), 'restroom', ['figueroa-entrance', null, undefined]).map(f => f.id)).toEqual(['figueroa-entrance', 'restroom-m23', 'restroom-u31']);
   });
 
   it('has nothing for a chip the venue has no facility for', () => {
-    expect(pinsFor(sofi, 'food')).toEqual([]);
+    expect(pinsFor(facilitiesFor('crypto-arena'), 'food')).toEqual([]);
   });
 });
 

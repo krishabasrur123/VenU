@@ -1,6 +1,7 @@
 /**
  * The sheet's directions to the open facility, while the map shows the dashed route: walk time and
- * steps, where the walk starts, then three steps (start, heading and distance, arrive).
+ * steps, where the walk starts, then three steps (start, heading and distance, arrive), plus a
+ * change of level after the start when the facility is on another map layer.
  * e.g. "6 min walk · about 560 steps / From Entry 4 / 1. Start at Entry 4. 2. Head southeast…"
  */
 import { StyleSheet, Text, View } from 'react-native';
@@ -11,7 +12,7 @@ import { languageOf, useLayoutRtl, useT } from '@/i18n';
 import { formatNumber } from '@/i18n/format';
 
 import type { Route } from './directions';
-import { facilityLocation, facilityName, withoutFinalStop } from './labels';
+import { facilityLocation, facilityName, layerLabel, withoutFinalStop } from './labels';
 import { venueText } from './ui';
 
 /** Keeps a name's own direction inside a sentence ("Answers Portal مستوى Terrace" in Arabic). */
@@ -26,10 +27,14 @@ export function DirectionsPanel({ route, onEnd, plainArrival = false }: { route:
   const from = isolate(facilityName(route.from, t));
   const name = isolate(facilityName(route.to, t));
   const { minutes, steps, meters, heading } = route.walk;
+  // A walk onto another layer changes level first: "Take an elevator or escalator to Level 3."
+  const change = route.levelChange;
+  const levelStep = !change ? [] : [change.kind === 'level' ? t('directions.stepLevel', { level: isolate(layerLabel(change, t)) }) : t('directions.stepOut')];
   const lines = route.here
     ? [t('directions.here')]
     : [
         t('directions.stepStart', { from }),
+        ...levelStep,
         t('directions.stepHead', { direction: t(`directions.dir.${heading}`), meters: num(Math.round(meters / 10) * 10) }),
         // The step adds its own full stop: "East Garage: Entrance on 102nd St." not "St..".
         t('directions.stepArrive', { name, location: isolate(withoutFinalStop(facilityLocation(route.to, t))) }),

@@ -83,9 +83,14 @@ export interface Facility {
   /** Step-free and wheelchair usable. Shows the blue wheelchair badge. */
   accessible: boolean;
   tags: FacilityTag[];
-  /** Position on the venue's map image (./venue-maps.ts), from 0 to 1 across and down. */
+  /** Position on its layer's map image (./venue-maps.ts), from 0 to 1 across and down. */
   x: number;
   y: number;
+  /**
+   * The map layer it's pinned on, e.g. 'level-3' at SoFi (see VenueMap.layers); without one, the
+   * venue's first layer (its outside map).
+   */
+  layer?: string;
   /**
    * The venue doesn't publish where it is, so the pin is only a placeholder: no walking route or
    * walk time, and the card says to ask staff instead.

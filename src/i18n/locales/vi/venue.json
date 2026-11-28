@@ -83,7 +83,12 @@
     "label": "Bản đồ {{venue}} có ghim các tiện ích. Kéo để di chuyển, chụm ngón tay hoặc dùng nút để phóng to, thu nhỏ.",
     "you": "Bạn",
     "start": "Xuất phát",
-    "cardHint": "Mở trong bảng bên dưới"
+    "cardHint": "Mở trong bảng bên dưới",
+    "layers": {
+      "label": "Lớp bản đồ",
+      "outside": "Bên ngoài",
+      "level": "Tầng {{number}}"
+    }
   },
   "officialMap": {
     "attribution": "Bản đồ: {{source}}",
@@ -174,54 +179,174 @@
       "location": "Hành lang chính, phía Figueroa",
       "offer": "Giảm $1 cho mọi đồ uống Coca-Cola với VenU"
     },
+    "entry-1": {
+      "name": "Lối vào 1",
+      "description": "Lối vào phía bắc. Túi trong suốt tối đa 12×6×12 inch, hoặc túi nhỏ tối đa 4,5×6,5 inch. Mọi lối vào đều có lối đi hỗ trợ tiếp cận và người hỗ trợ xe lăn miễn phí.",
+      "location": "Phía bắc, trên Touchdown Drive"
+    },
+    "entry-2": {
+      "name": "Lối vào 2",
+      "description": "Lối vào phía bắc, mở đến cuối trận ở các trận bóng bầu dục. Túi trong suốt tối đa 12×6×12 inch, hoặc túi nhỏ tối đa 4,5×6,5 inch.",
+      "location": "Phía bắc, trên Touchdown Drive"
+    },
     "entry-3": {
       "name": "Lối vào 3",
-      "description": "Lối vào phía bắc. Mọi lối vào đều có lối đi hỗ trợ tiếp cận và người hỗ trợ xe lăn miễn phí.",
+      "description": "Lối vào phía bắc, mở đến cuối trận ở các trận bóng bầu dục. Mọi lối vào đều có lối đi hỗ trợ tiếp cận và người hỗ trợ xe lăn miễn phí.",
       "location": "Phía bắc"
     },
     "entry-4": {
       "name": "Lối vào 4",
-      "description": "Lối vào phía bắc, bên trong có quầy hỗ trợ tiếp cận và ghế chờ.",
+      "description": "Lối vào phía bắc, ngay bên trong có quầy hỗ trợ tiếp cận và ghế chờ. Túi trong suốt tối đa 12×6×12 inch, hoặc túi nhỏ tối đa 4,5×6,5 inch.",
       "location": "Phía bắc"
+    },
+    "entry-5": {
+      "name": "Lối vào 5",
+      "description": "Lối vào phía tây bắc, gần Khu Xanh lá (Bãi A và B) nhất. Mọi lối vào đều có lối đi hỗ trợ tiếp cận và người hỗ trợ xe lăn miễn phí.",
+      "location": "Phía tây bắc"
     },
     "entry-6": {
       "name": "Lối vào 6",
-      "description": "Lối vào phía tây cho người có vé VIP và vé cao cấp.",
+      "description": "Lối vào phía tây cho người có vé VIP và vé cao cấp, mở đến cuối trận ở các trận bóng bầu dục.",
       "location": "Phía tây"
+    },
+    "entry-7": {
+      "name": "Lối vào 7",
+      "description": "Lối vào phía tây cho người có vé VIP và vé cao cấp, mở đến cuối trận ở các trận bóng bầu dục. Gần Khu Xanh dương (Bãi N) nhất.",
+      "location": "Phía tây, trên Champions Way"
     },
     "entry-8": {
       "name": "Lối vào 8",
-      "description": "Lối vào phía nam, bên trong có quầy hỗ trợ tiếp cận và ghế chờ.",
+      "description": "Lối vào phía nam, ngay bên trong có quầy hỗ trợ tiếp cận và ghế chờ. Lối vào 8B mở đến cuối trận ở các trận bóng bầu dục.",
       "location": "Phía nam"
+    },
+    "entry-9": {
+      "name": "Lối vào 9",
+      "description": "Lối vào phía nam (cổng 9A đến 9D), gần Khu Tím (Bãi K và L) nhất. Mọi lối vào đều có lối đi hỗ trợ tiếp cận và người hỗ trợ xe lăn miễn phí.",
+      "location": "Phía nam, cạnh hồ"
     },
     "entry-10": {
       "name": "Lối vào 10",
-      "description": "Lối vào phía nam, bên trong có quầy hỗ trợ tiếp cận và ghế chờ.",
-      "location": "Phía nam"
+      "description": "Lối vào phía đông nam, ngay bên trong có quầy hỗ trợ tiếp cận và ghế chờ. Lối vào 10B mở đến cuối trận ở các trận bóng bầu dục.",
+      "location": "Phía đông nam, trên Stadium Drive"
     },
     "entry-11": {
       "name": "Lối vào 11",
-      "description": "Lối vào phía đông cho người có vé VIP và vé cao cấp.",
+      "description": "Lối vào phía đông cho người có vé VIP và vé cao cấp, mở đến cuối trận ở các trận bóng bầu dục.",
       "location": "Phía đông"
+    },
+    "entry-12": {
+      "name": "Lối vào 12",
+      "description": "Lối vào phía đông bắc cho người có vé VIP và vé cao cấp, mở đến cuối trận ở các trận bóng bầu dục.",
+      "location": "Phía đông bắc"
+    },
+    "podium-entry-4": {
+      "name": "Quầy hỗ trợ tiếp cận 4",
+      "description": "Đại sứ Di chuyển sắp xếp người hỗ trợ xe lăn miễn phí đưa bạn đến chỗ ngồi và quay lại sau sự kiện. Có ghế chờ. Không cho mượn xe lăn trong suốt sự kiện và không được mang xe lăn ra bãi đỗ xe.",
+      "location": "Ngay bên trong Lối vào 4"
+    },
+    "podium-entry-8": {
+      "name": "Quầy hỗ trợ tiếp cận 8",
+      "description": "Đại sứ Di chuyển sắp xếp người hỗ trợ xe lăn miễn phí đưa bạn đến chỗ ngồi và quay lại sau sự kiện. Có ghế chờ. Không cho mượn xe lăn trong suốt sự kiện và không được mang xe lăn ra bãi đỗ xe.",
+      "location": "Ngay bên trong Lối vào 8"
+    },
+    "podium-entry-10": {
+      "name": "Quầy hỗ trợ tiếp cận 10",
+      "description": "Đại sứ Di chuyển sắp xếp người hỗ trợ xe lăn miễn phí đưa bạn đến chỗ ngồi và quay lại sau sự kiện. Có ghế chờ. Không cho mượn xe lăn trong suốt sự kiện và không được mang xe lăn ra bãi đỗ xe.",
+      "location": "Ngay bên trong Lối vào 10"
+    },
+    "rideshare-kareem": {
+      "name": "Điểm trả khách xe công nghệ",
+      "description": "Uber, Lyft, taxi, xe buýt và xe đưa đón trả khách ở lề đường chiều đi về hướng bắc. Điểm đón ở Kareem Court và Manchester Boulevard. Đi tàu: Metro tuyến C hoặc K đến LAX/Metro Transit Center, rồi đi xe đưa đón ngày thi đấu từ Bus Bay 8.",
+      "location": "Kareem Court, giữa Pincay Drive và Manchester Boulevard"
+    },
+    "accessible-drop-off": {
+      "name": "Điểm đón trả hỗ trợ tiếp cận",
+      "description": "Đón và trả khách khuyết tật. Đi Prairie Avenue hướng bắc rồi vào qua Arbor Vitae Street; ra bằng Touchdown Drive.",
+      "location": "District Drive, giữa Champions Way và Touchdown Drive"
+    },
+    "brown-zone": {
+      "name": "Khu Nâu",
+      "description": "Bãi C và D, gần Lối vào 1–5 và 12 nhất. Bãi nào cũng có chỗ đỗ ADA (cần thẻ đỗ xe cho người khuyết tật), ai đến trước được trước. Có xe đưa đón miễn phí hỗ trợ tiếp cận ở một số sự kiện.",
+      "location": "3919 Pincay Drive"
+    },
+    "green-zone": {
+      "name": "Khu Xanh lá",
+      "description": "Bãi A và B, gần Lối vào 5 và 6 nhất. Bãi nào cũng có chỗ đỗ ADA (cần thẻ đỗ xe cho người khuyết tật), ai đến trước được trước. Có xe đưa đón miễn phí hỗ trợ tiếp cận ở một số sự kiện.",
+      "location": "800 Prairie Avenue"
+    },
+    "blue-zone": {
+      "name": "Khu Xanh dương",
+      "description": "Bãi N, gần Lối vào 7 và 8 nhất. Bãi nào cũng có chỗ đỗ ADA (cần thẻ đỗ xe cho người khuyết tật), ai đến trước được trước. Có xe đưa đón miễn phí hỗ trợ tiếp cận ở một số sự kiện.",
+      "location": "1100 Prairie Avenue"
+    },
+    "purple-zone": {
+      "name": "Khu Tím",
+      "description": "Bãi K và L, gần Lối vào 9 nhất. Bãi nào cũng có chỗ đỗ ADA (cần thẻ đỗ xe cho người khuyết tật), ai đến trước được trước. Có xe đưa đón miễn phí hỗ trợ tiếp cận ở một số sự kiện.",
+      "location": "3801 West Century Boulevard"
+    },
+    "orange-zone": {
+      "name": "Khu Cam",
+      "description": "Bãi E đến H, gần Lối vào 10, 11 và 12 nhất. Bãi nào cũng có chỗ đỗ ADA (cần thẻ đỗ xe cho người khuyết tật), ai đến trước được trước. Có xe đưa đón miễn phí hỗ trợ tiếp cận ở một số sự kiện.",
+      "location": "3695 Pincay Drive"
+    },
+    "service-animal-relief": {
+      "name": "Khu vệ sinh cho động vật phục vụ",
+      "description": "Chào đón động vật phục vụ (chó và ngựa lùn); không nhận động vật hỗ trợ cảm xúc. Nhân viên sẽ chỉ đường đến khu vệ sinh.",
+      "location": "Hỏi nhân viên Guest Experience để được chỉ đường"
     },
     "guest-services-ne": {
       "name": "Quầy dịch vụ Đông Bắc",
-      "description": "Giải đáp thắc mắc, đồ thất lạc, thiết bị hỗ trợ nghe, bộ dụng cụ giác quan miễn phí và phòng giác quan.",
-      "location": "Tầng 3, hành lang phía đông bắc"
+      "description": "Đồ thất lạc, thiết bị hỗ trợ nghe và tai nghe miễn phí (giữ giấy tờ tùy thân), bộ dụng cụ giác quan miễn phí, chỗ gửi thiết bị hỗ trợ di chuyển và phòng giác quan.",
+      "location": "Tầng 3, hành lang phía đông bắc, cạnh Pechanga VIP Lobby"
+    },
+    "sensory-room-ne": {
+      "name": "Phòng giác quan Đông Bắc",
+      "description": "Phòng yên tĩnh để nghỉ ngơi khỏi tiếng ồn, ánh sáng và đám đông, mỗi lượt 15 phút, ai đến trước được trước. Hỏi tại quầy dịch vụ ngay bên cạnh.",
+      "location": "Tầng 3, bên trong Trung tâm dịch vụ khách phía đông bắc"
+    },
+    "guest-services-n": {
+      "name": "Quầy dịch vụ Bắc",
+      "description": "Đồ thất lạc, thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ tùy thân), bộ dụng cụ giác quan miễn phí, vòng tay tìm trẻ lạc và đổi sang chỗ ngồi hỗ trợ tiếp cận.",
+      "location": "Tầng 3, hành lang phía bắc, cạnh Pro Shop"
+    },
+    "guest-services-se": {
+      "name": "Quầy dịch vụ Đông Nam",
+      "description": "Đồ thất lạc, thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ tùy thân), bộ dụng cụ giác quan miễn phí và chỉ đường.",
+      "location": "Tầng 3, phía đông nam, cạnh SoFi VIP Lobby"
     },
     "guest-services-sw": {
       "name": "Quầy dịch vụ Tây Nam",
-      "description": "Bên trong Corona Beach Club. Đồ thất lạc, thiết bị hỗ trợ nghe, bộ dụng cụ giác quan miễn phí và phòng giác quan.",
+      "description": "Bên trong Corona Beach Club. Đồ thất lạc, thiết bị hỗ trợ nghe và tai nghe miễn phí (giữ giấy tờ tùy thân), bộ dụng cụ giác quan miễn phí và phòng giác quan.",
       "location": "Tầng 3, hành lang phía tây nam"
     },
-    "first-aid-se": {
-      "name": "Trạm sơ cứu Đông Nam",
-      "description": "Có nhân viên cấp cứu tại chỗ. Mọi nhân viên hướng dẫn hay nhân viên sân đều có thể gọi giúp bạn.",
-      "location": "Tầng 1, hành lang phía đông nam"
+    "sensory-room-sw": {
+      "name": "Phòng giác quan Tây Nam",
+      "description": "Phòng yên tĩnh để nghỉ ngơi khỏi tiếng ồn, ánh sáng và đám đông, mỗi lượt 15 phút, ai đến trước được trước. Hỏi tại quầy dịch vụ ngay bên cạnh.",
+      "location": "Tầng 3, bên trong Trung tâm dịch vụ khách phía tây nam"
+    },
+    "first-aid-ne": {
+      "name": "Trạm sơ cứu Đông Bắc",
+      "description": "Có nhân viên cấp cứu tại chỗ. Mọi nhân viên hướng dẫn hay nhân viên sân đều có thể gọi giúp bạn. Bạn cũng có thể cho con bú riêng tư tại đây.",
+      "location": "Tầng 3, hành lang phía đông bắc"
     },
     "first-aid-nw": {
       "name": "Trạm sơ cứu Tây Bắc",
-      "description": "Có nhân viên cấp cứu tại chỗ. Mọi nhân viên hướng dẫn hay nhân viên sân đều có thể gọi giúp bạn.",
+      "description": "Có nhân viên cấp cứu tại chỗ. Mọi nhân viên hướng dẫn hay nhân viên sân đều có thể gọi giúp bạn. Bạn cũng có thể cho con bú riêng tư tại đây.",
+      "location": "Tầng 3, hành lang phía tây bắc; hỏi nhân viên để được chỉ đường"
+    },
+    "first-aid-se": {
+      "name": "Trạm sơ cứu Tầng 1",
+      "description": "Có nhân viên cấp cứu tại chỗ. Mọi nhân viên hướng dẫn hay nhân viên sân đều có thể gọi giúp bạn. Còn có phòng sơ cứu ở Tầng 2, 3, 6 và 8.",
+      "location": "Tầng 1 (tầng sân thi đấu), hành lang phía đông nam; hỏi nhân viên để được chỉ đường"
+    },
+    "elevator-north": {
+      "name": "Thang máy Bắc",
+      "description": "Khách khuyết tật được đi trước, cùng tối đa ba người đi kèm (một người vào giờ cao điểm). Thang máy và thang cuốn lên được mọi tầng.",
+      "location": "Tầng 3, hành lang phía bắc, cạnh khu 207"
+    },
+    "elevator-northwest": {
+      "name": "Thang máy Tây Bắc",
+      "description": "Khách khuyết tật được đi trước, cùng tối đa ba người đi kèm (một người vào giờ cao điểm). Thang máy và thang cuốn lên được mọi tầng.",
       "location": "Tầng 3, hành lang phía tây bắc"
     },
     "pedestrian-ramp": {
@@ -229,35 +354,65 @@
       "description": "Lối dốc đi bộ duy nhất của sân, lên được mọi tầng trừ tầng 7.",
       "location": "Phía đông nam, phía sau khu end zone"
     },
+    "restrooms-n": {
+      "name": "Nhà vệ sinh Bắc",
+      "description": "Mọi nhà vệ sinh đều hỗ trợ tiếp cận và có bàn thay tã cho em bé. Tầng nào cũng có nhà vệ sinh gia đình.",
+      "location": "Tầng 3, hành lang phía bắc, gần khu 205"
+    },
+    "restrooms-sw": {
+      "name": "Nhà vệ sinh Tây Nam",
+      "description": "Mọi nhà vệ sinh đều hỗ trợ tiếp cận và có bàn thay tã cho em bé. Tầng nào cũng có nhà vệ sinh gia đình.",
+      "location": "Tầng 3, hành lang phía tây nam, gần khu C223"
+    },
+    "first-aid-se-6": {
+      "name": "Trạm sơ cứu Đông Nam",
+      "description": "Có nhân viên cấp cứu tại chỗ. Mọi nhân viên hướng dẫn hay nhân viên sân đều có thể gọi giúp bạn. Bạn cũng có thể cho con bú riêng tư tại đây.",
+      "location": "Tầng 6, hành lang phía đông nam, gần khu 342"
+    },
+    "first-aid-sw-6": {
+      "name": "Trạm sơ cứu Tây Nam",
+      "description": "Có nhân viên cấp cứu tại chỗ. Mọi nhân viên hướng dẫn hay nhân viên sân đều có thể gọi giúp bạn. Bạn cũng có thể cho con bú riêng tư tại đây.",
+      "location": "Tầng 6, hành lang phía tây nam, gần khu 330"
+    },
+    "guest-services-ne-6": {
+      "name": "Quầy dịch vụ Tầng 6 Đông Bắc",
+      "description": "Đồ thất lạc, thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ tùy thân), bộ dụng cụ giác quan miễn phí và đổi sang chỗ ngồi hỗ trợ tiếp cận.",
+      "location": "Tầng 6, phía đông bắc, cạnh Pechanga VIP Lobby"
+    },
+    "guest-services-se-6": {
+      "name": "Quầy dịch vụ Tầng 6 Đông Nam",
+      "description": "Đồ thất lạc, thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ tùy thân), bộ dụng cụ giác quan miễn phí và đổi sang chỗ ngồi hỗ trợ tiếp cận.",
+      "location": "Tầng 6, phía đông nam, cạnh SoFi VIP Lobby"
+    },
+    "adult-changing": {
+      "name": "Bàn thay tã cho người lớn",
+      "description": "Bàn thay tã cho người lớn, gần thang máy 8. Nếu không tìm thấy, hãy hỏi Nhân viên Guest Experience.",
+      "location": "Tầng 6, gần khu 329"
+    },
     "lactation-suite": {
-      "name": "Phòng cho con bú",
-      "description": "Buồng cho con bú riêng tư Mamava. Mỗi tầng đều có nhà vệ sinh gia đình.",
-      "location": "Tầng 4, phía nam"
+      "name": "Các phòng cho con bú",
+      "description": "Phòng cho con bú riêng tư Mamava có ghế ngồi và ổ điện, ở Tầng 4 phía nam, Tầng 6 và Tầng 8. Phòng sơ cứu hoặc nhà vệ sinh gia đình nào cũng dùng được.",
+      "location": "Hỏi Quầy dịch vụ phòng gần nhất"
     },
-    "rideshare-kareem": {
-      "name": "Điểm trả khách xe công nghệ",
-      "description": "Điểm trả khách cho Uber, Lyft và taxi. Điểm đón ở góc Kareem Court và Manchester Boulevard.",
-      "location": "Kareem Court, giữa Pincay Drive và Manchester Boulevard"
+    "hydration-ne": {
+      "name": "Trạm nước uống Đông Bắc",
+      "description": "Nước lọc miễn phí. Bạn có thể mang một chai tái sử dụng rỗng, trong suốt, không bằng kim loại, tối đa 20 oz để lấy nước tại đây.",
+      "location": "Tầng 6, hành lang phía đông bắc, gần khu 304"
     },
-    "accessible-drop-off": {
-      "name": "Điểm đón trả hỗ trợ tiếp cận",
-      "description": "Đón và trả khách khuyết tật. Đi Prairie Avenue hướng bắc rồi vào Arbor Vitae Street.",
-      "location": "District Drive, giữa Champions Way và Touchdown Drive"
+    "hydration-sw": {
+      "name": "Trạm nước uống Tây Nam",
+      "description": "Nước lọc miễn phí. Bạn có thể mang một chai tái sử dụng rỗng, trong suốt, không bằng kim loại, tối đa 20 oz để lấy nước tại đây.",
+      "location": "Tầng 6, hành lang phía tây nam, gần khu 329"
     },
-    "brown-zone": {
-      "name": "Khu Nâu",
-      "description": "Bãi đỗ gần Lối vào 1–5 và 12 nhất. Bãi nào cũng có chỗ đỗ ADA, ai đến trước được trước.",
-      "location": "3919 Pincay Drive"
+    "restrooms-nw": {
+      "name": "Nhà vệ sinh Tây Bắc",
+      "description": "Mọi nhà vệ sinh đều hỗ trợ tiếp cận và có bàn thay tã cho em bé. Tầng nào cũng có nhà vệ sinh gia đình.",
+      "location": "Tầng 6, hành lang phía tây bắc, gần khu 316"
     },
-    "blue-zone": {
-      "name": "Khu Xanh dương",
-      "description": "Bãi đỗ gần Lối vào 7 và 8 nhất. Bãi nào cũng có chỗ đỗ ADA, ai đến trước được trước.",
-      "location": "1100 Prairie Avenue"
-    },
-    "orange-zone": {
-      "name": "Khu Cam",
-      "description": "Bãi đỗ gần Lối vào 10, 11 và 12 nhất. Bãi nào cũng có chỗ đỗ ADA, ai đến trước được trước.",
-      "location": "3695 Pincay Drive"
+    "restrooms-se": {
+      "name": "Nhà vệ sinh Đông Nam",
+      "description": "Mọi nhà vệ sinh đều hỗ trợ tiếp cận và có bàn thay tã cho em bé. Tầng nào cũng có nhà vệ sinh gia đình.",
+      "location": "Tầng 6, hành lang phía đông nam, gần khu 341"
     },
     "kobe-bryant-entrance": {
       "name": "Lối vào Kobe Bryant",
@@ -472,6 +627,8 @@
     "steps_other": "khoảng {{number}} bước",
     "stepStart": "Bắt đầu tại {{from}}.",
     "stepHead": "Đi về hướng {{direction}} khoảng {{meters}} m.",
+    "stepLevel": "Đi thang máy hoặc thang cuốn đến {{level}}.",
+    "stepOut": "Đi đến lối ra gần nhất và ra bên ngoài.",
     "stepArrive": "{{name}}: {{location}}.",
     "here": "Bạn đã ở đây rồi.",
     "end": "Kết thúc lộ trình",

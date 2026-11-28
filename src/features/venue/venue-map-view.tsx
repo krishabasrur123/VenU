@@ -19,12 +19,12 @@ import { useT } from '@/i18n';
 
 import { FacilityIcon } from './categories';
 import { startMarker, type Route } from './directions';
-import { facilityName } from './labels';
+import { facilityName, layerLabel } from './labels';
 import { clampView, contentSize, IMAGE_ZOOM_OUT_SLACK, isStrayPress, mapUpdate, zoomAt, ZOOM_STEP, zoomStep, type Box, type MapLayout, type MapRect, type MapView } from './map-geometry';
 import { SPONSOR_ACCENT, SPONSOR_SOFT, SponsoredIcon } from './sponsor-ui';
 import { VenueDrawing } from './stadium-map';
 import type { Facility } from './types';
-import { mapAspect, type VenueMap, type VenueMapImage } from './venue-maps';
+import { mapAspect, type VenueMap, type VenueMapImage, type VenueMapLayer } from './venue-maps';
 
 const PIN = 30;
 const PIN_BIG = 40;
@@ -32,11 +32,13 @@ const HIT = 44;
 /** The zoom buttons' column at the right edge. */
 const HIT_BUTTONS = 44 + 8;
 /** The source bar across the map's top edge. */
-const SOURCE_BAR = 40;
+export const SOURCE_BAR = 40;
+/** The layer toggle's height, under the source bar (see LayerToggle). */
+export const LAYER_TOGGLE = 40;
 const DOUBLE_TAP_ZOOM = 2;
 const TIMING = { duration: 320 };
-/** Fits keep pins below the source bar and left of the zoom buttons. */
-const FIT_INSETS = { top: SOURCE_BAR + Spacing.sm, right: HIT_BUTTONS };
+/** Fits keep pins below the source bar (and `overlayTop` more) and left of the zoom buttons. */
+const fitInsets = (overlayTop: number) => ({ top: SOURCE_BAR + Spacing.sm + overlayTop, right: HIT_BUTTONS });
 /** Room the bottom overlays (pin card, zoom buttons) keep clear above the sheet. */
 export const MAP_CARD_SPACE = 104;
 
@@ -77,13 +79,15 @@ export interface VenueMapViewProps {
   revealId?: string | null;
   /** Keep this much at the bottom of the viewport clear when revealing (the pin card). */
   revealInset?: number;
+  /** Px under the source bar that fits keep clear, for a control laid over the map there (the layer toggle). */
+  overlayTop?: number;
   onPinPress: (f: Facility) => void;
   /** Laid over the map's bottom edge, above the sheet (the pin card). */
   children?: ReactNode;
 }
 
 export function VenueMapView(props: VenueMapViewProps) {
-  const { map, venueName, pins, width, height, viewportHeight, highlightIds, tinted, route, fitKey, fitRect: rect, fitMax, revealId, revealInset = 0, onPinPress, children } = props;
+  const { map, venueName, pins, width, height, viewportHeight, highlightIds, tinted, route, fitKey, fitRect: rect, fitMax, revealId, revealInset = 0, overlayTop = 0, onPinPress, children } = props;
   const t = useT('venue');
   const content = contentSize(mapAspect(map), width, map.image ? IMAGE_ZOOM_OUT_SLACK : undefined);
   const viewport: Box = { w: width, h: Math.max(viewportHeight, 1) };
@@ -126,7 +130,7 @@ export function VenueMapView(props: VenueMapViewProps) {
       view: current(),
       content,
       viewport,
-      fit: { rect, max: fitMax, pad: 24, insets: FIT_INSETS },
+      fit: { rect, max: fitMax, pad: 24, insets: fitInsets(overlayTop) },
       revealPin: revealId ? pins.find(f => f.id === revealId) : undefined,
       revealInset,
     });
@@ -245,9 +249,10 @@ export function VenueMapView(props: VenueMapViewProps) {
   const start = startMarker(route);
   const youId = start?.kind === 'you' ? start.at.id : null;
   const scaleLine = (n: number) => n / Math.max(zoom, 0.1);
-  // The dashed line from the visitor's spot to the facility, in content px.
+  // The dashed line from the visitor's spot to the facility, in content px. Its start is where the
+  // spot falls on this layer, e.g. Entry 4 on the edge of the Level 3 map (see routeFor).
   const line = route && !route.here
-    ? { x1: route.from.x * content.w, y1: route.from.y * content.h, x2: route.to.x * content.w, y2: route.to.y * content.h }
+    ? { x1: route.start.x * content.w, y1: route.start.y * content.h, x2: route.to.x * content.w, y2: route.to.y * content.h }
     : null;
 
   return (
@@ -291,8 +296,8 @@ export function VenueMapView(props: VenueMapViewProps) {
                 onPress={pressPin}
               />
             ))}
-            {start?.kind === 'you' ? <YouMarker left={start.at.x * content.w} top={start.at.y * content.h} counterScale={counterScale} label={t('map.you')} /> : null}
-            {start?.kind === 'start' ? <StartTag left={start.at.x * content.w} top={start.at.y * content.h} counterScale={counterScale} label={t('map.start')} /> : null}
+            {start?.kind === 'you' ? <YouMarker left={start.point.x * content.w} top={start.point.y * content.h} counterScale={counterScale} label={t('map.you')} /> : null}
+            {start?.kind === 'start' ? <StartTag left={start.point.x * content.w} top={start.point.y * content.h} counterScale={counterScale} label={t('map.start')} /> : null}
           </Animated.View>
         </View>
       </GestureDetector>
@@ -401,6 +406,32 @@ function SourceBar({ map }: { map: VenueMap }) {
   );
 }
 
+/**
+ * "Outside · Level 3 · Level 6": switches the map between a venue's layers (VenueMap.layers). The
+ * screen lays it over the map's top-left corner, under the source bar.
+ */
+export function LayerToggle({ layers, value, onChange }: { layers: VenueMapLayer[]; value: string; onChange: (id: string) => void }) {
+  const t = useT('venue');
+  return (
+    <View style={styles.layers} accessibilityRole="radiogroup" accessibilityLabel={t('map.layers.label')}>
+      {layers.map(layer => {
+        const on = layer.id === value;
+        return (
+          <Pressable
+            key={layer.id}
+            onPress={() => onChange(layer.id)}
+            hitSlop={{ top: 4, bottom: 4 }}
+            style={({ pressed }) => [styles.layer, on && styles.layerOn, pressed && styles.pressed]}
+            accessibilityRole="radio"
+            accessibilityState={{ checked: on }}>
+            <Text style={[styles.layerText, on && styles.layerTextOn]} numberOfLines={1}>{layerLabel(layer, t)}</Text>
+          </Pressable>
+        );
+      })}
+    </View>
+  );
+}
+
 function ZoomButton({ glyph, label, onPress }: { glyph: string; label: string; onPress: () => void }) {
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [styles.zoom, pressed && styles.pressed]} accessibilityRole="button" accessibilityLabel={label}>
@@ -467,6 +498,22 @@ const styles = StyleSheet.create({
     ...Shadow.card,
   },
   zoomGlyph: { ...Face.displayMedium, fontSize: 24, lineHeight: 28, color: Colors.ink },
+  layers: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    height: LAYER_TOGGLE - Spacing.xs,
+    padding: 3,
+    gap: 2,
+    borderRadius: Radius.pill,
+    backgroundColor: Colors.surface,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    ...Shadow.card,
+  },
+  layer: { justifyContent: 'center', paddingHorizontal: Spacing.md, borderRadius: Radius.pill },
+  layerOn: { backgroundColor: Colors.primary },
+  layerText: { ...Face.textBold, fontSize: 13, lineHeight: 17, color: Colors.ink },
+  layerTextOn: { color: Colors.onPrimary },
   cover: { position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', gap: Spacing.md, paddingHorizontal: Spacing.xl, backgroundColor: Colors.surfaceAlt },
   coverText: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20, textAlign: 'center', color: Colors.textMuted },
   bottom: { position: 'absolute', left: 0, right: 0, justifyContent: 'flex-end', paddingHorizontal: Spacing.gutter, paddingBottom: Spacing.md },

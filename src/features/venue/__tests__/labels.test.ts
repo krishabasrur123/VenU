@@ -5,7 +5,7 @@ import i18n from '@/i18n';
 import { emptyFacilitiesMessage } from '../categories';
 import { eventsLabel, facilityDescription, facilityLocation, facilityMeta, facilityName, tagLabel } from '../labels';
 import { facilitiesFor, getFacility, getVenue, searchFacilities, searchKey, searchVenues } from '../mock';
-import type { Facility } from '../types';
+import type { Facility, FacilityCategory } from '../types';
 
 const sofi = getVenue('sofi')!;
 const entry4 = getFacility('sofi', 'entry-4')!;
@@ -64,7 +64,7 @@ describe('venue labels', () => {
   it('finds a facility by its translated name', () => {
     const es = i18n.getFixedT('es', 'venue');
     expect(searchFacilities(sofiFacilities, 'rampa peatonal', null, es).map(f => f.id)).toEqual(['pedestrian-ramp']);
-    expect(searchFacilities(sofiFacilities, 'entrada', 'gate', es).map(f => f.id)).toEqual(['entry-3', 'entry-4', 'entry-6', 'entry-8', 'entry-10', 'entry-11']);
+    expect(searchFacilities(sofiFacilities, 'entrada', 'gate', es).map(f => f.id)).toEqual(Array.from({ length: 12 }, (_, i) => `entry-${i + 1}`));
   });
 
   it('keeps a facility\'s own text when there is no translation for it', async () => {
@@ -85,13 +85,13 @@ describe('search in the app language', () => {
   });
 
   it('ignores accents, digit scripts, Arabic vs Persian letters and curly apostrophes', () => {
-    const ids = (q: string, lang: string) => searchFacilities(sofiFacilities, q, null, i18n.getFixedT(lang, 'venue')).map(f => f.id);
-    expect(ids('entree 4', 'fr')).toEqual(['entry-4']);
+    const ids = (q: string, lang: string, category: FacilityCategory | null = 'gate') => searchFacilities(sofiFacilities, q, category, i18n.getFixedT(lang, 'venue')).map(f => f.id);
+    expect(ids('entree 10', 'fr')).toEqual(['entry-10']);
     expect(searchVenues('natacion', undefined, i18n.getFixedT('es', 'venue')).map(v => v.id)).toEqual(['sofi']);
-    expect(ids('ورودی 4', 'fa')).toEqual(['entry-4']); // shown as ورودی ۴
-    expect(ids('المدخل ٤', 'ar')).toEqual(['entry-4']); // shown as المدخل 4
-    expect(ids('ورودي ۴', 'fa')).toEqual(['entry-4']); // typed with the Arabic ي
-    expect(ids("stadium's", 'en')).toEqual(['pedestrian-ramp']); // written stadium’s
+    expect(ids('ورودی 10', 'fa')).toEqual(['entry-10']); // shown as ورودی ۱۰
+    expect(ids('المدخل ١٠', 'ar')).toEqual(['entry-10']); // shown as المدخل 10
+    expect(ids('ورودي ۱۰', 'fa')).toEqual(['entry-10']); // typed with the Arabic ي
+    expect(ids("stadium's", 'en', null)).toEqual(['pedestrian-ramp']); // written stadium’s
   });
 
   it('folds search text the same way on both sides', () => {
