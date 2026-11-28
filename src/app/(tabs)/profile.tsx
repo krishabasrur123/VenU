@@ -9,10 +9,12 @@ import { Button } from '@/components/button';
 import { FigmaIcon, type FigmaIconName } from '@/components/icons/figma-icon';
 import { NAV_BAR_CLEARANCE } from '@/components/tab-bar';
 import { AppLanguagePill } from '@/components/volunteer/app-language-pill';
+import { LanguageChips, TrainingChips } from '@/components/volunteer/skill-chips';
 import { useStartAligned } from '@/components/volunteer/start-aligned';
 import { Colors, Face, Fonts, Radius, Spacing, Type } from '@/constants/theme';
 import { useProfile } from '@/features/profile/profile-context';
 import { SummaryTags } from '@/features/profile/summary-tags';
+import type { Profile } from '@/features/profile/types';
 import { useLayoutRtl, useT } from '@/i18n';
 import { friendlyError } from '@/lib/errors';
 
@@ -48,6 +50,27 @@ function Chevron() {
     <Svg width={18} height={18} viewBox="0 0 24 24" fill="none" style={rtl ? styles.flip : undefined}>
       <Path d="M9 6l6 6-6 6" stroke={Colors.textFaint} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
     </Svg>
+  );
+}
+
+/**
+ * A volunteer's card (Figma 566:4451): fluent languages, main first, then training, as chips like
+ * the Volunteer tab's "What you can help with". Visitors are matched on exactly these.
+ */
+function VolunteerSkills({ languages, mainLanguage, trainings }: Pick<Profile, 'languages' | 'mainLanguage' | 'trainings'>) {
+  const tv = useT('volunteer');
+  const fluent = [mainLanguage, ...languages.filter(l => l !== mainLanguage)].filter(l => languages.includes(l));
+  return (
+    <>
+      <View style={styles.skillGroup}>
+        <Text style={styles.skillTitle}>{tv('home.languages')}</Text>
+        <LanguageChips codes={fluent} />
+      </View>
+      <View style={styles.skillGroup}>
+        <Text style={styles.skillTitle}>{tv('home.training')}</Text>
+        {trainings.length ? <TrainingChips trainings={trainings} /> : <Text style={Type.caption}>{tv('home.noTraining')}</Text>}
+      </View>
+    </>
   );
 }
 
@@ -124,10 +147,14 @@ export default function ProfileScreen() {
             </View>
           </View>
 
-          <Text style={styles.shareTitle}>
-            {profile.role === 'visitor' ? t('tab.sharedVisitor') : t('tab.sharedVolunteer')}
-          </Text>
-          <SummaryTags draft={profile} />
+          {profile.role === 'visitor' ? (
+            <>
+              <Text style={styles.shareTitle}>{t('tab.sharedVisitor')}</Text>
+              <SummaryTags draft={profile} />
+            </>
+          ) : (
+            <VolunteerSkills languages={profile.languages} mainLanguage={profile.mainLanguage} trainings={profile.trainings} />
+          )}
         </View>
 
         {MENU_SECTIONS.map(section => (
@@ -207,6 +234,8 @@ const styles = StyleSheet.create({
   badgePending: { backgroundColor: Colors.accentSoft, color: Colors.accent },
   editBtn: { paddingHorizontal: 18 },
   shareTitle: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20, color: Colors.text, marginTop: Spacing.lg, marginBottom: Spacing.sm },
+  skillGroup: { gap: Spacing.sm, marginTop: Spacing.lg },
+  skillTitle: { ...Type.overline },
 
   section: { marginBottom: Spacing.xl },
   sectionTitle: { fontFamily: Fonts.display, fontSize: 16, lineHeight: 22, color: Colors.text, marginBottom: Spacing.sm },
