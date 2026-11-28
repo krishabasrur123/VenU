@@ -4,8 +4,8 @@
  * Until the visitor says where they are, the walk starts at the venue's main way in (its map's
  * `arrival`), and the sheet says so.
  *
- * e.g. routeFor(sofiMap, sofiFacilities, { venueId: 'sofi', facilityId: null }, 'first-aid-se')
- *      → from Entry 4 (the arrival), to First Aid SE, heading 'se', about 6 min
+ * e.g. routeFor(sofiMap, sofiFacilities, { venueId: 'sofi', facilityId: null }, 'entry-10')
+ *      → from Entry 4 (the arrival), to Entry 10, heading 'se', about 9 min
  * A facility whose spot isn't published (`approximate`) gets no route: its pin is a placeholder.
  *
  * Across layers (SoFi's outside map and its concourse levels): the walk is measured and drawn on the
@@ -14,7 +14,7 @@
  * change level. e.g. Entry 4 → First Aid NE (Level 3): "Take an elevator or escalator to Level 3",
  * then head east on the Level 3 map.
  */
-import { contentSize, walkBetween, type Box, type MapPoint, type Walk } from './map-geometry';
+import { contentSize, walkBetween, type Box, type MapPoint, type MapRect, type Walk } from './map-geometry';
 import type { WhereAmI } from './current';
 import type { FacilityWalk } from './labels';
 import { layerById, layerOf, mapAspect, toLayerPoint, type VenueMap, type VenueMapLayer } from './venue-maps';
@@ -33,7 +33,10 @@ export interface Route {
   walk: Walk;
   /** The layer the route is drawn on: the facility's. */
   layer: string;
-  /** Where the walk starts on that layer: `from`'s pin, or where `from` falls on it from its own layer. */
+  /**
+   * Where the walk starts on that layer: `from`'s pin, or where `from` falls on it from its own
+   * layer (at the image's edge if it falls beyond it).
+   */
   start: MapPoint;
   /** The layer the walk changes to on the way (the facility's), or null when both are on one layer. */
   levelChange: VenueMapLayer | null;
@@ -46,10 +49,39 @@ export interface Route {
 function walkAcross(map: VenueMap, from: Facility, to: Facility, content?: Box): Pick<Route, 'walk' | 'layer' | 'start' | 'levelChange'> {
   const fromLayer = layerOf(map, from);
   const layer = layerById(map, layerOf(map, to));
-  const start = toLayerPoint(map, from, fromLayer, layer.id);
-  const walk = walkBetween(start, to, content ?? contentSize(mapAspect(layer), 1), layer.widthMeters);
-  if (fromLayer === layer.id) return { walk, layer: layer.id, start, levelChange: null };
-  return { walk: { ...walk, minutes: walk.minutes + LEVEL_CHANGE_MINUTES }, layer: layer.id, start, levelChange: layer };
+  const box = content ?? contentSize(mapAspect(layer), 1);
+  const at = toLayerPoint(map, from, fromLayer, layer.id);
+  const walk = walkBetween(at, to, box, layer.widthMeters);
+  if (fromLayer === layer.id) return { walk, layer: layer.id, start: at, levelChange: null };
+  // A start beyond the part of the layer that matters (Rideshare Drop-off lands above the Level 3
+  // map; Entry 4 in its blank north-west corner) is drawn where the walk enters the layer's focus,
+  // or the image when the facility is outside the focus. The walk is still measured from the real
+  // start.
+  const start = clipToRect(at, to, insideRect(to, layer.focus) ? layer.focus : IMAGE_RECT);
+  const line = { x1: start.x * box.w, y1: start.y * box.h, x2: walk.line.x2, y2: walk.line.y2 };
+  return { walk: { ...walk, line, minutes: walk.minutes + LEVEL_CHANGE_MINUTES }, layer: layer.id, start, levelChange: layer };
+}
+
+/** The whole image, 1% in from its edges so a start marker there isn't cut in half. */
+const IMAGE_RECT: MapRect = [0.01, 0.01, 0.99, 0.99];
+
+const insideRect = (p: MapPoint, [l, t, r, b]: MapRect) => p.x >= l && p.x <= r && p.y >= t && p.y <= b;
+
+/**
+ * Where the line from `from` to `to` (inside `rect`) enters `rect`; `from` itself when it's
+ * already inside.
+ * e.g. clipToRect({ x: 0.5, y: -0.5 }, { x: 0.5, y: 0.5 }, [0, 0.2, 1, 1]) → { x: 0.5, y: 0.2 }
+ */
+export function clipToRect(from: MapPoint, to: MapPoint, [l, t, r, b]: MapRect): MapPoint {
+  let s = 0; // how far along from → to the line has entered the rect on both axes
+  const enter = (a: number, z: number, lo: number, hi: number) => {
+    if (a < lo && z > a) s = Math.max(s, (lo - a) / (z - a));
+    if (a > hi && z < a) s = Math.max(s, (a - hi) / (a - z));
+  };
+  enter(from.x, to.x, l, r);
+  enter(from.y, to.y, t, b);
+  s = Math.min(s, 1);
+  return { x: from.x + s * (to.x - from.x), y: from.y + s * (to.y - from.y) };
 }
 
 /**

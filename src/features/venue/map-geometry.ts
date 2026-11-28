@@ -12,6 +12,7 @@
  */
 import { matchesCategory } from './mock';
 import type { Facility, FacilityCategory } from './types';
+import { layerById, layerOf, mapLayers, type VenueMap } from './venue-maps';
 
 export interface MapPoint {
   x: number;
@@ -222,6 +223,56 @@ export function mapUpdate(u: MapUpdate): { view: MapView; refit: boolean } | nul
  */
 export function pinsFor(facilities: Facility[], category: FacilityCategory | null, keep: (string | null | undefined)[] = []): Facility[] {
   return facilities.filter(f => matchesCategory(f, category) || keep.includes(f.id));
+}
+
+/**
+ * How many of a chip's facilities each map layer holds, in the layers' order, for the toggle's
+ * badges. e.g. SoFi + First Aid → { outside: 0, 'level-3': 3, 'level-6': 2 }
+ */
+export function chipCountsByLayer(map: VenueMap, facilities: Facility[], category: FacilityCategory): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const layer of mapLayers(map)) counts[layer.id] = 0;
+  for (const f of pinsFor(facilities, category)) counts[layerOf(map, f)] += 1;
+  return counts;
+}
+
+/** What moves the venue map to another layer. */
+export type LayerEvent =
+  /** A facility opened in the sheet (from the list, search, a pin or a link), or the list again. */
+  | { kind: 'open'; facility: Facility | undefined }
+  /** The layer toggle. */
+  | { kind: 'pick'; layer: string }
+  /** Directions to a facility: its route is drawn on its layer. */
+  | { kind: 'directions'; to: Facility }
+  /** A category chip. */
+  | { kind: 'chip'; category: FacilityCategory | null };
+
+/**
+ * The layer the map shows after `e`, from `current`:
+ * - open: the facility's layer (back on the list: stays put);
+ * - pick: the layer picked;
+ * - directions: the facility's layer, so the line, start tag and fit show even after the visitor
+ *   toggled away (toggling away again keeps the steps; coming back shows the line again);
+ * - chip: stays put if the chip has pins here, else the layer with the most of them (the first on a
+ *   tie), so "First Aid" from SoFi's outside map lands on Level 3 rather than an empty map.
+ */
+export function nextMapLayer(map: VenueMap, facilities: Facility[], current: string, e: LayerEvent): string {
+  switch (e.kind) {
+    case 'open':
+      return e.facility ? layerOf(map, e.facility) : current;
+    case 'pick':
+      return layerById(map, e.layer).id;
+    case 'directions':
+      return layerOf(map, e.to);
+    case 'chip': {
+      if (!e.category) return current;
+      const counts = chipCountsByLayer(map, facilities, e.category);
+      if (counts[current] > 0) return current;
+      let best = current;
+      for (const [id, n] of Object.entries(counts)) if (n > (counts[best] ?? 0)) best = id;
+      return best;
+    }
+  }
 }
 
 export type Compass = 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'nw';

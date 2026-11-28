@@ -51,8 +51,7 @@ describe('routeFor', () => {
     // Entry 4 (north-west of the bowl) to Entry 10 (south-east): south-east, a few minutes.
     const route = routeFor(sofi, facilities, nowhere, 'sofi', 'entry-10')!;
     expect(route.walk.heading).toBe('se');
-    expect(route.walk.minutes).toBeGreaterThanOrEqual(2);
-    expect(route.walk.minutes).toBeLessThanOrEqual(10);
+    expect(route.walk.minutes).toBe(9); // as directions.ts's header says
   });
 
   it('says you\'re already there instead of drawing a line to yourself', () => {

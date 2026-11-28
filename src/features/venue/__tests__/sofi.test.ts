@@ -4,11 +4,12 @@ import i18n from '@/i18n';
 import { resources } from '@/i18n/locales';
 
 import { venueContact } from '../contacts';
-import { LEVEL_CHANGE_MINUTES, routeFor, startMarker, walkFromStart } from '../directions';
+import { clipToRect, LEVEL_CHANGE_MINUTES, routeFor, startMarker, walkFromStart } from '../directions';
 import { layerLabel } from '../labels';
+import { chipCountsByLayer, contentSize, nextMapLayer, walkBetween, type LayerEvent } from '../map-geometry';
 import { facilitiesFor, getFacility, getVenue } from '../mock';
-import { sponsoredStandsFor } from '../sponsors';
-import { layerById, layerOf, layerView, mapLayers, SINGLE_LAYER, toLayerPoint, venueMapFor } from '../venue-maps';
+import { sponsoredStandsFor, venueFacilitiesFor } from '../sponsors';
+import { layerById, layerOf, layerView, mapAspect, mapLayers, SINGLE_LAYER, toLayerPoint, venueMapFor } from '../venue-maps';
 
 // mock.ts reaches reports.ts through labels, and reports.ts builds its store on AsyncStorage.
 jest.mock('@react-native-async-storage/async-storage', () => ({ __esModule: true, default: { getItem: async () => null, setItem: async () => {} } }));
@@ -169,13 +170,58 @@ describe('SoFi map layers', () => {
   });
 });
 
+describe('which SoFi layer the map shows', () => {
+  const next = (current: string, e: LayerEvent, list = facilities) => nextMapLayer(map, list, current, e);
+
+  it('follows the open facility, and stays put back on the list', () => {
+    expect(next('outside', { kind: 'open', facility: sofi('guest-services-ne') })).toBe('level-3');
+    expect(next('level-3', { kind: 'open', facility: undefined })).toBe('level-3');
+    expect(next('level-6', { kind: 'pick', layer: 'outside' })).toBe('outside');
+  });
+
+  it('brings Directions back to the route’s layer after a manual switch, and keeps the steps', () => {
+    // Open Guest Services NE (Level 3), tap "Outside", then Directions.
+    let layer = next('outside', { kind: 'open', facility: sofi('guest-services-ne') });
+    layer = next(layer, { kind: 'pick', layer: 'outside' });
+    const route = routeFor(map, facilities, nowhere, 'sofi', 'guest-services-ne')!;
+    layer = next(layer, { kind: 'directions', to: sofi('guest-services-ne') });
+    expect(layer).toBe(route.layer); // the line, Start tag and fit show
+    // Toggling away hides only the line (the route, and so the steps, stay); back again shows it.
+    layer = next(layer, { kind: 'pick', layer: 'level-6' });
+    expect(route.layer === layer).toBe(false);
+    expect(next(layer, { kind: 'pick', layer: 'level-3' })).toBe(route.layer);
+  });
+
+  it('moves a chip with no pins here to the layer with the most of them', () => {
+    expect(chipCountsByLayer(map, facilities, 'first_aid')).toEqual({ outside: 0, 'level-3': 3, 'level-6': 2 });
+    expect(next('outside', { kind: 'chip', category: 'first_aid' })).toBe('level-3');
+    expect(next('outside', { kind: 'chip', category: 'restroom' })).toBe('level-6'); // 2 on Level 3, 4 on Level 6
+    // Pins here: stay.
+    expect(next('level-6', { kind: 'chip', category: 'first_aid' })).toBe('level-6');
+    expect(next('outside', { kind: 'chip', category: 'accessible' })).toBe('outside');
+    // The venue screen counts the sponsored stands too: Food & Drinks has two outside.
+    expect(next('outside', { kind: 'chip', category: 'food' }, venueFacilitiesFor('sofi'))).toBe('outside');
+    expect(next('outside', { kind: 'chip', category: 'food' })).toBe('level-6'); // the hydration stations
+    expect(next('level-3', { kind: 'chip', category: null })).toBe('level-3');
+  });
+
+  it('never moves a venue with one layer', () => {
+    const intuit = venueMapFor(getVenue('intuit-dome')!);
+    expect(nextMapLayer(intuit, facilitiesFor('intuit-dome'), SINGLE_LAYER, { kind: 'chip', category: 'first_aid' })).toBe(SINGLE_LAYER);
+    expect(chipCountsByLayer(intuit, facilitiesFor('intuit-dome'), 'first_aid')).toEqual({ [SINGLE_LAYER]: 3 });
+  });
+});
+
 describe('walks across SoFi’s layers', () => {
   it('walks to an entry, changes level, then walks on the facility’s layer', () => {
     // From Entry 4 (outside, the way in) to First Aid NE (Level 3).
     const route = routeFor(map, facilities, nowhere, 'sofi', 'first-aid-ne')!;
     expect(route.layer).toBe('level-3');
     expect(route.levelChange?.id).toBe('level-3');
-    expect(route.start).toEqual(toLayerPoint(map, sofi('entry-4'), 'outside', 'level-3'));
+    // Entry 4 falls in the blank north-west corner of the Level 3 image: the line starts where it
+    // enters the concourse (the layer's focus).
+    const level3 = layerById(map, 'level-3');
+    expect(route.start).toEqual(clipToRect(toLayerPoint(map, sofi('entry-4'), 'outside', 'level-3'), sofi('first-aid-ne'), level3.focus));
     // Entry 4 falls on the north-west of the Level 3 ring, so the walk heads east across the north.
     expect(route.start.x).toBeLessThan(0.45);
     expect(route.start.y).toBeLessThan(0.3);
@@ -201,6 +247,35 @@ describe('walks across SoFi’s layers', () => {
     const route = routeFor(map, facilities, { venueId: 'sofi', facilityId: 'guest-services-sw' }, 'sofi', 'restrooms-sw')!;
     expect([route.layer, route.levelChange, route.fromIsMine]).toEqual(['level-3', null, true]);
     expect(route.start).toEqual({ x: sofi('guest-services-sw').x, y: sofi('guest-services-sw').y });
+  });
+
+  it('starts the line where the walk enters the level map when the start falls beyond it', () => {
+    // Rideshare Drop-off is north of the stadium: on Level 3 it lands above the image.
+    const where = { venueId: 'sofi', facilityId: 'rideshare-kareem' };
+    const raw = toLayerPoint(map, sofi('rideshare-kareem'), 'outside', 'level-3');
+    expect(raw.y).toBeLessThan(0);
+    const to = sofi('first-aid-ne');
+    const route = routeFor(map, facilities, where, 'sofi', 'first-aid-ne')!;
+    const { start } = route;
+    const [l, t, r, b] = layerById(map, 'level-3').focus;
+    expect(start.x >= l && start.x <= r && start.y >= t - 1e-9 && start.y <= b).toBe(true);
+    expect(start.y).toBeCloseTo(t, 9); // on the concourse's top edge, not off the image
+    // On the straight line from the real start to the facility.
+    expect((start.x - raw.x) * (to.y - raw.y) - (start.y - raw.y) * (to.x - raw.x)).toBeCloseTo(0, 9);
+    // The walk is still measured from the real start; the line and the "You" marker use the edge.
+    const real = walkBetween(raw, to, contentSize(mapAspect(layerById(map, 'level-3')), 1), 659);
+    expect([route.walk.meters, route.walk.minutes]).toEqual([real.meters, real.minutes + LEVEL_CHANGE_MINUTES]);
+    // The line in content px of a 1-wide Level 3 image (1 × 3300/2550).
+    expect(route.walk.line.x1).toBeCloseTo(start.x, 9);
+    expect(route.walk.line.y1).toBeCloseTo(start.y * 3300 / 2550, 9);
+    expect(startMarker(route)?.point).toEqual(start);
+  });
+
+  it('clips only a point outside the rectangle, along the line to the facility', () => {
+    expect(clipToRect({ x: 0.5, y: -0.5 }, { x: 0.5, y: 0.5 }, [0, 0.25, 1, 1])).toEqual({ x: 0.5, y: 0.25 });
+    expect(clipToRect({ x: 1.5, y: 0.5 }, { x: 0.5, y: 0.5 }, [0, 0, 1, 1])).toEqual({ x: 1, y: 0.5 });
+    expect(clipToRect({ x: -0.5, y: -0.5 }, { x: 0.5, y: 0.5 }, [0, 0.25, 1, 1])).toEqual({ x: 0.25, y: 0.25 });
+    expect(clipToRect({ x: 0.3, y: 0.4 }, { x: 0.5, y: 0.5 }, [0, 0, 1, 1])).toEqual({ x: 0.3, y: 0.4 });
   });
 
   it('goes back outside from inside', () => {

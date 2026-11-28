@@ -22,7 +22,7 @@ import { CategoryChips } from './category-chips';
 import { useWhereAmI } from './current';
 import { routeFor, routeStart, walkFrom, type Route } from './directions';
 import type { FacilityWalk } from './labels';
-import { boundsOf, FIT_MAX_SCALE, MAX_SCALE, pinsFor, type MapRect } from './map-geometry';
+import { boundsOf, chipCountsByLayer, FIT_MAX_SCALE, MAX_SCALE, nextMapLayer, pinsFor, type LayerEvent, type MapRect } from './map-geometry';
 import { PinCard } from './pin-card';
 import { pinPressAction } from './pin-press';
 import { snapPositions, type SheetSnap } from './sheet';
@@ -102,16 +102,17 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
   const facilities = useMemo(() => venueFacilitiesFor(venue.id), [venue.id]);
   const map = venueMapFor(venue); // the same object per venue
   const layers = mapLayers(map);
-  // The layer on screen (SoFi: outside, Level 3, Level 6). It follows the open facility: opening one
-  // on another layer (from the list, search or a deep link) switches to it; the toggle switches too.
+  // The layer on screen (SoFi: outside, Level 3, Level 6). It follows the open facility, the
+  // toggle, Directions and the chips (see nextMapLayer).
   const openNow = facilityId ? facilities.find(f => f.id === facilityId) : undefined;
-  const [layerState, setLayerState] = useState(() => ({ id: openNow ? layerOf(map, openNow) : layers[0].id, at: facilityId }));
+  const [layerState, setLayerState] = useState(() => ({ id: nextMapLayer(map, facilities, layers[0].id, { kind: 'open', facility: openNow }), at: facilityId }));
   let layer = layerState.id;
   if (layerState.at !== facilityId) {
     // Adjusting state while rendering, as React's docs advise for "reset when a prop changes".
-    layer = openNow ? layerOf(map, openNow) : layerState.id;
+    layer = nextMapLayer(map, facilities, layerState.id, { kind: 'open', facility: openNow });
     setLayerState({ id: layer, at: facilityId });
   }
+  const moveLayer = (e: LayerEvent) => setLayerState({ id: nextMapLayer(map, facilities, layer, e), at: facilityId });
   const shownMap = layerView(map, layer);
   const onLayer = (f: Facility) => layerOf(map, f) === layer;
   const [category, setCategory] = useState<FacilityCategory | null>(null);
@@ -134,7 +135,11 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
   const route = routeTo && routeTo === facilityId ? routeFor(map, facilities, where, venue.id, routeTo) : null;
   const setRouteTo = (id: string | null) => {
     setRouteState(id);
-    if (id) setCardState(null);
+    if (!id) return;
+    setCardState(null);
+    // The line is drawn on the facility's layer: show it, even if the visitor toggled away.
+    const to = facilities.find(f => f.id === id);
+    if (to) moveLayer({ kind: 'directions', to });
   };
   // Where walks start, found once per render: the list measures every facility from it.
   const walkStart = routeStart(map, facilities, where, venue.id);
@@ -207,15 +212,18 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
   const pickCategory = (c: FacilityCategory | null) => {
     setCategory(c);
     setCardState(null);
+    // A chip with no pins on this layer moves to the layer with the most (see nextMapLayer).
+    moveLayer({ kind: 'chip', category: c });
     // The chip's pins need the map in view.
     setSnap(s => (s === 'up' ? 'mid' : s));
   };
 
-
   const pickLayer = (id: string) => {
-    setLayerState({ id, at: facilityId });
+    moveLayer({ kind: 'pick', layer: id });
     setCardState(null);
   };
+  // With a chip on, each layer's button says how many of its pins are there.
+  const layerCounts = category && layers.length > 1 ? chipCountsByLayer(map, facilities, category) : undefined;
 
   // Pins for the chip on this layer (the open facility always stays), and what the map fits into
   // view: the chip's pins here, or the layer's own starting region for "All".
@@ -304,7 +312,7 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
 
               {layers.length > 1 ? (
                 <View style={styles.layerToggle} pointerEvents="box-none">
-                  <LayerToggle layers={layers} value={layer} onChange={pickLayer} />
+                  <LayerToggle layers={layers} value={layer} counts={layerCounts} onChange={pickLayer} />
                 </View>
               ) : null}
 

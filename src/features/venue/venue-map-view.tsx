@@ -15,7 +15,8 @@ import { scheduleOnRN } from 'react-native-worklets';
 
 import { Button } from '@/components/button';
 import { Colors, Face, Fonts, Radius, Shadow, Spacing } from '@/constants/theme';
-import { useT } from '@/i18n';
+import { languageOf, useT } from '@/i18n';
+import { formatNumber } from '@/i18n/format';
 
 import { FacilityIcon } from './categories';
 import { startMarker, type Route } from './directions';
@@ -408,14 +409,22 @@ function SourceBar({ map }: { map: VenueMap }) {
 
 /**
  * "Outside · Level 3 · Level 6": switches the map between a venue's layers (VenueMap.layers). The
- * screen lays it over the map's top-left corner, under the source bar.
+ * screen lays it over the map's top-left corner, under the source bar. With a chip on, `counts`
+ * puts a badge on each button: how many of the chip's pins that layer has ("Level 3 ③").
  */
-export function LayerToggle({ layers, value, onChange }: { layers: VenueMapLayer[]; value: string; onChange: (id: string) => void }) {
+export function LayerToggle({ layers, value, counts, onChange }: {
+  layers: VenueMapLayer[];
+  value: string;
+  counts?: Record<string, number>;
+  onChange: (id: string) => void;
+}) {
   const t = useT('venue');
+  const lang = languageOf(t);
   return (
     <View style={styles.layers} accessibilityRole="radiogroup" accessibilityLabel={t('map.layers.label')}>
       {layers.map(layer => {
         const on = layer.id === value;
+        const count = counts?.[layer.id];
         return (
           <Pressable
             key={layer.id}
@@ -425,6 +434,11 @@ export function LayerToggle({ layers, value, onChange }: { layers: VenueMapLayer
             accessibilityRole="radio"
             accessibilityState={{ checked: on }}>
             <Text style={[styles.layerText, on && styles.layerTextOn]} numberOfLines={1}>{layerLabel(layer, t)}</Text>
+            {count !== undefined ? (
+              <View style={[styles.layerCount, on && styles.layerCountOn, !count && styles.layerCountNone]}>
+                <Text style={[styles.layerCountText, on && styles.layerCountTextOn]}>{formatNumber(count, undefined, lang)}</Text>
+              </View>
+            ) : null}
           </Pressable>
         );
       })}
@@ -510,10 +524,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     ...Shadow.card,
   },
-  layer: { justifyContent: 'center', paddingHorizontal: Spacing.md, borderRadius: Radius.pill },
+  layer: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: Spacing.md, borderRadius: Radius.pill },
   layerOn: { backgroundColor: Colors.primary },
   layerText: { ...Face.textBold, fontSize: 13, lineHeight: 17, color: Colors.ink },
   layerTextOn: { color: Colors.onPrimary },
+  layerCount: { minWidth: 18, height: 18, paddingHorizontal: 4, borderRadius: 9, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.primary },
+  layerCountOn: { backgroundColor: Colors.surface },
+  layerCountNone: { opacity: 0.45 },
+  layerCountText: { ...Face.textBold, fontSize: 11, lineHeight: 14, color: Colors.onPrimary },
+  layerCountTextOn: { color: Colors.primary },
   cover: { position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', gap: Spacing.md, paddingHorizontal: Spacing.xl, backgroundColor: Colors.surfaceAlt },
   coverText: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20, textAlign: 'center', color: Colors.textMuted },
   bottom: { position: 'absolute', left: 0, right: 0, justifyContent: 'flex-end', paddingHorizontal: Spacing.gutter, paddingBottom: Spacing.md },
