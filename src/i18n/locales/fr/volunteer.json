@@ -28,14 +28,14 @@
     "languageLabel": "Aide en {{language}}. Changer de langue",
     "locationLabel": "Votre position : {{spot}}, {{venue}}",
     "near": "Près de {{place}}",
-    "locationUnset": "Votre position : pas encore choisie, {{venue}}",
+    "locationUnset": "Votre position : {{venue}}, aucun endroit choisi pour l’instant",
     "whereAreYou": "Où êtes-vous ?",
     "tapToChoose": "Touchez pour choisir un endroit",
     "locationHint": "Ouvre la liste des lieux de {{venue}}",
     "question": "De quelle aide avez-vous besoin ?",
     "notePlaceholder": "ex. : J’ai besoin d’aide près de la rampe 2",
     "photoOff": "L’accès aux photos est désactivé. Activez-le dans Réglages.",
-    "pickOne": "Choisissez au moins un type d’aide.",
+    "pickOne": "Choisissez le type d’aide dont vous avez besoin.",
     "send": "Envoyer la demande"
   },
   "where": {
@@ -49,9 +49,11 @@
   "note": {
     "label": "Ajouter une note <muted>(facultatif)</muted>",
     "labelPlain": "Ajouter une note (facultatif)",
+    "speak": "Dicter votre note",
     "placeholder": "Saisissez du texte",
     "attached": "Photo jointe",
-    "remove": "Retirer la photo"
+    "remove": "Retirer la photo",
+    "count": "{{used}} caractères sur {{max}}"
   },
   "emergency": {
     "title": "Urgence ?",
@@ -69,15 +71,17 @@
   "notice": {
     "searchFailed": "Impossible de joindre un bénévole. Vérifiez votre connexion et réessayez.",
     "thanks": "Merci ! Votre avis aide {{name}} et l’équipe LA28.",
-    "volunteerLeft": "Votre bénévole a dû partir. Nous cherchons quelqu’un d’autre."
+    "volunteerLeft": "Votre bénévole a dû partir. Nous cherchons quelqu’un d’autre.",
+    "volunteerEnded": "{{name}} a terminé la conversation. Besoin d’aide ? Touchez Passer et envoyez une nouvelle demande."
   },
   "searching": {
     "title": "Recherche d’un bénévole",
     "subtitle": "En général moins d’une minute · Restez où vous êtes",
     "askedFor": "Vous avez demandé",
+    "helpInLabel": "Aide en :",
     "notFoundTitle": "Aucun bénévole n’est disponible pour l’instant",
-    "notFoundBody": "Votre demande est conservée. Continuez à chercher ou appelez le personnel du site pour obtenir de l’aide.",
-    "keepSearching": "Continuer à chercher"
+    "notFoundBody": "Personne n’était libre, votre demande a donc été retirée. Relancez la recherche ou appelez le personnel du site pour obtenir de l’aide.",
+    "keepSearching": "Chercher à nouveau"
   },
   "match": {
     "title": "Bénévole trouvé",
@@ -133,7 +137,9 @@
     "stickers": "Autocollants",
     "stickersSoon": "Les autocollants arrivent bientôt.",
     "record": "Dicter un message",
-    "emptyVolunteer": "Dites bonjour à {{name}} et prévenez que vous arrivez."
+    "emptyVolunteer": "Dites bonjour à {{name}} et prévenez que vous arrivez.",
+    "yourRequest": "Votre demande",
+    "requestFrom": "Demande de {{name}}"
   },
   "translation": {
     "translatedFrom": "Traduit (original : {{language}})",
@@ -156,7 +162,7 @@
   },
   "bubble": {
     "mine": "Vous, {{time}} : {{text}}",
-    "listen": "écouter",
+    "listen": "Écouter",
     "listenLabel": "Écouter ce message",
     "from": "{{name}}, {{time}} : {{text}}",
     "fromTranslated": "{{name}}, {{time}} : {{text}} (traduit, original : {{language}})",
@@ -220,6 +226,8 @@
     "meta": "À {{distance}} · il y a {{minutes}} min · {{language}}",
     "accept": "Accepter",
     "acceptSoon": "Vous pourrez accepter des demandes quand la mise en relation sera active.",
+    "waitTitle": "En attente de vérification",
+    "waitBody": "LA28 vérifie vos informations. Vous voyez déjà les demandes et pourrez les accepter une fois votre compte vérifié.",
     "empty": "Personne à proximité n’a besoin d’aide pour l’instant. Les nouvelles demandes s’afficheront ici.",
     "metaLive": "il y a {{minutes}} min · {{language}}"
   },
@@ -229,14 +237,23 @@
     "end": "Terminer la conversation",
     "endHint": "Indique que l’aide est terminée, pour vous et pour {{name}}",
     "confirmEnd": "Terminer la conversation avec {{name}} ? L’aide sera indiquée comme terminée.",
-    "yesEnd": "Oui, terminer"
+    "yesEnd": "Oui, terminer",
+    "handBack": "Je ne peux pas venir",
+    "handBackHint": "Rend la demande pour qu’un autre bénévole aide {{name}}",
+    "confirmHandBack": "Vous ne pouvez pas venir ? Nous trouverons un autre bénévole pour {{name}}.",
+    "keepHelping": "Continuer à aider",
+    "yesHandBack": "Rendre la demande",
+    "handBackFailed": "Impossible de rendre la demande. Vérifiez votre connexion et réessayez."
   },
   "desk": {
     "taken": "Quelqu’un d’autre a déjà accepté cette demande.",
     "acceptFailed": "Impossible d’accepter la demande. Vérifiez votre connexion et réessayez.",
+    "notVerified": "Vous pourrez accepter des demandes une fois que LA28 aura vérifié votre compte.",
     "cancelled": "{{name}} a annulé la demande.",
+    "closed": "La demande de {{name}} a été fermée.",
     "done": "{{name}} a indiqué que l’aide est terminée. Merci !",
     "ended": "Conversation terminée. Merci d’avoir aidé {{name}} !",
+    "handedBack": "Vous avez rendu la demande de {{name}}. Un autre bénévole peut la prendre.",
     "withdrawn": "Cette demande a été retirée."
   },
   "home": {
@@ -253,16 +270,17 @@
       "off": "Absent"
     },
     "statusLine": {
-      "free": "Vous recevrez les demandes à proximité. Pendant une pause, passez en Occupé ou Absent et les demandes vous éviteront.",
+      "free": "Vous recevrez les demandes à proximité. Passez en Occupé ou Absent et les demandes vous éviteront.",
       "busy": "Vous êtes occupé pour l’instant. Les nouvelles demandes vous évitent jusqu’à ce que vous repassiez en Libre.",
-      "off": "Vous n’êtes pas en service. Les demandes vous évitent jusqu’à ce que vous passiez en Libre."
+      "off": "Vous n’êtes pas en service. Les demandes vous évitent jusqu’à ce que vous passiez en Libre.",
+      "helping": "Vous aidez {{name}}. Les nouvelles demandes attendent que vous ayez fini."
     },
     "helpTitle": "Ce en quoi vous pouvez aider",
     "editLabel": "Modifier ce en quoi vous pouvez aider",
     "languages": "Langues parlées couramment",
     "training": "Formation",
     "noTraining": "Aucune formation ajoutée pour l’instant",
-    "paused": "Les demandes sont suspendues pendant votre pause. Passez en Libre pour voir qui a besoin d’aide à proximité."
+    "paused": "Les demandes sont suspendues tant que vous êtes occupé ou absent. Passez en Libre pour voir qui a besoin d’aide à proximité."
   },
   "mock": {
     "greeting": "Bonjour {{name}} ! Je suis {{volunteer}}, bénévole LA28. J’arrive. Point de rendez-vous : {{spot}}.",

@@ -28,14 +28,14 @@
     "languageLabel": "Hỗ trợ bằng {{language}}. Đổi ngôn ngữ",
     "locationLabel": "Vị trí của bạn: {{spot}}, {{venue}}",
     "near": "Gần {{place}}",
-    "locationUnset": "Vị trí của bạn: chưa chọn, {{venue}}",
+    "locationUnset": "Vị trí của bạn: {{venue}}, chưa chọn chỗ cụ thể",
     "whereAreYou": "Bạn đang ở đâu?",
     "tapToChoose": "Chạm để chọn chỗ",
     "locationHint": "Mở danh sách địa điểm tại {{venue}}",
     "question": "Bạn cần giúp gì?",
     "notePlaceholder": "VD: Tôi bị kẹt gần dốc số 2",
     "photoOff": "Quyền truy cập ảnh đang tắt. Hãy bật trong Cài đặt.",
-    "pickOne": "Hãy chọn ít nhất một việc bạn cần giúp.",
+    "pickOne": "Hãy chọn việc bạn cần giúp.",
     "send": "Gửi yêu cầu"
   },
   "where": {
@@ -49,9 +49,11 @@
   "note": {
     "label": "Thêm ghi chú <muted>(không bắt buộc)</muted>",
     "labelPlain": "Thêm ghi chú (không bắt buộc)",
+    "speak": "Nói ghi chú của bạn",
     "placeholder": "Nhập nội dung",
     "attached": "Ảnh đã đính kèm",
-    "remove": "Xóa ảnh"
+    "remove": "Xóa ảnh",
+    "count": "{{used}}/{{max}} ký tự"
   },
   "emergency": {
     "title": "Khẩn cấp?",
@@ -69,15 +71,17 @@
   "notice": {
     "searchFailed": "Không liên lạc được với tình nguyện viên. Hãy kiểm tra kết nối và thử lại.",
     "thanks": "Cảm ơn bạn! Góp ý của bạn giúp {{name}} và đội LA28.",
-    "volunteerLeft": "Tình nguyện viên của bạn phải rời đi. Đang tìm người khác."
+    "volunteerLeft": "Tình nguyện viên của bạn phải rời đi. Đang tìm người khác.",
+    "volunteerEnded": "{{name}} đã kết thúc trò chuyện. Vẫn cần giúp? Nhấn Bỏ qua và gửi yêu cầu mới."
   },
   "searching": {
     "title": "Đang tìm tình nguyện viên",
     "subtitle": "Thường dưới một phút · Hãy ở yên tại chỗ",
     "askedFor": "Bạn đã yêu cầu",
+    "helpInLabel": "Hỗ trợ bằng:",
     "notFoundTitle": "Hiện chưa có tình nguyện viên nào rảnh",
-    "notFoundBody": "Yêu cầu của bạn đã được lưu. Hãy tiếp tục tìm hoặc gọi nhân viên địa điểm để được giúp.",
-    "keepSearching": "Tiếp tục tìm"
+    "notFoundBody": "Không có ai rảnh nên yêu cầu của bạn đã được rút lại. Hãy tìm lại hoặc gọi nhân viên địa điểm để được giúp.",
+    "keepSearching": "Tìm lại"
   },
   "match": {
     "title": "Đã tìm thấy tình nguyện viên",
@@ -131,7 +135,9 @@
     "stickers": "Nhãn dán",
     "stickersSoon": "Nhãn dán sắp ra mắt.",
     "record": "Nói tin nhắn",
-    "emptyVolunteer": "Hãy chào {{name}} và cho họ biết bạn đang đến."
+    "emptyVolunteer": "Hãy chào {{name}} và cho họ biết bạn đang đến.",
+    "yourRequest": "Yêu cầu của bạn",
+    "requestFrom": "Yêu cầu của {{name}}"
   },
   "translation": {
     "translatedFrom": "Dịch từ {{language}}",
@@ -154,7 +160,7 @@
   },
   "bubble": {
     "mine": "Bạn, {{time}}: {{text}}",
-    "listen": "nghe",
+    "listen": "Nghe",
     "listenLabel": "Nghe tin nhắn này",
     "from": "{{name}}, {{time}}: {{text}}",
     "fromTranslated": "{{name}}, {{time}}: {{text}} (dịch từ {{language}})",
@@ -216,6 +222,8 @@
     "meta": "Cách {{distance}} · {{minutes}} phút trước · {{language}}",
     "accept": "Nhận",
     "acceptSoon": "Bạn có thể nhận yêu cầu khi tính năng ghép đôi hoạt động.",
+    "waitTitle": "Đang chờ xác minh",
+    "waitBody": "LA28 đang kiểm tra thông tin của bạn. Bạn đã có thể xem các yêu cầu và sẽ nhận được chúng sau khi được xác minh.",
     "empty": "Hiện không có ai gần đây cần giúp đỡ. Yêu cầu mới sẽ hiện ở đây.",
     "metaLive": "{{minutes}} phút trước · {{language}}"
   },
@@ -225,14 +233,23 @@
     "end": "Kết thúc trò chuyện",
     "endHint": "Đánh dấu đã giúp xong cho bạn và {{name}}",
     "confirmEnd": "Kết thúc trò chuyện với {{name}}? Việc giúp đỡ sẽ được đánh dấu là xong.",
-    "yesEnd": "Có, kết thúc"
+    "yesEnd": "Có, kết thúc",
+    "handBack": "Tôi không đến được",
+    "handBackHint": "Trả lại yêu cầu để tình nguyện viên khác giúp {{name}}",
+    "confirmHandBack": "Bạn không đến được? Chúng tôi sẽ tìm tình nguyện viên khác cho {{name}}.",
+    "keepHelping": "Tiếp tục giúp",
+    "yesHandBack": "Trả lại",
+    "handBackFailed": "Không thể trả lại yêu cầu. Hãy kiểm tra kết nối và thử lại."
   },
   "desk": {
     "taken": "Người khác đã nhận yêu cầu này.",
     "acceptFailed": "Không thể nhận yêu cầu. Hãy kiểm tra kết nối và thử lại.",
+    "notVerified": "Bạn có thể nhận yêu cầu sau khi LA28 xác minh bạn.",
     "cancelled": "{{name}} đã hủy yêu cầu.",
+    "closed": "Yêu cầu của {{name}} đã được đóng.",
     "done": "{{name}} đã đánh dấu là đã được giúp xong. Cảm ơn bạn!",
     "ended": "Đã kết thúc trò chuyện. Cảm ơn bạn đã giúp {{name}}!",
+    "handedBack": "Bạn đã trả lại yêu cầu của {{name}}. Tình nguyện viên khác có thể nhận.",
     "withdrawn": "Yêu cầu này đã được rút lại."
   },
   "home": {
@@ -249,16 +266,17 @@
       "off": "Nghỉ"
     },
     "statusLine": {
-      "free": "Bạn sẽ nhận yêu cầu ở gần. Khi nghỉ giải lao, hãy chuyển sang Bận hoặc Nghỉ để yêu cầu bỏ qua bạn.",
+      "free": "Bạn sẽ nhận yêu cầu ở gần. Chuyển sang Bận hoặc Nghỉ để yêu cầu bỏ qua bạn.",
       "busy": "Bạn đang bận. Yêu cầu mới sẽ bỏ qua bạn cho đến khi bạn chuyển lại Rảnh.",
-      "off": "Bạn đang nghỉ. Yêu cầu sẽ bỏ qua bạn cho đến khi bạn chuyển sang Rảnh."
+      "off": "Bạn đang nghỉ. Yêu cầu sẽ bỏ qua bạn cho đến khi bạn chuyển sang Rảnh.",
+      "helping": "Bạn đang giúp {{name}}. Yêu cầu mới sẽ chờ đến khi bạn xong."
     },
     "helpTitle": "Việc bạn có thể giúp",
     "editLabel": "Sửa việc bạn có thể giúp",
     "languages": "Ngôn ngữ thông thạo",
     "training": "Đào tạo",
     "noTraining": "Chưa thêm khóa đào tạo nào",
-    "paused": "Yêu cầu tạm dừng khi bạn nghỉ giải lao. Chuyển sang Rảnh để xem ai ở gần đang cần giúp."
+    "paused": "Yêu cầu tạm dừng khi bạn Bận hoặc Nghỉ. Chuyển sang Rảnh để xem ai ở gần đang cần giúp."
   },
   "mock": {
     "greeting": "Chào {{name}}! Tôi là {{volunteer}}, tình nguyện viên LA28. Tôi đang đến chỗ bạn. Điểm hẹn: {{spot}}.",

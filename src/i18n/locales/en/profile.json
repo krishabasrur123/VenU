@@ -6,7 +6,6 @@
     "verified": "✓ Verified LA28",
     "unverified": "Unverified",
     "sharedVisitor": "Shared with your helper",
-    "sharedVolunteer": "Shown to visitors",
     "account": "Account",
     "support": "Support",
     "editProfile": "Edit profile",
@@ -15,13 +14,14 @@
     "help": "Help & feedback",
     "terms": "Terms of use",
     "signOutFailed": "Couldn't sign out. {{reason}}",
-    "deleteWarning": "This removes your profile and photo for good. You can make a new one later.",
+    "deleteWarning": "This deletes your account, profile and photo for good. You won’t be able to sign in with it again.",
     "deleteFailed": "Couldn't finish deleting your data. {{reason}}",
     "deleteData": "Delete my data"
   },
   "edit": {
     "title": "Edit profile",
     "subtitle": "Changes apply to your next help request.",
+    "subtitleVolunteer": "Visitors see these changes the next time you help.",
     "submit": "Save changes",
     "discardTitle": "Leave without saving? Your changes will be lost.",
     "keepEditing": "Keep editing",
@@ -207,7 +207,8 @@
     "placeholder": "e.g. The map was hard to read in the sun",
     "feedbackLabel": "Your feedback",
     "send": "Send feedback",
-    "empty": "Write a few words first."
+    "empty": "Write a few words first.",
+    "sendFailed": "Couldn’t send your feedback. {{reason}}"
   },
   "notifications": {
     "title": "Notifications",
@@ -216,7 +217,9 @@
     "options": {
       "volunteer": {
         "label": "Volunteer updates",
-        "hint": "e.g. Daniel accepted and is on his way"
+        "hint": "e.g. Daniel accepted and is on his way",
+        "labelVolunteer": "Help requests",
+        "hintVolunteer": "e.g. A visitor near you needs help"
       },
       "chat": {
         "label": "Chat messages",

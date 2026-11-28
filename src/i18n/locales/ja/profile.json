@@ -6,7 +6,6 @@
     "verified": "✓ LA28 認証済み",
     "unverified": "未認証",
     "sharedVisitor": "サポーターに共有される情報",
-    "sharedVolunteer": "来場者に表示される情報",
     "account": "アカウント",
     "support": "サポート",
     "editProfile": "プロフィールを編集",
@@ -15,13 +14,14 @@
     "help": "ヘルプとご意見",
     "terms": "利用規約",
     "signOutFailed": "ログアウトできませんでした。{{reason}}",
-    "deleteWarning": "プロフィールと写真が完全に削除されます。あとで新しく作成できます。",
+    "deleteWarning": "アカウント、プロフィール、写真が完全に削除されます。このアカウントで再びログインすることはできません。",
     "deleteFailed": "データをすべて削除できませんでした。{{reason}}",
     "deleteData": "データを削除"
   },
   "edit": {
     "title": "プロフィールを編集",
     "subtitle": "変更は次回のサポート依頼から反映されます。",
+    "subtitleVolunteer": "次に手助けするときから、来場者にこの変更が表示されます。",
     "submit": "変更を保存",
     "discardTitle": "保存せずに戻りますか？変更は失われます。",
     "keepEditing": "編集を続ける",
@@ -207,7 +207,8 @@
     "placeholder": "例：日差しの下で地図が見づらかった",
     "feedbackLabel": "ご意見",
     "send": "ご意見を送る",
-    "empty": "まず何か書いてください。"
+    "empty": "まず何か書いてください。",
+    "sendFailed": "ご意見を送信できませんでした。{{reason}}"
   },
   "notifications": {
     "title": "通知",
@@ -216,7 +217,9 @@
     "options": {
       "volunteer": {
         "label": "ボランティアの状況",
-        "hint": "例：Daniel が承諾し、向かっています"
+        "hint": "例：Daniel が承諾し、向かっています",
+        "labelVolunteer": "サポート依頼",
+        "hintVolunteer": "例：近くの来場者が助けを求めています"
       },
       "chat": {
         "label": "チャットのメッセージ",

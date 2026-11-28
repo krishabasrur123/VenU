@@ -28,14 +28,14 @@
     "languageLabel": "Tulong sa {{language}}. Palitan ang wika",
     "locationLabel": "Lokasyon mo: {{spot}}, {{venue}}",
     "near": "Malapit sa {{place}}",
-    "locationUnset": "Lokasyon mo: hindi pa napipili, {{venue}}",
+    "locationUnset": "Lokasyon mo: {{venue}}, wala pang napiling lugar",
     "whereAreYou": "Nasaan ka?",
     "tapToChoose": "I-tap para pumili ng lugar",
     "locationHint": "Bubuksan ang listahan ng mga lugar sa {{venue}}",
     "question": "Saan mo kailangan ng tulong?",
     "notePlaceholder": "hal. Naipit ako malapit sa ramp 2",
     "photoOff": "Naka-off ang access sa larawan. I-on ito sa Settings.",
-    "pickOne": "Pumili ng kahit isang bagay na kailangan mo ng tulong.",
+    "pickOne": "Piliin kung saan mo kailangan ng tulong.",
     "send": "Ipadala ang Request"
   },
   "where": {
@@ -49,9 +49,11 @@
   "note": {
     "label": "Magdagdag ng note <muted>(opsyonal)</muted>",
     "labelPlain": "Magdagdag ng note (opsyonal)",
+    "speak": "Sabihin ang iyong note",
     "placeholder": "Mag-type dito",
     "attached": "Nakalakip na larawan",
-    "remove": "Alisin ang larawan"
+    "remove": "Alisin ang larawan",
+    "count": "{{used}} sa {{max}} na character"
   },
   "emergency": {
     "title": "May emerhensiya?",
@@ -69,15 +71,17 @@
   "notice": {
     "searchFailed": "Hindi makakonekta sa volunteer. Tingnan ang koneksyon mo at subukan ulit.",
     "thanks": "Salamat! Nakakatulong ang feedback mo kay {{name}} at sa LA28 team.",
-    "volunteerLeft": "Kinailangang umalis ng iyong volunteer. Naghahanap ng iba."
+    "volunteerLeft": "Kinailangang umalis ng iyong volunteer. Naghahanap ng iba.",
+    "volunteerEnded": "Tinapos ni {{name}} ang chat. Kailangan mo pa ng tulong? I-tap ang Laktawan at magpadala ng bagong request."
   },
   "searching": {
     "title": "Naghahanap ng volunteer",
     "subtitle": "Karaniwang wala pang isang minuto · Manatili ka lang diyan",
     "askedFor": "Hiniling mo",
+    "helpInLabel": "Tulong sa wikang:",
     "notFoundTitle": "Walang bakanteng volunteer ngayon",
-    "notFoundBody": "Naka-save ang request mo. Patuloy na maghanap, o tawagan ang staff ng venue para sa tulong.",
-    "keepSearching": "Patuloy na maghanap"
+    "notFoundBody": "Walang bakante, kaya binawi ang request mo. Maghanap ulit, o tawagan ang staff ng venue para sa tulong.",
+    "keepSearching": "Maghanap ulit"
   },
   "match": {
     "title": "May nahanap na volunteer",
@@ -132,7 +136,9 @@
     "stickers": "Mga sticker",
     "stickersSoon": "Malapit nang dumating ang stickers.",
     "record": "Magsalita ng mensahe",
-    "emptyVolunteer": "Batiin si {{name}} at sabihing papunta ka na."
+    "emptyVolunteer": "Batiin si {{name}} at sabihing papunta ka na.",
+    "yourRequest": "Ang iyong request",
+    "requestFrom": "Request ni {{name}}"
   },
   "translation": {
     "translatedFrom": "Isinalin mula sa {{language}}",
@@ -155,7 +161,7 @@
   },
   "bubble": {
     "mine": "Ikaw, {{time}}: {{text}}",
-    "listen": "pakinggan",
+    "listen": "Pakinggan",
     "listenLabel": "Pakinggan ang mensaheng ito",
     "from": "{{name}}, {{time}}: {{text}}",
     "fromTranslated": "{{name}}, {{time}}: {{text}} (isinalin mula sa {{language}})",
@@ -218,6 +224,8 @@
     "meta": "{{distance}} ang layo · {{minutes}} min ang nakalipas · {{language}}",
     "accept": "Tanggapin",
     "acceptSoon": "Puwede nang tumanggap ng request kapag live na ang matching.",
+    "waitTitle": "Hinihintay ang verification",
+    "waitBody": "Sinusuri ng LA28 ang mga detalye mo. Nakikita mo na ang mga request, at puwede mo nang tanggapin ang mga ito kapag verified ka na.",
     "empty": "Walang nangangailangan ng tulong sa malapit ngayon. Dito lalabas ang mga bagong request.",
     "metaLive": "{{minutes}} min ang nakalipas · {{language}}"
   },
@@ -227,14 +235,23 @@
     "end": "Tapusin ang chat",
     "endHint": "Mamarkahang tapos na ang tulong para sa iyo at kay {{name}}",
     "confirmEnd": "Tapusin ang chat ninyo ni {{name}}? Mamarkahang tapos na ang tulong.",
-    "yesEnd": "Oo, tapusin"
+    "yesEnd": "Oo, tapusin",
+    "handBack": "Hindi ako makakapunta",
+    "handBackHint": "Ibinabalik ang request para ibang volunteer ang tumulong kay {{name}}",
+    "confirmHandBack": "Hindi ka makakapunta? Hahanap kami ng ibang volunteer para kay {{name}}.",
+    "keepHelping": "Patuloy na tumulong",
+    "yesHandBack": "Ibalik ito",
+    "handBackFailed": "Hindi maibalik ang request. Tingnan ang koneksyon mo at subukan ulit."
   },
   "desk": {
     "taken": "May iba nang tumanggap sa request na ito.",
     "acceptFailed": "Hindi matanggap ang request. Tingnan ang koneksyon mo at subukan ulit.",
+    "notVerified": "Puwede kang tumanggap ng request kapag na-verify ka na ng LA28.",
     "cancelled": "Kinansela ni {{name}} ang request.",
+    "closed": "Isinara ang request ni {{name}}.",
     "done": "Minarkahan ni {{name}} na tapos na ang tulong. Salamat!",
     "ended": "Tapos na ang chat. Salamat sa pagtulong kay {{name}}!",
+    "handedBack": "Ibinalik mo ang request ni {{name}}. Puwede itong kunin ng ibang volunteer.",
     "withdrawn": "Binawi na ang request na ito."
   },
   "home": {
@@ -251,16 +268,17 @@
       "off": "Pahinga"
     },
     "statusLine": {
-      "free": "Makakatanggap ka ng mga request sa malapit. Kapag naka-break, lumipat sa Abala o Pahinga at lalaktawan ka ng mga request.",
+      "free": "Makakatanggap ka ng mga request sa malapit. Lumipat sa Abala o Pahinga at lalaktawan ka ng mga request.",
       "busy": "Abala ka muna. Lalaktawan ka ng mga bagong request hanggang bumalik ka sa Bakante.",
-      "off": "Naka-pahinga ka. Lalaktawan ka ng mga request hanggang lumipat ka sa Bakante."
+      "off": "Naka-pahinga ka. Lalaktawan ka ng mga request hanggang lumipat ka sa Bakante.",
+      "helping": "Tinutulungan mo si {{name}}. Maghihintay ang mga bagong request hanggang matapos ka."
     },
     "helpTitle": "Mga maitutulong mo",
     "editLabel": "I-edit ang mga maitutulong mo",
     "languages": "Mga wikang matatas ka",
     "training": "Pagsasanay",
     "noTraining": "Wala pang naidagdag na pagsasanay",
-    "paused": "Naka-pause ang mga request habang naka-break ka. Lumipat sa Bakante para makita kung sino ang kailangan ng tulong sa malapit."
+    "paused": "Naka-pause ang mga request habang Abala ka o naka-Pahinga. Lumipat sa Bakante para makita kung sino ang kailangan ng tulong sa malapit."
   },
   "mock": {
     "greeting": "Hi {{name}}! Ako si {{volunteer}}, ang iyong LA28 volunteer. Papunta na ako sa iyo. Tagpuan: {{spot}}.",

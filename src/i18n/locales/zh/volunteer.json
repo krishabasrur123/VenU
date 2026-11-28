@@ -28,14 +28,14 @@
     "languageLabel": "帮助语言：{{language}}。更改语言",
     "locationLabel": "你的位置：{{spot}}，{{venue}}",
     "near": "{{place}}附近",
-    "locationUnset": "你的位置：尚未选择，{{venue}}",
+    "locationUnset": "你的位置：{{venue}}，尚未选择具体地点",
     "whereAreYou": "你在哪里？",
     "tapToChoose": "点按选择地点",
     "locationHint": "打开 {{venue}} 的地点列表",
     "question": "你需要什么帮助？",
     "notePlaceholder": "例如：我在 2 号坡道附近过不去",
     "photoOff": "照片访问已关闭。请在“设置”中开启。",
-    "pickOne": "请至少选择一项需要的帮助。",
+    "pickOne": "请选择你需要的帮助。",
     "send": "发送请求"
   },
   "where": {
@@ -49,9 +49,11 @@
   "note": {
     "label": "添加备注<muted>（可选）</muted>",
     "labelPlain": "添加备注（可选）",
+    "speak": "语音输入备注",
     "placeholder": "输入文字",
     "attached": "已附加的图片",
-    "remove": "移除图片"
+    "remove": "移除图片",
+    "count": "{{used}}/{{max}} 个字符"
   },
   "emergency": {
     "title": "紧急情况？",
@@ -69,15 +71,17 @@
   "notice": {
     "searchFailed": "无法联系到志愿者。请检查网络连接后重试。",
     "thanks": "谢谢！你的反馈能帮助 {{name}} 和 LA28 团队。",
-    "volunteerLeft": "你的志愿者需要离开。正在为你寻找其他人。"
+    "volunteerLeft": "你的志愿者需要离开。正在为你寻找其他人。",
+    "volunteerEnded": "{{name}} 结束了聊天。仍需要帮助？点按“跳过”并发送新的请求。"
   },
   "searching": {
     "title": "正在寻找志愿者",
     "subtitle": "通常不到一分钟 · 请留在原地",
     "askedFor": "你请求的帮助",
+    "helpInLabel": "帮助语言：",
     "notFoundTitle": "目前没有空闲的志愿者",
-    "notFoundBody": "你的请求已保存。可以继续寻找，或致电场馆工作人员寻求帮助。",
-    "keepSearching": "继续寻找"
+    "notFoundBody": "没有空闲的志愿者，所以你的请求已撤回。可以重新寻找，或致电场馆工作人员寻求帮助。",
+    "keepSearching": "重新寻找"
   },
   "match": {
     "title": "已找到志愿者",
@@ -131,7 +135,9 @@
     "stickers": "贴纸",
     "stickersSoon": "贴纸即将推出。",
     "record": "语音输入消息",
-    "emptyVolunteer": "向 {{name}} 打个招呼，告诉对方你正在路上。"
+    "emptyVolunteer": "向 {{name}} 打个招呼，告诉对方你正在路上。",
+    "yourRequest": "你的请求",
+    "requestFrom": "{{name}} 的请求"
   },
   "translation": {
     "translatedFrom": "译自{{language}}",
@@ -216,6 +222,8 @@
     "meta": "距离 {{distance}} · {{minutes}} 分钟前 · {{language}}",
     "accept": "接受",
     "acceptSoon": "匹配功能上线后即可接受请求。",
+    "waitTitle": "等待验证",
+    "waitBody": "LA28 正在核实你的信息。你现在可以查看请求，验证通过后即可接受。",
     "empty": "附近暂时没有人需要帮助。新的请求会显示在这里。",
     "metaLive": "{{minutes}} 分钟前 · {{language}}"
   },
@@ -225,14 +233,23 @@
     "end": "结束聊天",
     "endHint": "为你和 {{name}} 将帮助标记为完成",
     "confirmEnd": "要结束与 {{name}} 的聊天吗？帮助将被标记为完成。",
-    "yesEnd": "是的，结束聊天"
+    "yesEnd": "是的，结束聊天",
+    "handBack": "我去不了",
+    "handBackHint": "交回请求，让其他志愿者帮助 {{name}}",
+    "confirmHandBack": "去不了？我们会为 {{name}} 另找一位志愿者。",
+    "keepHelping": "继续帮忙",
+    "yesHandBack": "交回请求",
+    "handBackFailed": "无法交回请求。请检查网络连接后重试。"
   },
   "desk": {
     "taken": "这个请求已被其他志愿者接受。",
     "acceptFailed": "无法接受请求。请检查网络连接后重试。",
+    "notVerified": "LA28 验证你的身份后，你就可以接受请求了。",
     "cancelled": "{{name}} 取消了请求。",
+    "closed": "{{name}} 的请求已关闭。",
     "done": "{{name}} 已将帮助标记为完成。谢谢你！",
     "ended": "聊天已结束。感谢你帮助 {{name}}！",
+    "handedBack": "你已交回 {{name}} 的请求。其他志愿者可以接手。",
     "withdrawn": "此请求已被撤回。"
   },
   "home": {
@@ -249,16 +266,17 @@
       "off": "离线"
     },
     "statusLine": {
-      "free": "你会收到附近的请求。休息时切换到“忙碌”或“离线”，请求就会跳过你。",
+      "free": "你会收到附近的请求。切换到“忙碌”或“离线”，请求就会跳过你。",
       "busy": "你现在正忙。切换回“空闲”之前，新请求会跳过你。",
-      "off": "你已离线。切换到“空闲”之前，请求会跳过你。"
+      "off": "你已离线。切换到“空闲”之前，请求会跳过你。",
+      "helping": "你正在帮助 {{name}}。完成之前不会收到新的请求。"
     },
     "helpTitle": "你能提供的帮助",
     "editLabel": "编辑你能提供的帮助",
     "languages": "流利的语言",
     "training": "培训",
     "noTraining": "尚未添加培训",
-    "paused": "休息期间请求已暂停。切换到“空闲”即可查看附近需要帮助的人。"
+    "paused": "你处于“忙碌”或“离线”时，请求会暂停。切换到“空闲”即可查看附近需要帮助的人。"
   },
   "mock": {
     "greeting": "{{name}}，你好！我是 {{volunteer}}，LA28 志愿者。我现在就过去找你。会合地点：{{spot}}。",

@@ -64,3 +64,18 @@ export function validateAuth(mode: AuthMode, v: AuthValues, local: boolean): Aut
     return { field: 'terms', message: i18n.t('onboarding:validate.terms') };
   return null;
 }
+
+/** Forgot Password: the first problem with the typed username or email, or null. */
+export function resetIdentifierError(raw: string): string | null {
+  const typed = raw.trim();
+  if (!typed) return i18n.t('onboarding:validate.identifier');
+  if (isEmailLike(typed)) return /^\S+@\S+\.\S+$/.test(typed) ? null : i18n.t('onboarding:validate.email');
+  return usernameError(typed);
+}
+
+/** New Password: the Create Account rule (at least MIN_PASSWORD characters), typed the same twice. */
+export function newPasswordError(password: string, confirm: string): { field: 'password' | 'confirm'; message: string } | null {
+  if (password.length < MIN_PASSWORD) return { field: 'password', message: i18n.t('onboarding:validate.passwordLength', { min: MIN_PASSWORD }) };
+  if (confirm !== password) return { field: 'confirm', message: i18n.t('onboarding:validate.passwordMatch') };
+  return null;
+}

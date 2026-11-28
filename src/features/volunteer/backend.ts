@@ -15,6 +15,12 @@ export interface VolunteerBackend {
   /** Resolves when a volunteer accepts; rejects with an AbortError when `signal` aborts. */
   findVolunteer(request: HelpRequest, signal: AbortSignal): Promise<Match>;
   cancelRequest(requestId: string): Promise<void>;
+  /**
+   * The search ran out of time: withdraws the request only if it's still open. Resolves with the
+   * match when a volunteer took it first (a late timer on a locked phone), else null. Optional:
+   * without it the store calls cancelRequest.
+   */
+  withdrawRequest?(requestId: string): Promise<Match | null>;
   /** `lang`: the language the sender writes in (e.g. 'es'), so the reader's app knows what to translate. */
   sendMessage(requestId: string, text: string, lang?: string | null): Promise<void>;
   /**
@@ -54,10 +60,10 @@ export interface VolunteerBackend {
   /**
    * Takes an open request. Rejects with AlreadyTakenError when another volunteer got it first,
    * RequestClosedError when the visitor withdrew it, AlreadyHelpingError when this volunteer
-   * already has one.
+   * already has one, NotVerifiedError when LA28 hasn't verified this volunteer yet.
    */
   acceptRequest?(requestId: string): Promise<Assignment>;
-  /** The volunteer leaves without finishing (signing out): the request opens again for someone else. */
+  /** The volunteer leaves without finishing ("Can't make it", or signing out): the request opens again for someone else. */
   releaseRequest?(requestId: string): Promise<void>;
   /** The request this volunteer accepted and hasn't finished, e.g. after an app restart. */
   currentAssignment?(): Promise<Assignment | null>;
@@ -78,6 +84,14 @@ export class RequestClosedError extends Error {
   constructor() {
     super('This request was withdrawn');
     this.name = 'RequestClosedError';
+  }
+}
+
+/** Accept refused: LA28 hasn't verified this volunteer yet (profiles.verified is false). */
+export class NotVerifiedError extends Error {
+  constructor() {
+    super('Waiting for verification');
+    this.name = 'NotVerifiedError';
   }
 }
 
@@ -175,6 +189,12 @@ export function createMockBackend(timing = MOCK_TIMING): VolunteerBackend {
     async cancelRequest(requestId) {
       stop(requestId);
       listeners.delete(requestId);
+    },
+    // Nobody here accepts after the search gives up, so it's always withdrawn.
+    async withdrawRequest(requestId) {
+      stop(requestId);
+      listeners.delete(requestId);
+      return null;
     },
     async sendMessage(requestId) {
       const i = replyIndex.get(requestId) ?? 0;

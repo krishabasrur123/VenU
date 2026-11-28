@@ -39,6 +39,8 @@ export type FacilityTagId =
   | 'long_lines_halftime'
   | 'wheelchair_loans'
   | 'permit_needed'
+  /** A paid parking pass (not a disability permit). */
+  | 'pass_needed'
   | 'wheelchair_escort'
   | 'premium_access'
   | 'sensory_room'
@@ -54,6 +56,18 @@ export interface FacilityTag {
 
 export type WaitLevel = 'none' | 'short' | 'long';
 
+/**
+ * A demo sponsored placement on a stand (./sponsors.ts; no partnership exists): always labelled
+ * "Sponsored". The brand's logo (sponsorLogoOf) shows on cards, the stand page and the waiting
+ * banner; map pins and list rows keep VenU's own Sponsored icon.
+ */
+export interface FacilitySponsor {
+  /** The brand as plain text, e.g. "Coca-Cola". A proper name, so never translated. */
+  brand: string;
+  /** English; screens show venue:facilityText.<id>.offer, e.g. "$1 off any Coca-Cola drink with VenU". */
+  offer: string;
+}
+
 export interface Facility {
   /** Unique within its venue; used in the URL (/venue/sofi/entry-4). */
   id: string;
@@ -64,6 +78,7 @@ export interface Facility {
   description: string;
   /** Where to find it, e.g. "East entrance, by Lot C". Translated like `description`. */
   location: string;
+  /** A stand-in walk time; screens show the walk from the route start instead (see walkFromStart). */
   walkMinutes: number;
   wait: WaitLevel;
   /** Step-free and wheelchair usable. Shows the blue wheelchair badge. */
@@ -72,6 +87,13 @@ export interface Facility {
   /** Position on the venue's map image (./venue-maps.ts), from 0 to 1 across and down. */
   x: number;
   y: number;
+  /**
+   * The venue doesn't publish where it is, so the pin is only a placeholder: no walking route or
+   * walk time, and the card says to ask staff instead.
+   */
+  approximate?: boolean;
   /** A photo of the spot, hotlinked from the venue's site; the pin card shows the category icon without one. */
   photo?: string;
+  /** Set on sponsored stands only: they get the Sponsored pin, an offer and the promoted list card. */
+  sponsor?: FacilitySponsor;
 }

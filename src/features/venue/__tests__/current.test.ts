@@ -5,6 +5,7 @@ import {
   DEFAULT_WHERE,
   getWhereAmI,
   hydrateWhereAmI,
+  isMeetSpot,
   resetWhereAmIForTests,
   setCurrentSpot,
   setCurrentVenue,
@@ -12,6 +13,8 @@ import {
   validWhere,
   WHERE_KEY,
 } from '../current';
+import { getFacility } from '../mock';
+import { featuredStandFor } from '../sponsors';
 
 jest.mock('@react-native-async-storage/async-storage', () =>
   jest.requireActual('@react-native-async-storage/async-storage/jest/async-storage-mock'),
@@ -61,6 +64,22 @@ describe('where am I', () => {
     expect(validWhere({ venueId: 'sofi', facilityId: 'gone' })).toEqual({ venueId: 'sofi', facilityId: null });
     expect(validWhere({ venueId: 'gone' })).toEqual(DEFAULT_WHERE);
     expect(validWhere('{bad')).toEqual(DEFAULT_WHERE);
+  });
+
+  it('never makes an unpublished spot (Elevators, Sensory Room) the visitor\'s spot', async () => {
+    await setCurrentVenue('intuit-dome');
+    await setCurrentSpot('main-entrance');
+    await setCurrentSpot('elevators');
+    expect(getWhereAmI()).toEqual({ venueId: 'intuit-dome', facilityId: 'main-entrance' });
+    expect(isMeetSpot(getFacility('intuit-dome', 'sensory-room')!)).toBe(false);
+    expect(isMeetSpot(getFacility('intuit-dome', 'main-entrance')!)).toBe(true);
+    expect(isMeetSpot(featuredStandFor('intuit-dome')!)).toBe(false);
+  });
+
+  it('drops a spot saved before it became unpublished, keeping the venue', async () => {
+    await save({ venueId: 'intuit-dome', facilityId: 'sensory-room' });
+    await hydrateWhereAmI();
+    expect(getWhereAmI()).toEqual({ venueId: 'intuit-dome', facilityId: null });
   });
 
   it('reopening the saved venue on launch keeps the saved spot', async () => {

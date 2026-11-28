@@ -18,6 +18,9 @@
     "assistTitle": "¿Necesitas ayuda?",
     "assistBody": "Habla con un voluntario",
     "assistLabel": "¿Necesitas ayuda? Habla con un voluntario",
+    "assistTitleVolunteer": "¿Quieres ayudar?",
+    "assistBodyVolunteer": "Mira las solicitudes cerca de ti",
+    "assistLabelVolunteer": "¿Quieres ayudar? Mira las solicitudes cerca de ti",
     "empty": "Ninguna sede coincide con «{{query}}». Prueba con una ciudad, como Inglewood.",
     "cardHint": "Abre el mapa y los servicios"
   },
@@ -95,6 +98,9 @@
   "walk_one": "{{number}} min a pie",
   "walk_many": "{{number}} min a pie",
   "walk_other": "{{number}} min a pie",
+  "walkStart": "Aquí empiezan las rutas",
+  "walkMine": "Estás aquí",
+  "walkAsk": "Lugar no publicado",
   "wait": {
     "none": "Sin espera",
     "short": "Poca espera",
@@ -103,6 +109,18 @@
   "row": {
     "label": "{{name}}, {{meta}}",
     "labelAccessible": "{{name}}, {{meta}}, accesible"
+  },
+  "sponsor": {
+    "label": "Patrocinado",
+    "pin": "Patrocinado: {{name}} en el mapa",
+    "row": "Patrocinado: {{name}}, {{meta}}",
+    "card": "Patrocinado: {{name}}. {{offer}}. {{meta}}",
+    "heading": "Patrocinado: {{name}}",
+    "showScreen": "Muestra esta pantalla en el puesto",
+    "disclosure": "Anuncio de demostración, no es información del recinto",
+    "banner": "Patrocinado: {{name}}, {{walk}}. {{offer}}",
+    "bannerHint": "Abre el puesto. Tu solicitud sigue buscando.",
+    "hide": "Ocultar mensaje patrocinado"
   },
   "tags": {
     "label": "Etiquetas:",
@@ -119,6 +137,7 @@
     "long_lines_halftime": "Filas largas en el descanso",
     "wheelchair_loans": "Préstamo de sillas de ruedas",
     "permit_needed": "Requiere permiso",
+    "pass_needed": "Requiere pase",
     "wheelchair_escort": "Acompañamiento en silla de ruedas",
     "premium_access": "VIP y premium",
     "sensory_room": "Sala sensorial",
@@ -127,6 +146,36 @@
     "changing_table": "Cambiador"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "Puesto Coca-Cola Refresh",
+      "description": "Bebidas Coca-Cola frías, agua embotellada y refrigerios.",
+      "location": "En la plaza, junto a la cancha exterior",
+      "offer": "$1 de descuento en cualquier bebida Coca-Cola con VenU"
+    },
+    "panda-express-intuit": {
+      "name": "Puesto Panda Express",
+      "description": "Pollo a la naranja, chow mein y tazones de arroz.",
+      "location": "Explanada del nivel Main, pasando la Entrada de The Wall",
+      "offer": "Rollito primavera gratis con cualquier tazón"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "Puesto Coca-Cola Refresh",
+      "description": "Bebidas Coca-Cola frías, agua embotellada y refrigerios.",
+      "location": "Nivel 1, pasando las Entradas 1 y 2",
+      "offer": "$1 de descuento en cualquier bebida Coca-Cola con VenU"
+    },
+    "ben-jerrys-sofi": {
+      "name": "Puesto de helados Ben & Jerry’s",
+      "description": "Helado en vaso y en cono.",
+      "location": "American Airlines Plaza",
+      "offer": "Cobertura gratis en cualquier bola de helado"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "Puesto Coca-Cola Refresh",
+      "description": "Bebidas Coca-Cola frías, agua embotellada y refrigerios.",
+      "location": "Explanada principal, lado de Figueroa",
+      "offer": "$1 de descuento en cualquier bebida Coca-Cola con VenU"
+    },
     "entry-3": {
       "name": "Entrada 3",
       "description": "Entrada norte. Todas las entradas tienen un camino accesible y acompañamiento gratuito en silla de ruedas.",
@@ -279,27 +328,27 @@
     },
     "main-entrance": {
       "name": "Entrada principal",
-      "description": "Carril GameFace ID a la izquierda y carril Identity Pass a la derecha. Ayuda de movilidad gratis desde el control de seguridad hasta tu asiento.",
+      "description": "Carril GameFace ID a la izquierda y carril Identity Pass a la derecha; para la entrada accesible, quienes tienen Identity Pass validan en el Answers Portal. Bolsos de hasta 10×6×2 in (médicos hasta 14×14×6). Ayuda de movilidad gratis desde el control de seguridad hasta tu asiento.",
       "location": "En la plaza, junto a Century Blvd. y Prairie Ave."
     },
     "vip-entrance": {
       "name": "Entrada VIP",
-      "description": "Para boletos de suite, club y pista.",
+      "description": "Para boletos de suite, club y pista (también pueden usar la entrada principal).",
       "location": "A la izquierda de la entrada principal"
     },
     "wall-entrance": {
       "name": "Entrada de The Wall",
-      "description": "Entrada exclusiva para The Wall.",
+      "description": "Para boletos en The Wall (también pueden usar la entrada principal).",
       "location": "A la izquierda de la entrada principal, pasando la entrada VIP"
     },
     "answers-portal-main": {
       "name": "Answers Portal, nivel Main",
-      "description": "Atención al visitante: objetos perdidos, audición asistida gratis (se retiene una identificación con foto) y dispositivos OneCourt.",
+      "description": "Atención al visitante: objetos perdidos, audición asistida gratis (se retiene una identificación con foto), bolsas sensoriales (se retiene una identificación) y dispositivos OneCourt.",
       "location": "Nivel Main, cerca de la sección Main 6"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal, nivel Terrace",
-      "description": "Atención al visitante: objetos perdidos y audición asistida gratis (se retiene una identificación con foto).",
+      "description": "Atención al visitante: objetos perdidos, audición asistida gratis (se retiene una identificación con foto) y dispositivos OneCourt.",
       "location": "Nivel Terrace, cerca de la sección Terrace 18"
     },
     "first-aid-main": {
@@ -319,7 +368,7 @@
     },
     "sensory-room": {
       "name": "Sala sensorial",
-      "description": "La sala sensorial privada Kaiser Permanente. Hay bolsas sensoriales a pedido.",
+      "description": "La sala sensorial privada Kaiser Permanente. Las bolsas sensoriales (audífonos, juguetes antiestrés) están en el Answers Portal junto a Main 6; se pide identificación.",
       "location": "Pide indicaciones a un anfitrión de la arena"
     },
     "infant-care-room": {
@@ -329,31 +378,42 @@
     },
     "mobility-hub": {
       "name": "Centro de movilidad",
-      "description": "Subida y bajada de viajes compartidos y taxis, zona para dejar a la familia y lanzaderas.",
-      "location": "Garaje Este, nivel 1"
+      "description": "El único punto de subida y bajada de viajes compartidos. También taxis, zona para dejar a la familia y lanzaderas gratis (con camionetas adaptadas).",
+      "location": "Garaje Este, nivel 1 (3700 W Century Blvd.)"
     },
     "east-garage": {
       "name": "Garaje Este",
-      "description": "Estacionamiento estándar; compra el pase con anticipación. Los espacios accesibles se venden por orden de llegada.",
-      "location": "Entrada por 102nd St."
+      "description": "Estacionamiento estándar; compra el pase con anticipación. Los espacios accesibles se compran con un pase de estacionamiento, por orden de llegada.",
+      "location": "3665 W 102nd St (entrada por 102nd St.)"
     },
     "west-garage": {
       "name": "Garaje Oeste",
-      "description": "Estacionamiento VIP al otro lado de Prairie Ave.; compra el pase con anticipación.",
-      "location": "Entrada por Prairie Ave."
+      "description": "Estacionamiento VIP al otro lado de Prairie Ave.; compra el pase con anticipación. Los espacios accesibles se compran con un pase de estacionamiento, por orden de llegada.",
+      "location": "10117 S Prairie Ave (entrada por Prairie Ave.)"
+    },
+    "infant-care-terrace": {
+      "name": "Sala de cuidado infantil, nivel Terrace",
+      "description": "Sala privada para el cuidado de bebés. Todos los baños tienen cambiador.",
+      "location": "Nivel Terrace, Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "Elevadores",
+      "description": "Los elevadores van de la entrada principal a todos los niveles, y las escaleras mecánicas unen los niveles Main y Terrace en el vestíbulo principal. Las personas con movilidad reducida tienen prioridad.",
+      "location": "Pide a un anfitrión de la arena el más cercano"
     }
   },
   "facility": {
     "notFound": "Servicio no encontrado",
     "wheelchair": "Accesible en silla de ruedas",
     "directions": "Cómo llegar",
+    "noRoute": "Sin ruta a pie: el recinto no publica este lugar. Pide indicaciones al personal.",
     "imHere": "Estoy aquí",
     "imHereHint": "Usa este lugar como tu ubicación al pedir ayuda",
     "isHere": "Tu ubicación",
     "reports": "Reportes",
-    "results_one": "{{number}} resultado",
-    "results_many": "{{number}} de resultados",
-    "results_other": "{{number}} resultados",
+    "reportCount_one": "{{number}} reporte",
+    "reportCount_many": "{{number}} de reportes",
+    "reportCount_other": "{{number}} reportes",
     "noReports": "Aún no hay reportes. Sé el primero en contar lo que encontraste.",
     "addReport": "Agrega tu reporte"
   },
@@ -383,7 +443,12 @@
     "authorFallback": "Visitante de VenU",
     "submitted": "Enviado el {{date}}",
     "originalLanguage": "Idioma original: {{language}}",
-    "noBody": "Sin detalles."
+    "noBody": "Sin detalles.",
+    "delete": "Eliminar mi reporte",
+    "deleteConfirm": "¿Eliminar este reporte? Los visitantes de este recinto ya no lo verán.",
+    "deleteKeep": "Conservarlo",
+    "deleteYes": "Eliminar",
+    "deleteFailed": "No se pudo eliminar el reporte. {{reason}}"
   },
   "form": {
     "title": "Agregar reporte",
@@ -407,6 +472,7 @@
     "title": "Ruta a pie",
     "from": "Desde {{from}}",
     "fromArrival": "Desde {{from}}, la entrada principal. ¿Estás en otro sitio? Ábrelo y toca «Estoy aquí».",
+    "fromArrivalPlain": "Desde {{from}}. ¿Estás en otro sitio? Ábrelo y toca «Estoy aquí».",
     "steps_many": "unos {{number}} de pasos",
     "steps_one": "unos {{number}} paso",
     "steps_other": "unos {{number}} pasos",

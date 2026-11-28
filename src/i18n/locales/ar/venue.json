@@ -18,6 +18,9 @@
     "assistTitle": "تحتاج إلى مساعدة؟",
     "assistBody": "تواصل مع متطوع",
     "assistLabel": "تحتاج إلى مساعدة؟ تواصل مع متطوع",
+    "assistTitleVolunteer": "مستعد للمساعدة؟",
+    "assistBodyVolunteer": "اطّلع على الطلبات القريبة منك",
+    "assistLabelVolunteer": "مستعد للمساعدة؟ اطّلع على الطلبات القريبة منك",
     "empty": "لا يوجد مكان يطابق «{{query}}». جرّب اسم مدينة، مثل Inglewood.",
     "cardHint": "يفتح الخريطة والمرافق"
   },
@@ -98,6 +101,9 @@
   "walk_few": "{{number}} دقائق سيرًا",
   "walk_many": "{{number}} دقيقة سيرًا",
   "walk_other": "{{number}} دقيقة سيرًا",
+  "walkStart": "من هنا تبدأ المسارات",
+  "walkMine": "أنت هنا",
+  "walkAsk": "المكان غير منشور",
   "wait": {
     "none": "بلا انتظار",
     "short": "انتظار قصير",
@@ -106,6 +112,18 @@
   "row": {
     "label": "{{name}}، {{meta}}",
     "labelAccessible": "{{name}}، {{meta}}، مهيأ لذوي الإعاقة"
+  },
+  "sponsor": {
+    "label": "مُموَّل",
+    "pin": "مُموَّل: {{name}} على الخريطة",
+    "row": "مُموَّل: {{name}}، {{meta}}",
+    "card": "مُموَّل: {{name}}. {{offer}}. {{meta}}",
+    "heading": "مُموَّل: {{name}}",
+    "showScreen": "اعرض هذه الشاشة عند الكشك",
+    "disclosure": "إعلان تجريبي، وليس معلومات من المكان",
+    "banner": "مُموَّل: {{name}}، {{walk}}. {{offer}}",
+    "bannerHint": "يفتح الكشك. يستمر البحث عن طلبك.",
+    "hide": "إخفاء الرسالة المموّلة"
   },
   "tags": {
     "label": "الوسوم:",
@@ -122,6 +140,7 @@
     "long_lines_halftime": "طوابير طويلة بين الشوطين",
     "wheelchair_loans": "إعارة كراسي متحركة",
     "permit_needed": "يلزم تصريح",
+    "pass_needed": "يلزم تصريح وقوف",
     "wheelchair_escort": "مرافقة بالكرسي المتحرك",
     "premium_access": "VIP والمميزة",
     "sensory_room": "غرفة حسية",
@@ -130,6 +149,36 @@
     "changing_table": "طاولة تغيير الحفاضات"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "كشك Coca-Cola Refresh",
+      "description": "مشروبات Coca-Cola باردة ومياه معبأة ووجبات خفيفة.",
+      "location": "في الساحة، قرب الملعب الخارجي",
+      "offer": "خصم 1$ على أي مشروب Coca-Cola مع VenU"
+    },
+    "panda-express-intuit": {
+      "name": "كشك Panda Express",
+      "description": "دجاج بالبرتقال وتشاو مين وأطباق أرز.",
+      "location": "ردهة مستوى Main، بعد مدخل The Wall",
+      "offer": "لفافة بيض مجانية مع أي طبق"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "كشك Coca-Cola Refresh",
+      "description": "مشروبات Coca-Cola باردة ومياه معبأة ووجبات خفيفة.",
+      "location": "المستوى 1، بعد المدخلين 1 و2",
+      "offer": "خصم 1$ على أي مشروب Coca-Cola مع VenU"
+    },
+    "ben-jerrys-sofi": {
+      "name": "كشك آيس كريم Ben & Jerry’s",
+      "description": "آيس كريم في أكواب ومخاريط.",
+      "location": "American Airlines Plaza",
+      "offer": "إضافة مجانية على أي مغرفة"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "كشك Coca-Cola Refresh",
+      "description": "مشروبات Coca-Cola باردة ومياه معبأة ووجبات خفيفة.",
+      "location": "الردهة الرئيسية، جهة Figueroa",
+      "offer": "خصم 1$ على أي مشروب Coca-Cola مع VenU"
+    },
     "entry-3": {
       "name": "المدخل 3",
       "description": "المدخل الشمالي. لكل مدخل مسار مهيأ ومرافقة مجانية بالكرسي المتحرك.",
@@ -282,27 +331,27 @@
     },
     "main-entrance": {
       "name": "المدخل الرئيسي",
-      "description": "مسار GameFace ID على اليسار ومسار Identity Pass على اليمين. مساعدة مجانية في التنقل من التفتيش الأمني إلى مقعدك.",
+      "description": "مسار GameFace ID على اليسار ومسار Identity Pass على اليمين؛ للدخول المهيأ يمرّر حاملو Identity Pass هواتفهم عند Answers Portal. الحقائب حتى 10×6×2 بوصة (الطبية حتى 14×14×6). مساعدة مجانية في التنقل من التفتيش الأمني إلى مقعدك.",
       "location": "في الساحة، قرب Century Blvd. وPrairie Ave."
     },
     "vip-entrance": {
       "name": "مدخل VIP",
-      "description": "لحاملي تذاكر الأجنحة والنادي والأرضية.",
+      "description": "لتذاكر الأجنحة والنادي والأرضية (ويمكنهم أيضًا استخدام المدخل الرئيسي).",
       "location": "يسار المدخل الرئيسي"
     },
     "wall-entrance": {
       "name": "مدخل The Wall",
-      "description": "مدخل مخصص لـ The Wall.",
+      "description": "لتذاكر The Wall (ويمكنهم أيضًا استخدام المدخل الرئيسي).",
       "location": "يسار المدخل الرئيسي، بعد مدخل VIP"
     },
     "answers-portal-main": {
       "name": "Answers Portal مستوى Main",
-      "description": "خدمة الزوار: المفقودات وأجهزة مساعدة السمع المجانية (تُحتجز هوية بصورة) وأجهزة OneCourt.",
+      "description": "خدمة الزوار: المفقودات وأجهزة مساعدة السمع المجانية (تُحتجز هوية بصورة) والحقائب الحسية (تُحتجز هوية) وأجهزة OneCourt.",
       "location": "مستوى Main، قرب القسم Main 6"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal مستوى Terrace",
-      "description": "خدمة الزوار: المفقودات وأجهزة مساعدة السمع المجانية (تُحتجز هوية بصورة).",
+      "description": "خدمة الزوار: المفقودات وأجهزة مساعدة السمع المجانية (تُحتجز هوية بصورة) وأجهزة OneCourt.",
       "location": "مستوى Terrace، قرب القسم Terrace 18"
     },
     "first-aid-main": {
@@ -322,7 +371,7 @@
     },
     "sensory-room": {
       "name": "الغرفة الحسية",
-      "description": "غرفة Kaiser Permanente الحسية الخاصة. الحقائب الحسية متاحة عند الطلب.",
+      "description": "غرفة Kaiser Permanente الحسية الخاصة. الحقائب الحسية (سماعات وألعاب لتخفيف التوتر) عند Answers Portal قرب Main 6؛ تلزم هوية.",
       "location": "اسأل أحد مضيفي الساحة عن الطريق"
     },
     "infant-care-room": {
@@ -332,34 +381,45 @@
     },
     "mobility-hub": {
       "name": "مركز التنقل",
-      "description": "صعود ونزول ركاب سيارات التطبيقات والأجرة، ومنطقة إنزال العائلات، والحافلات المكوكية.",
-      "location": "المرآب الشرقي، المستوى 1"
+      "description": "المكان الوحيد لصعود ونزول ركاب سيارات التطبيقات. وفيه أيضًا سيارات الأجرة ومنطقة إنزال العائلات وحافلات مكوكية مجانية (تتوفر حافلات مهيأة).",
+      "location": "المرآب الشرقي، المستوى 1 (3700 W Century Blvd.)"
     },
     "east-garage": {
       "name": "المرآب الشرقي",
-      "description": "مواقف عادية؛ اشترِ تصريح الوقوف مسبقًا. تُباع الأماكن المهيأة بالأسبقية.",
-      "location": "المدخل من 102nd St."
+      "description": "مواقف عادية؛ اشترِ تصريح الوقوف مسبقًا. تُشترى الأماكن المهيأة مع تصريح الوقوف، بالأسبقية.",
+      "location": "3665 W 102nd St (المدخل من 102nd St.)"
     },
     "west-garage": {
       "name": "المرآب الغربي",
-      "description": "مواقف VIP مقابل Prairie Ave.؛ اشترِ تصريح الوقوف مسبقًا.",
-      "location": "المدخل من Prairie Ave."
+      "description": "مواقف VIP مقابل Prairie Ave.؛ اشترِ تصريح الوقوف مسبقًا. تُشترى الأماكن المهيأة مع تصريح الوقوف، بالأسبقية.",
+      "location": "10117 S Prairie Ave (المدخل من Prairie Ave.)"
+    },
+    "infant-care-terrace": {
+      "name": "غرفة رعاية الرضع مستوى Terrace",
+      "description": "غرفة خاصة لرعاية الرضع. في كل دورات المياه طاولة لتغيير الحفاضات.",
+      "location": "مستوى Terrace، Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "المصاعد",
+      "description": "تصل المصاعد من المدخل الرئيسي إلى كل المستويات، وتربط السلالم الكهربائية في الردهة الرئيسية بين مستويي Main وTerrace. الأولوية لذوي الإعاقة الحركية.",
+      "location": "اسأل أحد مضيفي الساحة عن أقربها"
     }
   },
   "facility": {
     "notFound": "المرفق غير موجود",
     "wheelchair": "مهيأ للكراسي المتحركة",
     "directions": "الاتجاهات",
+    "noRoute": "لا يوجد مسار مشي: لا تنشر الساحة هذا المكان. اسأل الموظفين عن الطريق.",
     "imHere": "أنا هنا",
     "imHereHint": "يُستخدم هذا المكان موقعًا لك عند طلب المساعدة",
     "isHere": "موقعك",
     "reports": "البلاغات",
-    "results_zero": "لا توجد نتائج",
-    "results_one": "نتيجة واحدة",
-    "results_two": "نتيجتان",
-    "results_few": "{{number}} نتائج",
-    "results_many": "{{number}} نتيجة",
-    "results_other": "{{number}} نتيجة",
+    "reportCount_zero": "لا توجد بلاغات",
+    "reportCount_one": "بلاغ واحد",
+    "reportCount_two": "بلاغان",
+    "reportCount_few": "{{number}} بلاغات",
+    "reportCount_many": "{{number}} بلاغًا",
+    "reportCount_other": "{{number}} بلاغ",
     "noReports": "لا توجد بلاغات بعد. كن أول من يشارك ما وجده.",
     "addReport": "أضف بلاغك"
   },
@@ -389,7 +449,12 @@
     "authorFallback": "زائر VenU",
     "submitted": "أُرسل في {{date}}",
     "originalLanguage": "اللغة الأصلية: {{language}}",
-    "noBody": "لا توجد تفاصيل."
+    "noBody": "لا توجد تفاصيل.",
+    "delete": "حذف بلاغي",
+    "deleteConfirm": "هل تريد حذف هذا البلاغ؟ لن يراه زوار هذا المكان بعد الآن.",
+    "deleteKeep": "الإبقاء عليه",
+    "deleteYes": "حذف",
+    "deleteFailed": "تعذّر حذف البلاغ. {{reason}}"
   },
   "form": {
     "title": "إضافة بلاغ",
@@ -413,6 +478,7 @@
     "title": "مسار المشي",
     "from": "من {{from}}",
     "fromArrival": "من {{from}}، المدخل الرئيسي. في مكان آخر؟ افتح ذلك المكان واضغط «أنا هنا».",
+    "fromArrivalPlain": "من {{from}}. في مكان آخر؟ افتح ذلك المكان واضغط «أنا هنا».",
     "steps_few": "نحو {{number}} خطوات",
     "steps_many": "نحو {{number}} خطوة",
     "steps_one": "نحو خطوة واحدة",

@@ -24,6 +24,7 @@ import {
   type ReportErrors,
 } from './reports';
 import { facilityName } from './labels';
+import { takesReports } from './sponsors';
 import { SheetScroll, useVenueScreen } from './venue-map-screen';
 import { BackArrow, InlineNote, venueText } from './ui';
 
@@ -33,7 +34,8 @@ export function ReportForm() {
   const { venue, facilities, setSnap } = useVenueScreen();
   const { profile } = useProfile();
   const { facilityId } = useLocalSearchParams<{ facilityId: string }>();
-  const facility = facilities.find(f => f.id === facilityId);
+  // A sponsored stand takes no reports: its link reads as not found.
+  const facility = facilities.find(f => f.id === facilityId && takesReports(f));
   const [draft, setDraft] = useState<ReportDraft>(emptyReportDraft);
   const [errors, setErrors] = useState<ReportErrors>({});
   const [tried, setTried] = useState(false);
@@ -79,7 +81,7 @@ export function ReportForm() {
     }
   }
 
-  // A stale or hand-typed link (/venue/sofi/nope/reports/new): nothing to report on.
+  // A stale or hand-typed link (/venue/sofi/nope/reports/new, or a sponsored stand's): nothing to report on.
   if (!facility) {
     return (
       <SheetScroll contentContainerStyle={styles.content}>

@@ -83,7 +83,7 @@ export function ProfileForm({ initial, savedAvatarUrl, submitLabel, onSubmit, he
 
         <FormSection title={t('form.aboutYou')}>
           <View style={styles.about}>
-            <AvatarPicker name={d.firstName} uri={shownAvatar} onPick={setAvatar} onRemove={() => setAvatar('remove')} />
+            <AvatarPicker role={d.role} name={d.firstName} uri={shownAvatar} onPick={setAvatar} onRemove={() => setAvatar('remove')} />
             <TextField
               label={t('form.firstName')}
               value={d.firstName}

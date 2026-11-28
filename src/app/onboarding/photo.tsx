@@ -81,7 +81,7 @@ export default function PhotoStep() {
       subtitle={draft.role === 'visitor' ? t('steps.photoSubtitle') : t('steps.photoSubtitleVolunteer')}
       actions={<PrimaryAction label={t('steps.finish')} onPress={() => void finish()} loading={saving} />}>
       <View style={styles.body}>
-        <AvatarPicker layout="stacked" name={draft.firstName} uri={shown} onPick={setAvatar} onRemove={() => setAvatar('remove')} />
+        <AvatarPicker layout="stacked" role={draft.role} name={draft.firstName} uri={shown} onPick={setAvatar} onRemove={() => setAvatar('remove')} />
         <TextField
           label={tp('form.firstName')}
           value={draft.firstName}

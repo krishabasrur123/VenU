@@ -50,7 +50,8 @@
           "microphonePermission": "VenU uses the microphone so you can speak a help request or chat message instead of typing it.",
           "speechRecognitionPermission": "VenU turns what you say into text for help requests and chat messages. VenU never receives the audio."
         }
-      ]
+      ],
+      "expo-image"
     ],
     "experiments": {
       "typedRoutes": true,

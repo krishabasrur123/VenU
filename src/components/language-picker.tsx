@@ -5,7 +5,7 @@ import Svg, { Circle, Path } from 'react-native-svg';
 
 import { Button } from '@/components/button';
 import { FigmaIcon } from '@/components/icons/figma-icon';
-import { Colors, Fonts, Radius, Shadow, Spacing, Type, WEB_COLUMN_MAX, webNoOutline } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Shadow, Spacing, Type, WEB_COLUMN_MAX, webNoOutline } from '@/constants/theme';
 import { LANGUAGES, languageName, searchLanguages, type Language } from '@/features/profile/options';
 import { uiLanguageName } from '@/features/profile/summary';
 import { useLayoutRtl, useT } from '@/i18n';
@@ -193,7 +193,7 @@ export function LanguageMenuField({ value, fieldName, exclude, onSelect, onClear
             accessibilityRole="button"
             accessibilityLabel={value ? t('language.field', { field: fieldName, language: languageName(value) }) : t('language.fieldEmpty', { field: fieldName })}
             accessibilityHint={t('language.openHint')}>
-            <Text style={styles.label}>{t('language.fieldLabel')}</Text>
+            <Text style={styles.label}>{t('language.search')}</Text>
             <Text style={[styles.value, value ? nameDirection : styles.placeholder]} numberOfLines={1}>
               {value ? languageName(value) : t('language.choose')}
             </Text>
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
   itemRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.md, paddingHorizontal: Spacing.sm, borderRadius: Radius.sm },
   itemText: { flex: 1, gap: 2 },
   itemCurrent: { backgroundColor: Colors.primarySoft },
-  menuNativeCurrent: { fontFamily: Fonts.displayMedium, color: Colors.primary },
-  currentTick: { fontFamily: Fonts.textBold, fontSize: 18, lineHeight: 22, color: Colors.primary },
+  menuNativeCurrent: { ...Face.displayMedium, color: Colors.primary },
+  currentTick: { ...Face.textBold, fontSize: 18, lineHeight: 22, color: Colors.primary },
   sep: { height: 1, backgroundColor: Colors.divider },
 });

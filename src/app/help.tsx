@@ -7,30 +7,40 @@ import { Button } from '@/components/button';
 import { FormSection, StepHeader } from '@/components/form-section';
 import { TextField } from '@/components/text-field';
 import { BackLink } from '@/components/top-bar';
-import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
-import { useT } from '@/i18n';
+import { Colors, Face, Fonts, Radius, Spacing, Type } from '@/constants/theme';
+import { APP_FEEDBACK_MAX, sendAppFeedback } from '@/features/settings/app-feedback';
+import { useT, useUiLanguage } from '@/i18n';
+import { friendlyError } from '@/lib/errors';
 
 /** Question and answer text: profile:help.faq.<key>.q / .a. */
 const FAQ = ['matching', 'volunteers', 'emergency', 'languages', 'privacy', 'report'] as const;
 
-const FEEDBACK_MAX = 1000;
-
 /** Profile → Help & feedback: FAQ answers that expand, and a feedback box. */
 export default function HelpScreen() {
   const t = useT('profile');
+  const { language } = useUiLanguage();
   const [open, setOpen] = useState<number | null>(null);
   const [feedback, setFeedback] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  function send() {
+  async function send() {
+    if (sending) return;
     const text = feedback.trim();
     if (!text) return setError(t('help.empty'));
-    // Mock: nowhere to send it yet. A backend can replace this log.
-    console.log('[feedback]', text);
     setError(null);
-    setFeedback('');
-    setSent(true);
+    setSending(true);
+    try {
+      await sendAppFeedback(text, language);
+      setFeedback('');
+      setSent(true);
+    } catch (e) {
+      // The note stays in the box so they can try again.
+      setError(t('help.sendFailed', { reason: friendlyError(e) }));
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -80,11 +90,11 @@ export default function HelpScreen() {
                   }}
                   placeholder={t('help.placeholder')}
                   multiline
-                  maxLength={FEEDBACK_MAX}
+                  maxLength={APP_FEEDBACK_MAX}
                   accessibilityLabel={t('help.feedbackLabel')}
                   error={error}
                 />
-                <Button label={t('help.send')} onPress={send} />
+                <Button label={t('help.send')} onPress={send} loading={sending} />
               </View>
             )}
           </FormSection>
@@ -117,6 +127,6 @@ const styles = StyleSheet.create({
 
   form: { gap: Spacing.md },
   thanks: { gap: Spacing.xs, padding: Spacing.lg, borderRadius: Radius.md, backgroundColor: Colors.successSoft },
-  thanksTitle: { fontFamily: Fonts.displayMedium, fontSize: 17, lineHeight: 22, color: Colors.text },
+  thanksTitle: { ...Face.displayMedium, fontSize: 17, lineHeight: 22, color: Colors.text },
   more: { alignSelf: 'flex-start' },
 });

@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { StyleSheet, View, type LayoutChangeEvent } from 'react-native';
 import Svg, { Circle, G, Path, Rect, Text as SvgText } from 'react-native-svg';
 
-import { Colors, Fonts } from '@/constants/theme';
+import { Colors, Face, Fonts } from '@/constants/theme';
 import { useT } from '@/i18n';
 
 const H = 200;
@@ -69,7 +69,7 @@ export function MeetMap({ volunteerName, distanceLabel, place }: { volunteerName
           {/* The meeting spot */}
           <G>
             <Rect x={w * 0.1} y={H * 0.78} width={gateW} height={24} rx={6} fill={Colors.ink} />
-            <SvgText x={w * 0.1 + gateW / 2} y={H * 0.78 + 16} fontSize={12} fontFamily={Fonts.textBold} fill={Colors.onPrimary} textAnchor="middle">
+            <SvgText x={w * 0.1 + gateW / 2} y={H * 0.78 + 16} fontSize={12} fontFamily={Fonts.textBold} fontWeight={Face.textBold.fontWeight} fill={Colors.onPrimary} textAnchor="middle">
               {gate}
             </SvgText>
           </G>
@@ -77,18 +77,18 @@ export function MeetMap({ volunteerName, distanceLabel, place }: { volunteerName
           <Path d={route} stroke={Colors.primary} strokeWidth={3} strokeDasharray="2 7" strokeLinecap="round" fill="none" />
           {/* Volunteer */}
           <Circle cx={vol.x} cy={vol.y} r={17} fill={Colors.success} stroke={Colors.surface} strokeWidth={3} />
-          <SvgText x={vol.x} y={vol.y + 5} fontSize={14} fontFamily={Fonts.textBold} fill={Colors.onPrimary} textAnchor="middle">
+          <SvgText x={vol.x} y={vol.y + 5} fontSize={14} fontFamily={Fonts.textBold} fontWeight={Face.textBold.fontWeight} fill={Colors.onPrimary} textAnchor="middle">
             {volunteerName.charAt(0)}
           </SvgText>
           <Rect x={vol.x - 34} y={vol.y + 22} width={68} height={20} rx={10} fill={Colors.surface} />
-          <SvgText x={vol.x} y={vol.y + 36} fontSize={12} fontFamily={Fonts.textSemiBold} fill={Colors.text} textAnchor="middle">
+          <SvgText x={vol.x} y={vol.y + 36} fontSize={12} fontFamily={Fonts.textSemiBold} fontWeight={Face.textSemiBold.fontWeight} fill={Colors.text} textAnchor="middle">
             {volunteerName.split(' ')[0]}
           </SvgText>
           {/* You */}
           <Circle cx={you.x} cy={you.y} r={22} fill={Colors.primary} opacity={0.18} />
           <Circle cx={you.x} cy={you.y} r={10} fill={Colors.primary} stroke={Colors.surface} strokeWidth={3} />
           <Rect x={you.x - youW / 2} y={you.y - 44} width={youW} height={20} rx={10} fill={Colors.surface} />
-          <SvgText x={you.x} y={you.y - 30} fontSize={12} fontFamily={Fonts.textSemiBold} fill={Colors.primary} textAnchor="middle">
+          <SvgText x={you.x} y={you.y - 30} fontSize={12} fontFamily={Fonts.textSemiBold} fontWeight={Face.textSemiBold.fontWeight} fill={Colors.primary} textAnchor="middle">
             {youLabel}
           </SvgText>
         </Svg>

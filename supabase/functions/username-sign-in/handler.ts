@@ -7,6 +7,8 @@
 //   POST { username: 'Rosa_M', password: '…' } → 200 { access_token, refresh_token }
 //   POST { username: 'nobody', password: '…' } → 400 { code: 'invalid_credentials', message: 'Invalid login credentials' }
 
+import { clientIpOf, CORS, json, type ClientIpSource } from '../_shared/edge.ts';
+
 /** A session as the app hands it to supabase.auth.setSession(). */
 export interface SignInSession {
   access_token: string;
@@ -29,16 +31,6 @@ const USERNAME_RE = /^[a-z0-9_.]{3,20}$/;
 const MAX_USERNAME_CHARS = 100;
 const MAX_PASSWORD_CHARS = 1000;
 
-const CORS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
-
-function json(status: number, body: unknown): Response {
-  return new Response(JSON.stringify(body), { status, headers: { ...CORS, 'Content-Type': 'application/json' } });
-}
-
 /** Auth error codes passed on as they are (same code, status and wording as Auth's own reply). */
 const PASS_ON: Record<string, { status: number; message: string }> = {
   invalid_credentials: { status: 400, message: 'Invalid login credentials' },
@@ -47,22 +39,6 @@ const PASS_ON: Record<string, { status: number; message: string }> = {
   user_banned: { status: 400, message: 'User is banned' },
 };
 const wrongLogin = () => json(400, { code: 'invalid_credentials', message: PASS_ON.invalid_credentials.message });
-
-export type ClientIpSource = 'cf-connecting-ip' | 'none';
-
-/**
- * The caller's IP for Auth's per-IP rate limit, and where it came from. Only Cf-Connecting-Ip:
- * Cloudflare, in front of Supabase's functions, overwrites whatever a caller sends there. Never
- * X-Forwarded-For, whose leftmost entry is the caller's own say-so (a brute-forcer would rotate it
- * and never be limited). Without the header nothing is forwarded, and Auth counts the function's
- * own IP: stricter, never looser.
- *   Cf-Connecting-Ip: 203.0.113.7               → { ip: '203.0.113.7', source: 'cf-connecting-ip' }
- *   X-Forwarded-For: 198.51.100.1, 203.0.113.7  → { ip: null, source: 'none' }
- */
-export function clientIpOf(req: Request): { ip: string | null; source: ClientIpSource } {
-  const cf = req.headers.get('cf-connecting-ip')?.trim();
-  return cf ? { ip: cf, source: 'cf-connecting-ip' } : { ip: null, source: 'none' };
-}
 
 const IP_SOURCE_LOG: Record<ClientIpSource, string> = {
   'cf-connecting-ip': "username-sign-in: Auth rate-limits sign-ins by the caller's Cf-Connecting-Ip",

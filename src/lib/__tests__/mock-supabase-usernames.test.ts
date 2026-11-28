@@ -18,7 +18,8 @@ let mock: ChildProcess;
 let base = '';
 
 beforeAll(async () => {
-  mock = spawn(process.execPath, [SCRIPT, '0', '--confirm-email'], { stdio: ['ignore', 'pipe', 'pipe'] });
+  // --stub-translate: never a real translate provider, even in a checkout whose .env.local has keys.
+  mock = spawn(process.execPath, [SCRIPT, '0', '--confirm-email', '--stub-translate'], { stdio: ['ignore', 'pipe', 'pipe'] });
   base = await new Promise<string>((resolve, reject) => {
     let out = '';
     mock.stdout!.on('data', chunk => {

@@ -18,6 +18,9 @@
     "assistTitle": "کمک لازم دارید؟",
     "assistBody": "با یک داوطلب در تماس باشید",
     "assistLabel": "کمک لازم دارید؟ با یک داوطلب در تماس باشید",
+    "assistTitleVolunteer": "آماده‌اید کمک کنید؟",
+    "assistBodyVolunteer": "درخواست‌های نزدیک خود را ببینید",
+    "assistLabelVolunteer": "آماده‌اید کمک کنید؟ درخواست‌های نزدیک خود را ببینید",
     "empty": "هیچ مکانی با «{{query}}» مطابقت ندارد. نام یک شهر را امتحان کنید، مثل Inglewood.",
     "cardHint": "نقشه و امکانات را باز می‌کند"
   },
@@ -94,6 +97,9 @@
   },
   "walk_one": "{{number}} دقیقه پیاده",
   "walk_other": "{{number}} دقیقه پیاده",
+  "walkStart": "مسیرها از اینجا شروع می‌شوند",
+  "walkMine": "شما اینجا هستید",
+  "walkAsk": "مکان منتشر نشده",
   "wait": {
     "none": "بدون انتظار",
     "short": "انتظار کوتاه",
@@ -102,6 +108,18 @@
   "row": {
     "label": "{{name}}، {{meta}}",
     "labelAccessible": "{{name}}، {{meta}}، دسترس‌پذیر"
+  },
+  "sponsor": {
+    "label": "تبلیغ",
+    "pin": "تبلیغ: {{name}} روی نقشه",
+    "row": "تبلیغ: {{name}}، {{meta}}",
+    "card": "تبلیغ: {{name}}. {{offer}}. {{meta}}",
+    "heading": "تبلیغ: {{name}}",
+    "showScreen": "این صفحه را در غرفه نشان دهید",
+    "disclosure": "آگهی نمایشی، نه اطلاعات محل برگزاری",
+    "banner": "تبلیغ: {{name}}، {{walk}}. {{offer}}",
+    "bannerHint": "غرفه را باز می‌کند. جستجو برای درخواست شما ادامه دارد.",
+    "hide": "پنهان کردن پیام تبلیغاتی"
   },
   "tags": {
     "label": "برچسب‌ها:",
@@ -118,6 +136,7 @@
     "long_lines_halftime": "صف طولانی در بین دو نیمه",
     "wheelchair_loans": "امانت ویلچر",
     "permit_needed": "نیاز به مجوز",
+    "pass_needed": "نیاز به کارت پارک",
     "wheelchair_escort": "همراهی با ویلچر",
     "premium_access": "VIP و ویژه",
     "sensory_room": "اتاق حسی",
@@ -126,6 +145,36 @@
     "changing_table": "میز تعویض پوشک"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "غرفه Coca-Cola Refresh",
+      "description": "نوشیدنی‌های سرد Coca-Cola، آب بطری و تنقلات.",
+      "location": "در میدان، کنار زمین روباز",
+      "offer": "۱ دلار تخفیف برای هر نوشیدنی Coca-Cola با VenU"
+    },
+    "panda-express-intuit": {
+      "name": "غرفه Panda Express",
+      "description": "مرغ پرتقالی، چاو مین و کاسه‌های برنج.",
+      "location": "سالن طبقه Main، بعد از ورودی The Wall",
+      "offer": "یک اگ‌رول رایگان با هر کاسه"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "غرفه Coca-Cola Refresh",
+      "description": "نوشیدنی‌های سرد Coca-Cola، آب بطری و تنقلات.",
+      "location": "طبقه ۱، بعد از ورودی‌های ۱ و ۲",
+      "offer": "۱ دلار تخفیف برای هر نوشیدنی Coca-Cola با VenU"
+    },
+    "ben-jerrys-sofi": {
+      "name": "غرفه بستنی Ben & Jerry’s",
+      "description": "بستنی لیوانی و قیفی.",
+      "location": "American Airlines Plaza",
+      "offer": "تاپینگ رایگان روی هر اسکوپ"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "غرفه Coca-Cola Refresh",
+      "description": "نوشیدنی‌های سرد Coca-Cola، آب بطری و تنقلات.",
+      "location": "سالن اصلی، سمت Figueroa",
+      "offer": "۱ دلار تخفیف برای هر نوشیدنی Coca-Cola با VenU"
+    },
     "entry-3": {
       "name": "ورودی ۳",
       "description": "ورودی شمالی. همه ورودی‌ها مسیر دسترس‌پذیر و همراهی رایگان با ویلچر دارند.",
@@ -278,27 +327,27 @@
     },
     "main-entrance": {
       "name": "ورودی اصلی",
-      "description": "صف GameFace ID سمت چپ و صف Identity Pass سمت راست است. کمک رایگان برای جابه‌جایی از بازرسی تا صندلی شما.",
+      "description": "صف GameFace ID سمت چپ و صف Identity Pass سمت راست است؛ برای ورود دسترس‌پذیر، دارندگان Identity Pass در Answers Portal گوشی را لمس می‌کنند. کیف تا ۱۰×۶×۲ اینچ (کیف پزشکی تا ۱۴×۱۴×۶). کمک رایگان برای جابه‌جایی از بازرسی تا صندلی شما.",
       "location": "در میدان، نزدیک Century Blvd. و Prairie Ave."
     },
     "vip-entrance": {
       "name": "ورودی VIP",
-      "description": "برای دارندگان بلیت سوئیت، باشگاه و زمین.",
+      "description": "برای بلیت‌های سوئیت، باشگاه و زمین (از ورودی اصلی هم می‌توانند وارد شوند).",
       "location": "سمت چپ ورودی اصلی"
     },
     "wall-entrance": {
       "name": "ورودی The Wall",
-      "description": "ورودی اختصاصی The Wall.",
+      "description": "برای بلیت‌های The Wall (از ورودی اصلی هم می‌توانند وارد شوند).",
       "location": "سمت چپ ورودی اصلی، بعد از ورودی VIP"
     },
     "answers-portal-main": {
       "name": "Answers Portal طبقه Main",
-      "description": "خدمات تماشاگران: اشیای گمشده، دستگاه کمک‌شنوایی رایگان (کارت شناسایی عکس‌دار نگه داشته می‌شود) و دستگاه‌های OneCourt.",
+      "description": "خدمات تماشاگران: اشیای گمشده، دستگاه کمک‌شنوایی رایگان (کارت شناسایی عکس‌دار نگه داشته می‌شود)، کیف حسی (کارت شناسایی نگه داشته می‌شود) و دستگاه‌های OneCourt.",
       "location": "طبقه Main، نزدیک بخش Main 6"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal طبقه Terrace",
-      "description": "خدمات تماشاگران: اشیای گمشده و دستگاه کمک‌شنوایی رایگان (کارت شناسایی عکس‌دار نگه داشته می‌شود).",
+      "description": "خدمات تماشاگران: اشیای گمشده، دستگاه کمک‌شنوایی رایگان (کارت شناسایی عکس‌دار نگه داشته می‌شود) و دستگاه‌های OneCourt.",
       "location": "طبقه Terrace، نزدیک بخش Terrace 18"
     },
     "first-aid-main": {
@@ -318,7 +367,7 @@
     },
     "sensory-room": {
       "name": "اتاق حسی",
-      "description": "اتاق حسی خصوصی Kaiser Permanente. کیف حسی هم در صورت درخواست هست.",
+      "description": "اتاق حسی خصوصی Kaiser Permanente. کیف‌های حسی (هدفون، اسباب‌بازی ضداسترس) در Answers Portal کنار Main 6 است؛ کارت شناسایی لازم است.",
       "location": "مسیر را از میزبانان سالن بپرسید"
     },
     "infant-care-room": {
@@ -328,30 +377,41 @@
     },
     "mobility-hub": {
       "name": "مرکز حمل‌ونقل",
-      "description": "سوار و پیاده شدن تاکسی اینترنتی و تاکسی، محل پیاده کردن خانواده‌ها و شاتل‌ها.",
-      "location": "پارکینگ شرقی، طبقه ۱"
+      "description": "تنها محل سوار و پیاده شدن تاکسی اینترنتی. تاکسی، محل پیاده کردن خانواده‌ها و شاتل رایگان (با ون مناسب افراد دارای معلولیت) هم هست.",
+      "location": "پارکینگ شرقی، طبقه ۱ (3700 W Century Blvd.)"
     },
     "east-garage": {
       "name": "پارکینگ شرقی",
-      "description": "پارکینگ عادی؛ مجوز پارک را از قبل بخرید. جاهای پارک دسترس‌پذیر به ترتیب ورود فروخته می‌شوند.",
-      "location": "ورودی از 102nd St."
+      "description": "پارکینگ عادی؛ مجوز پارک را از قبل بخرید. جاهای پارک دسترس‌پذیر همراه مجوز پارک و به ترتیب ورود خریده می‌شوند.",
+      "location": "3665 W 102nd St (ورودی از 102nd St.)"
     },
     "west-garage": {
       "name": "پارکینگ غربی",
-      "description": "پارکینگ VIP آن سوی Prairie Ave.؛ مجوز پارک را از قبل بخرید.",
-      "location": "ورودی از Prairie Ave."
+      "description": "پارکینگ VIP آن سوی Prairie Ave.؛ مجوز پارک را از قبل بخرید. جاهای پارک دسترس‌پذیر همراه مجوز پارک و به ترتیب ورود خریده می‌شوند.",
+      "location": "10117 S Prairie Ave (ورودی از Prairie Ave.)"
+    },
+    "infant-care-terrace": {
+      "name": "اتاق مراقبت از نوزاد طبقه Terrace",
+      "description": "اتاقی خصوصی برای مراقبت از نوزاد. همه سرویس‌های بهداشتی میز تعویض پوشک دارند.",
+      "location": "طبقه Terrace، Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "آسانسورها",
+      "description": "آسانسورها از ورودی اصلی به همه طبقات می‌روند و پله‌برقی‌های سالن اصلی طبقه Main را به Terrace وصل می‌کنند. افراد کم‌توان حرکتی در اولویت‌اند.",
+      "location": "نزدیک‌ترین را از میزبانان سالن بپرسید"
     }
   },
   "facility": {
     "notFound": "این مکان پیدا نشد",
     "wheelchair": "مناسب ویلچر",
     "directions": "مسیریابی",
+    "noRoute": "مسیر پیاده نیست: سالن این مکان را منتشر نکرده است. مسیر را از کارکنان بپرسید.",
     "imHere": "من اینجا هستم",
     "imHereHint": "هنگام درخواست کمک، اینجا مکان شما در نظر گرفته می‌شود",
     "isHere": "مکان شما",
     "reports": "گزارش‌ها",
-    "results_one": "{{number}} نتیجه",
-    "results_other": "{{number}} نتیجه",
+    "reportCount_one": "{{number}} گزارش",
+    "reportCount_other": "{{number}} گزارش",
     "noReports": "هنوز گزارشی نیست. اولین نفری باشید که تجربه‌اش را می‌گوید.",
     "addReport": "گزارش خود را اضافه کنید"
   },
@@ -381,7 +441,12 @@
     "authorFallback": "بازدیدکننده VenU",
     "submitted": "ارسال‌شده در {{date}}",
     "originalLanguage": "زبان اصلی: {{language}}",
-    "noBody": "جزئیاتی اضافه نشده."
+    "noBody": "جزئیاتی اضافه نشده.",
+    "delete": "حذف گزارش من",
+    "deleteConfirm": "این گزارش حذف شود؟ بازدیدکنندگان این مکان دیگر آن را نمی‌بینند.",
+    "deleteKeep": "نگه داشتن",
+    "deleteYes": "حذف",
+    "deleteFailed": "گزارش حذف نشد. {{reason}}"
   },
   "form": {
     "title": "افزودن گزارش",
@@ -405,6 +470,7 @@
     "title": "مسیر پیاده",
     "from": "از {{from}}",
     "fromArrival": "از {{from}}، ورودی اصلی. جای دیگری هستید؟ آن مکان را باز کنید و «من اینجا هستم» را بزنید.",
+    "fromArrivalPlain": "از {{from}}. جای دیگری هستید؟ آن مکان را باز کنید و «من اینجا هستم» را بزنید.",
     "steps_one": "حدود {{number}} قدم",
     "steps_other": "حدود {{number}} قدم",
     "stepStart": "از {{from}} شروع کنید.",

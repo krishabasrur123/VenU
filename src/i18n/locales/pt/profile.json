@@ -6,7 +6,6 @@
     "verified": "✓ Verificado LA28",
     "unverified": "Não verificado",
     "sharedVisitor": "O que quem te ajuda vê",
-    "sharedVolunteer": "O que os visitantes veem",
     "account": "Conta",
     "support": "Suporte",
     "editProfile": "Editar perfil",
@@ -15,13 +14,14 @@
     "help": "Ajuda e sugestões",
     "terms": "Termos de uso",
     "signOutFailed": "Não foi possível sair. {{reason}}",
-    "deleteWarning": "Isso apaga seu perfil e sua foto para sempre. Você pode criar um novo depois.",
+    "deleteWarning": "Isso apaga sua conta, seu perfil e sua foto para sempre. Você não poderá mais entrar com ela.",
     "deleteFailed": "Não foi possível apagar todos os seus dados. {{reason}}",
     "deleteData": "Apagar meus dados"
   },
   "edit": {
     "title": "Editar perfil",
     "subtitle": "As mudanças valem para seu próximo pedido de ajuda.",
+    "subtitleVolunteer": "Os visitantes verão essas mudanças na próxima vez que você ajudar.",
     "submit": "Salvar alterações",
     "discardTitle": "Sair sem salvar? Suas alterações serão perdidas.",
     "keepEditing": "Continuar editando",
@@ -207,7 +207,8 @@
     "placeholder": "ex.: O mapa ficou difícil de ler no sol",
     "feedbackLabel": "Sua sugestão",
     "send": "Enviar sugestão",
-    "empty": "Escreva algumas palavras primeiro."
+    "empty": "Escreva algumas palavras primeiro.",
+    "sendFailed": "Não foi possível enviar sua sugestão. {{reason}}"
   },
   "notifications": {
     "title": "Notificações",
@@ -216,7 +217,9 @@
     "options": {
       "volunteer": {
         "label": "Novidades do voluntário",
-        "hint": "ex.: Daniel aceitou e está a caminho"
+        "hint": "ex.: Daniel aceitou e está a caminho",
+        "labelVolunteer": "Pedidos de ajuda",
+        "hintVolunteer": "ex.: Um visitante perto de você precisa de ajuda"
       },
       "chat": {
         "label": "Mensagens do chat",

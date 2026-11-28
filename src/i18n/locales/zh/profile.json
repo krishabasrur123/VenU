@@ -6,7 +6,6 @@
     "verified": "✓ 已验证 LA28",
     "unverified": "未验证",
     "sharedVisitor": "帮手能看到的信息",
-    "sharedVolunteer": "访客能看到的信息",
     "account": "账户",
     "support": "支持",
     "editProfile": "编辑资料",
@@ -15,13 +14,14 @@
     "help": "帮助与反馈",
     "terms": "使用条款",
     "signOutFailed": "无法退出登录。{{reason}}",
-    "deleteWarning": "这将永久删除你的资料和照片。之后你可以重新创建。",
+    "deleteWarning": "这将永久删除你的账户、资料和照片。之后将无法再用它登录。",
     "deleteFailed": "未能删除你的全部数据。{{reason}}",
     "deleteData": "删除我的数据"
   },
   "edit": {
     "title": "编辑资料",
     "subtitle": "更改将用于你的下一次求助。",
+    "subtitleVolunteer": "你下次提供帮助时，访客就会看到这些更改。",
     "submit": "保存更改",
     "discardTitle": "不保存就离开？你的修改将会丢失。",
     "keepEditing": "继续编辑",
@@ -207,7 +207,8 @@
     "placeholder": "例如 阳光下地图很难看清",
     "feedbackLabel": "你的反馈",
     "send": "发送反馈",
-    "empty": "请先写几句话。"
+    "empty": "请先写几句话。",
+    "sendFailed": "无法发送你的反馈。{{reason}}"
   },
   "notifications": {
     "title": "通知",
@@ -216,7 +217,9 @@
     "options": {
       "volunteer": {
         "label": "志愿者动态",
-        "hint": "例如 Daniel 已接受，正在赶来"
+        "hint": "例如 Daniel 已接受，正在赶来",
+        "labelVolunteer": "求助请求",
+        "hintVolunteer": "例如 你附近有访客需要帮助"
       },
       "chat": {
         "label": "聊天消息",

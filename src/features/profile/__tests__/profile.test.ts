@@ -342,6 +342,7 @@ describe('saveWithAvatar', () => {
       avatarUrl: async p => p,
       deleteAll: async () => {},
       setAppLanguage: async () => { throw new Error('not used'); },
+      saveSettings: async () => { throw new Error('not used'); },
     };
     return { store, calls };
   }
@@ -370,6 +371,7 @@ describe('saveWithAvatar', () => {
       avatarUrl: async p => p,
       deleteAll: async () => {},
       setAppLanguage: async () => { throw new Error('not used'); },
+      saveSettings: async () => { throw new Error('not used'); },
     };
     await expect(saveWithAvatar(store, 'u1', rosa, pick, existing)).rejects.toMatchObject({ code: '' });
     expect(calls).toEqual(['upload', 'save']);
@@ -530,6 +532,7 @@ describe('saveWithAvatar retries after a network failure', () => {
       avatarUrl: async p => p,
       deleteAll: async () => {},
       setAppLanguage: async () => { throw new Error('not used'); },
+      saveSettings: async () => { throw new Error('not used'); },
     };
     return { store, calls };
   }
@@ -589,6 +592,7 @@ describe('saveWithAvatar retries after a network failure', () => {
       avatarUrl: async p => p,
       deleteAll: async () => {},
       setAppLanguage: async () => { throw new Error('not used'); },
+      saveSettings: async () => { throw new Error('not used'); },
     };
     const pending = { current: [] as PendingUpload[] };
     await expect(saveWithAvatar(store, 'u1', rosa, photo, existing, pending)).rejects.toThrow();
@@ -682,6 +686,7 @@ describe('what counts as a definite rejection', () => {
       avatarUrl: async p => p,
       deleteAll: async () => {},
       setAppLanguage: async () => { throw new Error('not used'); },
+      saveSettings: async () => { throw new Error('not used'); },
     };
     const pending = { current: [] as PendingUpload[] };
     await expect(saveWithAvatar(store, 'u1', rosa, photo, existing, pending)).rejects.toBe(error);

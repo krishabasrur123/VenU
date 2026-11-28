@@ -18,6 +18,9 @@
     "assistTitle": "Cần hỗ trợ?",
     "assistBody": "Kết nối với tình nguyện viên",
     "assistLabel": "Cần hỗ trợ? Kết nối với tình nguyện viên",
+    "assistTitleVolunteer": "Sẵn sàng giúp đỡ?",
+    "assistBodyVolunteer": "Xem các yêu cầu gần bạn",
+    "assistLabelVolunteer": "Sẵn sàng giúp đỡ? Xem các yêu cầu gần bạn",
     "empty": "Không có địa điểm nào khớp với “{{query}}”. Hãy thử tên thành phố, như Inglewood.",
     "cardHint": "Mở bản đồ và tiện ích"
   },
@@ -93,6 +96,9 @@
     "schematic": "Bản đồ giản lược"
   },
   "walk_other": "{{number}} phút đi bộ",
+  "walkStart": "Lộ trình bắt đầu từ đây",
+  "walkMine": "Bạn đang ở đây",
+  "walkAsk": "Vị trí chưa công bố",
   "wait": {
     "none": "Không phải chờ",
     "short": "Chờ ít",
@@ -101,6 +107,18 @@
   "row": {
     "label": "{{name}}, {{meta}}",
     "labelAccessible": "{{name}}, {{meta}}, hỗ trợ tiếp cận"
+  },
+  "sponsor": {
+    "label": "Được tài trợ",
+    "pin": "Được tài trợ: {{name}} trên bản đồ",
+    "row": "Được tài trợ: {{name}}, {{meta}}",
+    "card": "Được tài trợ: {{name}}. {{offer}}. {{meta}}",
+    "heading": "Được tài trợ: {{name}}",
+    "showScreen": "Đưa màn hình này tại quầy",
+    "disclosure": "Tin minh họa, không phải thông tin của địa điểm",
+    "banner": "Được tài trợ: {{name}}, {{walk}}. {{offer}}",
+    "bannerHint": "Mở quầy. Yêu cầu của bạn vẫn đang được tìm.",
+    "hide": "Ẩn tin được tài trợ"
   },
   "tags": {
     "label": "Nhãn:",
@@ -117,6 +135,7 @@
     "long_lines_halftime": "Xếp hàng dài giờ nghỉ",
     "wheelchair_loans": "Cho mượn xe lăn",
     "permit_needed": "Cần giấy phép",
+    "pass_needed": "Cần vé đỗ xe",
     "wheelchair_escort": "Hỗ trợ xe lăn",
     "premium_access": "VIP và vé cao cấp",
     "sensory_room": "Phòng giác quan",
@@ -125,6 +144,36 @@
     "changing_table": "Bàn thay tã"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "Quầy Coca-Cola Refresh",
+      "description": "Đồ uống Coca-Cola lạnh, nước đóng chai và đồ ăn vặt.",
+      "location": "Trên quảng trường, cạnh sân ngoài trời",
+      "offer": "Giảm $1 cho mọi đồ uống Coca-Cola với VenU"
+    },
+    "panda-express-intuit": {
+      "name": "Quầy Panda Express",
+      "description": "Gà sốt cam, mì xào và cơm tô.",
+      "location": "Hành lang tầng Main, qua Lối vào The Wall",
+      "offer": "Tặng chả giò khi mua tô bất kỳ"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "Quầy Coca-Cola Refresh",
+      "description": "Đồ uống Coca-Cola lạnh, nước đóng chai và đồ ăn vặt.",
+      "location": "Tầng 1, bên trong Lối vào 1 và 2",
+      "offer": "Giảm $1 cho mọi đồ uống Coca-Cola với VenU"
+    },
+    "ben-jerrys-sofi": {
+      "name": "Quầy kem Ben & Jerry’s",
+      "description": "Kem ly và kem ốc quế.",
+      "location": "American Airlines Plaza",
+      "offer": "Miễn phí topping cho mọi viên kem"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "Quầy Coca-Cola Refresh",
+      "description": "Đồ uống Coca-Cola lạnh, nước đóng chai và đồ ăn vặt.",
+      "location": "Hành lang chính, phía Figueroa",
+      "offer": "Giảm $1 cho mọi đồ uống Coca-Cola với VenU"
+    },
     "entry-3": {
       "name": "Lối vào 3",
       "description": "Lối vào phía bắc. Mọi lối vào đều có lối đi hỗ trợ tiếp cận và người hỗ trợ xe lăn miễn phí.",
@@ -277,27 +326,27 @@
     },
     "main-entrance": {
       "name": "Lối vào chính",
-      "description": "Làn GameFace ID bên trái, làn Identity Pass bên phải. Hỗ trợ di chuyển miễn phí từ điểm kiểm tra an ninh đến chỗ ngồi.",
+      "description": "Làn GameFace ID bên trái, làn Identity Pass bên phải; để vào cửa hỗ trợ tiếp cận, người có Identity Pass chạm điện thoại tại Answers Portal. Túi tối đa 10×6×2 inch (túi y tế tối đa 14×14×6). Hỗ trợ di chuyển miễn phí từ điểm kiểm tra an ninh đến chỗ ngồi.",
       "location": "Trên quảng trường, gần Century Blvd. và Prairie Ave."
     },
     "vip-entrance": {
       "name": "Lối vào VIP",
-      "description": "Dành cho người có vé phòng riêng, câu lạc bộ và sàn đấu.",
+      "description": "Dành cho vé phòng riêng, câu lạc bộ và sàn đấu (cũng có thể đi Lối vào chính).",
       "location": "Bên trái Lối vào chính"
     },
     "wall-entrance": {
       "name": "Lối vào The Wall",
-      "description": "Lối vào riêng cho The Wall.",
+      "description": "Dành cho vé khu The Wall (cũng có thể đi Lối vào chính).",
       "location": "Bên trái Lối vào chính, qua Lối vào VIP"
     },
     "answers-portal-main": {
       "name": "Answers Portal tầng Main",
-      "description": "Dịch vụ khán giả: đồ thất lạc, thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ có ảnh) và thiết bị OneCourt.",
+      "description": "Dịch vụ khán giả: đồ thất lạc, thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ có ảnh), túi giác quan (giữ giấy tờ) và thiết bị OneCourt.",
       "location": "Tầng Main, gần khu Main 6"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal tầng Terrace",
-      "description": "Dịch vụ khán giả: đồ thất lạc và thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ có ảnh).",
+      "description": "Dịch vụ khán giả: đồ thất lạc, thiết bị hỗ trợ nghe miễn phí (giữ giấy tờ có ảnh) và thiết bị OneCourt.",
       "location": "Tầng Terrace, gần khu Terrace 18"
     },
     "first-aid-main": {
@@ -317,7 +366,7 @@
     },
     "sensory-room": {
       "name": "Phòng giác quan",
-      "description": "Phòng giác quan riêng Kaiser Permanente. Có túi giác quan khi bạn yêu cầu.",
+      "description": "Phòng giác quan riêng Kaiser Permanente. Túi giác quan (tai nghe, đồ chơi giảm căng thẳng) có tại Answers Portal cạnh Main 6; cần giấy tờ tùy thân.",
       "location": "Hỏi nhân viên Arena Host để được chỉ đường"
     },
     "infant-care-room": {
@@ -327,29 +376,40 @@
     },
     "mobility-hub": {
       "name": "Trạm di chuyển",
-      "description": "Đón trả xe công nghệ và taxi, khu đón trả gia đình và xe đưa đón.",
-      "location": "Nhà xe phía Đông, tầng 1"
+      "description": "Điểm đón trả xe công nghệ duy nhất. Có cả taxi, khu đón trả gia đình và xe đưa đón miễn phí (có xe hỗ trợ người khuyết tật).",
+      "location": "Nhà xe phía Đông, tầng 1 (3700 W Century Blvd.)"
     },
     "east-garage": {
       "name": "Nhà xe phía Đông",
-      "description": "Bãi đỗ thường; hãy mua vé đỗ xe trước. Chỗ đỗ hỗ trợ tiếp cận bán theo thứ tự đến trước.",
-      "location": "Lối vào trên 102nd St."
+      "description": "Bãi đỗ thường; hãy mua vé đỗ xe trước. Chỗ đỗ hỗ trợ tiếp cận được mua kèm vé đỗ xe, theo thứ tự đến trước.",
+      "location": "3665 W 102nd St (lối vào trên 102nd St.)"
     },
     "west-garage": {
       "name": "Nhà xe phía Tây",
-      "description": "Bãi đỗ VIP bên kia Prairie Ave.; hãy mua vé đỗ xe trước.",
-      "location": "Lối vào trên Prairie Ave."
+      "description": "Bãi đỗ VIP bên kia Prairie Ave.; hãy mua vé đỗ xe trước. Chỗ đỗ hỗ trợ tiếp cận được mua kèm vé đỗ xe, theo thứ tự đến trước.",
+      "location": "10117 S Prairie Ave (lối vào trên Prairie Ave.)"
+    },
+    "infant-care-terrace": {
+      "name": "Phòng chăm sóc trẻ sơ sinh tầng Terrace",
+      "description": "Phòng riêng để chăm sóc em bé. Mọi nhà vệ sinh đều có bàn thay tã.",
+      "location": "Tầng Terrace, Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "Thang máy",
+      "description": "Thang máy đi từ Lối vào chính đến mọi tầng, thang cuốn ở sảnh chính nối tầng Main với tầng Terrace. Người khó di chuyển được ưu tiên.",
+      "location": "Hỏi nhân viên Arena Host thang gần nhất"
     }
   },
   "facility": {
     "notFound": "Không tìm thấy tiện ích",
     "wheelchair": "Xe lăn vào được",
     "directions": "Chỉ đường",
+    "noRoute": "Không có lộ trình đi bộ: địa điểm không công bố vị trí này. Hãy hỏi nhân viên đường đi.",
     "imHere": "Tôi ở đây",
     "imHereHint": "Dùng chỗ này làm vị trí của bạn khi nhờ giúp đỡ",
     "isHere": "Vị trí của bạn",
     "reports": "Báo cáo",
-    "results_other": "{{number}} kết quả",
+    "reportCount_other": "{{number}} báo cáo",
     "noReports": "Chưa có báo cáo. Hãy là người đầu tiên chia sẻ điều bạn thấy.",
     "addReport": "Thêm báo cáo của bạn"
   },
@@ -379,7 +439,12 @@
     "authorFallback": "Khách tham quan VenU",
     "submitted": "Gửi ngày {{date}}",
     "originalLanguage": "Ngôn ngữ gốc: {{language}}",
-    "noBody": "Không có chi tiết."
+    "noBody": "Không có chi tiết.",
+    "delete": "Xóa báo cáo của tôi",
+    "deleteConfirm": "Xóa báo cáo này? Khách tại địa điểm này sẽ không thấy nó nữa.",
+    "deleteKeep": "Giữ lại",
+    "deleteYes": "Xóa",
+    "deleteFailed": "Không xóa được báo cáo. {{reason}}"
   },
   "form": {
     "title": "Thêm báo cáo",
@@ -403,6 +468,7 @@
     "title": "Lộ trình đi bộ",
     "from": "Từ {{from}}",
     "fromArrival": "Từ {{from}}, lối vào chính. Bạn đang ở chỗ khác? Mở địa điểm đó và nhấn “Tôi ở đây”.",
+    "fromArrivalPlain": "Từ {{from}}. Bạn đang ở chỗ khác? Mở địa điểm đó và nhấn “Tôi ở đây”.",
     "steps_other": "khoảng {{number}} bước",
     "stepStart": "Bắt đầu tại {{from}}.",
     "stepHead": "Đi về hướng {{direction}} khoảng {{meters}} m.",

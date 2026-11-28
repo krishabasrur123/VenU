@@ -1,19 +1,30 @@
 // A small stand-in for Supabase (auth, the `profiles` table, the `avatars` bucket) for testing on
 // your own machine without a real project. It mirrors the rules in supabase/migrations: users see
 // and change only their own row, can't change role or verified, and keep photos in their own folder.
+// Sign-ups start unverified, as on the real project; only the verify hook below (the dashboard,
+// live) verifies a volunteer, and unverified volunteers can't accept requests.
 // Started by `npm run dev:mock`; see scripts/dev.mjs.
 //
 // It also serves the `translate` Edge Function (POST /functions/v1/translate), running the same code
 // as supabase/functions/translate. Without keys it uses the offline stub; with TRANSLATE_PROVIDER and
-// a key in .env.server.local (git-ignored, never bundled into the app) it calls the real provider:
+// a key in .env.server.local or .env.local (both git-ignored) it calls the real provider:
 //   TRANSLATE_PROVIDER=anthropic            or   TRANSLATE_PROVIDER=deepl
 //   ANTHROPIC_API_KEY=sk-ant-...                 DEEPL_API_KEY=...:fx
+// Only those three keys are read (scripts/server-env.ts), here on the server; the app bundle never
+// sees them. translate: 'stub' (`--stub-translate`) keeps the stub even when keys are there.
 //
 // Test hooks: GET /__state (everything stored), POST /__control { dropNextProfileWrite: n }
 // (drop the next n profile-save responses, to test lost connections), { failTranslate: n } (the next
 // n translate calls fail), { translateDelayMs: ms } (slow translations), { clockOffsetMs: ms } (move the
 // clock used for how long a sign-up has waited unconfirmed, e.g. 2h to free its username),
-// GET /__confirm?email=...
+// { verify: 'sam_helps' } (verify a volunteer by username or email, as LA28 staff do in the dashboard;
+// add verified: false to take it back),
+// { disabledProviders: ['apple'] } (social sign-in providers that are "off"), { missingFunctions: ['delete-account'] }
+// (password-reset / delete-account answer 404 as if not deployed), GET /__confirm?email=...
+// Password reset prints its link like confirmation does; social sign-in (/auth/v1/authorize) returns
+// straight away as "<Provider> User"; the delete-account and password-reset functions run their
+// shared code from supabase/functions.
+// /__state also lists facility_reports, help_feedback and app_feedback rows (see handleFeedbackTables).
 import { Buffer } from 'node:buffer';
 import { randomUUID } from 'node:crypto';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -23,34 +34,55 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const SERVER_ENV_FILE = join(ROOT, '.env.server.local');
+export const ENV_LOCAL_FILE = join(ROOT, '.env.local');
 
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+
+// profiles columns from 20261118020000_volunteer_settings_verified.sql.
+const AVAILABILITIES = ['free', 'busy', 'off'];
+const NOTIFICATION_KINDS = ['volunteer', 'chat', 'venue', 'reports'];
+const DEFAULT_NOTIFICATION_PREFS = { volunteer: true, chat: true, venue: true, reports: true };
+// Saved state from before verified was enforced: its volunteers were made when anyone could accept,
+// so they load verified (keeps the demo's volunteer working). Later sign-ups start unverified.
+const VERIFIED_RULE = 1;
 
 // Below 49152 on purpose: Windows (Hyper-V, WSL, Docker) reserves blocks of 49152-65535 that move
 // between reboots, and a reserved port fails with EACCES. 54330 was inside one of those blocks.
 export const MOCK_SUPABASE_PORT = 47330;
 
 /**
- * @param {{ port: number, confirmEmail?: boolean, stateFile?: string, log?: (line: string) => void }} options
+ * @param {{ port: number, confirmEmail?: boolean, stateFile?: string, translate?: 'auto' | 'stub', envFile?: string, log?: (line: string) => void }} options
  *   confirmEmail: sign-up sends a (printed) confirmation link instead of signing straight in.
  *   stateFile: keep accounts, profiles and photos here between runs.
+ *   translate: 'auto' uses a real provider when the env files have keys; 'stub' always the offline stub.
+ *   envFile: read the translate keys from this file instead of .env.local (e.g. the main checkout's,
+ *     from a worktree). .env.server.local still comes first.
  */
-export function startMockSupabase({ port, confirmEmail = false, stateFile, log = console.log }) {
+export function startMockSupabase({ port, confirmEmail = false, stateFile, translate: translateMode = 'auto', envFile, log = console.log }) {
   const users = new Map(); // email -> { id, email, password, confirmed, createdAt, username?, wantedUsername? }
   const profiles = new Map(); // user id -> row
   const files = new Map(); // path -> { bytes: Buffer, type }
   const refreshTokens = new Map(); // token -> user id
+  const recoveryTokens = new Map(); // token -> { userId, expires }: password-reset links, one use each
   const requests = [];
-  const control = { dropNextProfileWrite: 0, failTranslate: 0, translateDelayMs: 0, clockOffsetMs: 0 };
+  // facility_reports, help_feedback and app_feedback rows, saved with the accounts.
+  const feedbackTables = { facility_reports: [], help_feedback: [], app_feedback: [] };
+  const control = { dropNextProfileWrite: 0, failTranslate: 0, translateDelayMs: 0, clockOffsetMs: 0, disabledProviders: [], missingFunctions: [] };
   const now = () => Date.now() + control.clockOffsetMs;
 
   if (stateFile && existsSync(stateFile)) {
     try {
       const saved = JSON.parse(readFileSync(stateFile, 'utf8'));
       for (const u of saved.users ?? []) users.set(u.email, u);
-      for (const p of saved.profiles ?? []) profiles.set(p.id, p);
+      const grandfather = (saved.verifiedRule ?? 0) < VERIFIED_RULE;
+      for (const p of saved.profiles ?? []) {
+        // Rows from before the settings columns get their defaults, as `add column ... default` does.
+        const row = { availability: 'free', availability_updated_at: p.created_at ?? null, notification_prefs: { ...DEFAULT_NOTIFICATION_PREFS }, ...p };
+        profiles.set(p.id, grandfather && p.role === 'volunteer' ? { ...row, verified: true } : row);
+      }
       for (const [path, f] of Object.entries(saved.files ?? {})) files.set(path, { bytes: Buffer.from(f.bytes, 'base64'), type: f.type });
       for (const [token, id] of Object.entries(saved.refreshTokens ?? {})) refreshTokens.set(token, id);
+      for (const table of Object.keys(feedbackTables)) feedbackTables[table] = saved[table] ?? [];
     } catch {
       log(`mock supabase: couldn't read ${stateFile}, starting empty`);
     }
@@ -63,6 +95,8 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
       profiles: [...profiles.values()],
       files: Object.fromEntries([...files].map(([path, f]) => [path, { bytes: f.bytes.toString('base64'), type: f.type }])),
       refreshTokens: Object.fromEntries(refreshTokens),
+      verifiedRule: VERIFIED_RULE,
+      ...feedbackTables,
     }));
   }
 
@@ -70,7 +104,8 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
   const publicUser = u => ({
     id: u.id, aud: 'authenticated', role: 'authenticated', email: u.email,
     email_confirmed_at: u.confirmed ? '2026-11-09T00:00:00Z' : null,
-    app_metadata: { provider: 'email' }, user_metadata: u.username ? { username: u.username } : {},
+    app_metadata: { provider: u.provider ?? 'email' },
+    user_metadata: { ...(u.username ? { username: u.username } : {}), ...(u.fullName ? { full_name: u.fullName, name: u.fullName } : {}) },
     created_at: new Date(u.createdAt ?? Date.parse('2026-11-09T00:00:00Z')).toISOString(),
   });
   // Mirrors public.usernames (supabase/migrations/20261116000000_usernames.sql and
@@ -78,6 +113,8 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
   const normalUsername = name => (typeof name === 'string' ? name.trim().toLowerCase() : '');
   const userByUsername = name => [...users.values()].find(u => u.username && u.username === normalUsername(name));
   let usernameSignIn = null; // the username-sign-in function's handler, loaded on first use
+  let passwordReset = null; // the password-reset function's handler, loaded on first use
+  let deleteAccount = null; // the delete-account function's handler, loaded on first use
   // A name an unconfirmed sign-up has held for over an hour is free. (Saved users from before
   // createdAt was kept count as old.)
   const USERNAME_HOLD_MS = 60 * 60 * 1000;
@@ -97,6 +134,26 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
       access_token: `${b64url({ alg: 'HS256', typ: 'JWT' })}.${b64url({ sub: user.id, email: user.email, role: 'authenticated', aud: 'authenticated', exp })}.mock`,
       token_type: 'bearer', expires_in: 3600, expires_at: exp, refresh_token, user: publicUser(user),
     };
+  }
+  /**
+   * auth.admin.deleteUser with the foreign keys of 20261118030000_account_deletion.sql: profile,
+   * username (kept on the user here) and sessions go; help requests stay for the other person.
+   * False when there was no such user.
+   */
+  function deleteUser(id) {
+    const user = [...users.values()].find(u => u.id === id);
+    if (!user) return false;
+    users.delete(user.email);
+    profiles.delete(id);
+    for (const [token, owner] of refreshTokens) if (owner === id) refreshTokens.delete(token);
+    for (const [token, entry] of recoveryTokens) if (entry.userId === id) recoveryTokens.delete(token);
+    forgetHelpUser(profiles, id);
+    // 20261118010000_reports_feedback.sql: reports and help feedback cascade; app feedback keeps the note.
+    feedbackTables.facility_reports = feedbackTables.facility_reports.filter(r => r.author_id !== id);
+    feedbackTables.help_feedback = feedbackTables.help_feedback.filter(r => r.author_id !== id);
+    for (const row of feedbackTables.app_feedback) if (row.author_id === id) row.author_id = null;
+    persist();
+    return true;
   }
   /** The signed-in user's id, or null. Tokens for users that no longer exist don't count. */
   function userIdOf(req) {
@@ -137,9 +194,23 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
 
     // ---- test hooks
     if (p === '/__state') {
-      return send(res, 200, { users: [...users.values()].map(u => ({ id: u.id, email: u.email, confirmed: u.confirmed, username: u.username ?? null })), profiles: [...profiles.values()], files: [...files.keys()], log: requests });
+      return send(res, 200, { users: [...users.values()].map(u => ({ id: u.id, email: u.email, confirmed: u.confirmed, username: u.username ?? null })), profiles: [...profiles.values()], files: [...files.keys()], ...feedbackTables, log: requests });
     }
-    if (p === '/__control') { Object.assign(control, json()); return send(res, 200, control); }
+    if (p === '/__control') {
+      const { verify, verified = true, ...rest } = json() ?? {};
+      if (verify !== undefined) {
+        // By username or email, like the dashboard's Table Editor (which runs as postgres, past the guard).
+        const user = userByUsername(verify) ?? users.get(normalEmail(verify));
+        const row = user && profiles.get(user.id);
+        if (!row) return send(res, 404, { error: `no profile for ${verify}` });
+        row.verified = verified === true;
+        row.updated_at = new Date().toISOString();
+        persist();
+        log(`mock supabase: ${user.username ?? user.email} is ${row.verified ? 'verified' : 'unverified'}`);
+      }
+      Object.assign(control, rest);
+      return send(res, 200, control);
+    }
     if (p === '/__confirm') {
       const user = users.get(normalEmail(url.searchParams.get('email')));
       if (user && !user.confirmed) {
@@ -209,6 +280,76 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
       const user = [...users.values()].find(u => u.id === uid);
       return user ? send(res, 200, publicUser(user)) : authErr(res, 401, 'bad_jwt', 'invalid JWT');
     }
+    // New password (from a reset link's session, or signed in). Auth's own minimum is 6; the app asks for 8.
+    if (p === '/auth/v1/user' && req.method === 'PUT') {
+      const user = [...users.values()].find(u => u.id === uid);
+      if (!user) return authErr(res, 401, 'bad_jwt', 'invalid JWT');
+      const { password } = json() ?? {};
+      if (typeof password === 'string') {
+        if (password.length < 6) return authErr(res, 422, 'weak_password', 'Password should be at least 6 characters.');
+        if (password === user.password) return authErr(res, 422, 'same_password', 'New password should be different from the old password.');
+        user.password = password;
+        persist();
+      }
+      return send(res, 200, publicUser(user));
+    }
+    // Forgot password: like Supabase, the same empty 200 whether or not the email has an account. The
+    // "email" is printed here, linking to /auth/v1/verify as Supabase's template does.
+    if (p === '/auth/v1/recover' && req.method === 'POST') {
+      const user = users.get(normalEmail(json()?.email));
+      if (user) {
+        const token = randomUUID();
+        recoveryTokens.set(token, { userId: user.id, expires: Date.now() + 60 * 60 * 1000 });
+        const redirect = url.searchParams.get('redirect_to');
+        const link = `http://localhost:${server.address().port}/auth/v1/verify?token=${token}&type=recovery${redirect ? `&redirect_to=${encodeURIComponent(redirect)}` : ''}`;
+        log(`\n  Password reset "email" for ${user.email}: ${link}\n`);
+      }
+      return send(res, 200, {});
+    }
+    // The link in that email: one use, an hour. Back to redirect_to with a session (implicit flow), or Auth's error.
+    if (p === '/auth/v1/verify' && req.method === 'GET') {
+      const redirect = url.searchParams.get('redirect_to');
+      const entry = recoveryTokens.get(url.searchParams.get('token'));
+      recoveryTokens.delete(url.searchParams.get('token'));
+      const user = entry && entry.expires > Date.now() && [...users.values()].find(u => u.id === entry.userId);
+      let fragment;
+      if (user) {
+        user.confirmed = true; // opening a reset link proves the email, as in Supabase
+        const s = session(user);
+        fragment = new URLSearchParams({ access_token: s.access_token, expires_at: String(s.expires_at), expires_in: '3600', refresh_token: s.refresh_token, token_type: 'bearer', type: 'recovery' });
+      } else {
+        fragment = new URLSearchParams({ error: 'access_denied', error_code: 'otp_expired', error_description: 'Email link is invalid or has expired' });
+      }
+      if (!redirect) return send(res, user ? 200 : 403, user ? { note: 'no redirect_to; nothing to open' } : Object.fromEntries(fragment));
+      res.writeHead(303, { location: `${redirect}#${fragment}` });
+      return res.end();
+    }
+    // Which sign-in methods are on (Authentication > Sign In / Providers). POST /__control
+    // { disabledProviders: ['apple'] } switches one off, to see the app's "isn't set up yet".
+    if (p === '/auth/v1/settings' && req.method === 'GET') {
+      const external = Object.fromEntries(['email', 'facebook', 'google', 'apple'].map(name => [name, !control.disabledProviders.includes(name)]));
+      return send(res, 200, { external, disable_signup: false, mailer_autoconfirm: !confirmEmail });
+    }
+    // Social sign-in without the provider: straight back to redirect_to signed in as "<Provider> User"
+    // (<provider>-user@mock.venu, made on first use), as Supabase does after the provider says yes.
+    if (p === '/auth/v1/authorize' && req.method === 'GET') {
+      const provider = url.searchParams.get('provider') ?? '';
+      const redirect = url.searchParams.get('redirect_to');
+      if (!['facebook', 'google', 'apple'].includes(provider) || control.disabledProviders.includes(provider))
+        return authErr(res, 400, 'validation_failed', 'Unsupported provider: provider is not enabled');
+      if (!redirect) return authErr(res, 400, 'validation_failed', 'mock supabase: send redirect_to');
+      const email = `${provider}-user@mock.venu`;
+      const name = `${provider[0].toUpperCase()}${provider.slice(1)} User`;
+      let user = users.get(email);
+      if (!user) {
+        user = { id: randomUUID(), email, password: null, confirmed: true, createdAt: now(), provider, fullName: name };
+        users.set(email, user);
+      }
+      const s = session(user);
+      const fragment = new URLSearchParams({ access_token: s.access_token, expires_at: String(s.expires_at), expires_in: '3600', provider_token: 'mock', refresh_token: s.refresh_token, token_type: 'bearer' });
+      res.writeHead(302, { location: `${redirect}#${fragment}` });
+      return res.end();
+    }
 
     // ---- username functions. username_available is callable signed out (Create Account needs it);
     // email_for_username is service role only (20261117000000_private_username_lookup.sql), so Sign
@@ -234,6 +375,35 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
       res.writeHead(reply.status, Object.fromEntries(reply.headers));
       return res.end(Buffer.from(await reply.arrayBuffer()));
     }
+    // ---- account functions: the same code as supabase/functions/password-reset and delete-account.
+    if (p === '/functions/v1/password-reset' || p === '/functions/v1/delete-account') {
+      const name = p.slice('/functions/v1/'.length);
+      // As the gateway answers for a function that isn't deployed (POST /__control { missingFunctions: ['delete-account'] }).
+      if (control.missingFunctions.includes(name)) return send(res, 404, { code: 'NOT_FOUND', message: 'Requested function was not found' });
+      const load = () => importShared(`supabase/functions/${name}/handler.ts`).then(mod => name === 'password-reset'
+        ? mod.createHandler({
+          emailForUsername: async n => userByUsername(n)?.email ?? null,
+          // Auth's recover endpoint on this same server, which prints the link.
+          sendRecovery: mod.httpRecover(`http://localhost:${server.address().port}`, 'mock-secret-key'),
+          log: line => log(`mock supabase: ${line}`),
+        })
+        : mod.createHandler({
+          verifyUser: async token => userIdOfToken(token),
+          listAvatars: async id => [...files.keys()].filter(k => k.startsWith(`${id}/`)),
+          removeAvatars: async paths => { for (const k of paths) files.delete(k); persist(); },
+          deleteUser: async id => (deleteUser(id) ? 'deleted' : 'gone'),
+          log: line => log(`mock supabase: ${line}`),
+        })).catch(e => {
+        log(`mock supabase: ${name} is off (${e.message}). It needs Node 22.18+, which loads the shared .ts files.`);
+        return null;
+      });
+      const handle = await (name === 'password-reset' ? (passwordReset ??= load()) : (deleteAccount ??= load()));
+      if (!handle) return send(res, 503, { code: 'unexpected_failure', message: `${name} needs Node 22.18 or newer in mock mode.` });
+      const headers = Object.entries(req.headers).filter(([, v]) => typeof v === 'string');
+      const reply = await handle(new Request(`http://mock${req.url}`, { method: req.method, headers, body: req.method === 'POST' ? raw : undefined }));
+      res.writeHead(reply.status, Object.fromEntries(reply.headers));
+      return res.end(Buffer.from(await reply.arrayBuffer()));
+    }
     if (p === '/rest/v1/rpc/username_available' && req.method === 'POST') {
       return send(res, 200, !usernameTaken(json()?.p_username));
     }
@@ -251,6 +421,10 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
       const checkRow = r => {
         if (r.avatar_path != null && !new RegExp(`^${r.id}/[A-Za-z0-9._-]+$`).test(r.avatar_path)) return 'new row for relation "profiles" violates check constraint "avatar_path_own_folder"';
         if (!Array.isArray(r.languages) || !r.languages.includes(r.main_language)) return 'new row for relation "profiles" violates check constraint "main_language_listed"';
+        if (!AVAILABILITIES.includes(r.availability)) return 'new row for relation "profiles" violates check constraint "profiles_availability_check"';
+        const prefs = r.notification_prefs;
+        if (!prefs || typeof prefs !== 'object' || Array.isArray(prefs) || Object.entries(prefs).some(([k, v]) => !NOTIFICATION_KINDS.includes(k) || typeof v !== 'boolean'))
+          return 'new row for relation "profiles" violates check constraint "notification_prefs_shape"';
         return null;
       };
       // Simulates a lost connection: the write is saved but the app never hears back.
@@ -269,10 +443,14 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
       if (req.method === 'POST') {
         const body = json();
         const row = Array.isArray(body) ? body[0] : body;
-        if (row?.id !== uid || row.verified) return pgErr(res, 403, '42501', 'new row violates row-level security policy for table "profiles"');
+        if (row?.id !== uid) return pgErr(res, 403, '42501', 'new row violates row-level security policy for table "profiles"');
         if (profiles.has(row.id)) return pgErr(res, 409, '23505', 'duplicate key value violates unique constraint "profiles_pkey"');
         const now = new Date().toISOString();
-        const full = { ...row, verified: false, created_at: now, updated_at: now };
+        // The profiles_guard trigger: a client's verified always comes out false, and the server stamps the time.
+        const full = {
+          availability: 'free', notification_prefs: { ...DEFAULT_NOTIFICATION_PREFS },
+          ...row, verified: false, availability_updated_at: now, created_at: now, updated_at: now,
+        };
         const bad = checkRow(full);
         if (bad) return pgErr(res, 400, '23514', bad);
         profiles.set(row.id, full);
@@ -282,10 +460,12 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
       }
       if (req.method === 'PATCH') {
         const body = json() ?? {};
-        if ('role' in body || 'verified' in body || 'id' in body) return pgErr(res, 403, '42501', 'permission denied for table profiles');
+        if (['role', 'verified', 'id', 'availability_updated_at'].some(k => k in body)) return pgErr(res, 403, '42501', 'permission denied for table profiles');
         const existing = idEq === uid ? profiles.get(uid) : undefined;
         if (!existing) return reply([]);
-        const next = { ...existing, ...body, updated_at: new Date().toISOString() };
+        const at = new Date().toISOString();
+        const next = { ...existing, ...body, updated_at: at };
+        if (existing.availability !== next.availability) next.availability_updated_at = at;
         const bad = checkRow(next);
         if (bad) return pgErr(res, 400, '23514', bad);
         profiles.set(uid, next);
@@ -301,6 +481,8 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
 
     // ---- help requests and chat (see handleHelpRequests below)
     if (handleHelpRequests({ req, res, p, url, body: json, uid, profiles, send, pgErr })) return;
+    // ---- facility reports, ratings / problem reports after help, Help & feedback
+    if (handleFeedbackTables({ req, res, p, url, body: json, uid, profiles, send, pgErr, tables: feedbackTables, persist })) return;
 
     // ---- the avatars bucket (private: owners only)
     const ownPath = path => path.split('/')[0] === uid;
@@ -342,7 +524,8 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
     send(res, 404, { message: `mock supabase: no route for ${req.method} ${p}` });
   });
 
-  const translate = createTranslate({ verifyUser: async token => userIdOfToken(token), control, log }).catch(e => {
+  const envFiles = [SERVER_ENV_FILE, envFile ? resolve(envFile) : ENV_LOCAL_FILE];
+  const translate = createTranslate({ verifyUser: async token => userIdOfToken(token), control, log, stub: translateMode === 'stub', envFiles }).catch(e => {
     log(`mock supabase: translate is off (${e.message}). It needs Node 22.18+, which loads the shared .ts files.`);
     return null;
   });
@@ -354,7 +537,8 @@ export function startMockSupabase({ port, confirmEmail = false, stateFile, log =
 }
 
 // ---- help requests and chat: the help_requests and messages tables and their functions, with the
-// rules of supabase/migrations/20261117010000_help_requests_chat.sql. One store per server (keyed
+// rules of supabase/migrations/20261117010000_help_requests_chat.sql. Signed in only, tables and
+// functions alike (20261118000000_db_hardening.sql took EXECUTE away from anon). One store per server (keyed
 // by its profiles map), kept in memory only. There's no Realtime here: the app sees its channels fail
 // and polls instead (src/features/volunteer/supabase-backend.ts).
 // Test hooks: GET /__help (every request and message); POST /__help { rejectSends: true } makes
@@ -363,7 +547,8 @@ const helpStores = new WeakMap();
 const HELP_TYPE_IDS = ['physical', 'directions', 'language', 'quiet', 'lost', 'other'];
 const HELP_ROUTES = new Set([
   '/__help', '/rest/v1/help_requests', '/rest/v1/messages', '/rest/v1/rpc/accept_help_request',
-  '/rest/v1/rpc/close_help_request', '/rest/v1/rpc/release_help_request', '/rest/v1/rpc/open_help_requests',
+  '/rest/v1/rpc/close_help_request', '/rest/v1/rpc/withdraw_open_request', '/rest/v1/rpc/release_help_request',
+  '/rest/v1/rpc/open_help_requests',
 ]);
 /** open_help_requests(): requests opened within this long are listed. */
 const OPEN_WINDOW_MS = 5 * 60 * 1000;
@@ -407,6 +592,28 @@ function handleHelpRequests({ req, res, p, url, body, uid, profiles, send, pgErr
   if (!helpStores.has(profiles)) helpStores.set(profiles, { requests: new Map(), messages: [], rejectSends: false });
   helpRoute({ req, res, p, url, body, uid, profiles, send, pgErr }, helpStores.get(profiles));
   return true;
+}
+
+/**
+ * A deleted user's part of the help store, as 20261118030000_account_deletion.sql does it: their
+ * running requests end (cancelled as the visitor, opened again as the volunteer), their id is
+ * cleared from the rest (names stay), and their messages go.
+ */
+function forgetHelpUser(profiles, id) {
+  const store = helpStores.get(profiles);
+  if (!store) return;
+  const at = new Date().toISOString();
+  for (const r of store.requests.values()) {
+    if (r.visitor_id === id && (r.status === 'open' || r.status === 'matched')) Object.assign(r, { status: 'cancelled', closed_at: at });
+    if (r.volunteer_id === id && r.status === 'matched') {
+      Object.assign(r, {
+        status: 'open', volunteer_id: null, volunteer_name: null, volunteer_languages: null, volunteer_trainings: null,
+        matched_at: null, opened_at: at,
+      });
+    }
+    for (const col of ['visitor_id', 'volunteer_id', 'closed_by']) if (r[col] === id) r[col] = null;
+  }
+  store.messages = store.messages.filter(m => m.sender_id !== id);
 }
 
 function helpRoute({ req, res, p, url, body, uid, profiles, send, pgErr }, store) {
@@ -495,6 +702,7 @@ function helpRoute({ req, res, p, url, body, uid, profiles, send, pgErr }, store
   if (p === '/rest/v1/rpc/accept_help_request') {
     const me = profiles.get(uid);
     if (me?.role !== 'volunteer') return pgErr(res, 403, '42501', 'not_a_volunteer');
+    if (me.verified !== true) return pgErr(res, 403, '42501', 'not_verified');
     if ([...store.requests.values()].some(x => x.volunteer_id === uid && x.status === 'matched')) return pgErr(res, 400, 'P0001', 'already_helping');
     const r = store.requests.get(input?.p_request_id);
     // Node runs one request at a time, so check-and-set here is as atomic as the SQL update.
@@ -513,8 +721,18 @@ function helpRoute({ req, res, p, url, body, uid, profiles, send, pgErr }, store
     const r = store.requests.get(input?.p_request_id);
     const allowed = r && (r.status === 'open' || r.status === 'matched')
       && (r.visitor_id === uid || (r.volunteer_id === uid && r.status === 'matched' && status === 'done'));
-    if (allowed) Object.assign(r, { status, closed_by: uid, closed_at: now() });
+    // 'done' on a request nobody took (still open) cancels it (20261118050000_review_fixes.sql).
+    if (allowed) Object.assign(r, { status: r.status === 'matched' ? status : 'cancelled', closed_by: uid, closed_at: now() });
     return send(res, 204);
+  }
+  // withdraw_open_request (20261118040000_help_flow_fixes.sql): the visitor's search gave up. Cancels
+  // only a request that's still open and answers with the row either way ('matched' when a volunteer
+  // took it first), or null when it isn't the caller's.
+  if (p === '/rest/v1/rpc/withdraw_open_request') {
+    const r = store.requests.get(input?.p_request_id);
+    if (!r || r.visitor_id !== uid) return send(res, 200, null);
+    if (r.status === 'open') Object.assign(r, { status: 'cancelled', closed_by: uid, closed_at: now() });
+    return send(res, 200, r);
   }
   if (p === '/rest/v1/rpc/release_help_request') {
     const r = store.requests.get(input?.p_request_id);
@@ -528,15 +746,160 @@ function helpRoute({ req, res, p, url, body, uid, profiles, send, pgErr }, store
   }
 }
 
-/** KEY=value lines from .env.server.local (git-ignored), or {} when there's no such file. */
-export function readServerEnv(file = SERVER_ENV_FILE) {
-  if (!existsSync(file)) return {};
-  const out = {};
-  for (const line of readFileSync(file, 'utf8').split(/\r?\n/)) {
-    const m = /^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/.exec(line);
-    if (m) out[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2');
+// ---- facility_reports, help_feedback and app_feedback, with the rules of
+// supabase/migrations/20261118010000_reports_feedback.sql. Signed in only. Saved in the state file with
+// the accounts (help requests aren't, so a rating can outlive its request across a restart; harmless).
+//   facility_reports  everyone signed in reads, every column but author_id (20261118050000_review_fixes.sql:
+//                     select=* or author_id is refused); insert as yourself (author_name from your profile's
+//                     first name, whatever the app sends); delete only your own; no updates.
+//   facility_report_cards  the reports as the app lists them: no author_id, plus mine (yours).
+//   help_feedback     insert: a party to a request a volunteer took (matched_at set, status matched or
+//                     done), one rating each (23505 after).
+//                     select: ratings only, to their author or to the request's volunteer.
+//   app_feedback      insert only.
+const FEEDBACK_ROUTES = new Set(['/rest/v1/facility_reports', '/rest/v1/facility_report_cards', '/rest/v1/help_feedback', '/rest/v1/app_feedback']);
+// facility_reports columns signed-in users may read (all but author_id), and the view's.
+const REPORT_COLUMNS = ['id', 'venue_id', 'facility_id', 'author_name', 'title', 'topic', 'body', 'language', 'created_at'];
+const REPORT_CARD_COLUMNS = [...REPORT_COLUMNS, 'mine'];
+const REPORT_TOPICS = ['accessibility', 'directions', 'facility_condition', 'security', 'crowds', 'other'];
+const FEEDBACK_TAGS = ['language', 'venue', 'patient', 'fast', 'helpful', 'other'];
+const PROBLEM_KINDS = ['no_show', 'unsafe', 'rude', 'other'];
+const GRANTED = {
+  facility_reports: ['venue_id', 'facility_id', 'title', 'topic', 'body', 'language'],
+  help_feedback: ['request_id', 'kind', 'stars', 'tags', 'problem', 'note'],
+  app_feedback: ['note', 'language', 'platform'],
+};
+
+/** Handles the routes above; false for anything else. */
+function handleFeedbackTables(ctx) {
+  if (!FEEDBACK_ROUTES.has(ctx.p)) return false;
+  feedbackRoute(ctx);
+  return true;
+}
+
+function feedbackRoute({ req, res, p, url, body, uid, profiles, send, pgErr, tables, persist }) {
+  const table = p.slice('/rest/v1/'.length);
+  const permission = () => pgErr(res, 403, '42501', `permission denied for table ${table}`);
+  const rls = () => pgErr(res, 403, '42501', `new row violates row-level security policy for table "${table}"`);
+  const check = () => pgErr(res, 400, '23514', `new row for relation "${table}" violates check constraint`);
+  if (!uid) return permission(); // anon has no grants on these tables
+  const wantsRows = (req.headers.prefer ?? '').includes('return=representation');
+  const wantsObject = (req.headers.accept ?? '').includes('vnd.pgrst.object');
+  const reply = (rows, status = 200) => {
+    if (!wantsObject) return send(res, status, rows);
+    if (rows.length !== 1) return pgErr(res, 406, 'PGRST116', 'JSON object requested, multiple (or no) rows returned');
+    return send(res, status, rows[0]);
+  };
+  const input = body();
+  const row = Array.isArray(input) ? input[0] : input;
+  const text = (v, max) => typeof v === 'string' && v.length <= max;
+  const saved = (full, shown = full) => {
+    tables[table].push(full);
+    persist();
+    return wantsRows ? reply([shown], 201) : send(res, 201);
+  };
+  /** The asked-for columns of a report, or null when the select (or a filter) needs one the caller can't read. */
+  const reportColumns = allowed => {
+    const cols = (url.searchParams.get('select') ?? '*').split(',').map(c => c.trim());
+    const wanted = cols.includes('*') ? (allowed === REPORT_CARD_COLUMNS ? allowed : null) : cols;
+    if (!wanted || !wanted.every(c => allowed.includes(c)) || url.searchParams.has('author_id')) return null;
+    return r => Object.fromEntries(wanted.map(c => [c, r[c]]));
+  };
+  if (table === 'facility_report_cards') {
+    // A security_invoker view with only a select grant.
+    const project = reportColumns(REPORT_CARD_COLUMNS);
+    if (req.method !== 'GET' || !project) return permission();
+    const cards = tables.facility_reports.map(({ author_id, ...r }) => ({ ...r, mine: author_id === uid }));
+    return reply(orderAndLimit(cards.filter(rowFilter(url)), url).map(project));
   }
-  return out;
+  if (req.method === 'POST') {
+    if (!row || typeof row !== 'object') return check();
+    // Only the granted columns; ids, authors and times come from the server.
+    if (Object.keys(row).some(k => !GRANTED[table].includes(k))) return permission();
+  }
+
+  if (table === 'facility_reports') {
+    const project = reportColumns(REPORT_COLUMNS);
+    if (req.method === 'GET') return project ? reply(orderAndLimit(tables.facility_reports.filter(rowFilter(url)), url).map(project)) : permission();
+    if (req.method === 'POST') {
+      if (wantsRows && !project) return permission(); // RETURNING author_id: the whole insert fails
+      const title = typeof row.title === 'string' ? row.title : '';
+      if (!row.venue_id || !text(row.venue_id, 40) || !row.facility_id || !text(row.facility_id, 80) || !title.trim() || title.trim().length > 80
+        || !REPORT_TOPICS.includes(row.topic) || !text(row.body ?? '', 1000) || (row.language != null && !text(row.language, 12))) return check();
+      const full = {
+        id: randomUUID(), venue_id: row.venue_id, facility_id: row.facility_id, author_id: uid,
+        // set_report_author_name: the profile's first name, whatever the app sent.
+        author_name: String(profiles.get(uid)?.first_name ?? '').trim().slice(0, 40),
+        title, topic: row.topic, body: row.body ?? '', language: row.language ?? null, created_at: new Date().toISOString(),
+      };
+      return saved(full, project ? project(full) : full);
+    }
+    if (req.method === 'DELETE') {
+      if (url.searchParams.has('author_id')) return permission();
+      const match = rowFilter(url);
+      // RLS: only your own rows match; someone else's are left alone without an error.
+      tables.facility_reports = tables.facility_reports.filter(r => !(r.author_id === uid && match(r)));
+      persist();
+      return send(res, 204);
+    }
+    return permission();
+  }
+
+  if (table === 'help_feedback') {
+    const helpRequests = helpStores.get(profiles)?.requests ?? new Map();
+    if (req.method === 'GET') {
+      const visible = tables.help_feedback.filter(f => {
+        if (f.kind !== 'rating') return false;
+        const r = helpRequests.get(f.request_id);
+        return f.author_id === uid || (!!r && r.volunteer_id === uid && r.visitor_id === f.author_id);
+      });
+      return reply(orderAndLimit(visible.filter(rowFilter(url)), url));
+    }
+    if (req.method === 'POST') {
+      const tags = row.tags ?? [];
+      const stars = row.stars ?? null;
+      const problem = row.problem ?? null;
+      const okRating = row.kind === 'rating' && Number.isInteger(stars) && stars >= 1 && stars <= 5 && problem === null;
+      const okProblem = row.kind === 'problem' && stars === null && PROBLEM_KINDS.includes(problem) && Array.isArray(tags) && tags.length === 0;
+      if (!Array.isArray(tags) || tags.length > 6 || !tags.every(t => FEEDBACK_TAGS.includes(t)) || !(okRating || okProblem) || !text(row.note ?? '', 1000))
+        return check();
+      const r = helpRequests.get(row.request_id);
+      // private.is_help_party, on a request a volunteer took (matched_at survives finishing, and the
+      // volunteer's account being deleted afterwards; a hand-back clears it).
+      if (!r || (r.visitor_id !== uid && r.volunteer_id !== uid) || (r.status !== 'matched' && r.status !== 'done') || !r.matched_at) return rls();
+      if (row.kind === 'rating' && tables.help_feedback.some(f => f.kind === 'rating' && f.request_id === row.request_id && f.author_id === uid))
+        return pgErr(res, 409, '23505', 'duplicate key value violates unique constraint "help_feedback_one_rating"');
+      // Problem reports have no select policy, so nothing comes back for them.
+      if (wantsRows && row.kind === 'problem') return rls();
+      return saved({
+        id: randomUUID(), request_id: row.request_id, author_id: uid, kind: row.kind, stars, tags, problem,
+        note: row.note ?? '', created_at: new Date().toISOString(),
+      });
+    }
+    return permission();
+  }
+
+  // app_feedback: insert only, and no select grant, so nothing comes back.
+  if (req.method !== 'POST' || wantsRows) return permission();
+  if (typeof row.note !== 'string' || !row.note.trim() || row.note.length > 1000
+    || (row.platform != null && !['ios', 'android', 'web'].includes(row.platform)) || (row.language != null && !text(row.language, 12))) return check();
+  return saved({
+    id: randomUUID(), author_id: uid, note: row.note, language: row.language ?? null, platform: row.platform ?? null,
+    created_at: new Date().toISOString(),
+  });
+}
+
+/**
+ * The translate keys from `files` (per key, the first file that sets it wins) and the file
+ * TRANSLATE_PROVIDER came from. Keeps only TRANSLATE_PROVIDER, ANTHROPIC_API_KEY and DEEPL_API_KEY.
+ */
+export async function readTranslateEnv(files = [SERVER_ENV_FILE, ENV_LOCAL_FILE]) {
+  const { parseEnvText, pickTranslateEnv } = await importShared('scripts/server-env.ts');
+  const sources = files.filter(f => existsSync(f)).map(f => ({
+    name: f.startsWith(ROOT) ? f.slice(ROOT.length + 1) : f,
+    vars: parseEnvText(readFileSync(f, 'utf8')),
+  }));
+  return pickTranslateEnv(sources);
 }
 
 /**
@@ -571,22 +934,24 @@ function stubCatalog(flattenStrings, placeNames) {
   return catalog;
 }
 
-/** The translate function's handler with the provider from .env.server.local, else the stub. */
-async function createTranslate({ verifyUser, control, log }) {
+/** The translate function's handler with the provider from the env files, else (or with `stub`) the stub. */
+async function createTranslate({ verifyUser, control, log, stub, envFiles }) {
   const { chooseProvider, createHandler } = await importShared('supabase/functions/translate/handler.ts');
   const { createStub, flattenStrings, placeNames } = await importShared('src/features/translate/stub.ts');
-  const env = readServerEnv();
+  const { env, from } = stub ? { env: {}, from: null } : await readTranslateEnv(envFiles);
   let translator = null;
   if (env.TRANSLATE_PROVIDER) {
     const Anthropic = env.TRANSLATE_PROVIDER.trim().toLowerCase() === 'anthropic' ? (await import('@anthropic-ai/sdk')).default : null;
     const choice = chooseProvider(env, apiKey => new Anthropic({ apiKey, timeout: 20_000, maxRetries: 2 }));
     if (choice.ok) translator = choice.translator;
-    else log(`mock supabase: ${choice.reason} in .env.server.local; using the stub translator`);
+    else log(`mock supabase: ${choice.reason} in ${from}; using the stub translator`);
   }
   translator ??= createStub(stubCatalog(flattenStrings, placeNames)).translator;
-  log(translator.name === 'stub'
-    ? 'Translate: offline stub (knows the mock volunteer lines). Real provider: see README "Chat translation".'
-    : `Translate: ${translator.name}, keys from .env.server.local`);
+  log(translator.name !== 'stub'
+    ? `Translate: ${translator.name}, keys from ${from} (-- --stub-translate for the offline stub)`
+    : stub
+      ? 'Translate: offline stub (--stub-translate; it knows only the mock volunteer lines).'
+      : 'Translate: offline stub (knows the mock volunteer lines). Real provider: see README "Chat translation".');
 
   const real = translator;
   const controlled = {
@@ -603,9 +968,14 @@ async function createTranslate({ verifyUser, control, log }) {
   return createHandler({ verifyUser, translator: controlled, log: line => log(`mock supabase: ${line}`) });
 }
 
-// Run on its own: node scripts/mock-supabase.mjs [port] [--confirm-email]
+// Run on its own: node scripts/mock-supabase.mjs [port] [--confirm-email] [--stub-translate] [--env-file <path>]
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const port = Number(process.argv.find(a => /^\d+$/.test(a)) ?? MOCK_SUPABASE_PORT);
-  const server = await startMockSupabase({ port, confirmEmail: process.argv.includes('--confirm-email') });
+  const args = process.argv.slice(2);
+  const envAt = args.indexOf('--env-file');
+  const envFile = envAt === -1 ? undefined : args.splice(envAt, 2)[1];
+  const port = Number(args.find(a => /^\d+$/.test(a)) ?? MOCK_SUPABASE_PORT);
+  const server = await startMockSupabase({
+    port, confirmEmail: args.includes('--confirm-email'), translate: args.includes('--stub-translate') ? 'stub' : 'auto', envFile,
+  });
   console.log(`mock supabase on http://localhost:${server.address().port}`); // port 0 picks a free one
 }

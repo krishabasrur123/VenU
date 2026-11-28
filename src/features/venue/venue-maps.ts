@@ -32,6 +32,13 @@ export interface VenueMap {
   widthMeters: number;
   /** The facility a visitor starts from until they tap "I'm here" somewhere: the main way in. */
   arrival: string | null;
+  /**
+   * The arrival's own name already says it's the main way in ("Main Entrance"), so the route panel
+   * says "From Main Entrance." rather than "From Main Entrance, the main way in."
+   */
+  arrivalNamedMain?: boolean;
+  /** Fills the map area around the image when zoomed out, matching the image's own edges. */
+  background?: string;
 }
 
 const MAPS: Readonly<Record<string, VenueMap>> = {
@@ -62,6 +69,8 @@ const MAPS: Readonly<Record<string, VenueMap>> = {
     focus: [0.24, 0.46, 0.56, 0.86],
     widthMeters: 900,
     arrival: 'main-entrance',
+    arrivalNamedMain: true,
+    background: '#101010', // the image's near-black edge
   },
   // Seating blueprint (1425×1104) bundled as a local asset — use the special "local:" prefix so
   // venue-map-view.tsx can resolve it via require() without polluting this plain TS module with

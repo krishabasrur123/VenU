@@ -3,18 +3,17 @@
  * can help with, then nearby requests while Free, or the request they accepted.
  */
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { AppState, Pressable, StyleSheet, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
-import { labelFor, TRAININGS } from '@/features/profile/options';
-import { uiLanguageName } from '@/features/profile/summary';
+import { useProfile } from '@/features/profile/profile-context';
 import type { Profile } from '@/features/profile/types';
 import { useWhereAmI } from '@/features/venue/current';
 import { getVenue } from '@/features/venue/mock';
 import { meetSpotLabel, meetVenueName } from '@/features/volunteer/meet-point';
-import { useAvailability } from '@/features/volunteer/availability';
-import { useVolunteerDesk } from '@/features/volunteer/desk-store';
+import { useVolunteerDesk, volunteerDesk } from '@/features/volunteer/desk-store';
 import { useT } from '@/i18n';
 
 import { ActiveRequest } from './active-request';
@@ -22,16 +21,26 @@ import { AppLanguagePill } from './app-language-pill';
 import { EmergencyCard } from './emergency-card';
 import { IncomingRequests } from './incoming-requests';
 import { DeskBanner } from './note-banner';
+import { LanguageChips, TrainingChips } from './skill-chips';
 import { useStartAligned } from './start-aligned';
 import { StatusCard } from './status-card';
 
-type HomeProfile = Pick<Profile, 'id' | 'firstName' | 'languages' | 'mainLanguage' | 'trainings'>;
+type HomeProfile = Pick<Profile, 'id' | 'firstName' | 'languages' | 'mainLanguage' | 'trainings' | 'availability' | 'verified'>;
+
+/** While a volunteer waits for verification, the tab re-reads their profile this often (and on app resume). */
+export const VERIFIED_RECHECK_MS = 30_000;
 
 export function VolunteerHome({ profile }: { profile: HomeProfile }) {
   const t = useT('volunteer');
-  const { venueId } = useWhereAmI();
-  const venueName = getVenue(venueId)?.name ?? '';
-  const { status, ready, setStatus } = useAvailability(profile.id);
+  const tv = useT('venue');
+  const where = useWhereAmI();
+  const venueName = getVenue(where.venueId)?.name ?? '';
+  // With no spot chosen the location card below is just the venue: don't name it twice.
+  const spotChosen = meetSpotLabel(where, tv, t) !== null;
+  const { saveSettings, recheck } = useProfile();
+  const status = profile.availability;
+  const setStatus = (availability: HomeProfile['availability']) => saveSettings({ availability });
+  useVerifiedRecheck(profile.verified, recheck);
   const startAligned = useStartAligned();
   const { assignment, unread, notice } = useVolunteerDesk();
 
@@ -41,7 +50,7 @@ export function VolunteerHome({ profile }: { profile: HomeProfile }) {
         <AppLanguagePill />
         <View style={styles.titles}>
           <Text style={styles.title} accessibilityRole="header">{t('home.greeting', { name: profile.firstName })}</Text>
-          <Text style={[styles.subtitle, startAligned]}>{venueName}</Text>
+          {spotChosen ? <Text style={[styles.subtitle, startAligned]}>{venueName}</Text> : null}
         </View>
       </View>
 
@@ -50,12 +59,12 @@ export function VolunteerHome({ profile }: { profile: HomeProfile }) {
       {assignment ? <ActiveRequest assignment={assignment} unread={unread} /> : null}
 
       <LocationCard />
-      <StatusCard status={status} onChange={setStatus} />
+      {/* While helping, the line says so; the stored Free / Busy / Off stays for after. */}
+      <StatusCard status={status} onChange={setStatus} helping={assignment?.visitorName ?? null} />
       <HelpWithCard profile={profile} />
 
-      {/* Until the saved status is read, show neither list nor note, so a Busy volunteer never sees requests flash. */}
-      {assignment || !ready ? null : status === 'free' ? (
-        <IncomingRequests />
+      {assignment ? null : status === 'free' ? (
+        <IncomingRequests verified={profile.verified} />
       ) : (
         <Text style={styles.paused}>{t('home.paused')}</Text>
       )}
@@ -63,6 +72,27 @@ export function VolunteerHome({ profile }: { profile: HomeProfile }) {
       <EmergencyCard />
     </View>
   );
+}
+
+/**
+ * LA28 verifies volunteers in the dashboard, so nothing tells the app when it happens: until then,
+ * re-read the profile now, every VERIFIED_RECHECK_MS and on returning to the app. Live matching only
+ * (local mode has no one to verify anyone).
+ */
+function useVerifiedRecheck(verified: boolean, recheck: () => Promise<void>) {
+  useEffect(() => {
+    if (verified || !volunteerDesk.live) return;
+    const check = () => void recheck().catch(() => {});
+    check();
+    const timer = setInterval(check, VERIFIED_RECHECK_MS);
+    const sub = AppState.addEventListener('change', state => {
+      if (state === 'active') check();
+    });
+    return () => {
+      clearInterval(timer);
+      sub.remove();
+    };
+  }, [verified, recheck]);
 }
 
 /** Solid map pin from the Figma card. */
@@ -104,7 +134,6 @@ function LocationCard() {
 function HelpWithCard({ profile }: { profile: HomeProfile }) {
   const t = useT('volunteer');
   const tc = useT('common');
-  const tp = useT('profile');
   const { languages, mainLanguage, trainings } = profile;
   const fluent = [mainLanguage, ...languages.filter(l => l !== mainLanguage)].filter(l => languages.includes(l));
 
@@ -123,27 +152,16 @@ function HelpWithCard({ profile }: { profile: HomeProfile }) {
 
       <View style={styles.group}>
         <Text style={styles.overline}>{t('home.languages')}</Text>
-        <Tags labels={fluent.map(code => uiLanguageName(code, tp))} />
+        <LanguageChips codes={fluent} />
       </View>
       <View style={styles.group}>
         <Text style={styles.overline}>{t('home.training')}</Text>
         {trainings.length ? (
-          <Tags labels={trainings.map(skill => labelFor(TRAININGS, skill, tp))} />
+          <TrainingChips trainings={trainings} />
         ) : (
           <Text style={Type.caption}>{t('home.noTraining')}</Text>
         )}
       </View>
-    </View>
-  );
-}
-
-/** Same chips as the profile's summary tags. */
-function Tags({ labels }: { labels: string[] }) {
-  return (
-    <View style={styles.tags}>
-      {labels.map(label => (
-        <Text key={label} style={styles.tag}>{label}</Text>
-      ))}
     </View>
   );
 }
@@ -175,18 +193,8 @@ const styles = StyleSheet.create({
   cardTitle: { ...Type.bodyStrong, flexShrink: 1 },
   editTarget: { minHeight: 44, minWidth: 44, alignItems: 'center', justifyContent: 'center', marginVertical: -Spacing.md },
   edit: { ...Type.body, color: Colors.primary, textDecorationLine: 'underline' },
-  group: { gap: 6 },
+  group: { gap: Spacing.sm },
   overline: { ...Type.overline },
-  tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  tag: {
-    ...Type.caption,
-    color: Colors.text,
-    backgroundColor: Colors.bg,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: Radius.sm,
-    overflow: 'hidden',
-  },
 
   paused: { ...Type.caption, padding: Spacing.md, borderRadius: Radius.md, backgroundColor: Colors.surfaceAlt },
 });

@@ -18,6 +18,9 @@
     "assistTitle": "需要帮助？",
     "assistBody": "联系志愿者",
     "assistLabel": "需要帮助？联系志愿者",
+    "assistTitleVolunteer": "准备好帮忙了吗？",
+    "assistBodyVolunteer": "查看你附近的求助",
+    "assistLabelVolunteer": "准备好帮忙了吗？查看你附近的求助",
     "empty": "没有与“{{query}}”匹配的场馆。试试城市名，例如 Inglewood。",
     "cardHint": "打开地图和设施"
   },
@@ -93,6 +96,9 @@
     "schematic": "简化地图"
   },
   "walk_other": "步行 {{number}} 分钟",
+  "walkStart": "路线从这里出发",
+  "walkMine": "你在这里",
+  "walkAsk": "位置未公布",
   "wait": {
     "none": "无需排队",
     "short": "排队较短",
@@ -101,6 +107,18 @@
   "row": {
     "label": "{{name}}，{{meta}}",
     "labelAccessible": "{{name}}，{{meta}}，无障碍"
+  },
+  "sponsor": {
+    "label": "广告",
+    "pin": "广告：地图上的{{name}}",
+    "row": "广告：{{name}}，{{meta}}",
+    "card": "广告：{{name}}。{{offer}}。{{meta}}",
+    "heading": "广告：{{name}}",
+    "showScreen": "请在摊位出示此屏幕",
+    "disclosure": "演示推广，非场馆信息",
+    "banner": "广告：{{name}}，{{walk}}。{{offer}}",
+    "bannerHint": "打开该摊位。你的请求仍在继续匹配。",
+    "hide": "隐藏广告消息"
   },
   "tags": {
     "label": "标签：",
@@ -117,6 +135,7 @@
     "long_lines_halftime": "中场排长队",
     "wheelchair_loans": "轮椅借用",
     "permit_needed": "需要许可证",
+    "pass_needed": "需要停车证",
     "wheelchair_escort": "轮椅陪同",
     "premium_access": "VIP 和高级票",
     "sensory_room": "感官室",
@@ -125,6 +144,36 @@
     "changing_table": "尿布台"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "Coca-Cola Refresh 摊位",
+      "description": "冰镇 Coca-Cola 饮料、瓶装水和零食。",
+      "location": "广场上，户外球场旁",
+      "offer": "使用 VenU 购买任意 Coca-Cola 饮料立减 $1"
+    },
+    "panda-express-intuit": {
+      "name": "Panda Express 摊位",
+      "description": "陈皮鸡、炒面和米饭碗。",
+      "location": "Main 层大厅，过了 The Wall 入口",
+      "offer": "点任意米饭碗送一个春卷"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "Coca-Cola Refresh 摊位",
+      "description": "冰镇 Coca-Cola 饮料、瓶装水和零食。",
+      "location": "1 层，1 号和 2 号入口内",
+      "offer": "使用 VenU 购买任意 Coca-Cola 饮料立减 $1"
+    },
+    "ben-jerrys-sofi": {
+      "name": "Ben & Jerry’s 冰淇淋摊位",
+      "description": "杯装和甜筒冰淇淋。",
+      "location": "American Airlines Plaza",
+      "offer": "任意一球冰淇淋免费加一份配料"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "Coca-Cola Refresh 摊位",
+      "description": "冰镇 Coca-Cola 饮料、瓶装水和零食。",
+      "location": "主大厅，Figueroa 一侧",
+      "offer": "使用 VenU 购买任意 Coca-Cola 饮料立减 $1"
+    },
     "entry-3": {
       "name": "3 号入口",
       "description": "北入口。每个入口都有无障碍通道，并提供免费轮椅陪同服务。",
@@ -277,27 +326,27 @@
     },
     "main-entrance": {
       "name": "主入口",
-      "description": "GameFace ID 通道在左侧，Identity Pass 通道在右侧。从安检口到座位可提供免费行动协助。",
+      "description": "GameFace ID 通道在左侧，Identity Pass 通道在右侧；需要无障碍入场时，Identity Pass 持有人可在 Answers Portal 刷手机入场。包袋不超过 10×6×2 英寸（医疗用包不超过 14×14×6）。从安检口到座位可提供免费行动协助。",
       "location": "广场上，靠近 Century Blvd. 和 Prairie Ave."
     },
     "vip-entrance": {
       "name": "VIP 入口",
-      "description": "供包厢、俱乐部和场地票持票人使用。",
+      "description": "供包厢、俱乐部和场地票持票人使用（也可走主入口）。",
       "location": "主入口左侧"
     },
     "wall-entrance": {
       "name": "The Wall 入口",
-      "description": "The Wall 专用入口。",
+      "description": "供 The Wall 区域持票人使用（也可走主入口）。",
       "location": "主入口左侧，经过 VIP 入口"
     },
     "answers-portal-main": {
       "name": "Answers Portal（Main 层）",
-      "description": "观众服务：失物招领、免费辅助听音设备（需押带照片的证件）和 OneCourt 设备。",
+      "description": "观众服务：失物招领、免费辅助听音设备（需押带照片的证件）、感官包（需押证件）和 OneCourt 设备。",
       "location": "Main 层，Main 6 区附近"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal（Terrace 层）",
-      "description": "观众服务：失物招领和免费辅助听音设备（需押带照片的证件）。",
+      "description": "观众服务：失物招领、免费辅助听音设备（需押带照片的证件）和 OneCourt 设备。",
       "location": "Terrace 层，Terrace 18 区附近"
     },
     "first-aid-main": {
@@ -317,7 +366,7 @@
     },
     "sensory-room": {
       "name": "感官室",
-      "description": "私密的 Kaiser Permanente 感官室。可按需领取感官包。",
+      "description": "私密的 Kaiser Permanente 感官室。感官包（耳机、解压玩具）在 Main 6 旁的 Answers Portal 领取，需出示证件。",
       "location": "请向场馆接待员问路"
     },
     "infant-care-room": {
@@ -327,29 +376,40 @@
     },
     "mobility-hub": {
       "name": "出行枢纽",
-      "description": "网约车和出租车上下客、家庭接送区和接驳车。",
-      "location": "东停车楼 1 层"
+      "description": "唯一的网约车上下客点。另有出租车、家庭接送区和免费接驳车（提供无障碍车辆）。",
+      "location": "东停车楼 1 层（3700 W Century Blvd.）"
     },
     "east-garage": {
       "name": "东停车楼",
-      "description": "普通停车，请提前购买停车证。无障碍车位先到先得出售。",
-      "location": "入口在 102nd St."
+      "description": "普通停车，请提前购买停车证。无障碍车位须随停车证购买，先到先得。",
+      "location": "3665 W 102nd St（入口在 102nd St.）"
     },
     "west-garage": {
       "name": "西停车楼",
-      "description": "VIP 停车，位于 Prairie Ave. 对面。请提前购买停车证。",
-      "location": "入口在 Prairie Ave."
+      "description": "VIP 停车，位于 Prairie Ave. 对面。请提前购买停车证。无障碍车位须随停车证购买，先到先得。",
+      "location": "10117 S Prairie Ave（入口在 Prairie Ave.）"
+    },
+    "infant-care-terrace": {
+      "name": "婴儿护理室（Terrace 层）",
+      "description": "私密的婴儿护理室。所有洗手间都有尿布台。",
+      "location": "Terrace 层，Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "电梯",
+      "description": "电梯从主入口通往各层，主大厅的自动扶梯连接 Main 层和 Terrace 层。行动不便者优先。",
+      "location": "请向场馆接待员询问最近的电梯"
     }
   },
   "facility": {
     "notFound": "未找到该设施",
     "wheelchair": "轮椅可通行",
     "directions": "路线",
+    "noRoute": "没有步行路线：场馆未公布此位置。请向工作人员问路。",
     "imHere": "我在这里",
     "imHereHint": "请求帮助时将此处作为你的位置",
     "isHere": "你的位置",
     "reports": "反馈",
-    "results_other": "{{number}} 条结果",
+    "reportCount_other": "{{number}} 条反馈",
     "noReports": "还没有反馈。来分享你的发现吧。",
     "addReport": "添加你的反馈"
   },
@@ -379,7 +439,12 @@
     "authorFallback": "VenU 访客",
     "submitted": "提交于 {{date}}",
     "originalLanguage": "原文语言：{{language}}",
-    "noBody": "未添加详情。"
+    "noBody": "未添加详情。",
+    "delete": "删除我的反馈",
+    "deleteConfirm": "要删除这条反馈吗？此场馆的访客将不会再看到它。",
+    "deleteKeep": "保留",
+    "deleteYes": "删除",
+    "deleteFailed": "无法删除反馈。{{reason}}"
   },
   "form": {
     "title": "添加反馈",
@@ -403,6 +468,7 @@
     "title": "步行路线",
     "from": "从{{from}}出发",
     "fromArrival": "从主入口{{from}}出发。在别处？打开那个地点并点按“我在这里”。",
+    "fromArrivalPlain": "从{{from}}出发。在别处？打开那个地点并点按“我在这里”。",
     "steps_other": "约{{number}}步",
     "stepStart": "从{{from}}出发。",
     "stepHead": "向{{direction}}走约{{meters}}米。",

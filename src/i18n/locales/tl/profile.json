@@ -6,7 +6,6 @@
     "verified": "✓ Verified ng LA28",
     "unverified": "Hindi pa verified",
     "sharedVisitor": "Ibinabahagi sa tutulong sa iyo",
-    "sharedVolunteer": "Nakikita ng mga bisita",
     "account": "Iyong account",
     "support": "Suporta",
     "editProfile": "I-edit ang profile",
@@ -15,13 +14,14 @@
     "help": "Tulong at feedback",
     "terms": "Mga tuntunin ng paggamit",
     "signOutFailed": "Hindi makapag-sign out. {{reason}}",
-    "deleteWarning": "Permanenteng mabubura ang iyong profile at larawan. Puwede kang gumawa ng bago mamaya.",
+    "deleteWarning": "Permanenteng mabubura ang iyong account, profile at larawan. Hindi ka na makakapag-sign in gamit ito.",
     "deleteFailed": "Hindi natapos burahin ang iyong data. {{reason}}",
     "deleteData": "Burahin ang aking data"
   },
   "edit": {
     "title": "I-edit ang profile",
     "subtitle": "Gagamitin ang mga pagbabago sa susunod mong paghingi ng tulong.",
+    "subtitleVolunteer": "Makikita ng mga bisita ang mga pagbabagong ito sa susunod mong pagtulong.",
     "submit": "I-save ang mga pagbabago",
     "discardTitle": "Umalis nang hindi nagse-save? Mawawala ang mga binago mo.",
     "keepEditing": "Ituloy ang pag-edit",
@@ -207,7 +207,8 @@
     "placeholder": "hal. Mahirap basahin ang mapa sa ilalim ng araw",
     "feedbackLabel": "Ang iyong feedback",
     "send": "Magpadala ng feedback",
-    "empty": "Sumulat muna ng ilang salita."
+    "empty": "Sumulat muna ng ilang salita.",
+    "sendFailed": "Hindi maipadala ang feedback mo. {{reason}}"
   },
   "notifications": {
     "title": "Mga notification",
@@ -216,7 +217,9 @@
     "options": {
       "volunteer": {
         "label": "Balita mula sa volunteer",
-        "hint": "hal. Tinanggap ni Daniel at papunta na siya"
+        "hint": "hal. Tinanggap ni Daniel at papunta na siya",
+        "labelVolunteer": "Mga request ng tulong",
+        "hintVolunteer": "hal. May bisitang malapit sa iyo na kailangan ng tulong"
       },
       "chat": {
         "label": "Mga mensahe sa chat",
