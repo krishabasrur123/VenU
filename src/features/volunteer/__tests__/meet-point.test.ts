@@ -4,7 +4,7 @@ import { facilitiesFor } from '@/features/venue/mock';
 import { localStub } from '@/features/translate/local';
 import i18n from '@/i18n';
 
-import { meetPlaceLine, meetPointFrom, meetSpotLabel, restoreMeetPoint, spotChoices } from '../meet-point';
+import { meetPlaceLine, meetPointFrom, meetSpotLabel, meetSpotsFor, restoreMeetPoint, spotChoices } from '../meet-point';
 import { greetingFrom, MOCK_VOLUNTEERS, mockIncoming } from '../mock';
 
 // current.ts (the venue store) keeps the spot in AsyncStorage, which has no native module under jest.
@@ -47,15 +47,24 @@ describe('spot choices', () => {
   it('lists every facility, gates first, keeping the venue’s order within a type', () => {
     const ids = spotChoices(sofi, '', null).map(f => f.id);
     expect(ids).toHaveLength(sofi.length);
-    expect(ids.slice(0, 6)).toEqual(['entry-3', 'entry-4', 'entry-6', 'entry-8', 'entry-10', 'entry-11']);
+    expect(ids.slice(0, 12)).toEqual(Array.from({ length: 12 }, (_, i) => `entry-${i + 1}`));
     expect(ids.indexOf('lactation-suite')).toBeLessThan(ids.indexOf('first-aid-se')); // restrooms before first aid, as the chips
   });
 
   it('searches in the app language and in English, within the chip', () => {
     expect(spotChoices(sofi, 'rampa', null, tv('es')).map(f => f.id)).toEqual(['pedestrian-ramp']);
-    expect(spotChoices(sofi, 'sensory', 'info', tv('es')).map(f => f.id)).toEqual(['guest-services-ne', 'guest-services-sw']);
-    expect(spotChoices(sofi, 'entrada 1', 'gate', tv('es')).map(f => f.id)).toEqual(['entry-10', 'entry-11']);
+    expect(spotChoices(sofi, 'sensory room', 'info', tv('es')).map(f => f.id)).toEqual(['guest-services-ne', 'guest-services-sw']);
+    expect(spotChoices(sofi, 'entrada 11', 'gate', tv('es')).map(f => f.id)).toEqual(['entry-11']);
     expect(spotChoices(sofi, 'zzz', null, tv('en'))).toEqual([]);
+  });
+
+  it('leaves out spots the venue doesn’t publish (no one could find you there)', () => {
+    const intuit = meetSpotsFor('intuit-dome');
+    expect(intuit.map(f => f.id)).toEqual(facilitiesFor('intuit-dome').filter(f => !f.approximate).map(f => f.id));
+    expect(intuit.some(f => f.id === 'elevators' || f.id === 'sensory-room')).toBe(false);
+    expect(spotChoices(intuit, 'elevator', null, tv('en'))).toEqual([]);
+    expect(meetSpotsFor('sofi')).toEqual(sofi.filter(f => !f.approximate));
+    expect(meetSpotsFor('sofi').some(f => ['first-aid-nw', 'first-aid-se', 'lactation-suite', 'service-animal-relief'].includes(f.id))).toBe(false);
   });
 });
 

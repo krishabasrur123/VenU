@@ -8,7 +8,9 @@ import { Avatar } from '@/components/avatar';
 import { Button } from '@/components/button';
 import { FigmaIcon, type FigmaIconName } from '@/components/icons/figma-icon';
 import { NAV_BAR_CLEARANCE } from '@/components/tab-bar';
-import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
+import { AppLanguagePill } from '@/components/volunteer/app-language-pill';
+import { useStartAligned } from '@/components/volunteer/start-aligned';
+import { Colors, Face, Fonts, Radius, Spacing, Type } from '@/constants/theme';
 import { useProfile } from '@/features/profile/profile-context';
 import { SummaryTags } from '@/features/profile/summary-tags';
 import { useLayoutRtl, useT } from '@/i18n';
@@ -58,6 +60,8 @@ export default function ProfileScreen() {
   const scrollRef = useRef<ScrollViewInstance>(null);
   const t = useT('profile');
   const tc = useT('common');
+  // A Latin name in Arabic still lines up by the avatar, not at the far side of the card.
+  const startAligned = useStartAligned();
 
   async function handleSignOut() {
     setSignOutError(null);
@@ -73,8 +77,9 @@ export default function ProfileScreen() {
     setBusy(true);
     setDeleteError(null);
     try {
-      await deleteAll(); // also signs out
-      router.replace('/welcome');
+      const deleted = await deleteAll(); // also signs out
+      // The first screen says what happened: the account is gone, or (function not deployed) the sign-in remains.
+      router.replace({ pathname: '/welcome', params: { deleted } });
     } catch (e) {
       // Photos go first, so a failure can be partial (the context has already reloaded what's left).
       setDeleteError(t('tab.deleteFailed', { reason: friendlyError(e) }));
@@ -94,6 +99,8 @@ export default function ProfileScreen() {
         showsVerticalScrollIndicator={false}
         // Opening the delete confirmation grows the page; bring its buttons out from under the tab bar.
         onContentSizeChange={() => confirmDelete && scrollRef.current?.scrollToEnd({ animated: true })}>
+        {/* The app language, as on the other tabs' top corner. */}
+        <AppLanguagePill />
         <Text style={styles.pageTitle} accessibilityRole="header">{t('tab.title')}</Text>
 
         <View style={styles.card}>
@@ -103,7 +110,7 @@ export default function ProfileScreen() {
               {/* Badges sit under the name and the Edit button, so a long Edit label (e.g. Armenian
                   "Խմբագրել") doesn't squeeze "✓ Verified LA28" into a three-line pill. */}
               <View style={styles.nameRow}>
-                <Text style={[styles.name, styles.nameFill]}>{profile.firstName}</Text>
+                <Text style={[styles.name, styles.nameFill, startAligned]}>{profile.firstName}</Text>
                 <Button label={tc('actions.edit')} variant="secondary" onPress={() => router.push('/edit-profile')} style={styles.editBtn} />
               </View>
               <View style={styles.badges}>
@@ -178,11 +185,11 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: Colors.bg },
   scroll: { flex: 1 },
-  content: { paddingHorizontal: Spacing.gutter, paddingTop: Spacing.xl },
+  content: { paddingHorizontal: Spacing.gutter, paddingTop: Spacing.sm },
   flex: { flex: 1 },
   gapSm: { marginTop: Spacing.xs },
 
-  pageTitle: { fontFamily: Fonts.display, fontSize: 28, lineHeight: 34, color: Colors.text, marginBottom: Spacing.xl },
+  pageTitle: { fontFamily: Fonts.display, fontSize: 28, lineHeight: 34, color: Colors.text, marginTop: Spacing.xs, marginBottom: Spacing.xl },
 
   // Figma info tile: #F5F5F5, radius 10.
   card: { backgroundColor: Colors.surfaceAlt, borderRadius: Radius.md, padding: Spacing.lg, marginBottom: Spacing.xxl },
@@ -194,7 +201,7 @@ const styles = StyleSheet.create({
   nameFill: { flex: 1, minWidth: 0 },
   name: { fontFamily: Fonts.display, fontSize: 20, lineHeight: 26, color: Colors.text },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  badge: { ...Type.caption, fontFamily: Fonts.textSemiBold, paddingHorizontal: Spacing.sm, paddingVertical: 2, borderRadius: 6, overflow: 'hidden' },
+  badge: { ...Type.caption, ...Face.textSemiBold, paddingHorizontal: Spacing.sm, paddingVertical: 2, borderRadius: 6, overflow: 'hidden' },
   badgeRole: { backgroundColor: Colors.primarySoft, color: Colors.primary },
   badgeOk: { backgroundColor: Colors.successSoft, color: Colors.success },
   badgePending: { backgroundColor: Colors.accentSoft, color: Colors.accent },

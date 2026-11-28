@@ -7,7 +7,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import * as backendModule from '../backend';
 import { AlreadyTakenError, createMockBackend } from '../backend';
 import { createDeskStore } from '../desk-store';
-import { createRequestStore, reduce, type NewRequest } from '../request-store';
+import { createRequestStore, reduce, SEARCH_TIMEOUT_MS, type NewRequest } from '../request-store';
 import {
   CONNECT_GRACE_MS,
   createLiveBackend,
@@ -22,6 +22,7 @@ import {
   supabaseHelpDb,
   type HelpDb,
   type MessageRow,
+  type NewFeedbackRow,
   type RequestRow,
   type WatchSpec,
 } from '../supabase-backend';
@@ -35,6 +36,8 @@ interface Profile {
   main_language: string;
   trainings: string[];
   gender: string | null;
+  /** False: LA28 hasn't verified them yet (accept_help_request refuses). Missing means verified. */
+  verified?: boolean;
 }
 
 const PROFILES: Record<string, Profile> = {
@@ -42,6 +45,7 @@ const PROFILES: Record<string, Profile> = {
   sam: { role: 'volunteer', first_name: 'Sam', languages: ['es', 'en'], main_language: 'en', trainings: ['first_aid', 'sighted_guide'], gender: 'man' },
   ana: { role: 'volunteer', first_name: 'Ana', languages: ['en'], main_language: 'en', trainings: [], gender: 'woman' },
   lee: { role: 'visitor', first_name: 'Lee', languages: ['en'], main_language: 'en', trainings: [], gender: null },
+  kim: { role: 'volunteer', first_name: 'Kim', languages: ['en'], main_language: 'en', trainings: [], gender: 'woman', verified: false },
 };
 
 /** Errors added with the review fixes, looked up at run time so these tests also run (and fail) without them. */
@@ -49,6 +53,7 @@ const errorClass = (name: string): new () => Error =>
   (backendModule as unknown as Record<string, (new () => Error) | undefined>)[name] ?? class extends Error { constructor() { super(name); } };
 const AlreadyHelpingError = errorClass('AlreadyHelpingError');
 const RequestClosedError = errorClass('RequestClosedError');
+const NotVerifiedError = errorClass('NotVerifiedError');
 
 /** How long an open request stays on volunteers' lists (open_help_requests in the migration). */
 const OPEN_WINDOW_S = 5 * 60;
@@ -66,6 +71,8 @@ interface Sub {
 function fakeServer({ realtime = true } = {}) {
   const requests = new Map<string, RequestRow>();
   const messages: MessageRow[] = [];
+  /** help_feedback rows, with the author the database would set. */
+  const feedback: (NewFeedbackRow & { author_id: string })[] = [];
   const subs = new Set<Sub>();
   /** The server's clock, which tests move with advance(); the device clock (Date.now) is separate. */
   let clock = Date.parse('2026-11-17T18:00:00Z');
@@ -133,6 +140,7 @@ function fakeServer({ realtime = true } = {}) {
         const p = PROFILES[who];
         const r = requests.get(id);
         if (!p || p.role !== 'volunteer') throw new Error('not_a_volunteer');
+        if (p.verified === false) throw new NotVerifiedError();
         if ([...requests.values()].some(x => x.volunteer_id === who && x.status === 'matched')) throw new AlreadyHelpingError();
         if (!r || r.status === 'cancelled' || r.status === 'done') throw new RequestClosedError();
         if (r.status !== 'open' || r.visitor_id === who) throw new AlreadyTakenError();
@@ -153,6 +161,17 @@ function fakeServer({ realtime = true } = {}) {
         requests.set(id, next);
         changed(next);
       },
+      // withdraw_open_request: cancels only while open; the row either way, null when not yours.
+      async withdraw(id) {
+        await Promise.resolve();
+        const r = requests.get(id);
+        if (!r || r.visitor_id !== who) return null;
+        if (r.status !== 'open') return { ...r };
+        const next: RequestRow = { ...r, status: 'cancelled', closed_by: who, closed_at: now() };
+        requests.set(id, next);
+        changed(next);
+        return { ...next };
+      },
       async release(id) {
         const r = requests.get(id);
         if (!r || r.status !== 'matched' || r.volunteer_id !== who) return;
@@ -172,6 +191,14 @@ function fakeServer({ realtime = true } = {}) {
         messages.push(full);
         posted(full);
       },
+      // help_feedback's insert policy: a party to a matched or finished request; one rating each.
+      async insertFeedback(row) {
+        await Promise.resolve();
+        const r = requests.get(row.request_id);
+        if (!party(row.request_id, who) || (r?.status !== 'matched' && r?.status !== 'done')) throw new Error('row-level security');
+        if (row.kind === 'rating' && feedback.some(f => f.kind === 'rating' && f.request_id === row.request_id && f.author_id === who)) return; // 23505
+        feedback.push({ ...row, author_id: who });
+      },
       subscribe<Row>(spec: WatchSpec, onRow: (row: Row | null) => void, onLive: (live: boolean) => void) {
         const sub: Sub = { viewer: who, spec, onRow: onRow as (row: unknown) => void };
         if (realtime) subs.add(sub);
@@ -181,7 +208,7 @@ function fakeServer({ realtime = true } = {}) {
     };
   }
 
-  return { requests, messages, subs, dbFor, control, advance: (ms: number) => { clock += ms; } };
+  return { requests, messages, feedback, subs, dbFor, control, advance: (ms: number) => { clock += ms; } };
 }
 
 const rosaNeedsHelp: NewRequest = {
@@ -337,6 +364,31 @@ describe('live help requests', () => {
     expect(visitor.getState().match?.volunteer.firstName).toBe('Sam');
   });
 
+  it('saves the visitor’s rating to help_feedback, once, then thanks them', async () => {
+    const { visitor, id, server } = await matched();
+    visitor.endHelp();
+    await settle();
+    await visitor.submitFeedback(4, ['patient', 'helpful'], '  Found me a seat  ');
+    expect(server.feedback).toEqual([
+      { request_id: id, kind: 'rating', stars: 4, tags: ['patient', 'helpful'], problem: null, note: 'Found me a seat', author_id: 'rosa' },
+    ]);
+    expect(visitor.getState()).toMatchObject({ status: 'idle', notice: { key: 'thanks', params: { name: 'Sam' } } });
+  });
+
+  it('saves a problem report with its kind, and a refused insert reaches the screen', async () => {
+    const { visitor, id, server } = await matched();
+    visitor.endHelp();
+    await settle();
+    await visitor.reportProblem('no_show', ' Waited 20 minutes ');
+    expect(server.feedback).toEqual([
+      { request_id: id, kind: 'problem', stars: null, tags: [], problem: 'no_show', note: 'Waited 20 minutes', author_id: 'rosa' },
+    ]);
+    // Someone who isn't on the request (RLS refuses): the error reaches feedback-view's "Couldn't send".
+    const lee = createLiveBackend(server.dbFor('lee'));
+    await expect(lee.reportProblem({ requestId: id, volunteerId: 'sam', kind: 'rude', note: '' })).rejects.toThrow('row-level security');
+    expect(server.feedback).toHaveLength(1);
+  });
+
   it('open → cancelled while searching: it leaves the volunteer’s list on the next refresh', async () => {
     const server = fakeServer();
     const { visitor, sam } = devices(server);
@@ -390,6 +442,25 @@ describe('live help requests', () => {
     const rosaAsVolunteer = createDeskStore(createLiveBackend(server.dbFor('rosa')));
     expect(await rosaAsVolunteer.accept(visitor.getState().request!.id)).toBe(false);
     expect(rosaAsVolunteer.getState().notice?.key).toBe('acceptFailed');
+  });
+
+  it('an unverified volunteer sees the request but can’t take it; it stays open for others', async () => {
+    const server = fakeServer();
+    const { visitor, sam } = devices(server);
+    const kim = createDeskStore(createLiveBackend(server.dbFor('kim')));
+    await kim.setUser('kim');
+    kim.watchOpen();
+    void visitor.sendRequest(rosaNeedsHelp);
+    await settle();
+    const id = visitor.getState().request!.id;
+    expect(kim.getState().open.map(r => r.id)).toEqual([id]);
+    expect(await kim.accept(id)).toBe(false);
+    expect(kim.getState()).toMatchObject({ assignment: null, notice: { tone: 'error', key: 'notVerified' } });
+    // Still listed (it isn't gone, Kim just can't take it), and Sam can.
+    expect(kim.getState().open.map(r => r.id)).toEqual([id]);
+    expect(server.requests.get(id)?.status).toBe('open');
+    await sam.setUser('sam');
+    expect(await sam.accept(id)).toBe(true);
   });
 
   it('polls every 2 s when Realtime never subscribes (the local mock server)', async () => {
@@ -687,6 +758,7 @@ describe('the Supabase calls', () => {
     await expect(supabaseHelpDb(failing('already_taken')).accept('r1')).rejects.toBeInstanceOf(AlreadyTakenError);
     await expect(supabaseHelpDb(failing('request_closed')).accept('r1')).rejects.toBeInstanceOf(RequestClosedError);
     await expect(supabaseHelpDb(failing('already_helping')).accept('r1')).rejects.toBeInstanceOf(AlreadyHelpingError);
+    await expect(supabaseHelpDb(failing('not_verified')).accept('r1')).rejects.toBeInstanceOf(NotVerifiedError);
   });
 
   it('lists open requests and hands a request back through the database functions', async () => {
@@ -695,6 +767,144 @@ describe('the Supabase calls', () => {
     await db.openRequests();
     await db.release('r1');
     expect(rpc.mock.calls).toEqual([['open_help_requests'], ['release_help_request', { p_request_id: 'r1' }]]);
+  });
+
+  it('inserts ratings and problem reports into help_feedback without reading them back', async () => {
+    const insert = jest.fn(async (_row: unknown) => ({ error: null as null | { code: string; message: string } }));
+    const from = jest.fn((_table: string) => ({ insert }));
+    const backend = createLiveBackend(supabaseHelpDb({ from } as unknown as SupabaseClient));
+    await backend.submitFeedback({ requestId: 'r1', volunteerId: 'sam', stars: 5, tags: ['fast'], note: ' Great ' });
+    await backend.reportProblem({ requestId: 'r1', volunteerId: 'sam', kind: 'unsafe', note: 'x'.repeat(1200) });
+    expect(from.mock.calls).toEqual([['help_feedback'], ['help_feedback']]);
+    expect(insert.mock.calls[0]![0]).toEqual({ request_id: 'r1', kind: 'rating', stars: 5, tags: ['fast'], problem: null, note: 'Great' });
+    expect(insert.mock.calls[1]![0]).toMatchObject({ request_id: 'r1', kind: 'problem', stars: null, tags: [], problem: 'unsafe' });
+    expect((insert.mock.calls[1]![0] as { note: string }).note).toHaveLength(1000);
+  });
+
+  it('a rating saved before (23505, a retried Submit) counts as sent; other errors throw', async () => {
+    const failing = (code: string) => ({ from: () => ({ insert: async () => ({ error: { code, message: code } }) }) }) as unknown as SupabaseClient;
+    const rating = { request_id: 'r1', kind: 'rating' as const, stars: 5, tags: [], problem: null, note: '' };
+    await expect(supabaseHelpDb(failing('23505')).insertFeedback(rating)).resolves.toBeUndefined();
+    await expect(supabaseHelpDb(failing('42501')).insertFeedback(rating)).rejects.toMatchObject({ code: '42501' });
+    await expect(supabaseHelpDb(failing('23505')).insertFeedback({ ...rating, kind: 'problem', stars: null, problem: 'rude' }))
+      .rejects.toMatchObject({ code: '23505' });
+  });
+
+  it('withdraws through withdraw_open_request and reads a null row (all nulls) as none', async () => {
+    const row = { id: 'r1', status: 'matched' };
+    const rpc = jest.fn<(...args: unknown[]) => Promise<{ data: unknown; error: null }>>()
+      .mockResolvedValueOnce({ data: row, error: null })
+      .mockResolvedValueOnce({ data: { id: null, status: null }, error: null })
+      .mockResolvedValueOnce({ data: null, error: null });
+    const db = supabaseHelpDb({ rpc } as unknown as SupabaseClient);
+    expect(await db.withdraw('r1')).toEqual(row);
+    expect(await db.withdraw('r1')).toBeNull();
+    expect(await db.withdraw('r1')).toBeNull();
+    expect(rpc).toHaveBeenCalledWith('withdraw_open_request', { p_request_id: 'r1' });
+  });
+});
+
+// Found by the two-browser test on 2026-11-18 (findings-visitor F3/F16/F18, findings-volunteer F5/F11/F14/F23).
+describe('help request lifecycle', () => {
+  beforeEach(() => { jest.useFakeTimers(); });
+  afterEach(() => { jest.useRealTimers(); });
+
+  it('a search timer that fires late, after a volunteer accepted, shows the match and leaves the volunteer’s chat alone', async () => {
+    const server = fakeServer();
+    // The visitor's phone is asleep: its polls and Realtime never see the Accept.
+    const asleep: HelpDb = { ...server.dbFor('rosa'), subscribe: () => () => {}, getRequest: () => new Promise(() => {}) };
+    const visitor = createRequestStore(createLiveBackend(asleep));
+    const sam = createDeskStore(createLiveBackend(server.dbFor('sam')));
+    await sam.setUser('sam');
+    sam.watchOpen();
+    void visitor.sendRequest(rosaNeedsHelp);
+    await settle();
+    const id = visitor.getState().request!.id;
+    await settle(SEARCH_TIMEOUT_MS - 5000);
+    expect(await sam.accept(id)).toBe(true); // 1:55 in
+    await settle(5000); // the visitor's 2-minute timer fires: too late to withdraw it
+
+    expect(server.requests.get(id)).toMatchObject({ status: 'matched', volunteer_id: 'sam', closed_by: null });
+    expect(visitor.getState()).toMatchObject({ status: 'matched', match: { volunteer: { firstName: 'Sam' } } });
+    expect(sam.getState()).toMatchObject({ assignment: { id }, notice: null });
+    // And they can talk.
+    sam.sendMessage('On my way');
+    await settle(POLL_MS);
+    expect(sam.getState().assignment?.id).toBe(id);
+  });
+
+  it('a search nobody took is withdrawn on time: off the list, and a late Accept hears it was withdrawn', async () => {
+    const server = fakeServer();
+    const { visitor, sam } = devices(server);
+    await sam.setUser('sam');
+    sam.watchOpen();
+    void visitor.sendRequest(rosaNeedsHelp);
+    await settle();
+    const id = visitor.getState().request!.id;
+    await settle(SEARCH_TIMEOUT_MS);
+    expect(visitor.getState().status).toBe('notFound');
+    expect(server.requests.get(id)).toMatchObject({ status: 'cancelled', closed_by: 'rosa' });
+    expect(await sam.accept(id)).toBe(false);
+    expect(sam.getState().notice?.key).toBe('withdrawn');
+  });
+
+  it('“Can’t make it” hands the request back: the visitor searches again (no rating), and another volunteer takes it', async () => {
+    const { visitor, sam, ana, id, server } = await matched();
+    expect(await sam.handBack()).toBe(true);
+    expect(sam.getState()).toMatchObject({ assignment: null, notice: { tone: 'success', key: 'handedBack', params: { name: 'Rosa' } } });
+    await settle();
+    expect(server.requests.get(id)).toMatchObject({ status: 'open', volunteer_id: null, closed_by: null });
+    expect(visitor.getState()).toMatchObject({ status: 'searching', match: null, notice: { key: 'volunteerLeft' } });
+    // Not back on Sam's own list; Ana gets it.
+    await settle(OPEN_REFRESH_MS);
+    expect(sam.getState().open.map(r => r.id)).not.toContain(id);
+    await ana.setUser('ana');
+    ana.watchOpen();
+    await settle();
+    expect(await ana.accept(id)).toBe(true);
+    await settle();
+    expect(visitor.getState()).toMatchObject({ status: 'matched', match: { volunteer: { firstName: 'Ana' } } });
+  });
+
+  it('a hand-back that fails (offline) keeps the request on the card', async () => {
+    const server = fakeServer();
+    const flaky: HelpDb = { ...server.dbFor('sam'), release: async () => { throw new Error('offline'); } };
+    const visitor = createRequestStore(createLiveBackend(server.dbFor('rosa')));
+    const sam = createDeskStore(createLiveBackend(flaky));
+    await sam.setUser('sam');
+    void visitor.sendRequest(rosaNeedsHelp);
+    await settle();
+    const id = visitor.getState().request!.id;
+    expect(await sam.accept(id)).toBe(true);
+    expect(await sam.handBack()).toBe(false);
+    expect(sam.getState().assignment?.id).toBe(id);
+    expect(server.requests.get(id)?.status).toBe('matched');
+  });
+
+  it('the volunteer ending the chat tells the visitor who ended it, above the rating', async () => {
+    const { visitor, sam } = await matched();
+    sam.endChat();
+    await settle();
+    expect(visitor.getState()).toMatchObject({ status: 'done', notice: { tone: 'success', key: 'volunteerEnded', params: { name: 'Sam' } } });
+    visitor.skipFeedback();
+    expect(visitor.getState()).toMatchObject({ status: 'idle', notice: null });
+  });
+
+  it('marking help as done yourself shows no “ended the chat” note', async () => {
+    const { visitor } = await matched();
+    visitor.endHelp();
+    await settle();
+    expect(visitor.getState()).toMatchObject({ status: 'done', notice: null });
+  });
+
+  it('a request called off by neither person (account deleted) doesn’t blame the visitor', async () => {
+    const server = fakeServer({ realtime: false });
+    const { visitor, sam, id } = await matched(server);
+    void visitor;
+    // 20261118030000_account_deletion.sql: cancelled with no closed_by.
+    server.requests.set(id, { ...server.requests.get(id)!, status: 'cancelled', closed_at: new Date().toISOString(), visitor_id: null as never });
+    await settle(POLL_MS);
+    expect(sam.getState()).toMatchObject({ assignment: null, notice: { key: 'closed', params: { name: 'Rosa' } } });
   });
 });
 

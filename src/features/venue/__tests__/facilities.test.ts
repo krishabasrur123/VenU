@@ -6,7 +6,7 @@ import { resources } from '@/i18n/locales';
 import { facilityDescription, facilityLocation, facilityName } from '../labels';
 import { facilitiesFor, getFacility, getVenue, VENUES } from '../mock';
 import { SEED_REPORTS } from '../reports';
-import { mapAspect, venueMapFor } from '../venue-maps';
+import { layerById, layerOf, mapAspect, mapLayers, venueMapFor } from '../venue-maps';
 
 // reports.ts builds its store on AsyncStorage, which has no native module under jest.
 jest.mock('@react-native-async-storage/async-storage', () => ({ __esModule: true, default: { getItem: async () => null, setItem: async () => {} } }));
@@ -31,15 +31,18 @@ describe('venue facility data', () => {
     expect(list.every(f => f.venueId === venueId)).toBe(true);
   });
 
-  it.each(VENUES.map(v => v.id))('%s puts every pin inside the map, clear of the others', venueId => {
+  it.each(VENUES.map(v => v.id))('%s puts every pin inside its layer’s map, clear of the others there', venueId => {
     const list = facilitiesFor(venueId);
-    const aspect = mapAspect(venueMapFor(getVenueOrThrow(venueId)));
+    const map = venueMapFor(getVenueOrThrow(venueId));
     for (const f of list) {
       expect({ id: f.id, inside: f.x >= EDGE && f.x <= 1 - EDGE && f.y >= EDGE && f.y <= 1 - EDGE }).toEqual({ id: f.id, inside: true });
+      // A pin names a layer the map has (a typo would quietly drop it on the first layer).
+      expect({ id: f.id, layer: f.layer === undefined || mapLayers(map).some(l => l.id === f.layer) }).toEqual({ id: f.id, layer: true });
     }
     for (const a of list) {
       for (const b of list) {
-        if (a.id >= b.id) continue;
+        if (a.id >= b.id || layerOf(map, a) !== layerOf(map, b)) continue;
+        const aspect = mapAspect(layerById(map, layerOf(map, a)));
         // In widths of the map: a step down a tall map is longer than the same share across.
         const gap = Math.hypot(a.x - b.x, (a.y - b.y) / aspect);
         expect({ pair: `${a.id}/${b.id}`, apart: gap >= MIN_GAP }).toEqual({ pair: `${a.id}/${b.id}`, apart: true });

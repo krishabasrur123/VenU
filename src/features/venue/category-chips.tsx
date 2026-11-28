@@ -37,9 +37,11 @@ function EdgeFade({ side, rtl }: { side: 'start' | 'end'; rtl: boolean }) {
   );
 }
 
-export function CategoryChips({ value, onChange }: {
+export function CategoryChips({ value, onChange, categories = CATEGORIES }: {
   value: FacilityCategory | null;
   onChange: (c: FacilityCategory | null) => void;
+  /** The chips to show after "All" (see categoriesAt): every category by default. */
+  categories?: FacilityCategory[];
 }) {
   const t = useT('venue');
   const rtl = useLayoutRtl();
@@ -71,7 +73,7 @@ export function CategoryChips({ value, onChange }: {
         accessibilityRole="radiogroup"
         accessibilityLabel={t('category.groupLabel')}>
         <Chip label={t('category.all')} role="radio" selected={value === null} onPress={() => onChange(null)} />
-        {CATEGORIES.map(c => (
+        {categories.map(c => (
           <Chip key={c} label={categoryLabel(c, t)} role="radio" selected={value === c} onPress={() => onChange(value === c ? null : c)} />
         ))}
       </DragScrollView>

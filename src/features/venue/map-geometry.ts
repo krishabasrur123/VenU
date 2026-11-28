@@ -12,6 +12,7 @@
  */
 import { matchesCategory } from './mock';
 import type { Facility, FacilityCategory } from './types';
+import { layerById, layerOf, mapLayers, type VenueMap } from './venue-maps';
 
 export interface MapPoint {
   x: number;
@@ -28,6 +29,10 @@ export interface MapView {
 export interface Box {
   w: number;
   h: number;
+  /** Content only: how far past "the whole map fits" it zooms out (see minScale). */
+  slack?: number;
+  /** Viewport only: px along its bottom that the pin card covers; the map may pan up to clear them. */
+  inset?: number;
 }
 
 /** A normalized region: [left, top, right, bottom]. */
@@ -37,9 +42,12 @@ export const MAX_SCALE = 6;
 /** A chip's pins, or a route, never zoom in past this: they should still show some context. */
 export const FIT_MAX_SCALE = 3.2;
 
-/** Content size for an image `aspect` (width / height) laid out across a map area `width` wide. */
-export function contentSize(aspect: number, width: number): Box {
-  return { w: width, h: width / aspect };
+/**
+ * Content size for an image `aspect` (width / height) laid out across a map area `width` wide, and
+ * its zoom-out `slack` (see minScale). e.g. contentSize(16 / 9, 390, 1) → { w: 390, h: 219.4, slack: 1 }
+ */
+export function contentSize(aspect: number, width: number, slack?: number): Box {
+  return slack === undefined ? { w: width, h: width / aspect } : { w: width, h: width / aspect, slack };
 }
 
 /** Where a normalized point shows on screen. */
@@ -52,28 +60,36 @@ export function toMap(screen: MapPoint, content: Box, view: MapView): MapPoint {
   return { x: (screen.x - view.x) / (view.s * content.w), y: (screen.y - view.y) / (view.s * content.h) };
 }
 
-/** How far past "the whole image fits" the map zooms out, so pins at its edges clear the buttons. */
-const ZOOM_OUT_SLACK = 0.75;
+/**
+ * How far past "the whole image fits" the map zooms out by default, so pins at its edges clear the
+ * buttons. The schematic drawing keeps it; a published map image passes 1 (IMAGE_ZOOM_OUT_SLACK).
+ */
+export const ZOOM_OUT_SLACK = 0.75;
+/** A published map stops zooming out once it fits: past that it only shrinks into a blank field with its pins piled up. */
+export const IMAGE_ZOOM_OUT_SLACK = 1;
 
-/** Smallest scale: the whole image fits in the viewport, with some room around it. */
+/** Smallest scale: the whole image fits in the viewport, with `content.slack` room around it. */
 export function minScale(content: Box, viewport: Box): number {
   'worklet';
-  return Math.min(viewport.w / content.w, viewport.h / content.h, 1) * ZOOM_OUT_SLACK;
+  return Math.min(viewport.w / content.w, viewport.h / content.h, 1) * (content.slack ?? ZOOM_OUT_SLACK);
 }
 
 /**
  * Keeps the image in reach: an axis that's smaller than the viewport is centred on it, a larger one
- * can't be dragged past its edges. Scale is held between minScale and MAX_SCALE.
+ * can't be dragged past its edges (its bottom edge may rise to `viewport.inset` above the bottom,
+ * so a pin there can clear the pin card). Scale is held between minScale and MAX_SCALE.
  */
 export function clampView(view: MapView, content: Box, viewport: Box): MapView {
   'worklet';
   const s = Math.min(Math.max(view.s, minScale(content, viewport)), MAX_SCALE);
-  const axis = (offset: number, size: number, room: number) => {
+  const axis = (offset: number, size: number, room: number, inset: number) => {
     const shown = size * s;
-    if (shown <= room) return (room - shown) / 2;
-    return Math.min(Math.max(offset, room - shown), 0);
+    const centred = (room - shown) / 2;
+    // Smaller: centred, or raised as far as the inset asks. Larger: edges stay outside the viewport.
+    if (shown <= room) return Math.min(Math.max(offset, Math.min(room - inset - shown, centred)), centred);
+    return Math.min(Math.max(offset, room - inset - shown), 0);
   };
-  return { s, x: axis(view.x, content.w, viewport.w), y: axis(view.y, content.h, viewport.h) };
+  return { s, x: axis(view.x, content.w, viewport.w, 0), y: axis(view.y, content.h, viewport.h, viewport.inset ?? 0) };
 }
 
 /** Zooms by `factor` around a screen point, which stays over the same spot on the map. */
@@ -82,6 +98,29 @@ export function zoomAt(view: MapView, factor: number, at: MapPoint, content: Box
   const s = Math.min(Math.max(view.s * factor, minScale(content, viewport)), MAX_SCALE);
   const k = s / view.s;
   return clampView({ s, x: at.x - (at.x - view.x) * k, y: at.y - (at.y - view.y) * k }, content, viewport);
+}
+
+/** How much one press of the map's + button zooms in (− zooms out by 1 / ZOOM_STEP). */
+export const ZOOM_STEP = 1.6;
+
+/**
+ * A +/− button press: zooms about the middle of the viewport, clamped to the same box as pan, pinch
+ * and the wheel (`reach`, with the pin card's inset), so a pin lifted clear of the card stays clear.
+ */
+export function zoomStep(view: MapView, factor: number, content: Box, reach: Box): MapView {
+  return zoomAt(view, factor, { x: reach.w / 2, y: reach.h / 2 }, content, reach);
+}
+
+/** How long after a pan ends a press still counts as part of it (web fires the click on release). */
+export const PAN_PRESS_GRACE_MS = 250;
+
+/**
+ * Whether a press on a pin is really the end of a drag that started on it: the map is panning, or
+ * stopped panning within PAN_PRESS_GRACE_MS. Such a press shouldn't open the pin's card.
+ * e.g. isStrayPress(1000, 900, false) → true; isStrayPress(1000, 500, false) → false
+ */
+export function isStrayPress(now: number, lastPanEnd: number, panning: boolean): boolean {
+  return panning || now - lastPanEnd < PAN_PRESS_GRACE_MS;
 }
 
 /** Screen px a fit keeps clear along the viewport's top and right edges (the bar and buttons over the map). */
@@ -171,7 +210,9 @@ export function mapUpdate(u: MapUpdate): { view: MapView; refit: boolean } | nul
   if (next.reveal && prev?.reveal !== next.reveal && u.revealPin) {
     const room: Box = { w: viewport.w, h: Math.max(viewport.h - u.revealInset, 1) };
     const base = view ?? u.view;
-    if (!isVisible(u.revealPin, content, base, room, 32)) view = centreOn(u.revealPin, { x: next.w / 2, y: room.h / 2 }, base, content, viewport);
+    // Clamped with the card's inset, so a pin near the map's bottom edge can still be lifted clear
+    // of the card (the image's bottom then sits at the card's top, not the viewport's).
+    if (!isVisible(u.revealPin, content, base, room, 32)) view = centreOn(u.revealPin, { x: next.w / 2, y: room.h / 2 }, base, content, { ...viewport, inset: u.revealInset });
   }
   return view ? { view, refit } : null;
 }
@@ -182,6 +223,56 @@ export function mapUpdate(u: MapUpdate): { view: MapView; refit: boolean } | nul
  */
 export function pinsFor(facilities: Facility[], category: FacilityCategory | null, keep: (string | null | undefined)[] = []): Facility[] {
   return facilities.filter(f => matchesCategory(f, category) || keep.includes(f.id));
+}
+
+/**
+ * How many of a chip's facilities each map layer holds, in the layers' order, for the toggle's
+ * badges. e.g. SoFi + First Aid → { outside: 0, 'level-3': 3, 'level-6': 2 }
+ */
+export function chipCountsByLayer(map: VenueMap, facilities: Facility[], category: FacilityCategory): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const layer of mapLayers(map)) counts[layer.id] = 0;
+  for (const f of pinsFor(facilities, category)) counts[layerOf(map, f)] += 1;
+  return counts;
+}
+
+/** What moves the venue map to another layer. */
+export type LayerEvent =
+  /** A facility opened in the sheet (from the list, search, a pin or a link), or the list again. */
+  | { kind: 'open'; facility: Facility | undefined }
+  /** The layer toggle. */
+  | { kind: 'pick'; layer: string }
+  /** Directions to a facility: its route is drawn on its layer. */
+  | { kind: 'directions'; to: Facility }
+  /** A category chip. */
+  | { kind: 'chip'; category: FacilityCategory | null };
+
+/**
+ * The layer the map shows after `e`, from `current`:
+ * - open: the facility's layer (back on the list: stays put);
+ * - pick: the layer picked;
+ * - directions: the facility's layer, so the line, start tag and fit show even after the visitor
+ *   toggled away (toggling away again keeps the steps; coming back shows the line again);
+ * - chip: stays put if the chip has pins here, else the layer with the most of them (the first on a
+ *   tie), so "First Aid" from SoFi's outside map lands on Level 3 rather than an empty map.
+ */
+export function nextMapLayer(map: VenueMap, facilities: Facility[], current: string, e: LayerEvent): string {
+  switch (e.kind) {
+    case 'open':
+      return e.facility ? layerOf(map, e.facility) : current;
+    case 'pick':
+      return layerById(map, e.layer).id;
+    case 'directions':
+      return layerOf(map, e.to);
+    case 'chip': {
+      if (!e.category) return current;
+      const counts = chipCountsByLayer(map, facilities, e.category);
+      if (counts[current] > 0) return current;
+      let best = current;
+      for (const [id, n] of Object.entries(counts)) if (n > (counts[best] ?? 0)) best = id;
+      return best;
+    }
+  }
 }
 
 export type Compass = 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'nw';

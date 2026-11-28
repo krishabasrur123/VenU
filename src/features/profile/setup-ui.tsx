@@ -1,9 +1,9 @@
 /**
- * Pieces for the Onboarding 2.0 setup steps: a titled group in a soft outlined box (Figma
+ * Pieces for the Onboarding 2.0 setup steps: a titled group in a frosted box (Figma 506:10114
  * "I'd prefer help from" / "Anything we should know?") and the "Gender [chips]" label row.
  */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
 
@@ -30,20 +30,23 @@ export function LabeledRow({ label, children }: { label: string; children: React
 
 const styles = StyleSheet.create({
   group: { gap: Spacing.sm, marginBottom: Spacing.xl },
-  title: { ...Type.body },
-  hint: { ...Type.caption },
-  // Figma's 411x133 outline (#DFEBFD): a soft frame around the chips, filled white so they read on the gradient.
+  title: { ...Type.body, fontSize: 16, lineHeight: 21, paddingHorizontal: Spacing.sm },
+  hint: { ...Type.caption, paddingHorizontal: Spacing.sm },
+  // Figma's frosted glass card: a faint blue-gray tint and a white rim over the gradient, the
+  // gradient blurred behind it where the platform can (web).
   box: {
     gap: Spacing.md,
-    padding: Spacing.md,
-    borderRadius: Radius.md,
+    paddingVertical: Spacing.lg,
+    paddingHorizontal: Spacing.md,
+    borderRadius: Radius.lg,
     borderWidth: 1,
-    borderColor: Colors.primarySoft,
-    backgroundColor: 'rgba(255,255,255,0.6)',
+    borderColor: Colors.frostBorder,
+    backgroundColor: Colors.frost,
+    ...(Platform.OS === 'web' ? ({ backdropFilter: 'blur(12px)' } as object) : null),
   },
   boxError: { borderColor: Colors.danger },
   error: { ...Type.caption, color: Colors.danger },
   row: { flexDirection: 'row', alignItems: 'flex-start', gap: 6 },
-  rowLabel: { fontFamily: Fonts.display, fontSize: 14, lineHeight: 20, color: Colors.text, paddingTop: 8 },
+  rowLabel: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20, color: Colors.text, paddingTop: 8 },
   flex: { flex: 1 },
 });

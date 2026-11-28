@@ -1,6 +1,6 @@
 /** "Volunteer feedback report" (Figma 235:26589): stars, what went well, a note, Submit. */
-import { useMemo, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useMemo, useRef, useState, type ComponentRef } from 'react';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Avatar } from '@/components/avatar';
 import { Button } from '@/components/button';
@@ -9,14 +9,16 @@ import { TextField } from '@/components/text-field';
 import { Colors, Fonts, Radius, Spacing, Type } from '@/constants/theme';
 import { FEEDBACK_TAGS, PROBLEM_KINDS } from '@/features/volunteer/mock';
 import { volunteerRequests } from '@/features/volunteer/request-store';
-import type { FeedbackTag, Match, ProblemKind } from '@/features/volunteer/types';
+import type { FeedbackTag, Match, Notice, ProblemKind } from '@/features/volunteer/types';
 import { useT } from '@/i18n';
 import { friendlyError } from '@/lib/errors';
 
+import { NoteBanner } from './note-banner';
 import { NoteBox } from './note-box';
 import { StarRating } from './star-rating';
 
-export function FeedbackView({ match }: { match: Match }) {
+/** `notice`: why the help ended, when the volunteer ended it ("Daniel ended the chat. …"). */
+export function FeedbackView({ match, notice }: { match: Match; notice?: Notice | null }) {
   const v = match.volunteer;
   const t = useT('volunteer');
   const tagOptions = useMemo(() => FEEDBACK_TAGS.map(value => ({ value, label: t(`feedback.tags.${value}`) })), [t]);
@@ -45,6 +47,10 @@ export function FeedbackView({ match }: { match: Match }) {
           <Text style={styles.skipText}>{t('feedback.skip')}</Text>
         </Pressable>
       </View>
+
+      {notice ? (
+        <NoteBanner tone={notice.tone} text={t(`notice.${notice.key}`, { name: notice.params?.name ?? v.firstName })} onDismiss={volunteerRequests.dismissNotice} sticky />
+      ) : null}
 
       <View style={styles.who}>
         <Avatar name={v.firstName} uri={null} size={56} />
@@ -83,6 +89,15 @@ function ReportProblem() {
   const [note, setNote] = useState('');
   const [state, setState] = useState<'editing' | 'sending' | 'sent'>('editing');
   const [error, setError] = useState<string | null>(null);
+  const panel = useRef<ComponentRef<typeof View>>(null);
+
+  // It opens at the bottom of the page, under the tab bar: bring it into view. On web a View is
+  // its DOM element; native keeps its place (the page scrolls by hand).
+  useEffect(() => {
+    if (!open || Platform.OS !== 'web') return;
+    const el = panel.current as unknown as { scrollIntoView?: (o: object) => void } | null;
+    el?.scrollIntoView?.({ block: 'center', behavior: 'smooth' });
+  }, [open]);
 
   async function send() {
     if (!kind) return setError(t('report.pickKind'));
@@ -113,7 +128,7 @@ function ReportProblem() {
     );
   }
   return (
-    <View style={styles.report}>
+    <View ref={panel} style={styles.report}>
       <Text style={styles.reportTitle} accessibilityRole="header">{t('report.title')}</Text>
       <ChipGroup options={kindOptions} value={kind} onChange={k => { setKind(k); setError(null); }} accessibilityLabel={t('report.kindLabel')} />
       <TextField value={note} onChangeText={setNote} multiline placeholder={t('report.notePlaceholder')} accessibilityLabel={t('report.notePlaceholder')} maxLength={1000} />

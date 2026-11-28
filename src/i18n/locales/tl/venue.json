@@ -18,6 +18,9 @@
     "assistTitle": "Kailangan ng Tulong?",
     "assistBody": "Kumonekta sa isang boluntaryo",
     "assistLabel": "Kailangan ng tulong? Kumonekta sa isang boluntaryo",
+    "assistTitleVolunteer": "Handa nang Tumulong?",
+    "assistBodyVolunteer": "Tingnan ang mga request malapit sa iyo",
+    "assistLabelVolunteer": "Handa nang tumulong? Tingnan ang mga request malapit sa iyo",
     "empty": "Walang lugar na tugma sa “{{query}}”. Subukan ang isang lungsod, gaya ng Inglewood.",
     "cardHint": "Binubuksan ang mapa at mga pasilidad"
   },
@@ -80,7 +83,15 @@
     "label": "Mapa ng {{venue}} na may mga pin ng pasilidad. I-drag para ilipat; i-pinch o gamitin ang mga button para mag-zoom.",
     "you": "Ikaw",
     "start": "Simula",
-    "cardHint": "Binubuksan ito sa panel sa ibaba"
+    "cardHint": "Binubuksan ito sa panel sa ibaba",
+    "layers": {
+      "label": "Layer ng mapa",
+      "outside": "Labas",
+      "level": "Level {{number}}",
+      "matches_one": "{{layer}}, {{number}} tugma",
+      "matches_other": "{{layer}}, {{number}} tugma",
+      "noMatches": "{{layer}}, walang tugma"
+    }
   },
   "officialMap": {
     "attribution": "Mapa: {{source}}",
@@ -94,6 +105,9 @@
   },
   "walk_one": "{{number}} minutong lakad",
   "walk_other": "{{number}} minutong lakad",
+  "walkStart": "Dito nagsisimula ang ruta",
+  "walkMine": "Nandito ka",
+  "walkAsk": "Hindi nakalathala ang puwesto",
   "wait": {
     "none": "Walang pila",
     "short": "Maikling pila",
@@ -102,6 +116,18 @@
   "row": {
     "label": "{{name}}, {{meta}}",
     "labelAccessible": "{{name}}, {{meta}}, para sa may kapansanan"
+  },
+  "sponsor": {
+    "label": "May sponsor",
+    "pin": "May sponsor: {{name}} sa mapa",
+    "row": "May sponsor: {{name}}, {{meta}}",
+    "card": "May sponsor: {{name}}. {{offer}}. {{meta}}",
+    "heading": "May sponsor: {{name}}",
+    "showScreen": "Ipakita ang screen na ito sa stand",
+    "disclosure": "Bayad na listing, hindi impormasyon ng venue",
+    "banner": "May sponsor: {{name}}, {{walk}}. {{offer}}",
+    "bannerHint": "Binubuksan ang stand. Patuloy ang paghahanap para sa request mo.",
+    "hide": "Itago ang mensaheng may sponsor"
   },
   "tags": {
     "label": "Mga tag:",
@@ -118,6 +144,7 @@
     "long_lines_halftime": "Mahabang pila sa halftime",
     "wheelchair_loans": "Pahiram ng wheelchair",
     "permit_needed": "Kailangan ng permit",
+    "pass_needed": "Kailangan ng pass",
     "wheelchair_escort": "Alalay sa wheelchair",
     "premium_access": "VIP at premium",
     "sensory_room": "Silid-sensory",
@@ -126,54 +153,204 @@
     "changing_table": "Palitan ng lampin"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "Puwesto ng Coca-Cola Refresh",
+      "description": "Malamig na inuming Coca-Cola, de-boteng tubig at meryenda.",
+      "location": "Sa plaza, malapit sa outdoor court",
+      "offer": "$1 bawas sa anumang inuming Coca-Cola gamit ang VenU"
+    },
+    "panda-express-intuit": {
+      "name": "Puwesto ng Panda Express",
+      "description": "Orange chicken, chow mein at rice bowl.",
+      "location": "Concourse ng Main Level, lampas sa Pasukan ng The Wall",
+      "offer": "Libreng egg roll sa bawat bowl"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "Puwesto ng Coca-Cola Refresh",
+      "description": "Malamig na inuming Coca-Cola, de-boteng tubig at meryenda.",
+      "location": "Level 1, sa loob ng Pasukan 1 at 2",
+      "offer": "$1 bawas sa anumang inuming Coca-Cola gamit ang VenU"
+    },
+    "ben-jerrys-sofi": {
+      "name": "Puwesto ng ice cream ng Ben & Jerry’s",
+      "description": "Ice cream sa tasa at apa.",
+      "location": "American Airlines Plaza",
+      "offer": "Libreng topping sa bawat scoop"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "Puwesto ng Coca-Cola Refresh",
+      "description": "Malamig na inuming Coca-Cola, de-boteng tubig at meryenda.",
+      "location": "Main Concourse, sa gilid ng Figueroa",
+      "offer": "$1 bawas sa anumang inuming Coca-Cola gamit ang VenU"
+    },
+    "entry-1": {
+      "name": "Pasukan 1",
+      "description": "Hilagang pasukan. Clear bag hanggang 12×6×12 in., o maliit na bag hanggang 4.5×6.5 in. May accessible na daan at libreng wheelchair escort sa bawat pasukan.",
+      "location": "Hilagang bahagi, sa Touchdown Drive"
+    },
+    "entry-2": {
+      "name": "Pasukan 2",
+      "description": "Hilagang pasukan, bukas hanggang matapos ang laro kapag may football game. Clear bag hanggang 12×6×12 in., o maliit na bag hanggang 4.5×6.5 in.",
+      "location": "Hilagang bahagi, sa Touchdown Drive"
+    },
     "entry-3": {
       "name": "Pasukan 3",
-      "description": "Hilagang pasukan. May accessible na daan at libreng wheelchair escort sa bawat pasukan.",
+      "description": "Hilagang pasukan, bukas hanggang matapos ang laro kapag may football game. May accessible na daan at libreng wheelchair escort sa bawat pasukan.",
       "location": "Hilagang bahagi"
     },
     "entry-4": {
       "name": "Pasukan 4",
-      "description": "Hilagang pasukan na may accessibility podium at mga upuang hintayan sa loob.",
+      "description": "Hilagang pasukan na may accessibility podium at mga upuang hintayan pagpasok mismo. Clear bag hanggang 12×6×12 in., o maliit na bag hanggang 4.5×6.5 in.",
       "location": "Hilagang bahagi"
+    },
+    "entry-5": {
+      "name": "Pasukan 5",
+      "description": "Hilagang-kanlurang pasukan, pinakamalapit sa Berdeng Zone (Lote A at B). May accessible na daan at libreng wheelchair escort sa bawat pasukan.",
+      "location": "Hilagang-kanlurang bahagi"
     },
     "entry-6": {
       "name": "Pasukan 6",
-      "description": "Kanlurang pasukan para sa may VIP at premium na tiket.",
+      "description": "Kanlurang pasukan para sa may VIP at premium na tiket, bukas hanggang matapos ang laro kapag may football game.",
       "location": "Kanlurang bahagi"
+    },
+    "entry-7": {
+      "name": "Pasukan 7",
+      "description": "Kanlurang pasukan para sa may VIP at premium na tiket, bukas hanggang matapos ang laro kapag may football game. Pinakamalapit sa Asul na Zone (Lote N).",
+      "location": "Kanlurang bahagi, sa Champions Way"
     },
     "entry-8": {
       "name": "Pasukan 8",
-      "description": "Timog na pasukan na may accessibility podium at mga upuang hintayan sa loob.",
+      "description": "Timog na pasukan na may accessibility podium at mga upuang hintayan pagpasok mismo. Bukas ang Pasukan 8B hanggang matapos ang laro kapag may football game.",
       "location": "Timog na bahagi"
+    },
+    "entry-9": {
+      "name": "Pasukan 9",
+      "description": "Timog na pasukan (gate 9A hanggang 9D), pinakamalapit sa Lilang Zone (Lote K at L). May accessible na daan at libreng wheelchair escort sa bawat pasukan.",
+      "location": "Timog na bahagi, sa tabi ng lawa"
     },
     "entry-10": {
       "name": "Pasukan 10",
-      "description": "Timog na pasukan na may accessibility podium at mga upuang hintayan sa loob.",
-      "location": "Timog na bahagi"
+      "description": "Timog-silangang pasukan na may accessibility podium at mga upuang hintayan pagpasok mismo. Bukas ang Pasukan 10B hanggang matapos ang laro kapag may football game.",
+      "location": "Timog-silangang bahagi, sa Stadium Drive"
     },
     "entry-11": {
       "name": "Pasukan 11",
-      "description": "Silangang pasukan para sa may VIP at premium na tiket.",
+      "description": "Silangang pasukan para sa may VIP at premium na tiket, bukas hanggang matapos ang laro kapag may football game.",
       "location": "Silangang bahagi"
+    },
+    "entry-12": {
+      "name": "Pasukan 12",
+      "description": "Hilagang-silangang pasukan para sa may VIP at premium na tiket, bukas hanggang matapos ang laro kapag may football game.",
+      "location": "Hilagang-silangang bahagi"
+    },
+    "podium-entry-4": {
+      "name": "Podium para sa May Kapansanan 4",
+      "description": "Ang mga Mobility Ambassador ang mag-aayos ng libreng wheelchair escort papunta sa upuan mo at pabalik pagkatapos ng event. May mga upuang hintayan. Hindi puwedeng hiramin ang wheelchair para sa event o dalhin sa paradahan.",
+      "location": "Pagpasok mismo sa Pasukan 4"
+    },
+    "podium-entry-8": {
+      "name": "Podium para sa May Kapansanan 8",
+      "description": "Ang mga Mobility Ambassador ang mag-aayos ng libreng wheelchair escort papunta sa upuan mo at pabalik pagkatapos ng event. May mga upuang hintayan. Hindi puwedeng hiramin ang wheelchair para sa event o dalhin sa paradahan.",
+      "location": "Pagpasok mismo sa Pasukan 8"
+    },
+    "podium-entry-10": {
+      "name": "Podium para sa May Kapansanan 10",
+      "description": "Ang mga Mobility Ambassador ang mag-aayos ng libreng wheelchair escort papunta sa upuan mo at pabalik pagkatapos ng event. May mga upuang hintayan. Hindi puwedeng hiramin ang wheelchair para sa event o dalhin sa paradahan.",
+      "location": "Pagpasok mismo sa Pasukan 10"
+    },
+    "rideshare-kareem": {
+      "name": "Babaan ng Sakay-hatid",
+      "description": "Nagbababa ang Uber, Lyft, taxi, bus at shuttle sa gilid ng daan na pa-hilaga. Ang sakayan ay sa Kareem Court at Manchester Boulevard. Kung tren: Metro C o K Line papuntang LAX/Metro Transit Center, saka ang game-day shuttle mula sa Bus Bay 8.",
+      "location": "Kareem Court, sa pagitan ng Pincay Drive at Manchester Boulevard"
+    },
+    "accessible-drop-off": {
+      "name": "Accessible na Babaan",
+      "description": "Babaan at sakayan para sa mga bisitang may kapansanan. Pumasok mula sa Prairie Avenue pa-hilaga sa pamamagitan ng Arbor Vitae Street; lumabas sa Touchdown Drive.",
+      "location": "District Drive, sa pagitan ng Champions Way at Touchdown Drive"
+    },
+    "brown-zone": {
+      "name": "Kayumangging Zone",
+      "description": "Lote C at D, pinakamalapit sa Pasukan 1–5 at 12. May ADA stall (kailangan ng placard) sa bawat lote, unahan sa pagdating. May libreng accessible na shuttle sa piling event.",
+      "location": "3919 Pincay Drive"
+    },
+    "green-zone": {
+      "name": "Berdeng Zone",
+      "description": "Lote A at B, pinakamalapit sa Pasukan 5 at 6. May ADA stall (kailangan ng placard) sa bawat lote, unahan sa pagdating. May libreng accessible na shuttle sa piling event.",
+      "location": "800 Prairie Avenue"
+    },
+    "blue-zone": {
+      "name": "Asul na Zone",
+      "description": "Lote N, pinakamalapit sa Pasukan 7 at 8. May ADA stall (kailangan ng placard) sa bawat lote, unahan sa pagdating. May libreng accessible na shuttle sa piling event.",
+      "location": "1100 Prairie Avenue"
+    },
+    "purple-zone": {
+      "name": "Lilang Zone",
+      "description": "Lote K at L, pinakamalapit sa Pasukan 9. May ADA stall (kailangan ng placard) sa bawat lote, unahan sa pagdating. May libreng accessible na shuttle sa piling event.",
+      "location": "3801 West Century Boulevard"
+    },
+    "orange-zone": {
+      "name": "Kahel na Zone",
+      "description": "Lote E hanggang H, pinakamalapit sa Pasukan 10, 11 at 12. May ADA stall (kailangan ng placard) sa bawat lote, unahan sa pagdating. May libreng accessible na shuttle sa piling event.",
+      "location": "3695 Pincay Drive"
+    },
+    "service-animal-relief": {
+      "name": "Dumihan ng Service Animal",
+      "description": "Malugod na tinatanggap ang mga service animal (aso at miniature horse); hindi ang mga emotional support animal. Ituturo ng staff ang daan papunta sa dumihan.",
+      "location": "Magtanong ng daan sa staff ng Guest Experience"
     },
     "guest-services-ne": {
       "name": "Serbisyo sa Bisita NE",
-      "description": "Mga tanong, nawawalang gamit, tulong sa pandinig, libreng sensory kit at sensory room.",
-      "location": "Level 3, hilagang-silangang concourse"
+      "description": "Nawawalang gamit, libreng tulong sa pandinig at headphones (iiwan ang ID), libreng sensory kit, lagayan ng mobility device at sensory room.",
+      "location": "Level 3, hilagang-silangang concourse, sa tabi ng Pechanga VIP Lobby"
+    },
+    "sensory-room-ne": {
+      "name": "Silid-sensory NE",
+      "description": "Tahimik na kuwarto para makapagpahinga mula sa ingay, ilaw at dami ng tao, salitan nang tig-15 minuto, unahan sa pagdating. Magtanong sa desk ng Serbisyo sa Bisita sa tabi nito.",
+      "location": "Level 3, sa loob ng hilagang-silangang Serbisyo sa Bisita"
+    },
+    "guest-services-n": {
+      "name": "Serbisyo sa Bisita N",
+      "description": "Nawawalang gamit, libreng tulong sa pandinig (iiwan ang ID), libreng sensory kit, wristband panghanap ng bata at paglipat sa accessible na upuan.",
+      "location": "Level 3, hilagang concourse, sa tabi ng Pro Shop"
+    },
+    "guest-services-se": {
+      "name": "Serbisyo sa Bisita SE",
+      "description": "Nawawalang gamit, libreng tulong sa pandinig (iiwan ang ID), libreng sensory kit at pagtuturo ng daan.",
+      "location": "Level 3, timog-silangan, sa tabi ng SoFi VIP Lobby"
     },
     "guest-services-sw": {
       "name": "Serbisyo sa Bisita SW",
-      "description": "Nasa loob ng Corona Beach Club. Nawawalang gamit, tulong sa pandinig, libreng sensory kit at sensory room.",
+      "description": "Nasa loob ng Corona Beach Club. Nawawalang gamit, libreng tulong sa pandinig at headphones (iiwan ang ID), libreng sensory kit at sensory room.",
       "location": "Level 3, timog-kanlurang concourse"
     },
-    "first-aid-se": {
-      "name": "Pangunang Lunas SE",
-      "description": "May mga EMT sa lugar. Puwede silang tawagin ng kahit sinong usher o staff.",
-      "location": "Level 1, timog-silangang concourse"
+    "sensory-room-sw": {
+      "name": "Silid-sensory SW",
+      "description": "Tahimik na kuwarto para makapagpahinga mula sa ingay, ilaw at dami ng tao, salitan nang tig-15 minuto, unahan sa pagdating. Magtanong sa desk ng Serbisyo sa Bisita sa tabi nito.",
+      "location": "Level 3, sa loob ng timog-kanlurang Serbisyo sa Bisita"
+    },
+    "first-aid-ne": {
+      "name": "Pangunang Lunas NE",
+      "description": "May mga EMT sa lugar. Puwede silang tawagin ng kahit sinong usher o staff. Puwede ka ring magpasuso rito nang pribado.",
+      "location": "Level 3, hilagang-silangang concourse"
     },
     "first-aid-nw": {
       "name": "Pangunang Lunas NW",
-      "description": "May mga EMT sa lugar. Puwede silang tawagin ng kahit sinong usher o staff.",
+      "description": "May mga EMT sa lugar. Puwede silang tawagin ng kahit sinong usher o staff. Puwede ka ring magpasuso rito nang pribado.",
+      "location": "Level 3, hilagang-kanlurang concourse; magtanong ng daan sa staff"
+    },
+    "first-aid-se": {
+      "name": "Pangunang Lunas Level 1",
+      "description": "May mga EMT sa lugar. Puwede silang tawagin ng kahit sinong usher o staff. May first aid room din sa Level 2, 3, 6 at 8.",
+      "location": "Level 1 (event level), timog-silangang concourse; magtanong ng daan sa staff"
+    },
+    "elevator-north": {
+      "name": "Elebeytor N",
+      "description": "Unang sumasakay ang mga bisitang may kapansanan, kasama ang hanggang tatlong kasamahan (isa lang kapag peak hours). Abot ng mga elevator at escalator ang bawat level.",
+      "location": "Level 3, hilagang concourse, sa tabi ng section 207"
+    },
+    "elevator-northwest": {
+      "name": "Elebeytor NW",
+      "description": "Unang sumasakay ang mga bisitang may kapansanan, kasama ang hanggang tatlong kasamahan (isa lang kapag peak hours). Abot ng mga elevator at escalator ang bawat level.",
       "location": "Level 3, hilagang-kanlurang concourse"
     },
     "pedestrian-ramp": {
@@ -181,35 +358,65 @@
       "description": "Ang nag-iisang rampa para sa naglalakad sa stadium. Abot nito ang lahat ng level maliban sa Level 7.",
       "location": "Timog-silangang bahagi, sa likod ng end zone"
     },
+    "restrooms-n": {
+      "name": "Mga CR N",
+      "description": "Accessible ang bawat CR at may palitan ng lampin ng sanggol. May family restroom sa bawat level.",
+      "location": "Level 3, hilagang concourse, malapit sa section 205"
+    },
+    "restrooms-sw": {
+      "name": "Mga CR SW",
+      "description": "Accessible ang bawat CR at may palitan ng lampin ng sanggol. May family restroom sa bawat level.",
+      "location": "Level 3, timog-kanlurang concourse, malapit sa section C223"
+    },
+    "first-aid-se-6": {
+      "name": "Pangunang Lunas SE",
+      "description": "May mga EMT sa lugar. Puwede silang tawagin ng kahit sinong usher o staff. Puwede ka ring magpasuso rito nang pribado.",
+      "location": "Level 6, timog-silangang concourse, malapit sa section 342"
+    },
+    "first-aid-sw-6": {
+      "name": "Pangunang Lunas SW",
+      "description": "May mga EMT sa lugar. Puwede silang tawagin ng kahit sinong usher o staff. Puwede ka ring magpasuso rito nang pribado.",
+      "location": "Level 6, timog-kanlurang concourse, malapit sa section 330"
+    },
+    "guest-services-ne-6": {
+      "name": "Serbisyo sa Bisita Level 6 NE",
+      "description": "Nawawalang gamit, libreng tulong sa pandinig (iiwan ang ID), libreng sensory kit at paglipat sa accessible na upuan.",
+      "location": "Level 6, hilagang-silangan, sa tabi ng Pechanga VIP Lobby"
+    },
+    "guest-services-se-6": {
+      "name": "Serbisyo sa Bisita Level 6 SE",
+      "description": "Nawawalang gamit, libreng tulong sa pandinig (iiwan ang ID), libreng sensory kit at paglipat sa accessible na upuan.",
+      "location": "Level 6, timog-silangan, sa tabi ng SoFi VIP Lobby"
+    },
+    "adult-changing": {
+      "name": "Palitan ng Lampin ng Adulto",
+      "description": "Palitan ng lampin para sa adulto, malapit sa elevator 8. Magtanong sa isang Guest Experience Representative kung hindi mo ito makita.",
+      "location": "Level 6, malapit sa section 329"
+    },
     "lactation-suite": {
-      "name": "Silid-pasusuhan",
-      "description": "Pribadong Mamava lactation pod. May family restroom sa bawat level.",
-      "location": "Level 4, timog"
+      "name": "Mga Silid-pasusuhan",
+      "description": "Pribadong Mamava lactation suite na may upuan at saksakan, sa Level 4 (timog), Level 6 at Level 8. Puwede rin ang kahit anong first aid room o family restroom.",
+      "location": "Itanong sa Serbisyo sa Bisita ang pinakamalapit"
     },
-    "rideshare-kareem": {
-      "name": "Babaan ng Sakay-hatid",
-      "description": "Babaan ng Uber, Lyft at taxi. Ang sakayan ay sa Kareem Court at Manchester Boulevard.",
-      "location": "Kareem Court, sa pagitan ng Pincay Drive at Manchester Boulevard"
+    "hydration-ne": {
+      "name": "Istasyon ng Tubig NE",
+      "description": "Libreng filtered na tubig. Puwede kang magdala ng isang walang laman, malinaw at hindi metal na reusable na bote hanggang 20 oz para punuin dito.",
+      "location": "Level 6, hilagang-silangang concourse, malapit sa section 304"
     },
-    "accessible-drop-off": {
-      "name": "Accessible na Babaan",
-      "description": "Babaan at sakayan para sa mga bisitang may kapansanan. Pumasok mula sa Prairie Avenue pa-hilaga papuntang Arbor Vitae Street.",
-      "location": "District Drive, sa pagitan ng Champions Way at Touchdown Drive"
+    "hydration-sw": {
+      "name": "Istasyon ng Tubig SW",
+      "description": "Libreng filtered na tubig. Puwede kang magdala ng isang walang laman, malinaw at hindi metal na reusable na bote hanggang 20 oz para punuin dito.",
+      "location": "Level 6, timog-kanlurang concourse, malapit sa section 329"
     },
-    "brown-zone": {
-      "name": "Kayumangging Zone",
-      "description": "Pinakamalapit na paradahan sa Pasukan 1–5 at 12. May ADA stall sa bawat lote, unahan sa pagdating.",
-      "location": "3919 Pincay Drive"
+    "restrooms-nw": {
+      "name": "Mga CR NW",
+      "description": "Accessible ang bawat CR at may palitan ng lampin ng sanggol. May family restroom sa bawat level.",
+      "location": "Level 6, hilagang-kanlurang concourse, malapit sa section 316"
     },
-    "blue-zone": {
-      "name": "Asul na Zone",
-      "description": "Pinakamalapit na paradahan sa Pasukan 7 at 8. May ADA stall sa bawat lote, unahan sa pagdating.",
-      "location": "1100 Prairie Avenue"
-    },
-    "orange-zone": {
-      "name": "Kahel na Zone",
-      "description": "Pinakamalapit na paradahan sa Pasukan 10, 11 at 12. May ADA stall sa bawat lote, unahan sa pagdating.",
-      "location": "3695 Pincay Drive"
+    "restrooms-se": {
+      "name": "Mga CR SE",
+      "description": "Accessible ang bawat CR at may palitan ng lampin ng sanggol. May family restroom sa bawat level.",
+      "location": "Level 6, timog-silangang concourse, malapit sa section 341"
     },
     "kobe-bryant-entrance": {
       "name": "Pasukang Kobe Bryant",
@@ -278,27 +485,27 @@
     },
     "main-entrance": {
       "name": "Pangunahing Pasukan",
-      "description": "GameFace ID lane sa kaliwa, Identity Pass lane sa kanan. Libreng tulong sa paggalaw mula security hanggang sa upuan mo.",
+      "description": "GameFace ID lane sa kaliwa, Identity Pass lane sa kanan; para sa accessible na pagpasok, mag-tap ang may Identity Pass sa Answers Portal. Bag hanggang 10×6×2 in. (medical bag hanggang 14×14×6). Libreng tulong sa paggalaw mula security hanggang sa upuan mo.",
       "location": "Sa plaza, malapit sa Century Blvd. at Prairie Ave."
     },
     "vip-entrance": {
       "name": "Pasukang VIP",
-      "description": "Para sa may suite, club at floor na tiket.",
+      "description": "Para sa suite, club at floor na tiket (puwede rin sa Pangunahing Pasukan).",
       "location": "Sa kaliwa ng Pangunahing Pasukan"
     },
     "wall-entrance": {
       "name": "Pasukan ng The Wall",
-      "description": "Sariling pasukan para sa The Wall.",
+      "description": "Para sa tiket sa The Wall (puwede rin sa Pangunahing Pasukan).",
       "location": "Sa kaliwa ng Pangunahing Pasukan, lampas sa Pasukang VIP"
     },
     "answers-portal-main": {
       "name": "Answers Portal sa Main",
-      "description": "Serbisyo sa bisita: nawawalang gamit, libreng tulong sa pandinig (iiwan ang photo ID) at OneCourt device.",
+      "description": "Serbisyo sa bisita: nawawalang gamit, libreng tulong sa pandinig (iiwan ang photo ID), sensory bag (iiwan ang ID) at OneCourt device.",
       "location": "Main Level, malapit sa section Main 6"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal sa Terrace",
-      "description": "Serbisyo sa bisita: nawawalang gamit at libreng tulong sa pandinig (iiwan ang photo ID).",
+      "description": "Serbisyo sa bisita: nawawalang gamit, libreng tulong sa pandinig (iiwan ang photo ID) at OneCourt device.",
       "location": "Terrace Level, malapit sa section Terrace 18"
     },
     "first-aid-main": {
@@ -318,7 +525,7 @@
     },
     "sensory-room": {
       "name": "Silid-sensory",
-      "description": "Ang pribadong Kaiser Permanente Sensory Room. May sensory bag kapag hiniling.",
+      "description": "Ang pribadong Kaiser Permanente Sensory Room. Nasa Answers Portal sa tabi ng Main 6 ang sensory bag (headphones, fidget toy); kailangan ng ID.",
       "location": "Magtanong ng daan sa isang Arena Host"
     },
     "infant-care-room": {
@@ -328,30 +535,41 @@
     },
     "mobility-hub": {
       "name": "Sentro ng Sakayan",
-      "description": "Sakayan at babaan ng sakay-hatid at taxi, babaan ng pamilya at mga shuttle.",
-      "location": "Silangang Garahe, level 1"
+      "description": "Ang tanging sakayan at babaan ng sakay-hatid. May taxi rin, babaan ng pamilya at libreng shuttle (may ADA van).",
+      "location": "Silangang Garahe, level 1 (3700 W Century Blvd.)"
     },
     "east-garage": {
       "name": "Silangang Garahe",
-      "description": "Karaniwang paradahan; bumili ng pass nang maaga. Ibinebenta ang accessible na puwesto, unahan sa pagbili.",
-      "location": "Pasukan sa 102nd St."
+      "description": "Karaniwang paradahan; bumili ng pass nang maaga. Nabibili ang accessible na puwesto kasama ng parking pass, unahan sa pagbili.",
+      "location": "3665 W 102nd St (pasukan sa 102nd St.)"
     },
     "west-garage": {
       "name": "Kanlurang Garahe",
-      "description": "VIP na paradahan sa tapat ng Prairie Ave.; bumili ng pass nang maaga.",
-      "location": "Pasukan sa Prairie Ave."
+      "description": "VIP na paradahan sa tapat ng Prairie Ave.; bumili ng pass nang maaga. Nabibili ang accessible na puwesto kasama ng parking pass, unahan sa pagbili.",
+      "location": "10117 S Prairie Ave (pasukan sa Prairie Ave.)"
+    },
+    "infant-care-terrace": {
+      "name": "Silid para sa Sanggol sa Terrace",
+      "description": "Pribadong silid para sa pag-aalaga ng sanggol. May palitan ng lampin sa lahat ng restroom.",
+      "location": "Terrace Level, Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "Mga Elevator",
+      "description": "Umaabot ang mga elevator mula sa Pangunahing Pasukan hanggang sa bawat level, at pinagdurugtong ng mga escalator sa main lobby ang Main at Terrace Level. Inuuna ang may kapansanan sa paggalaw.",
+      "location": "Itanong sa isang Arena Host ang pinakamalapit"
     }
   },
   "facility": {
     "notFound": "Hindi nakita ang pasilidad",
     "wheelchair": "Accessible sa wheelchair",
     "directions": "Direksyon",
+    "noRoute": "Walang rutang lakad: hindi inilalathala ng venue ang puwestong ito. Magtanong ng daan sa staff.",
     "imHere": "Nandito ako",
     "imHereHint": "Gagamitin ang lugar na ito bilang lokasyon mo kapag humingi ka ng tulong",
     "isHere": "Lokasyon mo",
     "reports": "Mga Ulat",
-    "results_one": "{{number}} resulta",
-    "results_other": "{{number}} resulta",
+    "reportCount_one": "{{number}} ulat",
+    "reportCount_other": "{{number}} ulat",
     "noReports": "Wala pang ulat. Ikaw na ang unang magbahagi ng nakita mo.",
     "addReport": "Magdagdag ng Ulat"
   },
@@ -381,7 +599,12 @@
     "authorFallback": "Bisita ng VenU",
     "submitted": "Ipinadala noong {{date}}",
     "originalLanguage": "Orihinal na wika: {{language}}",
-    "noBody": "Walang idinagdag na detalye."
+    "noBody": "Walang idinagdag na detalye.",
+    "delete": "Burahin ang ulat ko",
+    "deleteConfirm": "Burahin ang ulat na ito? Hindi na ito makikita ng mga bisita sa venue na ito.",
+    "deleteKeep": "Huwag burahin",
+    "deleteYes": "Burahin",
+    "deleteFailed": "Hindi mabura ang ulat. {{reason}}"
   },
   "form": {
     "title": "Magdagdag ng ulat",
@@ -405,10 +628,13 @@
     "title": "Ruta sa paglalakad",
     "from": "Mula sa {{from}}",
     "fromArrival": "Mula sa {{from}}, ang pangunahing pasukan. Nasa ibang lugar ka? Buksan ang lugar na iyon at i-tap ang “Nandito ako”.",
+    "fromArrivalPlain": "Mula sa {{from}}. Nasa ibang lugar ka? Buksan ang lugar na iyon at i-tap ang “Nandito ako”.",
     "steps_one": "mga {{number}} hakbang",
     "steps_other": "mga {{number}} hakbang",
     "stepStart": "Magsimula sa {{from}}.",
     "stepHead": "Pumunta sa {{direction}} nang mga {{meters}} m.",
+    "stepLevel": "Sumakay ng elevator o escalator papunta sa {{level}}.",
+    "stepOut": "Pumunta sa pinakamalapit na labasan at lumabas.",
     "stepArrive": "{{name}}: {{location}}.",
     "here": "Nandito ka na.",
     "end": "Tapusin ang ruta",

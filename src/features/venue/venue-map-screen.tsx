@@ -17,18 +17,22 @@ import { NAV_BAR_CLEARANCE } from '@/components/tab-bar';
 import { Colors, Shadow, Spacing } from '@/constants/theme';
 import { useT } from '@/i18n';
 
+import { categoriesAt } from './categories';
 import { CategoryChips } from './category-chips';
 import { useWhereAmI } from './current';
-import { routeFor, type Route } from './directions';
-import { boundsOf, FIT_MAX_SCALE, MAX_SCALE, pinsFor, type MapRect } from './map-geometry';
-import { facilitiesFor } from './mock';
+import { routeFor, routeStart, walkFrom, type Route } from './directions';
+import type { FacilityWalk } from './labels';
+import { LAYER_TOGGLE, LayerToggle } from './layer-toggle';
+import { boundsOf, chipCountsByLayer, FIT_MAX_SCALE, MAX_SCALE, nextMapLayer, pinsFor, type LayerEvent, type MapRect } from './map-geometry';
 import { PinCard } from './pin-card';
+import { pinPressAction } from './pin-press';
 import { snapPositions, type SheetSnap } from './sheet';
+import { venueFacilitiesFor } from './sponsors';
 import { MAP_BACKGROUND, SHEET_HANDLE } from './stadium-map';
 import type { Facility, FacilityCategory, Venue } from './types';
 import { BackArrow, venueText } from './ui';
-import { venueMapFor, type VenueMap } from './venue-maps';
-import { MAP_CARD_SPACE, VenueMapView } from './venue-map-view';
+import { layerOf, layerView, mapLayers, venueMapFor, type VenueMap } from './venue-maps';
+import { MAP_CARD_SPACE, SOURCE_BAR, VenueMapView } from './venue-map-view';
 
 export type { SheetSnap };
 
@@ -49,6 +53,8 @@ interface VenueScreenState {
   route: Route | null;
   /** Directions to a facility (the open one), or null to end them. */
   setRouteTo: (facilityId: string | null) => void;
+  /** How far a facility is from where walks start, in the same minutes the route panel shows. */
+  walkTo: (f: Facility) => FacilityWalk | null;
 }
 
 export interface FreshReport {
@@ -93,8 +99,23 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
   const t = useT('venue');
   const insets = useSafeAreaInsets();
   const { facilityId } = useGlobalSearchParams<{ facilityId?: string }>();
-  const facilities = useMemo(() => facilitiesFor(venue.id), [venue.id]);
+  // The venue's facilities and its sponsored stands (./sponsors.ts).
+  const facilities = useMemo(() => venueFacilitiesFor(venue.id), [venue.id]);
   const map = venueMapFor(venue); // the same object per venue
+  const layers = mapLayers(map);
+  // The layer on screen (SoFi: outside, Level 3, Level 6). It follows the open facility, the
+  // toggle, Directions and the chips (see nextMapLayer).
+  const openNow = facilityId ? facilities.find(f => f.id === facilityId) : undefined;
+  const [layerState, setLayerState] = useState(() => ({ id: nextMapLayer(map, facilities, layers[0].id, { kind: 'open', facility: openNow }), at: facilityId }));
+  let layer = layerState.id;
+  if (layerState.at !== facilityId) {
+    // Adjusting state while rendering, as React's docs advise for "reset when a prop changes".
+    layer = nextMapLayer(map, facilities, layerState.id, { kind: 'open', facility: openNow });
+    setLayerState({ id: layer, at: facilityId });
+  }
+  const moveLayer = (e: LayerEvent) => setLayerState({ id: nextMapLayer(map, facilities, layer, e), at: facilityId });
+  const shownMap = layerView(map, layer);
+  const onLayer = (f: Facility) => layerOf(map, f) === layer;
   const [category, setCategory] = useState<FacilityCategory | null>(null);
   // Start low, so most of the map shows; the map fits its view into the part the sheet leaves.
   // Opening a facility or searching raises it to mid. Chosen once per mount (the route keys this
@@ -115,8 +136,15 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
   const route = routeTo && routeTo === facilityId ? routeFor(map, facilities, where, venue.id, routeTo) : null;
   const setRouteTo = (id: string | null) => {
     setRouteState(id);
-    if (id) setCardState(null);
+    if (!id) return;
+    setCardState(null);
+    // The line is drawn on the facility's layer: show it, even if the visitor toggled away.
+    const to = facilities.find(f => f.id === id);
+    if (to) moveLayer({ kind: 'directions', to });
   };
+  // Where walks start, found once per render: the list measures every facility from it.
+  const walkStart = routeStart(map, facilities, where, venue.id);
+  const walkTo = (f: Facility) => walkFrom(map, walkStart, f);
 
   const tabClearance = NAV_BAR_CLEARANCE - 24 + Math.max(insets.bottom, 0);
   const positions = useMemo(() => snapPositions(box.h, tabClearance), [box.h, tabClearance]);
@@ -185,25 +213,39 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
   const pickCategory = (c: FacilityCategory | null) => {
     setCategory(c);
     setCardState(null);
+    // A chip with no pins on this layer moves to the layer with the most (see nextMapLayer).
+    moveLayer({ kind: 'chip', category: c });
     // The chip's pins need the map in view.
     setSnap(s => (s === 'up' ? 'mid' : s));
   };
 
+  const pickLayer = (id: string) => {
+    moveLayer({ kind: 'pick', layer: id });
+    setCardState(null);
+  };
+  // With a chip on, each layer's button says how many of its pins are there.
+  const layerCounts = category && layers.length > 1 ? chipCountsByLayer(map, facilities, category) : undefined;
 
-  // Pins for the chip (the open facility always stays), and what the map fits into view: the
-  // chip's pins, or the venue's own starting region for "All".
-  const pins = pinsFor(facilities, category, [facilityId, cardId, route?.from.id, route?.to.id]);
+  // Pins for the chip on this layer (the open facility always stays), and what the map fits into
+  // view: the chip's pins here, or the layer's own starting region for "All".
+  const pins = pinsFor(facilities, category, [facilityId, cardId, route?.from.id, route?.to.id]).filter(onLayer);
   const card = cardId ? facilities.find(f => f.id === cardId) : undefined;
-  const chipBounds = category ? boundsOf(pinsFor(facilities, category)) : null;
+  const chipBounds = category ? boundsOf(pinsFor(facilities, category).filter(onLayer)) : null;
+  // The route shows on its facility's layer, from where its start falls there (see routeFor).
+  const shownRoute = route && route.layer === layer ? route : null;
   // A route wins: both its ends in view above the sheet.
-  const fit: { key: string; rect: MapRect; max: number } = route
-    ? { key: `route:${route.from.id}>${route.to.id}`, rect: boundsOf([route.from, route.to])!, max: FIT_MAX_SCALE }
+  const fit: { key: string; rect: MapRect; max: number } = shownRoute
+    ? { key: `route:${shownRoute.from.id}>${shownRoute.to.id}`, rect: boundsOf([shownRoute.start, shownRoute.to])!, max: FIT_MAX_SCALE }
     : chipBounds
       ? { key: `chip:${category}`, rect: chipBounds, max: FIT_MAX_SCALE }
-      : { key: 'focus', rect: map.focus, max: MAX_SCALE };
+      : { key: 'focus', rect: shownMap.focus, max: MAX_SCALE };
 
-  // A pin shows its card; the card opens the facility in the sheet.
-  const showCard = (f: Facility) => {
+  // From the list, a pin shows its card and the card opens the facility in the sheet. With a
+  // facility open, another pin opens straight away (./pin-press.ts).
+  const pressPin = (f: Facility) => {
+    const action = pinPressAction(facilityId, f.id);
+    if (action === 'open') openFacility(f);
+    if (action !== 'card') return;
     setCardId(f.id);
     setSnap(s => (s === 'up' ? 'mid' : s)); // room above the sheet for the card
   };
@@ -227,6 +269,7 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
     setFreshReport,
     route,
     setRouteTo,
+    walkTo,
   };
 
   return (
@@ -240,14 +283,16 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
               <Text style={venueText.caption} numberOfLines={1}>{venue.address}</Text>
             </View>
           </View>
-          <CategoryChips value={category} onChange={pickCategory} />
+          <CategoryChips value={category} onChange={pickCategory} categories={categoriesAt(facilities, category)} />
         </SafeAreaView>
 
-        <View style={[styles.area, map.image && styles.areaImage]} onLayout={onAreaLayout}>
+        <View style={[styles.area, shownMap.image && styles.areaImage, shownMap.background ? { backgroundColor: shownMap.background } : null]} onLayout={onAreaLayout}>
           {box.w > 0 ? (
             <>
+              {/* Keyed by layer: a new layer is a new image, loaded and fitted from scratch. */}
               <VenueMapView
-                map={map}
+                key={layer}
+                map={shownMap}
                 venueName={venue.name}
                 pins={pins}
                 width={box.w}
@@ -255,15 +300,22 @@ export function VenueMapScreen({ venue }: { venue: Venue }) {
                 viewportHeight={positions[snap]}
                 highlightIds={[facilityId, cardId, route?.to.id]}
                 tinted={!!category}
-                route={route}
+                route={shownRoute}
                 fitKey={fit.key}
                 fitRect={fit.rect}
                 fitMax={fit.max}
                 revealId={cardId ?? facilityId}
                 revealInset={card ? MAP_CARD_SPACE : 0}
-                onPinPress={showCard}>
-                {card ? <PinCard facility={card} onOpen={() => openFacility(card)} onClose={() => setCardId(null)} /> : null}
+                overlayTop={layers.length > 1 ? LAYER_TOGGLE : 0}
+                onPinPress={pressPin}>
+                {card ? <PinCard facility={card} walk={walkTo(card)} onOpen={() => openFacility(card)} onClose={() => setCardId(null)} /> : null}
               </VenueMapView>
+
+              {layers.length > 1 ? (
+                <View style={styles.layerToggle} pointerEvents="box-none">
+                  <LayerToggle layers={layers} value={layer} counts={layerCounts} onChange={pickLayer} />
+                </View>
+              ) : null}
 
               <Animated.View style={[styles.sheet, { height: sheetHeight }, sheetStyle]}>
                 <GestureDetector gesture={pan}>
@@ -299,6 +351,7 @@ const styles = StyleSheet.create({
   titleText: { flex: 1, gap: 4 },
   area: { flex: 1, overflow: 'hidden', backgroundColor: MAP_BACKGROUND, borderTopLeftRadius: 10, borderTopRightRadius: 10 },
   areaImage: { backgroundColor: Colors.surfaceAlt },
+  layerToggle: { position: 'absolute', top: SOURCE_BAR + Spacing.sm, left: Spacing.gutter, right: Spacing.gutter },
   sheet: {
     position: 'absolute',
     left: 0,

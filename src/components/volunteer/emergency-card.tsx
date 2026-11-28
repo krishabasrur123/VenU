@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { FigmaIcon } from '@/components/icons/figma-icon';
-import { Colors, Fonts, Radius, Spacing } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Spacing } from '@/constants/theme';
 import { useLayoutRtl, useT } from '@/i18n';
 
 import { EmergencyDialog } from './emergency-dialog';
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.85 },
   flip: { transform: [{ scaleX: -1 }] },
   text: { flex: 1, gap: 2 },
-  title: { fontFamily: Fonts.displayMedium, fontSize: 16, lineHeight: 20, color: Colors.danger },
+  title: { ...Face.displayMedium, fontSize: 16, lineHeight: 20, color: Colors.danger },
   sub: { fontFamily: Fonts.text, fontSize: 14, lineHeight: 18, color: Colors.danger },
 });

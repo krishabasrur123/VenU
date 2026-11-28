@@ -18,6 +18,9 @@
     "assistTitle": "Need Assistance?",
     "assistBody": "Connect with a volunteer",
     "assistLabel": "Need assistance? Connect with a volunteer",
+    "assistTitleVolunteer": "Ready to Help?",
+    "assistBodyVolunteer": "See requests near you",
+    "assistLabelVolunteer": "Ready to help? See requests near you",
     "empty": "No venue matches “{{query}}”. Try a city, like Inglewood.",
     "cardHint": "Opens the map and facilities"
   },
@@ -80,7 +83,15 @@
     "label": "{{venue}} map with facility pins. Drag to move, pinch or use the zoom buttons to zoom.",
     "you": "You",
     "start": "Start",
-    "cardHint": "Opens it in the panel below"
+    "cardHint": "Opens it in the panel below",
+    "layers": {
+      "label": "Map layer",
+      "outside": "Outside",
+      "level": "Level {{number}}",
+      "matches_one": "{{layer}}, {{number}} match",
+      "matches_other": "{{layer}}, {{number}} matches",
+      "noMatches": "{{layer}}, no matches"
+    }
   },
   "officialMap": {
     "attribution": "Map: {{source}}",
@@ -94,6 +105,9 @@
   },
   "walk_one": "{{number}} min walk",
   "walk_other": "{{number}} min walk",
+  "walkStart": "Walks start here",
+  "walkMine": "You’re here",
+  "walkAsk": "Spot not published",
   "wait": {
     "none": "No wait",
     "short": "Short wait",
@@ -102,6 +116,18 @@
   "row": {
     "label": "{{name}}, {{meta}}",
     "labelAccessible": "{{name}}, {{meta}}, accessible"
+  },
+  "sponsor": {
+    "label": "Sponsored",
+    "pin": "Sponsored: {{name}} on the map",
+    "row": "Sponsored: {{name}}, {{meta}}",
+    "card": "Sponsored: {{name}}. {{offer}}. {{meta}}",
+    "heading": "Sponsored: {{name}}",
+    "showScreen": "Show this screen at the stand",
+    "disclosure": "Paid listing, not venue information",
+    "banner": "Sponsored: {{name}}, {{walk}}. {{offer}}",
+    "bannerHint": "Opens the stand. Your request keeps searching.",
+    "hide": "Hide sponsored message"
   },
   "tags": {
     "label": "Tags:",
@@ -118,6 +144,7 @@
     "long_lines_halftime": "Long lines at halftime",
     "wheelchair_loans": "Wheelchair loans",
     "permit_needed": "Permit needed",
+    "pass_needed": "Pass needed",
     "wheelchair_escort": "Wheelchair escort",
     "premium_access": "VIP & premium",
     "sensory_room": "Sensory room",
@@ -126,54 +153,204 @@
     "changing_table": "Changing table"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "Coca-Cola Refresh Stand",
+      "description": "Cold Coca-Cola drinks, bottled water and snacks.",
+      "location": "On the plaza, by the outdoor court",
+      "offer": "$1 off any Coca-Cola drink with VenU"
+    },
+    "panda-express-intuit": {
+      "name": "Panda Express Stand",
+      "description": "Orange chicken, chow mein and rice bowls.",
+      "location": "Main Level concourse, past The Wall Entrance",
+      "offer": "Free egg roll with any bowl"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "Coca-Cola Refresh Stand",
+      "description": "Cold Coca-Cola drinks, bottled water and snacks.",
+      "location": "Level 1, inside Entries 1 and 2",
+      "offer": "$1 off any Coca-Cola drink with VenU"
+    },
+    "ben-jerrys-sofi": {
+      "name": "Ben & Jerry’s Scoop Stand",
+      "description": "Ice cream cups and cones.",
+      "location": "American Airlines Plaza",
+      "offer": "Free topping on any scoop"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "Coca-Cola Refresh Stand",
+      "description": "Cold Coca-Cola drinks, bottled water and snacks.",
+      "location": "Main Concourse, Figueroa side",
+      "offer": "$1 off any Coca-Cola drink with VenU"
+    },
+    "entry-1": {
+      "name": "Entry 1",
+      "description": "North entrance. Clear bags up to 12×6×12 in., or a small bag up to 4.5×6.5 in. Every entry has an accessible path and free wheelchair escorts.",
+      "location": "North side, on Touchdown Drive"
+    },
+    "entry-2": {
+      "name": "Entry 2",
+      "description": "North entrance, open until the end at football games. Clear bags up to 12×6×12 in., or a small bag up to 4.5×6.5 in.",
+      "location": "North side, on Touchdown Drive"
+    },
     "entry-3": {
       "name": "Entry 3",
-      "description": "North entrance. Every entry has an accessible path and free wheelchair escorts.",
+      "description": "North entrance, open until the end at football games. Every entry has an accessible path and free wheelchair escorts.",
       "location": "North side"
     },
     "entry-4": {
       "name": "Entry 4",
-      "description": "North entrance with an accessibility podium and waiting chairs inside.",
+      "description": "North entrance with an accessibility podium and waiting chairs just inside. Clear bags up to 12×6×12 in., or a small bag up to 4.5×6.5 in.",
       "location": "North side"
+    },
+    "entry-5": {
+      "name": "Entry 5",
+      "description": "North-west entrance, closest to the Green Zone (Lots A and B). Every entry has an accessible path and free wheelchair escorts.",
+      "location": "North-west side"
     },
     "entry-6": {
       "name": "Entry 6",
-      "description": "West entrance for VIP and premium ticket holders.",
+      "description": "West entrance for VIP and premium tickets, open until the end at football games.",
       "location": "West side"
+    },
+    "entry-7": {
+      "name": "Entry 7",
+      "description": "West entrance for VIP and premium tickets, open until the end at football games. Closest to the Blue Zone (Lot N).",
+      "location": "West side, on Champions Way"
     },
     "entry-8": {
       "name": "Entry 8",
-      "description": "South entrance with an accessibility podium and waiting chairs inside.",
+      "description": "South entrance with an accessibility podium and waiting chairs just inside. Entry 8B stays open until the end at football games.",
       "location": "South side"
+    },
+    "entry-9": {
+      "name": "Entry 9",
+      "description": "South entrance (gates 9A to 9D), closest to the Purple Zone (Lots K and L). Every entry has an accessible path and free wheelchair escorts.",
+      "location": "South side, by the lake"
     },
     "entry-10": {
       "name": "Entry 10",
-      "description": "South entrance with an accessibility podium and waiting chairs inside.",
-      "location": "South side"
+      "description": "South-east entrance with an accessibility podium and waiting chairs just inside. Entry 10B stays open until the end at football games.",
+      "location": "South-east side, on Stadium Drive"
     },
     "entry-11": {
       "name": "Entry 11",
-      "description": "East entrance for VIP and premium ticket holders.",
+      "description": "East entrance for VIP and premium tickets, open until the end at football games.",
       "location": "East side"
+    },
+    "entry-12": {
+      "name": "Entry 12",
+      "description": "North-east entrance for VIP and premium tickets, open until the end at football games.",
+      "location": "North-east side"
+    },
+    "podium-entry-4": {
+      "name": "Accessibility Podium 4",
+      "description": "Mobility Ambassadors arrange a free wheelchair escort to your seat and back after the event. Waiting chairs. Wheelchairs can’t be lent for the event or brought to the parking lots.",
+      "location": "Just inside Entry 4"
+    },
+    "podium-entry-8": {
+      "name": "Accessibility Podium 8",
+      "description": "Mobility Ambassadors arrange a free wheelchair escort to your seat and back after the event. Waiting chairs. Wheelchairs can’t be lent for the event or brought to the parking lots.",
+      "location": "Just inside Entry 8"
+    },
+    "podium-entry-10": {
+      "name": "Accessibility Podium 10",
+      "description": "Mobility Ambassadors arrange a free wheelchair escort to your seat and back after the event. Waiting chairs. Wheelchairs can’t be lent for the event or brought to the parking lots.",
+      "location": "Just inside Entry 10"
+    },
+    "rideshare-kareem": {
+      "name": "Rideshare Drop-off",
+      "description": "Uber, Lyft, taxis, buses and shuttles drop off on the northbound curb. Pick-up is at Kareem Court and Manchester Boulevard. By train: Metro C or K Line to LAX/Metro Transit Center, then the game-day shuttle from Bus Bay 8.",
+      "location": "Kareem Court, between Pincay Drive and Manchester Boulevard"
+    },
+    "accessible-drop-off": {
+      "name": "Accessible Drop-off",
+      "description": "Drop-off and pick-up for guests with disabilities. Come in from northbound Prairie Avenue via Arbor Vitae Street; leave by Touchdown Drive.",
+      "location": "District Drive, between Champions Way and Touchdown Drive"
+    },
+    "brown-zone": {
+      "name": "Brown Zone",
+      "description": "Lots C and D, closest to Entries 1–5 and 12. ADA stalls (placard needed) in every lot, first come, first served. An accessible courtesy shuttle runs at select events.",
+      "location": "3919 Pincay Drive"
+    },
+    "green-zone": {
+      "name": "Green Zone",
+      "description": "Lots A and B, closest to Entries 5 and 6. ADA stalls (placard needed) in every lot, first come, first served. An accessible courtesy shuttle runs at select events.",
+      "location": "800 Prairie Avenue"
+    },
+    "blue-zone": {
+      "name": "Blue Zone",
+      "description": "Lot N, closest to Entries 7 and 8. ADA stalls (placard needed) in every lot, first come, first served. An accessible courtesy shuttle runs at select events.",
+      "location": "1100 Prairie Avenue"
+    },
+    "purple-zone": {
+      "name": "Purple Zone",
+      "description": "Lots K and L, closest to Entry 9. ADA stalls (placard needed) in every lot, first come, first served. An accessible courtesy shuttle runs at select events.",
+      "location": "3801 West Century Boulevard"
+    },
+    "orange-zone": {
+      "name": "Orange Zone",
+      "description": "Lots E to H, closest to Entries 10, 11 and 12. ADA stalls (placard needed) in every lot, first come, first served. An accessible courtesy shuttle runs at select events.",
+      "location": "3695 Pincay Drive"
+    },
+    "service-animal-relief": {
+      "name": "Service Animal Relief Area",
+      "description": "Service animals (dogs and miniature horses) are welcome; emotional support animals aren’t. Staff will show you the way to the relief area.",
+      "location": "Ask Guest Experience staff for the way"
     },
     "guest-services-ne": {
       "name": "Guest Services NE",
-      "description": "Questions, lost items, assistive listening, free sensory kits and a sensory room.",
-      "location": "Level 3, northeast concourse"
+      "description": "Lost items, free assistive listening and headphones (ID held), free sensory kits, mobility device storage and a sensory room.",
+      "location": "Level 3, northeast concourse, by the Pechanga VIP Lobby"
+    },
+    "sensory-room-ne": {
+      "name": "Sensory Room NE",
+      "description": "A quiet room for a break from sound, lights and crowds, in 15-minute turns, first come, first served. Ask at the Guest Services desk beside it.",
+      "location": "Level 3, inside the northeast Guest Services Center"
+    },
+    "guest-services-n": {
+      "name": "Guest Services N",
+      "description": "Lost items, free assistive listening (ID held), free sensory kits, child locator wristbands and accessible seat moves.",
+      "location": "Level 3, north concourse, by the Pro Shop"
+    },
+    "guest-services-se": {
+      "name": "Guest Services SE",
+      "description": "Lost items, free assistive listening (ID held), free sensory kits and directions.",
+      "location": "Level 3, southeast, by the SoFi VIP Lobby"
     },
     "guest-services-sw": {
       "name": "Guest Services SW",
-      "description": "Inside the Corona Beach Club. Lost items, assistive listening, free sensory kits and a sensory room.",
+      "description": "Inside the Corona Beach Club. Lost items, free assistive listening and headphones (ID held), free sensory kits and a sensory room.",
       "location": "Level 3, southwest concourse"
     },
-    "first-aid-se": {
-      "name": "First Aid SE",
-      "description": "EMTs on site. Any usher or staff member can call them to you.",
-      "location": "Level 1, southeast concourse"
+    "sensory-room-sw": {
+      "name": "Sensory Room SW",
+      "description": "A quiet room for a break from sound, lights and crowds, in 15-minute turns, first come, first served. Ask at the Guest Services desk beside it.",
+      "location": "Level 3, inside the southwest Guest Services Center"
+    },
+    "first-aid-ne": {
+      "name": "First Aid NE",
+      "description": "EMTs on site. Any usher or staff member can call them to you. You can also nurse a baby here in private.",
+      "location": "Level 3, northeast concourse"
     },
     "first-aid-nw": {
       "name": "First Aid NW",
-      "description": "EMTs on site. Any usher or staff member can call them to you.",
+      "description": "EMTs on site. Any usher or staff member can call them to you. You can also nurse a baby here in private.",
+      "location": "Level 3, northwest concourse; ask staff for the way"
+    },
+    "first-aid-se": {
+      "name": "First Aid Level 1",
+      "description": "EMTs on site. Any usher or staff member can call them to you. There are also first aid rooms on Levels 2, 3, 6 and 8.",
+      "location": "Level 1 (event level), southeast concourse; ask staff for the way"
+    },
+    "elevator-north": {
+      "name": "Elevator N",
+      "description": "Guests with disabilities ride first, with up to three companions (one at peak times). Elevators and escalators reach every level.",
+      "location": "Level 3, north concourse, by section 207"
+    },
+    "elevator-northwest": {
+      "name": "Elevator NW",
+      "description": "Guests with disabilities ride first, with up to three companions (one at peak times). Elevators and escalators reach every level.",
       "location": "Level 3, northwest concourse"
     },
     "pedestrian-ramp": {
@@ -181,35 +358,65 @@
       "description": "The stadium’s one pedestrian ramp. It reaches every level except Level 7.",
       "location": "Southeast side, behind the end zone"
     },
+    "restrooms-n": {
+      "name": "Restrooms N",
+      "description": "Every restroom is accessible and has a baby changing station. Family restrooms are on every level.",
+      "location": "Level 3, north concourse, near section 205"
+    },
+    "restrooms-sw": {
+      "name": "Restrooms SW",
+      "description": "Every restroom is accessible and has a baby changing station. Family restrooms are on every level.",
+      "location": "Level 3, southwest concourse, near section C223"
+    },
+    "first-aid-se-6": {
+      "name": "First Aid SE",
+      "description": "EMTs on site. Any usher or staff member can call them to you. You can also nurse a baby here in private.",
+      "location": "Level 6, southeast concourse, near section 342"
+    },
+    "first-aid-sw-6": {
+      "name": "First Aid SW",
+      "description": "EMTs on site. Any usher or staff member can call them to you. You can also nurse a baby here in private.",
+      "location": "Level 6, southwest concourse, near section 330"
+    },
+    "guest-services-ne-6": {
+      "name": "Guest Services Level 6 NE",
+      "description": "Lost items, free assistive listening (ID held), free sensory kits and accessible seat moves.",
+      "location": "Level 6, northeast, by the Pechanga VIP Lobby"
+    },
+    "guest-services-se-6": {
+      "name": "Guest Services Level 6 SE",
+      "description": "Lost items, free assistive listening (ID held), free sensory kits and accessible seat moves.",
+      "location": "Level 6, southeast, by the SoFi VIP Lobby"
+    },
+    "adult-changing": {
+      "name": "Adult Changing Station",
+      "description": "An adult changing station, near elevator 8. Ask a Guest Experience Representative if you can’t find it.",
+      "location": "Level 6, near section 329"
+    },
     "lactation-suite": {
-      "name": "Lactation Suite",
-      "description": "Private Mamava lactation pod. Family restrooms are on every level.",
-      "location": "Level 4, south"
+      "name": "Lactation Suites",
+      "description": "Private Mamava lactation suites with seating and power, on Level 4 South, Level 6 and Level 8. Any first aid room or family restroom works too.",
+      "location": "Ask Guest Services for the nearest one"
     },
-    "rideshare-kareem": {
-      "name": "Rideshare Drop-off",
-      "description": "Uber, Lyft and taxi drop-off. Pick-up is at Kareem Court and Manchester Boulevard.",
-      "location": "Kareem Court, between Pincay Drive and Manchester Boulevard"
+    "hydration-ne": {
+      "name": "Hydration Station NE",
+      "description": "Free filtered water. You can bring one empty, clear, non-metal reusable bottle up to 20 oz to fill here.",
+      "location": "Level 6, northeast concourse, near section 304"
     },
-    "accessible-drop-off": {
-      "name": "Accessible Drop-off",
-      "description": "Drop-off and pick-up for guests with disabilities. Come in from northbound Prairie Avenue via Arbor Vitae Street.",
-      "location": "District Drive, between Champions Way and Touchdown Drive"
+    "hydration-sw": {
+      "name": "Hydration Station SW",
+      "description": "Free filtered water. You can bring one empty, clear, non-metal reusable bottle up to 20 oz to fill here.",
+      "location": "Level 6, southwest concourse, near section 329"
     },
-    "brown-zone": {
-      "name": "Brown Zone",
-      "description": "Parking closest to Entries 1–5 and 12. ADA stalls in every lot, first come, first served.",
-      "location": "3919 Pincay Drive"
+    "restrooms-nw": {
+      "name": "Restrooms NW",
+      "description": "Every restroom is accessible and has a baby changing station. Family restrooms are on every level.",
+      "location": "Level 6, northwest concourse, near section 316"
     },
-    "blue-zone": {
-      "name": "Blue Zone",
-      "description": "Parking closest to Entries 7 and 8. ADA stalls in every lot, first come, first served.",
-      "location": "1100 Prairie Avenue"
-    },
-    "orange-zone": {
-      "name": "Orange Zone",
-      "description": "Parking closest to Entries 10, 11 and 12. ADA stalls in every lot, first come, first served.",
-      "location": "3695 Pincay Drive"
+    "restrooms-se": {
+      "name": "Restrooms SE",
+      "description": "Every restroom is accessible and has a baby changing station. Family restrooms are on every level.",
+      "location": "Level 6, southeast concourse, near section 341"
     },
     "kobe-bryant-entrance": {
       "name": "Kobe Bryant Entrance",
@@ -278,27 +485,27 @@
     },
     "main-entrance": {
       "name": "Main Entrance",
-      "description": "GameFace ID lane on the left, Identity Pass lane on the right. Free mobility help from security to your seat.",
+      "description": "GameFace ID lane on the left, Identity Pass lane on the right; for accessible entry, Identity Pass holders tap in at the Answers Portal. Bags up to 10×6×2 in. (medical bags up to 14×14×6). Free mobility help from security to your seat.",
       "location": "On the plaza, off Century Blvd. and Prairie Ave."
     },
     "vip-entrance": {
       "name": "VIP Entrance",
-      "description": "For suite, club and floor ticket holders.",
+      "description": "For suite, club and floor tickets (they can also use the Main Entrance).",
       "location": "Left of the Main Entrance"
     },
     "wall-entrance": {
       "name": "The Wall Entrance",
-      "description": "Dedicated entrance for The Wall.",
+      "description": "For tickets in The Wall (they can also use the Main Entrance).",
       "location": "Left of the Main Entrance, past the VIP Entrance"
     },
     "answers-portal-main": {
       "name": "Answers Portal Main",
-      "description": "Guest services: lost and found, free assisted listening (photo ID held) and OneCourt devices.",
+      "description": "Guest services: lost and found, free assisted listening (photo ID held), sensory bags (ID held) and OneCourt devices.",
       "location": "Main Level, near section Main 6"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal Terrace",
-      "description": "Guest services: lost and found and free assisted listening (photo ID held).",
+      "description": "Guest services: lost and found, free assisted listening (photo ID held) and OneCourt devices.",
       "location": "Terrace Level, near section Terrace 18"
     },
     "first-aid-main": {
@@ -318,7 +525,7 @@
     },
     "sensory-room": {
       "name": "Sensory Room",
-      "description": "The private Kaiser Permanente Sensory Room. Sensory bags are available on request.",
+      "description": "The private Kaiser Permanente Sensory Room. Sensory bags (headphones, fidget toys) are at the Answers Portal by Main 6; ID needed.",
       "location": "Ask an Arena Host for the way"
     },
     "infant-care-room": {
@@ -328,30 +535,41 @@
     },
     "mobility-hub": {
       "name": "Mobility Hub",
-      "description": "Rideshare and taxi drop-off and pick-up, family drop-off and shuttles.",
-      "location": "East Garage, level 1"
+      "description": "The only rideshare drop-off and pick-up. Also taxis, family drop-off and free shuttles (ADA vans available).",
+      "location": "East Garage, level 1 (3700 W Century Blvd.)"
     },
     "east-garage": {
       "name": "East Garage",
-      "description": "Standard parking; buy a pass ahead. Accessible spaces are sold first come, first served.",
-      "location": "Entrance on 102nd St."
+      "description": "Standard parking; buy a pass ahead. Accessible spaces can be bought with a parking pass, first come, first served.",
+      "location": "3665 W 102nd St (entrance on 102nd St.)"
     },
     "west-garage": {
       "name": "West Garage",
-      "description": "VIP parking across Prairie Ave.; buy a pass ahead.",
-      "location": "Entrance on Prairie Ave."
+      "description": "VIP parking across Prairie Ave.; buy a pass ahead. Accessible spaces can be bought with a parking pass, first come, first served.",
+      "location": "10117 S Prairie Ave (entrance on Prairie Ave.)"
+    },
+    "infant-care-terrace": {
+      "name": "Infant Care Room Terrace",
+      "description": "A private room for infant care. Every restroom also has a baby changing station.",
+      "location": "Terrace Level, Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "Elevators",
+      "description": "Elevators go from the Main Entrance to every level, and escalators link the Main and Terrace levels in the main lobby. Guests with limited mobility go first.",
+      "location": "Ask an Arena Host for the nearest one"
     }
   },
   "facility": {
     "notFound": "Facility not found",
     "wheelchair": "Wheelchair accessible",
     "directions": "Directions",
+    "noRoute": "No walking route: the venue doesn’t publish this spot. Ask venue staff for the way.",
     "imHere": "I’m here",
     "imHereHint": "Uses this spot as your location when you ask for help",
     "isHere": "Your location",
     "reports": "Reports",
-    "results_one": "{{number}} result",
-    "results_other": "{{number}} results",
+    "reportCount_one": "{{number}} report",
+    "reportCount_other": "{{number}} reports",
     "noReports": "No reports yet. Be the first to share what you found.",
     "addReport": "Add Your Own Report"
   },
@@ -381,7 +599,12 @@
     "authorFallback": "VenU visitor",
     "submitted": "Submitted {{date}}",
     "originalLanguage": "Original language: {{language}}",
-    "noBody": "No details added."
+    "noBody": "No details added.",
+    "delete": "Delete my report",
+    "deleteConfirm": "Delete this report? Visitors at this venue won’t see it any more.",
+    "deleteKeep": "Keep it",
+    "deleteYes": "Delete",
+    "deleteFailed": "Couldn’t delete the report. {{reason}}"
   },
   "form": {
     "title": "Add report",
@@ -405,10 +628,13 @@
     "title": "Walking route",
     "from": "From {{from}}",
     "fromArrival": "From {{from}}, the main way in. Somewhere else? Open that spot and tap “I’m here”.",
+    "fromArrivalPlain": "From {{from}}. Somewhere else? Open that spot and tap “I’m here”.",
     "steps_one": "about {{number}} step",
     "steps_other": "about {{number}} steps",
     "stepStart": "Start at {{from}}.",
     "stepHead": "Head {{direction}} for about {{meters}} m.",
+    "stepLevel": "Take an elevator or escalator to {{level}}.",
+    "stepOut": "Head for the nearest exit and go outside.",
     "stepArrive": "{{name}}: {{location}}.",
     "here": "You’re already here.",
     "end": "End route",

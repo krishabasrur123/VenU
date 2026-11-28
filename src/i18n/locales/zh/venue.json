@@ -18,6 +18,9 @@
     "assistTitle": "需要帮助？",
     "assistBody": "联系志愿者",
     "assistLabel": "需要帮助？联系志愿者",
+    "assistTitleVolunteer": "准备好帮忙了吗？",
+    "assistBodyVolunteer": "查看你附近的求助",
+    "assistLabelVolunteer": "准备好帮忙了吗？查看你附近的求助",
     "empty": "没有与“{{query}}”匹配的场馆。试试城市名，例如 Inglewood。",
     "cardHint": "打开地图和设施"
   },
@@ -80,7 +83,14 @@
     "label": "{{venue}}地图，已标出各项设施。拖动可移动，双指缩放或使用缩放按钮。",
     "you": "你",
     "start": "起点",
-    "cardHint": "在下方面板中打开"
+    "cardHint": "在下方面板中打开",
+    "layers": {
+      "label": "地图图层",
+      "outside": "室外",
+      "level": "{{number}} 层",
+      "matches_other": "{{layer}}，{{number}} 个结果",
+      "noMatches": "{{layer}}，无结果"
+    }
   },
   "officialMap": {
     "attribution": "地图：{{source}}",
@@ -93,6 +103,9 @@
     "schematic": "简化地图"
   },
   "walk_other": "步行 {{number}} 分钟",
+  "walkStart": "路线从这里出发",
+  "walkMine": "你在这里",
+  "walkAsk": "位置未公布",
   "wait": {
     "none": "无需排队",
     "short": "排队较短",
@@ -101,6 +114,18 @@
   "row": {
     "label": "{{name}}，{{meta}}",
     "labelAccessible": "{{name}}，{{meta}}，无障碍"
+  },
+  "sponsor": {
+    "label": "广告",
+    "pin": "广告：地图上的{{name}}",
+    "row": "广告：{{name}}，{{meta}}",
+    "card": "广告：{{name}}。{{offer}}。{{meta}}",
+    "heading": "广告：{{name}}",
+    "showScreen": "请在摊位出示此屏幕",
+    "disclosure": "付费推广，非场馆信息",
+    "banner": "广告：{{name}}，{{walk}}。{{offer}}",
+    "bannerHint": "打开该摊位。你的请求仍在继续匹配。",
+    "hide": "隐藏广告消息"
   },
   "tags": {
     "label": "标签：",
@@ -117,6 +142,7 @@
     "long_lines_halftime": "中场排长队",
     "wheelchair_loans": "轮椅借用",
     "permit_needed": "需要许可证",
+    "pass_needed": "需要停车证",
     "wheelchair_escort": "轮椅陪同",
     "premium_access": "VIP 和高级票",
     "sensory_room": "感官室",
@@ -125,54 +151,204 @@
     "changing_table": "尿布台"
   },
   "facilityText": {
+    "coca-cola-refresh-intuit": {
+      "name": "Coca-Cola Refresh 摊位",
+      "description": "冰镇 Coca-Cola 饮料、瓶装水和零食。",
+      "location": "广场上，户外球场旁",
+      "offer": "使用 VenU 购买任意 Coca-Cola 饮料立减 $1"
+    },
+    "panda-express-intuit": {
+      "name": "Panda Express 摊位",
+      "description": "陈皮鸡、炒面和米饭碗。",
+      "location": "Main 层大厅，过了 The Wall 入口",
+      "offer": "点任意米饭碗送一个春卷"
+    },
+    "coca-cola-refresh-sofi": {
+      "name": "Coca-Cola Refresh 摊位",
+      "description": "冰镇 Coca-Cola 饮料、瓶装水和零食。",
+      "location": "1 层，1 号和 2 号入口内",
+      "offer": "使用 VenU 购买任意 Coca-Cola 饮料立减 $1"
+    },
+    "ben-jerrys-sofi": {
+      "name": "Ben & Jerry’s 冰淇淋摊位",
+      "description": "杯装和甜筒冰淇淋。",
+      "location": "American Airlines Plaza",
+      "offer": "任意一球冰淇淋免费加一份配料"
+    },
+    "coca-cola-refresh-crypto": {
+      "name": "Coca-Cola Refresh 摊位",
+      "description": "冰镇 Coca-Cola 饮料、瓶装水和零食。",
+      "location": "主大厅，Figueroa 一侧",
+      "offer": "使用 VenU 购买任意 Coca-Cola 饮料立减 $1"
+    },
+    "entry-1": {
+      "name": "1 号入口",
+      "description": "北入口。透明包不超过 12×6×12 英寸，或小包不超过 4.5×6.5 英寸。每个入口都有无障碍通道，并提供免费轮椅陪同服务。",
+      "location": "北侧，Touchdown Drive 上"
+    },
+    "entry-2": {
+      "name": "2 号入口",
+      "description": "北入口，橄榄球比赛时开放至比赛结束。透明包不超过 12×6×12 英寸，或小包不超过 4.5×6.5 英寸。",
+      "location": "北侧，Touchdown Drive 上"
+    },
     "entry-3": {
       "name": "3 号入口",
-      "description": "北入口。每个入口都有无障碍通道，并提供免费轮椅陪同服务。",
+      "description": "北入口，橄榄球比赛时开放至比赛结束。每个入口都有无障碍通道，并提供免费轮椅陪同服务。",
       "location": "北侧"
     },
     "entry-4": {
       "name": "4 号入口",
-      "description": "北入口，内设无障碍服务台和候场座椅。",
+      "description": "北入口，一进门就有无障碍服务台和候场座椅。透明包不超过 12×6×12 英寸，或小包不超过 4.5×6.5 英寸。",
       "location": "北侧"
+    },
+    "entry-5": {
+      "name": "5 号入口",
+      "description": "西北入口，离绿色停车区（A、B 停车场）最近。每个入口都有无障碍通道，并提供免费轮椅陪同服务。",
+      "location": "西北侧"
     },
     "entry-6": {
       "name": "6 号入口",
-      "description": "西入口，供 VIP 和高级票持票人使用。",
+      "description": "西入口，供 VIP 和高级票持票人使用，橄榄球比赛时开放至比赛结束。",
       "location": "西侧"
+    },
+    "entry-7": {
+      "name": "7 号入口",
+      "description": "西入口，供 VIP 和高级票持票人使用，橄榄球比赛时开放至比赛结束。离蓝色停车区（N 停车场）最近。",
+      "location": "西侧，Champions Way 上"
     },
     "entry-8": {
       "name": "8 号入口",
-      "description": "南入口，内设无障碍服务台和候场座椅。",
+      "description": "南入口，一进门就有无障碍服务台和候场座椅。8B 入口在橄榄球比赛时开放至比赛结束。",
       "location": "南侧"
+    },
+    "entry-9": {
+      "name": "9 号入口",
+      "description": "南入口（9A 至 9D 闸口），离紫色停车区（K、L 停车场）最近。每个入口都有无障碍通道，并提供免费轮椅陪同服务。",
+      "location": "南侧，湖边"
     },
     "entry-10": {
       "name": "10 号入口",
-      "description": "南入口，内设无障碍服务台和候场座椅。",
-      "location": "南侧"
+      "description": "东南入口，一进门就有无障碍服务台和候场座椅。10B 入口在橄榄球比赛时开放至比赛结束。",
+      "location": "东南侧，Stadium Drive 上"
     },
     "entry-11": {
       "name": "11 号入口",
-      "description": "东入口，供 VIP 和高级票持票人使用。",
+      "description": "东入口，供 VIP 和高级票持票人使用，橄榄球比赛时开放至比赛结束。",
       "location": "东侧"
+    },
+    "entry-12": {
+      "name": "12 号入口",
+      "description": "东北入口，供 VIP 和高级票持票人使用，橄榄球比赛时开放至比赛结束。",
+      "location": "东北侧"
+    },
+    "podium-entry-4": {
+      "name": "无障碍服务台（4 号入口）",
+      "description": "行动协助大使会免费安排轮椅陪同，送你到座位，活动结束后再送回。设有候场座椅。轮椅不能在活动期间借用，也不能带到停车场。",
+      "location": "4 号入口进门处"
+    },
+    "podium-entry-8": {
+      "name": "无障碍服务台（8 号入口）",
+      "description": "行动协助大使会免费安排轮椅陪同，送你到座位，活动结束后再送回。设有候场座椅。轮椅不能在活动期间借用，也不能带到停车场。",
+      "location": "8 号入口进门处"
+    },
+    "podium-entry-10": {
+      "name": "无障碍服务台（10 号入口）",
+      "description": "行动协助大使会免费安排轮椅陪同，送你到座位，活动结束后再送回。设有候场座椅。轮椅不能在活动期间借用，也不能带到停车场。",
+      "location": "10 号入口进门处"
+    },
+    "rideshare-kareem": {
+      "name": "网约车下车点",
+      "description": "Uber、Lyft、出租车、巴士和接驳车在北行方向路边下客。上车点在 Kareem Court 与 Manchester Boulevard 路口。乘火车：乘 Metro C 线或 K 线到 LAX/Metro Transit Center，再从 Bus Bay 8 搭比赛日接驳车。",
+      "location": "Kareem Court，Pincay Drive 与 Manchester Boulevard 之间"
+    },
+    "accessible-drop-off": {
+      "name": "无障碍上下车点",
+      "description": "供残障人士上下车。从 Prairie Avenue 北行，经 Arbor Vitae Street 进入；从 Touchdown Drive 离开。",
+      "location": "District Drive，Champions Way 与 Touchdown Drive 之间"
+    },
+    "brown-zone": {
+      "name": "棕色停车区",
+      "description": "C、D 停车场，离 1–5 号和 12 号入口最近。每个停车场都有 ADA 车位（需残障停车证），先到先得。部分活动有无障碍免费接驳车。",
+      "location": "3919 Pincay Drive"
+    },
+    "green-zone": {
+      "name": "绿色停车区",
+      "description": "A、B 停车场，离 5 号和 6 号入口最近。每个停车场都有 ADA 车位（需残障停车证），先到先得。部分活动有无障碍免费接驳车。",
+      "location": "800 Prairie Avenue"
+    },
+    "blue-zone": {
+      "name": "蓝色停车区",
+      "description": "N 停车场，离 7 号和 8 号入口最近。每个停车场都有 ADA 车位（需残障停车证），先到先得。部分活动有无障碍免费接驳车。",
+      "location": "1100 Prairie Avenue"
+    },
+    "purple-zone": {
+      "name": "紫色停车区",
+      "description": "K、L 停车场，离 9 号入口最近。每个停车场都有 ADA 车位（需残障停车证），先到先得。部分活动有无障碍免费接驳车。",
+      "location": "3801 West Century Boulevard"
+    },
+    "orange-zone": {
+      "name": "橙色停车区",
+      "description": "E 至 H 停车场，离 10、11 和 12 号入口最近。每个停车场都有 ADA 车位（需残障停车证），先到先得。部分活动有无障碍免费接驳车。",
+      "location": "3695 Pincay Drive"
+    },
+    "service-animal-relief": {
+      "name": "服务动物如厕区",
+      "description": "欢迎服务动物（狗和迷你马）入场；情感支持动物不可入场。工作人员会带你去如厕区。",
+      "location": "请向 Guest Experience 工作人员问路"
     },
     "guest-services-ne": {
       "name": "观众服务处（东北）",
-      "description": "咨询、失物招领、辅助听音设备、免费感官工具包和感官室。",
-      "location": "3 层，东北大厅"
+      "description": "失物招领、免费辅助听音设备和耳机（需押证件）、免费感官工具包、助行设备寄存和感官室。",
+      "location": "3 层，东北大厅，Pechanga VIP Lobby 旁"
+    },
+    "sensory-room-ne": {
+      "name": "感官室（东北）",
+      "description": "安静的房间，可以远离声音、灯光和人群休息一下，每次 15 分钟，先到先得。请在旁边的观众服务处询问。",
+      "location": "3 层，东北观众服务中心内"
+    },
+    "guest-services-n": {
+      "name": "观众服务处（北）",
+      "description": "失物招领、免费辅助听音设备（需押证件）、免费感官工具包、儿童防走失手环，以及换到无障碍座位。",
+      "location": "3 层，北大厅，Pro Shop 旁"
+    },
+    "guest-services-se": {
+      "name": "观众服务处（东南）",
+      "description": "失物招领、免费辅助听音设备（需押证件）、免费感官工具包和指路服务。",
+      "location": "3 层，东南侧，SoFi VIP Lobby 旁"
     },
     "guest-services-sw": {
       "name": "观众服务处（西南）",
-      "description": "位于 Corona Beach Club 内。失物招领、辅助听音设备、免费感官工具包和感官室。",
+      "description": "位于 Corona Beach Club 内。失物招领、免费辅助听音设备和耳机（需押证件）、免费感官工具包和感官室。",
       "location": "3 层，西南大厅"
     },
-    "first-aid-se": {
-      "name": "急救站（东南）",
-      "description": "现场有急救人员。任何引座员或工作人员都可以帮你呼叫。",
-      "location": "1 层，东南大厅"
+    "sensory-room-sw": {
+      "name": "感官室（西南）",
+      "description": "安静的房间，可以远离声音、灯光和人群休息一下，每次 15 分钟，先到先得。请在旁边的观众服务处询问。",
+      "location": "3 层，西南观众服务中心内"
+    },
+    "first-aid-ne": {
+      "name": "急救站（东北）",
+      "description": "现场有急救人员。任何引座员或工作人员都可以帮你呼叫。这里也可以私密哺乳。",
+      "location": "3 层，东北大厅"
     },
     "first-aid-nw": {
       "name": "急救站（西北）",
-      "description": "现场有急救人员。任何引座员或工作人员都可以帮你呼叫。",
+      "description": "现场有急救人员。任何引座员或工作人员都可以帮你呼叫。这里也可以私密哺乳。",
+      "location": "3 层，西北大厅；请向工作人员问路"
+    },
+    "first-aid-se": {
+      "name": "急救站（1 层）",
+      "description": "现场有急救人员。任何引座员或工作人员都可以帮你呼叫。2、3、6 和 8 层也有急救室。",
+      "location": "1 层（赛场层），东南大厅；请向工作人员问路"
+    },
+    "elevator-north": {
+      "name": "电梯（北）",
+      "description": "残障观众优先乘坐，最多可带三名同伴（高峰时段一名）。电梯和自动扶梯可到达各层。",
+      "location": "3 层，北大厅，207 区旁"
+    },
+    "elevator-northwest": {
+      "name": "电梯（西北）",
+      "description": "残障观众优先乘坐，最多可带三名同伴（高峰时段一名）。电梯和自动扶梯可到达各层。",
       "location": "3 层，西北大厅"
     },
     "pedestrian-ramp": {
@@ -180,35 +356,65 @@
       "description": "体育场唯一的人行坡道，可到达除 7 层以外的所有楼层。",
       "location": "东南侧，端区后方"
     },
+    "restrooms-n": {
+      "name": "洗手间（北）",
+      "description": "所有洗手间都是无障碍的，并设有婴儿尿布台。每层都有家庭洗手间。",
+      "location": "3 层，北大厅，205 区附近"
+    },
+    "restrooms-sw": {
+      "name": "洗手间（西南）",
+      "description": "所有洗手间都是无障碍的，并设有婴儿尿布台。每层都有家庭洗手间。",
+      "location": "3 层，西南大厅，C223 区附近"
+    },
+    "first-aid-se-6": {
+      "name": "急救站（东南）",
+      "description": "现场有急救人员。任何引座员或工作人员都可以帮你呼叫。这里也可以私密哺乳。",
+      "location": "6 层，东南大厅，342 区附近"
+    },
+    "first-aid-sw-6": {
+      "name": "急救站（西南）",
+      "description": "现场有急救人员。任何引座员或工作人员都可以帮你呼叫。这里也可以私密哺乳。",
+      "location": "6 层，西南大厅，330 区附近"
+    },
+    "guest-services-ne-6": {
+      "name": "观众服务处（6 层东北）",
+      "description": "失物招领、免费辅助听音设备（需押证件）、免费感官工具包，以及换到无障碍座位。",
+      "location": "6 层，东北侧，Pechanga VIP Lobby 旁"
+    },
+    "guest-services-se-6": {
+      "name": "观众服务处（6 层东南）",
+      "description": "失物招领、免费辅助听音设备（需押证件）、免费感官工具包，以及换到无障碍座位。",
+      "location": "6 层，东南侧，SoFi VIP Lobby 旁"
+    },
+    "adult-changing": {
+      "name": "成人护理台",
+      "description": "成人护理台，在 8 号电梯附近。找不到的话，请询问 Guest Experience 服务代表。",
+      "location": "6 层，329 区附近"
+    },
     "lactation-suite": {
       "name": "哺乳室",
-      "description": "Mamava 私密哺乳舱。每层都有家庭洗手间。",
-      "location": "4 层，南侧"
+      "description": "Mamava 私密哺乳室，设有座椅和电源，位于 4 层南侧、6 层和 8 层。任何急救室或家庭洗手间也可以使用。",
+      "location": "请向观众服务处询问最近的哺乳室"
     },
-    "rideshare-kareem": {
-      "name": "网约车下车点",
-      "description": "Uber、Lyft 和出租车下车点。上车点在 Kareem Court 与 Manchester Boulevard 路口。",
-      "location": "Kareem Court，Pincay Drive 与 Manchester Boulevard 之间"
+    "hydration-ne": {
+      "name": "饮水站（东北）",
+      "description": "免费过滤饮用水。可带一个空的、透明的、非金属的可重复使用水瓶（不超过 20 盎司）在这里接水。",
+      "location": "6 层，东北大厅，304 区附近"
     },
-    "accessible-drop-off": {
-      "name": "无障碍上下车点",
-      "description": "供残障人士上下车。从 Prairie Avenue 北行，经 Arbor Vitae Street 进入。",
-      "location": "District Drive，Champions Way 与 Touchdown Drive 之间"
+    "hydration-sw": {
+      "name": "饮水站（西南）",
+      "description": "免费过滤饮用水。可带一个空的、透明的、非金属的可重复使用水瓶（不超过 20 盎司）在这里接水。",
+      "location": "6 层，西南大厅，329 区附近"
     },
-    "brown-zone": {
-      "name": "棕色停车区",
-      "description": "离 1–5 号和 12 号入口最近的停车区。每个停车场都有 ADA 车位，先到先得。",
-      "location": "3919 Pincay Drive"
+    "restrooms-nw": {
+      "name": "洗手间（西北）",
+      "description": "所有洗手间都是无障碍的，并设有婴儿尿布台。每层都有家庭洗手间。",
+      "location": "6 层，西北大厅，316 区附近"
     },
-    "blue-zone": {
-      "name": "蓝色停车区",
-      "description": "离 7 号和 8 号入口最近的停车区。每个停车场都有 ADA 车位，先到先得。",
-      "location": "1100 Prairie Avenue"
-    },
-    "orange-zone": {
-      "name": "橙色停车区",
-      "description": "离 10、11 和 12 号入口最近的停车区。每个停车场都有 ADA 车位，先到先得。",
-      "location": "3695 Pincay Drive"
+    "restrooms-se": {
+      "name": "洗手间（东南）",
+      "description": "所有洗手间都是无障碍的，并设有婴儿尿布台。每层都有家庭洗手间。",
+      "location": "6 层，东南大厅，341 区附近"
     },
     "kobe-bryant-entrance": {
       "name": "Kobe Bryant 入口",
@@ -277,27 +483,27 @@
     },
     "main-entrance": {
       "name": "主入口",
-      "description": "GameFace ID 通道在左侧，Identity Pass 通道在右侧。从安检口到座位可提供免费行动协助。",
+      "description": "GameFace ID 通道在左侧，Identity Pass 通道在右侧；需要无障碍入场时，Identity Pass 持有人可在 Answers Portal 刷手机入场。包袋不超过 10×6×2 英寸（医疗用包不超过 14×14×6）。从安检口到座位可提供免费行动协助。",
       "location": "广场上，靠近 Century Blvd. 和 Prairie Ave."
     },
     "vip-entrance": {
       "name": "VIP 入口",
-      "description": "供包厢、俱乐部和场地票持票人使用。",
+      "description": "供包厢、俱乐部和场地票持票人使用（也可走主入口）。",
       "location": "主入口左侧"
     },
     "wall-entrance": {
       "name": "The Wall 入口",
-      "description": "The Wall 专用入口。",
+      "description": "供 The Wall 区域持票人使用（也可走主入口）。",
       "location": "主入口左侧，经过 VIP 入口"
     },
     "answers-portal-main": {
       "name": "Answers Portal（Main 层）",
-      "description": "观众服务：失物招领、免费辅助听音设备（需押带照片的证件）和 OneCourt 设备。",
+      "description": "观众服务：失物招领、免费辅助听音设备（需押带照片的证件）、感官包（需押证件）和 OneCourt 设备。",
       "location": "Main 层，Main 6 区附近"
     },
     "answers-portal-terrace": {
       "name": "Answers Portal（Terrace 层）",
-      "description": "观众服务：失物招领和免费辅助听音设备（需押带照片的证件）。",
+      "description": "观众服务：失物招领、免费辅助听音设备（需押带照片的证件）和 OneCourt 设备。",
       "location": "Terrace 层，Terrace 18 区附近"
     },
     "first-aid-main": {
@@ -317,7 +523,7 @@
     },
     "sensory-room": {
       "name": "感官室",
-      "description": "私密的 Kaiser Permanente 感官室。可按需领取感官包。",
+      "description": "私密的 Kaiser Permanente 感官室。感官包（耳机、解压玩具）在 Main 6 旁的 Answers Portal 领取，需出示证件。",
       "location": "请向场馆接待员问路"
     },
     "infant-care-room": {
@@ -327,29 +533,40 @@
     },
     "mobility-hub": {
       "name": "出行枢纽",
-      "description": "网约车和出租车上下客、家庭接送区和接驳车。",
-      "location": "东停车楼 1 层"
+      "description": "唯一的网约车上下客点。另有出租车、家庭接送区和免费接驳车（提供无障碍车辆）。",
+      "location": "东停车楼 1 层（3700 W Century Blvd.）"
     },
     "east-garage": {
       "name": "东停车楼",
-      "description": "普通停车，请提前购买停车证。无障碍车位先到先得出售。",
-      "location": "入口在 102nd St."
+      "description": "普通停车，请提前购买停车证。无障碍车位须随停车证购买，先到先得。",
+      "location": "3665 W 102nd St（入口在 102nd St.）"
     },
     "west-garage": {
       "name": "西停车楼",
-      "description": "VIP 停车，位于 Prairie Ave. 对面。请提前购买停车证。",
-      "location": "入口在 Prairie Ave."
+      "description": "VIP 停车，位于 Prairie Ave. 对面。请提前购买停车证。无障碍车位须随停车证购买，先到先得。",
+      "location": "10117 S Prairie Ave（入口在 Prairie Ave.）"
+    },
+    "infant-care-terrace": {
+      "name": "婴儿护理室（Terrace 层）",
+      "description": "私密的婴儿护理室。所有洗手间都有尿布台。",
+      "location": "Terrace 层，Terrace Wall 16"
+    },
+    "elevators": {
+      "name": "电梯",
+      "description": "电梯从主入口通往各层，主大厅的自动扶梯连接 Main 层和 Terrace 层。行动不便者优先。",
+      "location": "请向场馆接待员询问最近的电梯"
     }
   },
   "facility": {
     "notFound": "未找到该设施",
     "wheelchair": "轮椅可通行",
     "directions": "路线",
+    "noRoute": "没有步行路线：场馆未公布此位置。请向工作人员问路。",
     "imHere": "我在这里",
     "imHereHint": "请求帮助时将此处作为你的位置",
     "isHere": "你的位置",
     "reports": "反馈",
-    "results_other": "{{number}} 条结果",
+    "reportCount_other": "{{number}} 条反馈",
     "noReports": "还没有反馈。来分享你的发现吧。",
     "addReport": "添加你的反馈"
   },
@@ -379,7 +596,12 @@
     "authorFallback": "VenU 访客",
     "submitted": "提交于 {{date}}",
     "originalLanguage": "原文语言：{{language}}",
-    "noBody": "未添加详情。"
+    "noBody": "未添加详情。",
+    "delete": "删除我的反馈",
+    "deleteConfirm": "要删除这条反馈吗？此场馆的访客将不会再看到它。",
+    "deleteKeep": "保留",
+    "deleteYes": "删除",
+    "deleteFailed": "无法删除反馈。{{reason}}"
   },
   "form": {
     "title": "添加反馈",
@@ -403,9 +625,12 @@
     "title": "步行路线",
     "from": "从{{from}}出发",
     "fromArrival": "从主入口{{from}}出发。在别处？打开那个地点并点按“我在这里”。",
+    "fromArrivalPlain": "从{{from}}出发。在别处？打开那个地点并点按“我在这里”。",
     "steps_other": "约{{number}}步",
     "stepStart": "从{{from}}出发。",
     "stepHead": "向{{direction}}走约{{meters}}米。",
+    "stepLevel": "乘电梯或自动扶梯前往 {{level}}。",
+    "stepOut": "前往最近的出口，走到室外。",
     "stepArrive": "{{name}}：{{location}}。",
     "here": "你已经在这里了。",
     "end": "结束路线",

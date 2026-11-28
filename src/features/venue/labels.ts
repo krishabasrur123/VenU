@@ -13,6 +13,7 @@ import { formatList, formatNumber } from '@/i18n/format';
 import { en } from '@/i18n/locales';
 
 import type { Facility, FacilityCategory, FacilityTag, Venue } from './types';
+import type { VenueMapLayer } from './venue-maps';
 
 export type VenueT = TFunction<'venue'>;
 
@@ -59,6 +60,37 @@ export function facilityLocation(f: Facility, t: VenueT = venueT()): string {
   return isKnown(id) ? t(`facilityText.${id}.location`) : f.location;
 }
 
+/** A sponsored stand's offer, translated like the description; '' for a facility without a sponsor. */
+export function facilityOffer(f: Facility, t: VenueT = venueT()): string {
+  if (!f.sponsor) return '';
+  const id = f.id;
+  return isKnown(id) && 'offer' in FACILITY_TEXT[id] ? t(`facilityText.${id}.offer` as never) : f.sponsor.offer;
+}
+
+/**
+ * A map layer's name, as the layer toggle and the walking steps say it.
+ * e.g. layerLabel({ kind: 'outside' }) → 'Outside'; layerLabel({ kind: 'level', level: 3 }) → 'Level 3'
+ * (in the language's own digits, as walkLabel does)
+ */
+export function layerLabel(layer: Pick<VenueMapLayer, 'kind' | 'level'>, t: VenueT = venueT()): string {
+  if (layer.kind === 'level' && layer.level !== undefined) {
+    return t('map.layers.level', { number: formatNumber(layer.level, undefined, languageOf(t)) });
+  }
+  return t('map.layers.outside');
+}
+
+/**
+ * What a screen reader says for a layer button while a chip is on: the layer and how many of the
+ * chip's pins it holds. Without a count (no chip) it's just the layer's name.
+ * e.g. layerCountLabel(level3, 3) → 'Level 3, 3 matches'; layerCountLabel(outside, 0) → 'Outside, no matches'
+ */
+export function layerCountLabel(layer: Pick<VenueMapLayer, 'kind' | 'level'>, count: number | undefined, t: VenueT = venueT()): string {
+  const name = layerLabel(layer, t);
+  if (count === undefined) return name;
+  if (count === 0) return t('map.layers.noMatches', { layer: name });
+  return t('map.layers.matches', { layer: name, count, number: formatNumber(count, undefined, languageOf(t)) });
+}
+
 /** Longest search text echoed back in an empty-results line before it's cut with "…". */
 export const ECHO_MAX = 40;
 
@@ -73,8 +105,35 @@ export function echoQuery(query: string): string {
   return chars.length > ECHO_MAX ? `${chars.slice(0, ECHO_MAX).join('').trimEnd()}…` : q;
 }
 
-/** "3 min walk · Short wait"; the number in the language's digits ("۳ دقیقه پیاده‌روی" in Persian). */
-export function facilityMeta(f: Facility, t: VenueT = venueT()): string {
-  const number = formatNumber(f.walkMinutes, undefined, languageOf(t));
-  return `${t('walk', { count: f.walkMinutes, number })} · ${t(`wait.${f.wait}`)}`;
+/**
+ * How far a facility is from where walks start (see walkFromStart in ./directions): a walk in
+ * minutes, the start itself (the way in, or the visitor's own "I'm here" spot), or `ask` when its
+ * spot isn't published.
+ */
+export type FacilityWalk = { kind: 'walk'; minutes: number } | { kind: 'start' | 'mine' | 'ask' };
+
+/**
+ * A walk as every screen words it: "3 min walk" (in the language's digits: "۳ دقیقه پیاده‌روی"),
+ * "Walks start here", "You're here" or "Spot not published".
+ */
+export function walkLabel(w: FacilityWalk, t: VenueT = venueT()): string {
+  return w.kind === 'walk'
+    ? t('walk', { count: w.minutes, number: formatNumber(w.minutes, undefined, languageOf(t)) })
+    : t(w.kind === 'start' ? 'walkStart' : w.kind === 'mine' ? 'walkMine' : 'walkAsk');
+}
+
+/**
+ * "3 min walk · Short wait": the walk (see walkLabel), then the wait. Without a `walk` it falls
+ * back to the facility's stand-in walkMinutes.
+ */
+export function facilityMeta(f: Facility, t: VenueT = venueT(), walk?: FacilityWalk | null): string {
+  return `${walkLabel(walk ?? { kind: 'walk', minutes: f.walkMinutes }, t)} · ${t(`wait.${f.wait}`)}`;
+}
+
+/**
+ * Text without its closing full stop, for a template that adds its own.
+ * e.g. withoutFinalStop('Entrance on 102nd St.') → 'Entrance on 102nd St'; withoutFinalStop('Main 6') → 'Main 6'
+ */
+export function withoutFinalStop(text: string): string {
+  return text.replace(/[.。．]\s*$/u, '');
 }

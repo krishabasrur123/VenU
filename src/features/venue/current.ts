@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSyncExternalStore } from 'react';
 
 import { getFacility, getVenue } from './mock';
+import type { Facility } from './types';
 
 export interface WhereAmI {
   venueId: string;
@@ -28,12 +29,30 @@ let hydration: Promise<void> | null = null;
 let generation = 0;
 const listeners = new Set<() => void>();
 
-/** A saved value that still names a real venue (and facility), else the default. */
+/**
+ * Whether a facility can be the visitor's spot (and so a volunteer's meeting point): not a spot the
+ * venue doesn't publish (`approximate`: nobody could find you there, and walks can't start there)
+ * and not a sponsored stand. e.g. Intuit Dome's Main Entrance → true; its Elevators → false.
+ */
+export function isMeetSpot(f: Facility): boolean {
+  return !f.approximate && !f.sponsor;
+}
+
+/** The facility at this venue that can be the visitor's spot (see isMeetSpot), if any. */
+function meetSpot(venueId: string, facilityId: string): Facility | undefined {
+  const f = getFacility(venueId, facilityId);
+  return f && isMeetSpot(f) ? f : undefined;
+}
+
+/**
+ * A saved value that still names a real venue (and spot), else the default. A spot saved before it
+ * stopped being one (Sensory Room, now unpublished) is dropped and the venue kept: "I'm not sure".
+ */
 export function validWhere(value: unknown): WhereAmI {
   if (!value || typeof value !== 'object') return DEFAULT_WHERE;
   const { venueId, facilityId } = value as Partial<Record<keyof WhereAmI, unknown>>;
   if (typeof venueId !== 'string' || !getVenue(venueId)) return DEFAULT_WHERE;
-  const spot = typeof facilityId === 'string' && getFacility(venueId, facilityId) ? facilityId : null;
+  const spot = typeof facilityId === 'string' && meetSpot(venueId, facilityId) ? facilityId : null;
   return { venueId, facilityId: spot };
 }
 
@@ -111,10 +130,10 @@ export function setCurrentVenue(venueId: string): Promise<void> {
   return afterHydration(() => set(venueId === state.venueId ? state : { venueId, facilityId: null }));
 }
 
-/** The spot in the current venue (a facility id), or null to clear it. */
+/** The spot in the current venue (a facility id that isMeetSpot), or null to clear it. */
 export function setCurrentSpot(facilityId: string | null): Promise<void> {
   return afterHydration(() => {
-    if (facilityId !== null && !getFacility(state.venueId, facilityId)) return;
+    if (facilityId !== null && !meetSpot(state.venueId, facilityId)) return;
     set({ ...state, facilityId });
   });
 }

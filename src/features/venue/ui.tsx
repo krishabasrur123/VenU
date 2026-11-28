@@ -3,7 +3,7 @@ import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-na
 import Svg, { Circle, Line } from 'react-native-svg';
 
 import { FigmaIcon } from '@/components/icons/figma-icon';
-import { Colors, Fonts, Radius, Spacing, webNoOutline } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Spacing, webNoOutline } from '@/constants/theme';
 import { useLayoutRtl, useT } from '@/i18n';
 
 /** A tag as shown: its translated label and tone (green good news, orange heads-up). */
@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
   tag: { minHeight: 28, minWidth: 78, paddingHorizontal: 14, borderRadius: Radius.sm, alignItems: 'center', justifyContent: 'center' },
   tagGood: { backgroundColor: Colors.successStrong },
   tagNote: { backgroundColor: Colors.warning },
-  tagText: { fontFamily: Fonts.textMedium, fontSize: 13, lineHeight: 17, color: Colors.ink },
-  tagTextGood: { fontFamily: Fonts.textBold, color: Colors.onPrimary },
+  tagText: { ...Face.textMedium, fontSize: 13, lineHeight: 17, color: Colors.ink },
+  tagTextGood: { ...Face.textBold, color: Colors.onPrimary },
 
   // The 34pt glyph starts 5.6pt into its box, which is centred in the 44pt target: 5 + 5.6 ≈ 11.
   back: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center', marginStart: -11 },
