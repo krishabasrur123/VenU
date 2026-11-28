@@ -34,6 +34,10 @@
     "forgot": "Forgot Password?",
     "confirmNotice": "Check your email to confirm your account, then sign in.",
     "resetNotice": "Password changed. Sign in with your new password.",
+    "confirmBlocked": "You need to verify your email before signing in.",
+    "resend": "Resend confirmation email",
+    "resendSent": "Email sent — check your inbox.",
+    "resendError": "Couldn't resend. Try again.",
     "submit": "Sign In"
   },
   "signUp": {

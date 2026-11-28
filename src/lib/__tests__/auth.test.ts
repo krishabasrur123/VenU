@@ -21,6 +21,9 @@ const mockSetSession = jest.fn(async (_: { access_token: string; refresh_token: 
   data: { user: { email: 'rosa@example.com' }, session: {} },
   error: null,
 }));
+// After a sign-in the app checks the email was confirmed (signs an unconfirmed one back out).
+const mockGetUser = jest.fn(async () => ({ data: { user: { email: 'rosa@example.com', email_confirmed_at: '2026-11-01T00:00:00Z' } }, error: null }));
+const mockSignOut = jest.fn(async (_: { scope: string }) => ({ error: null }));
 
 // Wrapped so the mocks are read at call time: the import below is hoisted above the consts.
 jest.mock('@/lib/supabase', () => ({
@@ -31,6 +34,8 @@ jest.mock('@/lib/supabase', () => ({
       signInWithPassword: (creds: { email: string; password: string }) => mockSignInWithPassword(creds),
       signUp: (body: unknown) => mockSignUp(body),
       setSession: (tokens: { access_token: string; refresh_token: string }) => mockSetSession(tokens),
+      getUser: () => mockGetUser(),
+      signOut: (options: { scope: string }) => mockSignOut(options),
     },
   },
 }));
@@ -47,6 +52,8 @@ beforeEach(() => {
   mockSignUp.mockClear();
   mockInvoke.mockClear();
   mockSetSession.mockClear();
+  mockGetUser.mockClear();
+  mockSignOut.mockClear();
 });
 
 describe('signIn', () => {
@@ -64,6 +71,12 @@ describe('signIn', () => {
     expect(mockSignInWithPassword).toHaveBeenCalledWith({ email: 'rosa@example.com', password: 'pw' });
     expect(mockInvoke).not.toHaveBeenCalled();
     expect(mockRpc).not.toHaveBeenCalled();
+  });
+
+  it('signs an unconfirmed account back out and asks for the confirmation', async () => {
+    mockGetUser.mockResolvedValueOnce({ data: { user: { email: 'rosa@example.com', email_confirmed_at: null } }, error: null } as never);
+    expect(await signIn('rosa@example.com', 'pw')).toEqual({ ok: true, needsConfirmation: true, email: 'rosa@example.com' });
+    expect(mockSignOut).toHaveBeenCalledWith({ scope: 'local' });
   });
 
   it("shows the function's refusal as the wrong-password message", async () => {

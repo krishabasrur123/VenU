@@ -33,6 +33,10 @@
     "signUp": "S'inscrire",
     "forgot": "Mot de passe oublié ?",
     "confirmNotice": "Consultez vos e-mails pour confirmer votre compte, puis connectez-vous.",
+    "confirmBlocked": "Vous devez confirmer votre adresse e-mail avant de vous connecter.",
+    "resend": "Renvoyer l’e-mail de confirmation",
+    "resendSent": "E-mail envoyé : consultez votre boîte de réception.",
+    "resendError": "Impossible de renvoyer. Réessayez.",
     "resetNotice": "Mot de passe modifié. Connectez-vous avec votre nouveau mot de passe.",
     "submit": "Se connecter"
   },

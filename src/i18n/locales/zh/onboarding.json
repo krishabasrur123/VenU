@@ -33,6 +33,10 @@
     "signUp": "注册",
     "forgot": "忘记密码？",
     "confirmNotice": "请查收电子邮件确认账户，然后登录。",
+    "confirmBlocked": "登录前需要先验证你的邮箱。",
+    "resend": "重新发送确认邮件",
+    "resendSent": "邮件已发送，请查收收件箱。",
+    "resendError": "无法重新发送，请重试。",
     "resetNotice": "密码已更改。请用新密码登录。",
     "submit": "登录"
   },

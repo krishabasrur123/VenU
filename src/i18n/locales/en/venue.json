@@ -322,7 +322,7 @@
     },
     "west-garage-lot-w": {
       "name": "West Garage (Lot W)",
-      "description": "Arena garage, entered from Chick Hearn Ct. or Georgia St.",
+      "description": "Arena garage with designated disabled parking. Entered from Chick Hearn Ct. or Georgia St.",
       "location": "1005 Chick Hearn Ct."
     },
     "main-entrance": {

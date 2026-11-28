@@ -143,88 +143,102 @@ const SOFI: Template[] = [
 //   https://www.cryptoarena.com/accessibility
 //   https://www.cryptoarena.com/plan-your-visit/getting-here
 //   https://www.cryptoarena.com/plan-your-visit/getting-here/public-transportation
-// "North" is the Chick Hearn Ct. (11th St.) side and east is Figueroa St., following the downtown
-// street grid (it runs about 38° off true north). Georgia St. is the west side. The guides give
-// aisles, not sides, so concourse pins go round the ring in aisle order, roughly. The A-Z guide puts
-// upper Guest Services at U6; the accessibility page says aisle 5 (U6 used here).
+// "North" is the Chick Hearn Way (top) side and east is Figueroa St./Star Plaza (right), following
+// the image compass. Georgia St. is the west (left) side. Pins are placed on the seating blueprint
+// (1425×1104, assets/images/Crypto.com Arena Seating Blueprint.png). Entrance labels, Guest
+// Services ⓘ, and restroom ♂♀ icons are printed directly on the image and used to place pins.
+// Street-level pins (rideshare, garage) sit outside the arena oval at the matching edge.
 const CRYPTO_ARENA: Template[] = [
   {
-    id: 'kobe-bryant-entrance', name: 'Kobe Bryant Entrance', category: 'gate', x: 0.145, y: 0.195,
+    // Labelled "KOBE BRYANT ENTRANCE" top-left of the image, white square marker.
+    id: 'kobe-bryant-entrance', name: 'Kobe Bryant Entrance', category: 'gate', x: 0.215, y: 0.063,
     description: 'Main entrance for all tickets. GA floor tickets enter here.',
     location: 'Chick Hearn Ct. (11th St.) at Georgia St.', walkMinutes: 5, wait: 'long', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'wheelchair_escort', tone: 'note' }, { id: 'bag_check', tone: 'note' }],
   },
   {
-    id: 'star-plaza-entrance', name: 'Star Plaza Entrance', category: 'gate', x: 0.855, y: 0.195,
+    // Labelled "STAR PLAZA ENTRANCE" top-right, white square marker below "STAR PLAZA" heading.
+    id: 'star-plaza-entrance', name: 'Star Plaza Entrance', category: 'gate', x: 0.800, y: 0.175,
     description: 'Main entrance for all tickets, between the Box Office and Team LA Store.',
     location: 'Chick Hearn Ct. (11th St.) at Figueroa St.', walkMinutes: 4, wait: 'short', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'wheelchair_escort', tone: 'note' }, { id: 'busy_before_events', tone: 'note' }],
   },
   {
-    id: 'figueroa-entrance', name: 'Figueroa Entrance', category: 'gate', x: 0.855, y: 0.805,
+    // Labelled "FIGUEROA ST. ENTRANCE" bottom-centre, white square marker.
+    id: 'figueroa-entrance', name: 'Figueroa Entrance', category: 'gate', x: 0.490, y: 0.950,
     description: 'Main entrance for all tickets. Ask here for a free wheelchair escort.',
     location: '12th St. at Figueroa St.', walkMinutes: 6, wait: 'short', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'wheelchair_escort', tone: 'note' }],
   },
   {
-    id: 'guest-services-m12', name: 'Guest Services M12', category: 'info', x: 0.875, y: 0.425,
+    // "GUEST SERVICES" label with ⓘ icon on the left concourse near M12–M13.
+    id: 'guest-services-m12', name: 'Guest Services M12', category: 'info', x: 0.155, y: 0.310,
     description: 'Questions, lost items, assistive listening, sensory bags and weighted lap pads (ID needed).',
     location: 'Main Concourse, across from aisle M12', walkMinutes: 3, wait: 'none', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'sensory_kits', tone: 'note' }, { id: 'assistive_listening', tone: 'note' }, { id: 'lost_items', tone: 'note' }],
   },
   {
-    id: 'guest-services-u6', name: 'Guest Services U6', category: 'info', x: 0.725, y: 0.170,
+    // Upper concourse U6 — NE quadrant, outer ring near sections 320–322.
+    id: 'guest-services-u6', name: 'Guest Services U6', category: 'info', x: 0.740, y: 0.185,
     description: 'Questions, lost items, sensory bags and lap pads. Ask here for the Sensory Pod code.',
     location: 'Upper Concourse, across from aisle U6', walkMinutes: 6, wait: 'none', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'sensory_kits', tone: 'note' }, { id: 'lost_items', tone: 'note' }],
   },
   {
-    id: 'first-aid-m3', name: 'First Aid M3', category: 'first_aid', x: 0.375, y: 0.170,
+    // First Aid M3 — NW main concourse, near sections 313–315 / M13–M14 area.
+    id: 'first-aid-m3', name: 'First Aid M3', category: 'first_aid', x: 0.265, y: 0.220,
     description: 'EMTs at every event, with a quiet area inside.',
     location: 'Main Concourse, across from aisle M3', walkMinutes: 4, wait: 'none', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'quiet_room', tone: 'note' }],
   },
   {
-    id: 'first-aid-u22', name: 'First Aid U22', category: 'first_aid', x: 0.575, y: 0.835,
+    // First Aid U22 — south concourse, near sections 302–303 bottom.
+    id: 'first-aid-u22', name: 'First Aid U22', category: 'first_aid', x: 0.430, y: 0.880,
     description: 'EMTs at every event, with a quiet area inside.',
     location: 'Upper Concourse, across from aisle U22', walkMinutes: 8, wait: 'none', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'quiet_room', tone: 'note' }],
   },
   {
-    id: 'sensory-pod', name: 'Sensory Pod', category: 'accessible', x: 0.550, y: 0.170,
+    // Sensory Pod — upper concourse aisle 3, NW area near sections 315–316.
+    id: 'sensory-pod', name: 'Sensory Pod', category: 'accessible', x: 0.340, y: 0.195,
     description: 'Quiet pod for one or two guests, open during every event. Guest Services has the door code.',
     location: 'Upper Concourse, across from aisle 3', walkMinutes: 7, wait: 'none', accessible: false,
     tags: [{ id: 'sensory_room', tone: 'note' }],
   },
   {
-    id: 'restroom-m23', name: 'Restroom M23', category: 'restroom', x: 0.400, y: 0.835,
+    // Restroom M23 — SE main concourse; ♂♀ icon visible near M25–M26 / sections 324–326.
+    id: 'restroom-m23', name: 'Restroom M23', category: 'restroom', x: 0.845, y: 0.420,
     description: 'All-gender restroom with a changing table. Every restroom is wheelchair accessible.',
     location: 'Main Concourse, across from aisle M23', walkMinutes: 5, wait: 'short', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'changing_table', tone: 'note' }],
   },
   {
-    id: 'restroom-u31', name: 'Restroom U31', category: 'restroom', x: 0.125, y: 0.450,
+    // Restroom U31 — west concourse; ♂♀ icon visible near M9 / sections 307–308.
+    id: 'restroom-u31', name: 'Restroom U31', category: 'restroom', x: 0.108, y: 0.555,
     description: 'All-gender restroom with a changing table. Every restroom is wheelchair accessible.',
     location: 'Upper Concourse, across from aisle U31', walkMinutes: 9, wait: 'short', accessible: true,
     tags: [{ id: 'accessible', tone: 'good' }, { id: 'changing_table', tone: 'note' }],
   },
   {
-    id: 'rideshare-chick-hearn', name: 'Chick Hearn Rideshare', category: 'parking', x: 0.225, y: 0.060,
+    // Chick Hearn rideshare — north street, top-centre of image above the arena oval.
+    id: 'rideshare-chick-hearn', name: 'Chick Hearn Rideshare', category: 'parking', x: 0.490, y: 0.025,
     description: 'Rideshare drop-off and pick-up in the white zone (eastbound).',
     location: 'Chick Hearn Ct., between L.A. Live Way and Georgia St.', walkMinutes: 7, wait: 'long', accessible: false,
     tags: [{ id: 'rideshare', tone: 'note' }, { id: 'busy_before_events', tone: 'note' }],
   },
   {
-    id: 'rideshare-figueroa', name: 'Figueroa Rideshare', category: 'parking', x: 0.950, y: 0.655,
+    // SW VIP Entrance labelled on the left edge — closest point for Figueroa rideshare zone.
+    id: 'rideshare-figueroa', name: 'Figueroa Rideshare', category: 'parking', x: 0.038, y: 0.460,
     description: 'Rideshare drop-off and pick-up in the white zone (southbound).',
     location: 'Figueroa St., between 12th St. and Pico Blvd.', walkMinutes: 8, wait: 'short', accessible: false,
     tags: [{ id: 'rideshare', tone: 'note' }],
   },
   {
-    id: 'west-garage-lot-w', name: 'West Garage (Lot W)', category: 'parking', x: 0.045, y: 0.350,
-    description: 'Arena garage, entered from Chick Hearn Ct. or Georgia St.',
+    // West Garage — left of the arena; "VIP" label area on the top-left of the image.
+    id: 'west-garage-lot-w', name: 'West Garage (Lot W)', category: 'parking', x: 0.038, y: 0.200,
+    description: 'Arena garage with designated disabled parking. Entered from Chick Hearn Ct. or Georgia St.',
     location: '1005 Chick Hearn Ct.', walkMinutes: 9, wait: 'none', accessible: false,
-    tags: [],
+    tags: [{ id: 'accessible', tone: 'good' }],
   },
 ];
 

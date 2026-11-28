@@ -33,6 +33,10 @@
     "signUp": "Đăng ký",
     "forgot": "Quên mật khẩu?",
     "confirmNotice": "Kiểm tra email để xác nhận tài khoản, rồi đăng nhập.",
+    "confirmBlocked": "Bạn cần xác minh email trước khi đăng nhập.",
+    "resend": "Gửi lại email xác nhận",
+    "resendSent": "Đã gửi email — hãy kiểm tra hộp thư đến.",
+    "resendError": "Không gửi lại được. Hãy thử lại.",
     "resetNotice": "Đã đổi mật khẩu. Hãy đăng nhập bằng mật khẩu mới.",
     "submit": "Đăng nhập"
   },

@@ -72,14 +72,21 @@ const MAPS: Readonly<Record<string, VenueMap>> = {
     arrivalNamedMain: true,
     background: '#101010', // the image's near-black edge
   },
-  // cryptoarena.com publishes no static map or seating chart image (checked 2026-11-16), only the
-  // interactive Wayfyndr map, so the schematic arena stands in.
+  // Seating blueprint (1425×1104) bundled as a local asset — use the special "local:" prefix so
+  // venue-map-view.tsx can resolve it via require() without polluting this plain TS module with
+  // a React Native require() call that breaks Jest. North is up (compass shown top-left).
+  // Chick Hearn Way runs along the top, Figueroa St. along the bottom-right, Georgia St. to the
+  // left. Entrances, Guest Services and restroom icons are labelled on the image itself.
   'crypto-arena': {
     source: 'Crypto.com Arena',
     pageUrl: 'https://visit.cryptoarena.com/map',
-    image: null,
+    image: {
+      url: 'local:crypto-arena-map',
+      width: 1425,
+      height: 1104,
+    },
     shape: 'arena',
-    focus: [0, 0, 1, 1],
+    focus: [0.08, 0.04, 0.92, 0.96],
     widthMeters: 260,
     arrival: 'star-plaza-entrance',
   },
