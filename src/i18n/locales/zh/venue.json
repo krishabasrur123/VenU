@@ -115,7 +115,7 @@
     "card": "广告：{{name}}。{{offer}}。{{meta}}",
     "heading": "广告：{{name}}",
     "showScreen": "请在摊位出示此屏幕",
-    "disclosure": "付费推广，非场馆信息",
+    "disclosure": "演示推广，非场馆信息",
     "banner": "广告：{{name}}，{{walk}}。{{offer}}",
     "bannerHint": "打开该摊位。你的请求仍在继续匹配。",
     "hide": "隐藏广告消息"

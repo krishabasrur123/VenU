@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 import i18n, { type UiLanguage } from '@/i18n';
@@ -9,7 +9,7 @@ import { categoriesAt } from '../categories';
 import { nearestFirst, routeFor, walkFromStart } from '../directions';
 import { facilityDescription, facilityLocation, facilityMeta, facilityName, facilityOffer, walkLabel } from '../labels';
 import { facilitiesFor, getFacility, getVenue, searchFacilities, VENUES } from '../mock';
-import { facilityListLayout, featuredStandFor, isSponsored, sponsoredStandsFor, takesReports, venueFacilitiesFor, waitingBannerFor } from '../sponsors';
+import { facilityListLayout, featuredStandFor, isSponsored, sponsoredStandsFor, sponsorLogoOf, takesReports, venueFacilitiesFor, waitingBannerFor } from '../sponsors';
 import { mapAspect, venueMapFor } from '../venue-maps';
 
 // Same rules as the facility pins (facilities.test.ts): inside the map, clear of every other pin.
@@ -33,6 +33,14 @@ describe('sponsored stand data', () => {
 
   it('features Coca-Cola at every venue (the demo placement)', () => {
     expect(VENUES.map(v => featuredStandFor(v.id)?.sponsor.brand)).toEqual(VENUES.map(() => 'Coca-Cola'));
+  });
+
+  it('gives every stand its brand’s logo, a file in assets/sponsors (Figma 565:3871)', () => {
+    const logos = Object.fromEntries(allStands().map(s => [s.sponsor.brand, sponsorLogoOf(s)]));
+    expect(logos).toEqual({ 'Coca-Cola': 'coca-cola', 'Panda Express': 'panda-express', 'Ben & Jerry’s': 'ben-jerrys' });
+    for (const logo of Object.values(logos)) expect({ logo, file: existsSync(join(__dirname, '../../../../assets/sponsors', `${logo}.png`)) }).toEqual({ logo, file: true });
+    // Only stands carry a logo.
+    expect(VENUES.flatMap(v => facilitiesFor(v.id)).some(f => sponsorLogoOf(f) !== undefined)).toBe(false);
   });
 
   it('gives every stand an id no other facility or stand uses (translations are keyed by id alone)', () => {
@@ -125,6 +133,14 @@ describe('translations', () => {
         expect({ lng, key, ok: !!text[key], slots: slots(text[key] ?? '') }).toEqual({ lng, key, ok: true, slots: slots(en[key]) });
       }
       if (lng !== 'en') expect({ lng, same: text.label === en.label }).toEqual({ lng, same: false });
+    }
+  });
+
+  it('calls a stand a demo placement, not a paid one: nobody pays for these spots', () => {
+    expect(resources.en.venue.sponsor.disclosure).toBe('Demo placement, not venue information');
+    const paid = /paid|pagad|payant|pago|платн|bayad|trả phí|有料|유료|付费|مدفوع|پولی|Վճարովի/i;
+    for (const lng of LANGS) {
+      expect({ lng, paid: paid.test(resources[lng].venue.sponsor.disclosure) }).toEqual({ lng, paid: false });
     }
   });
 

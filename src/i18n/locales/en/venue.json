@@ -116,7 +116,7 @@
     "card": "Sponsored: {{name}}. {{offer}}. {{meta}}",
     "heading": "Sponsored: {{name}}",
     "showScreen": "Show this screen at the stand",
-    "disclosure": "Paid listing, not venue information",
+    "disclosure": "Demo placement, not venue information",
     "banner": "Sponsored: {{name}}, {{walk}}. {{offer}}",
     "bannerHint": "Opens the stand. Your request keeps searching.",
     "hide": "Hide sponsored message"

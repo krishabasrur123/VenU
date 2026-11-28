@@ -115,7 +115,7 @@
     "card": "광고: {{name}}. {{offer}}. {{meta}}",
     "heading": "광고: {{name}}",
     "showScreen": "매대에서 이 화면을 보여 주세요",
-    "disclosure": "유료 광고이며 경기장 안내가 아닙니다",
+    "disclosure": "데모용 광고이며 경기장 안내가 아닙니다",
     "banner": "광고: {{name}}, {{walk}}. {{offer}}",
     "bannerHint": "매대를 엽니다. 요청은 계속 검색됩니다.",
     "hide": "광고 메시지 숨기기"

@@ -1,6 +1,6 @@
 /**
- * The one ad slot outside the Venue tab: a small "Sponsored" card at the end of the waiting screen
- * (SearchingView), for the venue's featured stand (features/venue/sponsors.ts).
+ * The one ad slot outside the Venue tab: a small "Sponsored" card with the brand's logo at the end of
+ * the waiting screen (SearchingView), for the venue's featured stand (features/venue/sponsors.ts).
  * - Shows only while a visitor's request is searching (waitingBannerFor), so it can't leak onto the
  *   match, chat, feedback or volunteer screens even if it were placed there.
  * - Sits in the page flow below Cancel, never over the request, the notice or Cancel.
@@ -15,7 +15,7 @@ import { FigmaIcon } from '@/components/icons/figma-icon';
 import { Colors, Face, Fonts, Radius, Spacing } from '@/constants/theme';
 import { useProfile } from '@/features/profile/profile-context';
 import { facilityName, facilityOffer, walkLabel } from '@/features/venue/labels';
-import { SPONSOR_ACCENT, SPONSOR_SOFT, SponsoredIcon, SponsoredTag } from '@/features/venue/sponsor-ui';
+import { SPONSOR_ACCENT, SPONSOR_SOFT, SponsoredTag, SponsorMark } from '@/features/venue/sponsor-ui';
 import { waitingBannerFor } from '@/features/venue/sponsors';
 import { useVolunteerRequest } from '@/features/volunteer/request-store';
 import { useT } from '@/i18n';
@@ -48,9 +48,7 @@ export function SponsorBanner() {
         accessibilityRole="button"
         accessibilityLabel={t('sponsor.banner', { name, walk, offer })}
         accessibilityHint={t('sponsor.bannerHint')}>
-        <View style={styles.icon}>
-          <SponsoredIcon size={24} background={SPONSOR_SOFT} />
-        </View>
+        <SponsorMark facility={stand} size={44} />
         <View style={styles.text}>
           <SponsoredTag />
           <Text style={styles.name} numberOfLines={2}>{`${name} · ${walk}`}</Text>
@@ -68,7 +66,6 @@ const styles = StyleSheet.create({
   box: { flexDirection: 'row', alignItems: 'flex-start', borderRadius: Radius.md, borderWidth: 1.5, borderColor: SPONSOR_SOFT, backgroundColor: Colors.surface },
   main: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: Spacing.md, padding: Spacing.md, paddingEnd: 0, borderRadius: Radius.md },
   pressed: { opacity: 0.7 },
-  icon: { width: 40, height: 40, borderRadius: Radius.sm, alignItems: 'center', justifyContent: 'center', backgroundColor: SPONSOR_SOFT },
   text: { flex: 1, gap: 2 },
   name: { ...Face.displayMedium, fontSize: 14, lineHeight: 19, color: Colors.text },
   offer: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 17, color: SPONSOR_ACCENT },

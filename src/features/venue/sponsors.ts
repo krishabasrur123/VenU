@@ -1,15 +1,25 @@
 /**
  * Sponsored stands: a demo of how VenU could earn money, for the Intuit pitch.
  *
- * DEMO PLACEMENTS ONLY. None of these brands has a partnership with VenU, LA28 or the venues; the
- * names are real brands as plain text so the demo reads true, and the stands, spots and offers are
- * made up. Never show a brand's logo, artwork or colours: the UI uses VenU's own Sponsored icon and
- * theme colours, and always says "Sponsored" (on screen and to screen readers).
+ * DEMO PLACEMENTS ONLY. None of these brands has a partnership with VenU, LA28 or the venues, and
+ * nobody pays for these spots; the stands, spots and offers are made up. The brands' real logos show
+ * (Figma 565:3871) so the demo reads true; screens say "Demo placement, not venue information" on
+ * the stand, and always say "Sponsored" first (on screen and to screen readers).
+ *
+ * Logos (assets/sponsors/, drawn by sponsor-ui.tsx; each brand's trademark belongs to its owner):
+ * - coca-cola.png: from the VenU Figma file (WsE4dtVcbpIWfDokV0sYhc, frame 565:3871), 447x447.
+ * - panda-express.png: https://en.wikipedia.org/wiki/File:Panda_Express_logo.svg as a 500px PNG.
+ *   English Wikipedia only (not on Commons): "Non-free logo", a registered trademark used there
+ *   under fair use. Fine for a class demo; replace it before anything public.
+ * - ben-jerrys.png: https://commons.wikimedia.org/wiki/File:Ben_%26_Jerry%27s.svg as a 500px PNG.
+ *   "Public domain (PD-textlogo); trademarked" (Unilever).
  *
  * Where ads go: the venue map (a Sponsored pin), one promoted card in the facility list, the offer on
  * the stand, and one banner while a visitor waits for a volunteer. Never in the emergency dialog,
  * the meeting-spot picker or any other volunteer screen: these stands are kept out of
  * facilitiesFor() (./mock.ts), which those screens read, and only the venue screen adds them.
+ * The logo shows on the promoted card, the pin card, the stand's page and the waiting banner; the map
+ * pin and the list rows keep the Sponsored glyph, as a logo doesn't read at 19-30pt.
  *
  * Spots sit on each venue's map like the facilities in ./mock.ts (x, y from 0 to 1):
  * - Intuit Dome: the plaza's seating by the outdoor court, and the Main Level concourse past The Wall
@@ -25,10 +35,16 @@ import { facilitiesFor, getVenue } from './mock';
 import type { Facility, FacilityCategory, FacilitySponsor } from './types';
 import { venueMapFor } from './venue-maps';
 
-type Template = Omit<Facility, 'venueId'>;
+/** A brand logo in assets/sponsors/ (sponsor-ui.tsx loads the file). */
+export type SponsorLogoId = 'coca-cola' | 'panda-express' | 'ben-jerrys';
 
-/** A facility with a sponsor: a paid placement. */
-export type SponsoredStand = Facility & { sponsor: FacilitySponsor };
+/** A stand's sponsor, with its brand's logo when there is one. */
+export type StandSponsor = FacilitySponsor & { logo?: SponsorLogoId };
+
+/** A facility with a sponsor: a demo placement (see above). */
+export type SponsoredStand = Facility & { sponsor: StandSponsor };
+
+type Template = Omit<SponsoredStand, 'venueId'>;
 
 // The first stand per venue is its featured one: the promoted list card and the waiting banner.
 const SPONSORED_STANDS: Readonly<Record<string, Template[]>> = {
@@ -38,14 +54,14 @@ const SPONSORED_STANDS: Readonly<Record<string, Template[]>> = {
       description: 'Cold Coca-Cola drinks, bottled water and snacks.',
       location: 'On the plaza, by the outdoor court', walkMinutes: 1, wait: 'short', accessible: true,
       tags: [{ id: 'accessible', tone: 'good' }],
-      sponsor: { brand: 'Coca-Cola', offer: '$1 off any Coca-Cola drink with VenU' },
+      sponsor: { brand: 'Coca-Cola', offer: '$1 off any Coca-Cola drink with VenU', logo: 'coca-cola' },
     },
     {
       id: 'panda-express-intuit', name: 'Panda Express Stand', category: 'food', x: 0.448, y: 0.572,
       description: 'Orange chicken, chow mein and rice bowls.',
       location: 'Main Level concourse, past The Wall Entrance', walkMinutes: 2, wait: 'long', accessible: true,
       tags: [{ id: 'accessible', tone: 'good' }, { id: 'long_lines_halftime', tone: 'note' }],
-      sponsor: { brand: 'Panda Express', offer: 'Free egg roll with any bowl' },
+      sponsor: { brand: 'Panda Express', offer: 'Free egg roll with any bowl', logo: 'panda-express' },
     },
   ],
   sofi: [
@@ -54,14 +70,14 @@ const SPONSORED_STANDS: Readonly<Record<string, Template[]>> = {
       description: 'Cold Coca-Cola drinks, bottled water and snacks.',
       location: 'Level 1, inside Entries 1 and 2', walkMinutes: 2, wait: 'short', accessible: true,
       tags: [{ id: 'accessible', tone: 'good' }],
-      sponsor: { brand: 'Coca-Cola', offer: '$1 off any Coca-Cola drink with VenU' },
+      sponsor: { brand: 'Coca-Cola', offer: '$1 off any Coca-Cola drink with VenU', logo: 'coca-cola' },
     },
     {
       id: 'ben-jerrys-sofi', name: 'Ben & Jerry’s Scoop Stand', category: 'food', x: 0.492, y: 0.470,
       description: 'Ice cream cups and cones.',
       location: 'American Airlines Plaza', walkMinutes: 9, wait: 'short', accessible: true,
       tags: [{ id: 'accessible', tone: 'good' }],
-      sponsor: { brand: 'Ben & Jerry’s', offer: 'Free topping on any scoop' },
+      sponsor: { brand: 'Ben & Jerry’s', offer: 'Free topping on any scoop', logo: 'ben-jerrys' },
     },
   ],
   'crypto-arena': [
@@ -70,7 +86,7 @@ const SPONSORED_STANDS: Readonly<Record<string, Template[]>> = {
       description: 'Cold Coca-Cola drinks, bottled water and snacks.',
       location: 'Main Concourse, Figueroa side', walkMinutes: 1, wait: 'short', accessible: true,
       tags: [{ id: 'accessible', tone: 'good' }],
-      sponsor: { brand: 'Coca-Cola', offer: '$1 off any Coca-Cola drink with VenU' },
+      sponsor: { brand: 'Coca-Cola', offer: '$1 off any Coca-Cola drink with VenU', logo: 'coca-cola' },
     },
   ],
 };
@@ -79,9 +95,14 @@ export function isSponsored(f: Facility): f is SponsoredStand {
   return !!f.sponsor;
 }
 
+/** The stand's brand logo, if it has one; undefined for any other facility. */
+export function sponsorLogoOf(f: Facility): SponsorLogoId | undefined {
+  return isSponsored(f) ? f.sponsor.logo : undefined;
+}
+
 /**
- * Whether people can post community reports on a facility: not on a sponsored stand, so a paid
- * listing never carries reports (or gets them written to the database under it).
+ * Whether people can post community reports on a facility: not on a sponsored stand, so a
+ * sponsored listing never carries reports (or gets them written to the database under it).
  */
 export function takesReports(f: Facility): boolean {
   return !isSponsored(f);

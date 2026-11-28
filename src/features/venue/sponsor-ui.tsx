@@ -1,9 +1,12 @@
 /**
- * How sponsored stands look (./sponsors.ts): VenU's own Sponsored glyph (a price tag with a star,
- * drawn in the style of the Figma icon sheet: a solid glyph with cut-out details), the "Sponsored"
- * pill, the offer box on the stand, and the promoted card in the facility list.
- * The sponsor accent is the theme's accent (the orange "U" in VenU), never a brand's colours.
+ * How sponsored stands look (./sponsors.ts): the brand's logo on a white tile (SponsorMark), VenU's
+ * own Sponsored glyph where a logo is too small to read (a price tag with a star, drawn in the style
+ * of the Figma icon sheet: a solid glyph with cut-out details), the "Sponsored" pill, the offer box
+ * on the stand, and the promoted card in the facility list (Figma 565:3871).
+ * The sponsor accent is the theme's accent (the orange "U" in VenU); the promoted card follows
+ * Figma's blue. Logos are demo placements: no brand has a partnership with VenU.
  */
+import { Image } from 'expo-image';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
@@ -13,13 +16,20 @@ import { useLayoutRtl, useT } from '@/i18n';
 
 import { FacilityIcon } from './categories';
 import { facilityMeta, facilityName, facilityOffer, type FacilityWalk } from './labels';
-import type { SponsoredStand } from './sponsors';
+import { sponsorLogoOf, type SponsoredStand, type SponsorLogoId } from './sponsors';
 import type { Facility } from './types';
 import { venueText } from './ui';
 
 /** Sponsored pins, pills and cards are drawn in this colour, on SPONSOR_SOFT. */
 export const SPONSOR_ACCENT = Colors.accent;
 export const SPONSOR_SOFT = Colors.accentSoft;
+
+/** The logo files (require() ids) and their width / height, so a wide logo (Ben & Jerry's) fits its tile. */
+const SPONSOR_LOGOS: Record<SponsorLogoId, { source: number; aspect: number }> = {
+  'coca-cola': { source: require('../../../assets/sponsors/coca-cola.png'), aspect: 1 },
+  'panda-express': { source: require('../../../assets/sponsors/panda-express.png'), aspect: 1 },
+  'ben-jerrys': { source: require('../../../assets/sponsors/ben-jerrys.png'), aspect: 500 / 147 },
+};
 
 /**
  * The Sponsored glyph, 24x24: a tag (rounded, its point to the bottom right) with a punched hole and
@@ -58,23 +68,51 @@ export function StandIcon({ facility, size = 24, color, background = Colors.surf
     : <FacilityIcon category={facility.category} size={size} color={color ?? Colors.ink} background={background} />;
 }
 
-/** The "Sponsored" pill. Screen readers get "Sponsored" from the card's own label, so it's hidden from them here. */
-export function SponsoredTag() {
-  const t = useT('venue');
+/**
+ * The stand's brand logo on a white rounded tile, `size` square; a stand without a logo gets the
+ * Sponsored glyph on the soft accent instead. Decorative: the stand's name says the brand.
+ * e.g. <SponsorMark facility={stand} size={52} /> on the promoted card.
+ */
+export function SponsorMark({ facility, size }: { facility: Facility; size: number }) {
+  const logo = sponsorLogoOf(facility);
+  if (!logo) {
+    return (
+      <View style={[styles.mark, styles.markGlyph, { width: size, height: size }]} aria-hidden>
+        <SponsoredIcon size={Math.round(size * 0.6)} background={SPONSOR_SOFT} />
+      </View>
+    );
+  }
+  const { source, aspect } = SPONSOR_LOGOS[logo];
+  // A round or square logo nearly fills the tile; a wide one spans it, letterboxed.
+  const inner = size - Math.round(size * (aspect > 1.5 ? 0.1 : 0.14));
   return (
-    <View style={styles.tag} aria-hidden>
-      <Text style={styles.tagText} numberOfLines={1}>{t('sponsor.label')}</Text>
+    <View style={[styles.mark, styles.markLogo, { width: size, height: size }]} aria-hidden testID={`sponsor-logo-${logo}`}>
+      <Image source={source} style={{ width: inner, height: inner / aspect }} contentFit="contain" accessible={false} />
     </View>
   );
 }
 
-/** On the stand's card: "Sponsored", the offer, "Show this screen at the stand", and that it's a paid listing. */
+/**
+ * The "Sponsored" pill. Screen readers get "Sponsored" from the card's own label, so it's hidden from
+ * them here. `look="promoted"`: Figma's grey "SPONSORED" pill on the blue promoted card.
+ */
+export function SponsoredTag({ look }: { look?: 'promoted' }) {
+  const t = useT('venue');
+  const promoted = look === 'promoted';
+  return (
+    <View style={[styles.tag, promoted && styles.tagPromoted]} aria-hidden>
+      <Text style={[styles.tagText, promoted && styles.tagTextPromoted]} numberOfLines={1}>{t('sponsor.label')}</Text>
+    </View>
+  );
+}
+
+/** On the stand's card: the logo and "Sponsored", the offer, "Show this screen at the stand", and that it's a demo placement. */
 export function SponsorOffer({ stand }: { stand: SponsoredStand }) {
   const t = useT('venue');
   return (
     <View style={styles.offer} accessible accessibilityLabel={`${t('sponsor.label')}. ${facilityOffer(stand, t)}. ${t('sponsor.showScreen')}. ${t('sponsor.disclosure')}`}>
       <View style={styles.offerHead}>
-        <SponsoredIcon size={22} background={SPONSOR_SOFT} />
+        <SponsorMark facility={stand} size={40} />
         <Text style={styles.offerLabel}>{t('sponsor.label')}</Text>
       </View>
       <Text style={styles.offerText}>{facilityOffer(stand, t)}</Text>
@@ -85,8 +123,9 @@ export function SponsorOffer({ stand }: { stand: SponsoredStand }) {
 }
 
 /**
- * The facility list's promoted card: one per venue (see facilityListLayout). `walk` is the same
- * walk the list's rows show (walkTo: from the visitor's spot, else the way in).
+ * The facility list's promoted card (Figma 565:3871): one per venue (see facilityListLayout), blue,
+ * with the brand's logo, "SPONSORED", the stand, its offer and walk. `walk` is the same walk the
+ * list's rows show (walkTo: from the visitor's spot, else the way in).
  */
 export function PromotedCard({ stand, walk, onPress }: { stand: SponsoredStand; walk: FacilityWalk | null | undefined; onPress: () => void }) {
   const t = useT('venue');
@@ -100,11 +139,9 @@ export function PromotedCard({ stand, walk, onPress }: { stand: SponsoredStand; 
       accessibilityRole="button"
       accessibilityLabel={t('sponsor.card', { name, offer, meta })}
       style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}>
-      <View style={styles.cardIcon}>
-        <SponsoredIcon size={28} background={SPONSOR_SOFT} />
-      </View>
+      <SponsorMark facility={stand} size={52} />
       <View style={styles.cardText}>
-        <SponsoredTag />
+        <SponsoredTag look="promoted" />
         <Text style={styles.cardTitle} numberOfLines={2}>{name}</Text>
         <Text style={styles.cardOffer} numberOfLines={2}>{offer}</Text>
         <Text style={venueText.caption} numberOfLines={1}>{meta}</Text>
@@ -119,30 +156,37 @@ export function PromotedCard({ stand, walk, onPress }: { stand: SponsoredStand; 
 const styles = StyleSheet.create({
   tag: { alignSelf: 'flex-start', paddingHorizontal: 7, paddingVertical: 1, borderRadius: 6, backgroundColor: SPONSOR_SOFT },
   tagText: { ...Face.textBold, fontSize: 12, lineHeight: 16, color: SPONSOR_ACCENT },
+  // Figma: a light grey pill with blue capitals.
+  tagPromoted: { paddingHorizontal: Spacing.sm, paddingVertical: 2, backgroundColor: Colors.surfaceAlt },
+  tagTextPromoted: { ...Face.textMedium, letterSpacing: 0.6, textTransform: 'uppercase', color: Colors.primary },
+
+  mark: { alignItems: 'center', justifyContent: 'center', borderRadius: Radius.sm, overflow: 'hidden' },
+  markGlyph: { backgroundColor: SPONSOR_SOFT },
+  markLogo: { backgroundColor: Colors.surface, borderWidth: StyleSheet.hairlineWidth, borderColor: Colors.border },
 
   offer: { gap: 4, padding: Spacing.md, borderRadius: Radius.md, backgroundColor: SPONSOR_SOFT },
-  offerHead: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  offerHead: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
   offerLabel: { ...Face.textBold, fontSize: 13, lineHeight: 17, color: SPONSOR_ACCENT },
   offerText: { ...Face.displayMedium, fontSize: 16, lineHeight: 21, color: Colors.text },
   disclosure: { fontFamily: Fonts.text, fontSize: 12, lineHeight: 16, color: Colors.textMuted },
 
+  // Figma: pale blue card, blue outline, radius 10.
   card: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.md,
-    paddingVertical: 10,
+    paddingVertical: Spacing.md,
     paddingStart: Spacing.md,
     paddingEnd: Spacing.sm,
     borderRadius: Radius.md,
     borderWidth: 1.5,
-    borderColor: SPONSOR_SOFT,
-    backgroundColor: Colors.surface,
+    borderColor: Colors.primary,
+    backgroundColor: Colors.primarySoft,
     ...Shadow.card,
   },
-  cardPressed: { backgroundColor: Colors.surfaceAlt },
-  cardIcon: { width: 44, height: 44, borderRadius: Radius.sm, alignItems: 'center', justifyContent: 'center', backgroundColor: SPONSOR_SOFT },
-  cardText: { flex: 1, gap: 3 },
-  cardTitle: { fontFamily: Fonts.display, fontSize: 18, lineHeight: 23, color: Colors.text },
-  cardOffer: { ...Face.textSemiBold, fontSize: 13, lineHeight: 17, color: SPONSOR_ACCENT },
+  cardPressed: { opacity: 0.85 },
+  cardText: { flex: 1, gap: 4 },
+  cardTitle: { ...Face.displayMedium, fontSize: 20, lineHeight: 25, color: Colors.text },
+  cardOffer: { ...Face.textSemiBold, fontSize: 13, lineHeight: 17, color: Colors.primary },
   flip: { transform: [{ scaleX: -1 }] },
 });

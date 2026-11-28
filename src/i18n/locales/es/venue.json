@@ -117,7 +117,7 @@
     "card": "Patrocinado: {{name}}. {{offer}}. {{meta}}",
     "heading": "Patrocinado: {{name}}",
     "showScreen": "Muestra esta pantalla en el puesto",
-    "disclosure": "Anuncio pagado, no es información del recinto",
+    "disclosure": "Anuncio de demostración, no es información del recinto",
     "banner": "Patrocinado: {{name}}, {{walk}}. {{offer}}",
     "bannerHint": "Abre el puesto. Tu solicitud sigue buscando.",
     "hide": "Ocultar mensaje patrocinado"

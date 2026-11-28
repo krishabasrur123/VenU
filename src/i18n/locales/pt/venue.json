@@ -117,7 +117,7 @@
     "card": "Patrocinado: {{name}}. {{offer}}. {{meta}}",
     "heading": "Patrocinado: {{name}}",
     "showScreen": "Mostre esta tela no quiosque",
-    "disclosure": "Anúncio pago, não é informação do local",
+    "disclosure": "Anúncio de demonstração, não é informação do local",
     "banner": "Patrocinado: {{name}}, {{walk}}. {{offer}}",
     "bannerHint": "Abre o quiosque. Seu pedido continua na busca.",
     "hide": "Ocultar mensagem patrocinada"

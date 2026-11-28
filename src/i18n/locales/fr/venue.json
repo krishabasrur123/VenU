@@ -117,7 +117,7 @@
     "card": "Sponsorisé : {{name}}. {{offer}}. {{meta}}",
     "heading": "Sponsorisé : {{name}}",
     "showScreen": "Montrez cet écran au stand",
-    "disclosure": "Annonce payante, pas une information du site",
+    "disclosure": "Emplacement de démonstration, pas une information du site",
     "banner": "Sponsorisé : {{name}}, {{walk}}. {{offer}}",
     "bannerHint": "Ouvre le stand. Votre demande reste en cours.",
     "hide": "Masquer le message sponsorisé"

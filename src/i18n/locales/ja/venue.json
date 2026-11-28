@@ -115,7 +115,7 @@
     "card": "広告：{{name}}。{{offer}}。{{meta}}",
     "heading": "広告：{{name}}",
     "showScreen": "売店でこの画面を見せてください",
-    "disclosure": "有料掲載です。会場の案内ではありません",
+    "disclosure": "デモ用の掲載です。会場の案内ではありません",
     "banner": "広告：{{name}}、{{walk}}。{{offer}}",
     "bannerHint": "売店を開きます。リクエストの検索は続きます。",
     "hide": "広告メッセージを非表示"

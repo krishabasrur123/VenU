@@ -115,7 +115,7 @@
     "card": "Được tài trợ: {{name}}. {{offer}}. {{meta}}",
     "heading": "Được tài trợ: {{name}}",
     "showScreen": "Đưa màn hình này tại quầy",
-    "disclosure": "Tin trả phí, không phải thông tin của địa điểm",
+    "disclosure": "Tin minh họa, không phải thông tin của địa điểm",
     "banner": "Được tài trợ: {{name}}, {{walk}}. {{offer}}",
     "bannerHint": "Mở quầy. Yêu cầu của bạn vẫn đang được tìm.",
     "hide": "Ẩn tin được tài trợ"
