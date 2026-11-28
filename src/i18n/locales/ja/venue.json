@@ -87,7 +87,9 @@
     "layers": {
       "label": "地図のレイヤー",
       "outside": "屋外",
-      "level": "{{number}}階"
+      "level": "{{number}}階",
+      "matches_other": "{{layer}}、{{number}}件",
+      "noMatches": "{{layer}}、該当なし"
     }
   },
   "officialMap": {

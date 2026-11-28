@@ -87,7 +87,9 @@
     "layers": {
       "label": "Lớp bản đồ",
       "outside": "Bên ngoài",
-      "level": "Tầng {{number}}"
+      "level": "Tầng {{number}}",
+      "matches_other": "{{layer}}, {{number}} kết quả",
+      "noMatches": "{{layer}}, không có kết quả"
     }
   },
   "officialMap": {

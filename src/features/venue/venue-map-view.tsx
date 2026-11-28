@@ -15,17 +15,16 @@ import { scheduleOnRN } from 'react-native-worklets';
 
 import { Button } from '@/components/button';
 import { Colors, Face, Fonts, Radius, Shadow, Spacing } from '@/constants/theme';
-import { languageOf, useT } from '@/i18n';
-import { formatNumber } from '@/i18n/format';
+import { useT } from '@/i18n';
 
 import { FacilityIcon } from './categories';
 import { startMarker, type Route } from './directions';
-import { facilityName, layerLabel } from './labels';
+import { facilityName } from './labels';
 import { clampView, contentSize, IMAGE_ZOOM_OUT_SLACK, isStrayPress, mapUpdate, zoomAt, ZOOM_STEP, zoomStep, type Box, type MapLayout, type MapRect, type MapView } from './map-geometry';
 import { SPONSOR_ACCENT, SPONSOR_SOFT, SponsoredIcon } from './sponsor-ui';
 import { VenueDrawing } from './stadium-map';
 import type { Facility } from './types';
-import { mapAspect, type VenueMap, type VenueMapImage, type VenueMapLayer } from './venue-maps';
+import { mapAspect, type VenueMap, type VenueMapImage } from './venue-maps';
 
 const PIN = 30;
 const PIN_BIG = 40;
@@ -34,8 +33,6 @@ const HIT = 44;
 const HIT_BUTTONS = 44 + 8;
 /** The source bar across the map's top edge. */
 export const SOURCE_BAR = 40;
-/** The layer toggle's height, under the source bar (see LayerToggle). */
-export const LAYER_TOGGLE = 40;
 const DOUBLE_TAP_ZOOM = 2;
 const TIMING = { duration: 320 };
 /** Fits keep pins below the source bar (and `overlayTop` more) and left of the zoom buttons. */
@@ -407,45 +404,6 @@ function SourceBar({ map }: { map: VenueMap }) {
   );
 }
 
-/**
- * "Outside · Level 3 · Level 6": switches the map between a venue's layers (VenueMap.layers). The
- * screen lays it over the map's top-left corner, under the source bar. With a chip on, `counts`
- * puts a badge on each button: how many of the chip's pins that layer has ("Level 3 ③").
- */
-export function LayerToggle({ layers, value, counts, onChange }: {
-  layers: VenueMapLayer[];
-  value: string;
-  counts?: Record<string, number>;
-  onChange: (id: string) => void;
-}) {
-  const t = useT('venue');
-  const lang = languageOf(t);
-  return (
-    <View style={styles.layers} accessibilityRole="radiogroup" accessibilityLabel={t('map.layers.label')}>
-      {layers.map(layer => {
-        const on = layer.id === value;
-        const count = counts?.[layer.id];
-        return (
-          <Pressable
-            key={layer.id}
-            onPress={() => onChange(layer.id)}
-            hitSlop={{ top: 4, bottom: 4 }}
-            style={({ pressed }) => [styles.layer, on && styles.layerOn, pressed && styles.pressed]}
-            accessibilityRole="radio"
-            accessibilityState={{ checked: on }}>
-            <Text style={[styles.layerText, on && styles.layerTextOn]} numberOfLines={1}>{layerLabel(layer, t)}</Text>
-            {count !== undefined ? (
-              <View style={[styles.layerCount, on && styles.layerCountOn, !count && styles.layerCountNone]}>
-                <Text style={[styles.layerCountText, on && styles.layerCountTextOn]}>{formatNumber(count, undefined, lang)}</Text>
-              </View>
-            ) : null}
-          </Pressable>
-        );
-      })}
-    </View>
-  );
-}
-
 function ZoomButton({ glyph, label, onPress }: { glyph: string; label: string; onPress: () => void }) {
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [styles.zoom, pressed && styles.pressed]} accessibilityRole="button" accessibilityLabel={label}>
@@ -512,27 +470,6 @@ const styles = StyleSheet.create({
     ...Shadow.card,
   },
   zoomGlyph: { ...Face.displayMedium, fontSize: 24, lineHeight: 28, color: Colors.ink },
-  layers: {
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    height: LAYER_TOGGLE - Spacing.xs,
-    padding: 3,
-    gap: 2,
-    borderRadius: Radius.pill,
-    backgroundColor: Colors.surface,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    ...Shadow.card,
-  },
-  layer: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: Spacing.md, borderRadius: Radius.pill },
-  layerOn: { backgroundColor: Colors.primary },
-  layerText: { ...Face.textBold, fontSize: 13, lineHeight: 17, color: Colors.ink },
-  layerTextOn: { color: Colors.onPrimary },
-  layerCount: { minWidth: 18, height: 18, paddingHorizontal: 4, borderRadius: 9, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.primary },
-  layerCountOn: { backgroundColor: Colors.surface },
-  layerCountNone: { opacity: 0.45 },
-  layerCountText: { ...Face.textBold, fontSize: 11, lineHeight: 14, color: Colors.onPrimary },
-  layerCountTextOn: { color: Colors.primary },
   cover: { position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center', gap: Spacing.md, paddingHorizontal: Spacing.xl, backgroundColor: Colors.surfaceAlt },
   coverText: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20, textAlign: 'center', color: Colors.textMuted },
   bottom: { position: 'absolute', left: 0, right: 0, justifyContent: 'flex-end', paddingHorizontal: Spacing.gutter, paddingBottom: Spacing.md },

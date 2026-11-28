@@ -87,7 +87,11 @@
     "layers": {
       "label": "Calque de la carte",
       "outside": "Extérieur",
-      "level": "Niveau {{number}}"
+      "level": "Niveau {{number}}",
+      "matches_one": "{{layer}}, {{number}} résultat",
+      "matches_many": "{{layer}}, {{number}} de résultats",
+      "matches_other": "{{layer}}, {{number}} résultats",
+      "noMatches": "{{layer}}, aucun résultat"
     }
   },
   "officialMap": {

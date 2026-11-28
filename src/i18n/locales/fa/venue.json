@@ -87,7 +87,10 @@
     "layers": {
       "label": "لایه نقشه",
       "outside": "بیرون",
-      "level": "طبقه {{number}}"
+      "level": "طبقه {{number}}",
+      "matches_one": "{{layer}}، {{number}} مورد",
+      "matches_other": "{{layer}}، {{number}} مورد",
+      "noMatches": "{{layer}}، هیچ موردی نیست"
     }
   },
   "officialMap": {

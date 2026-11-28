@@ -87,7 +87,11 @@
     "layers": {
       "label": "Capa del mapa",
       "outside": "Exterior",
-      "level": "Nivel {{number}}"
+      "level": "Nivel {{number}}",
+      "matches_one": "{{layer}}, {{number}} resultado",
+      "matches_many": "{{layer}}, {{number}} de resultados",
+      "matches_other": "{{layer}}, {{number}} resultados",
+      "noMatches": "{{layer}}, sin resultados"
     }
   },
   "officialMap": {

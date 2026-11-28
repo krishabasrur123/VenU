@@ -22,6 +22,7 @@ import { CategoryChips } from './category-chips';
 import { useWhereAmI } from './current';
 import { routeFor, routeStart, walkFrom, type Route } from './directions';
 import type { FacilityWalk } from './labels';
+import { LAYER_TOGGLE, LayerToggle } from './layer-toggle';
 import { boundsOf, chipCountsByLayer, FIT_MAX_SCALE, MAX_SCALE, nextMapLayer, pinsFor, type LayerEvent, type MapRect } from './map-geometry';
 import { PinCard } from './pin-card';
 import { pinPressAction } from './pin-press';
@@ -31,7 +32,7 @@ import { MAP_BACKGROUND, SHEET_HANDLE } from './stadium-map';
 import type { Facility, FacilityCategory, Venue } from './types';
 import { BackArrow, venueText } from './ui';
 import { layerOf, layerView, mapLayers, venueMapFor, type VenueMap } from './venue-maps';
-import { LAYER_TOGGLE, LayerToggle, MAP_CARD_SPACE, SOURCE_BAR, VenueMapView } from './venue-map-view';
+import { MAP_CARD_SPACE, SOURCE_BAR, VenueMapView } from './venue-map-view';
 
 export type { SheetSnap };
 

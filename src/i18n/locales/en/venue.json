@@ -87,7 +87,10 @@
     "layers": {
       "label": "Map layer",
       "outside": "Outside",
-      "level": "Level {{number}}"
+      "level": "Level {{number}}",
+      "matches_one": "{{layer}}, {{number}} match",
+      "matches_other": "{{layer}}, {{number}} matches",
+      "noMatches": "{{layer}}, no matches"
     }
   },
   "officialMap": {

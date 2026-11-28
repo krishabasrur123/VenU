@@ -79,6 +79,18 @@ export function layerLabel(layer: Pick<VenueMapLayer, 'kind' | 'level'>, t: Venu
   return t('map.layers.outside');
 }
 
+/**
+ * What a screen reader says for a layer button while a chip is on: the layer and how many of the
+ * chip's pins it holds. Without a count (no chip) it's just the layer's name.
+ * e.g. layerCountLabel(level3, 3) → 'Level 3, 3 matches'; layerCountLabel(outside, 0) → 'Outside, no matches'
+ */
+export function layerCountLabel(layer: Pick<VenueMapLayer, 'kind' | 'level'>, count: number | undefined, t: VenueT = venueT()): string {
+  const name = layerLabel(layer, t);
+  if (count === undefined) return name;
+  if (count === 0) return t('map.layers.noMatches', { layer: name });
+  return t('map.layers.matches', { layer: name, count, number: formatNumber(count, undefined, languageOf(t)) });
+}
+
 /** Longest search text echoed back in an empty-results line before it's cut with "…". */
 export const ECHO_MAX = 40;
 

@@ -87,7 +87,10 @@
     "layers": {
       "label": "Քարտեզի շերտ",
       "outside": "Դրսում",
-      "level": "{{number}}-րդ հարկ"
+      "level": "{{number}}-րդ հարկ",
+      "matches_one": "{{layer}}, {{number}} արդյունք",
+      "matches_other": "{{layer}}, {{number}} արդյունք",
+      "noMatches": "{{layer}}, արդյունքներ չկան"
     }
   },
   "officialMap": {

@@ -87,7 +87,12 @@
     "layers": {
       "label": "Слой карты",
       "outside": "Снаружи",
-      "level": "Уровень {{number}}"
+      "level": "Уровень {{number}}",
+      "matches_one": "{{layer}}, {{number}} результат",
+      "matches_few": "{{layer}}, {{number}} результата",
+      "matches_many": "{{layer}}, {{number}} результатов",
+      "matches_other": "{{layer}}, {{number}} результата",
+      "noMatches": "{{layer}}, ничего не найдено"
     }
   },
   "officialMap": {

@@ -87,7 +87,10 @@
     "layers": {
       "label": "Layer ng mapa",
       "outside": "Labas",
-      "level": "Level {{number}}"
+      "level": "Level {{number}}",
+      "matches_one": "{{layer}}, {{number}} tugma",
+      "matches_other": "{{layer}}, {{number}} tugma",
+      "noMatches": "{{layer}}, walang tugma"
     }
   },
   "officialMap": {

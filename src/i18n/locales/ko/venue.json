@@ -87,7 +87,9 @@
     "layers": {
       "label": "지도 레이어",
       "outside": "야외",
-      "level": "{{number}}층"
+      "level": "{{number}}층",
+      "matches_other": "{{layer}}, {{number}}개",
+      "noMatches": "{{layer}}, 해당 없음"
     }
   },
   "officialMap": {

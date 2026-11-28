@@ -87,7 +87,9 @@
     "layers": {
       "label": "地图图层",
       "outside": "室外",
-      "level": "{{number}} 层"
+      "level": "{{number}} 层",
+      "matches_other": "{{layer}}，{{number}} 个结果",
+      "noMatches": "{{layer}}，无结果"
     }
   },
   "officialMap": {

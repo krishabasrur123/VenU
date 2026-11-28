@@ -87,7 +87,14 @@
     "layers": {
       "label": "طبقة الخريطة",
       "outside": "الخارج",
-      "level": "المستوى {{number}}"
+      "level": "المستوى {{number}}",
+      "matches_zero": "{{layer}}، لا نتائج",
+      "matches_one": "{{layer}}، نتيجة واحدة",
+      "matches_two": "{{layer}}، نتيجتان",
+      "matches_few": "{{layer}}، {{number}} نتائج",
+      "matches_many": "{{layer}}، {{number}} نتيجة",
+      "matches_other": "{{layer}}، {{number}} نتيجة",
+      "noMatches": "{{layer}}، لا نتائج"
     }
   },
   "officialMap": {
