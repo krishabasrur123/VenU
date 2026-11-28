@@ -57,8 +57,9 @@ export interface FacilityTag {
 export type WaitLevel = 'none' | 'short' | 'long';
 
 /**
- * A paid placement on a stand (./sponsors.ts): always shown labelled "Sponsored", with VenU's own
- * Sponsored icon and theme colours, never the brand's logo or colours.
+ * A demo sponsored placement on a stand (./sponsors.ts; no partnership exists): always labelled
+ * "Sponsored". The brand's logo (sponsorLogoOf) shows on cards, the stand page and the waiting
+ * banner; map pins and list rows keep VenU's own Sponsored icon.
  */
 export interface FacilitySponsor {
   /** The brand as plain text, e.g. "Coca-Cola". A proper name, so never translated. */
