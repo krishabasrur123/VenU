@@ -18,8 +18,9 @@ export const VENUE_CONTACTS: Readonly<Record<string, VenueContact>> = {
   sofi: { phone: '+14245419100', text: '+14245419222', source: 'https://www.sofistadium.com/accessibility' },
   // "Guest Services at (213) 742-7FAN (326)"
   'crypto-arena': { phone: '+12137427326', source: 'https://www.cryptoarena.com/general-info-faq' },
-  // Customer Support: "or by calling 1-888-311-0231"
-  'intuit-dome': { phone: '+18883110231', source: 'https://www.intuitdome.com/contact-us/customer-support' },
+  // FAQ: "Please contact us via email, phone, or text (available during event days only).
+  // Call: 1-888-311-0231 / Text: 310-282-5779" (the call number is also on its Customer Support page).
+  'intuit-dome': { phone: '+18883110231', text: '+13102825779', source: 'https://www.intuitdome.com/about/faq' },
 };
 
 /** The venue's staff line, or null when no official number is known. */

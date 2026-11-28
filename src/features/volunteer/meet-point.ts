@@ -4,9 +4,9 @@
 import type { TFunction } from 'i18next';
 
 import { CATEGORIES } from '@/features/venue/categories';
-import { DEFAULT_WHERE, type WhereAmI } from '@/features/venue/current';
+import { DEFAULT_WHERE, isMeetSpot, type WhereAmI } from '@/features/venue/current';
 import { facilityName, type VenueT } from '@/features/venue/labels';
-import { getFacility, getVenue, searchFacilities, VENUES } from '@/features/venue/mock';
+import { facilitiesFor, getFacility, getVenue, searchFacilities, VENUES } from '@/features/venue/mock';
 import type { Facility, FacilityCategory } from '@/features/venue/types';
 
 import type { MeetPoint } from './types';
@@ -32,6 +32,14 @@ export function restoreMeetPoint(value: unknown): MeetPoint {
   }
   const byName = typeof v.venue === 'string' ? VENUES.find(x => x.name === v.venue) : undefined;
   return { venueId: byName?.id ?? DEFAULT_WHERE.venueId, facilityId: null };
+}
+
+/**
+ * The spots a visitor can pick in "Where are you?": the venue's facilities without the ones it
+ * doesn't publish (see isMeetSpot). e.g. Intuit Dome → everything but Elevators and Sensory Room.
+ */
+export function meetSpotsFor(venueId: string): Facility[] {
+  return facilitiesFor(venueId).filter(isMeetSpot);
 }
 
 /**

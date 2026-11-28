@@ -41,7 +41,7 @@ describe('venue labels', () => {
   it('writes numbers in the language\'s digits, still choosing the plural by count', () => {
     const fa = i18n.getFixedT('fa', 'venue');
     expect(facilityMeta(entry4, fa)).toMatch(/^۴ /); // not "4 دقیقه" next to Persian digits elsewhere
-    expect(fa('facility.results', { count: 12, number: '۱۲' })).toContain('۱۲');
+    expect(fa('facility.reportCount', { count: 12, number: '۱۲' })).toContain('۱۲');
     expect(facilityMeta({ ...entry4, walkMinutes: 1 }, i18n.getFixedT('ru', 'venue'))).toMatch(/^1 /);
   });
 

@@ -5,7 +5,18 @@
  */
 import { Redirect, useLocalSearchParams } from 'expo-router';
 import { Fragment, useEffect, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View, type ScrollViewInstance } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  type ScrollViewInstance,
+  type TextInputKeyPressEvent,
+} from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Path } from 'react-native-svg';
 
@@ -14,10 +25,12 @@ import { FigmaIcon } from '@/components/icons/figma-icon';
 import { ChatBubble } from '@/components/volunteer/chat-bubble';
 import { Hint, useHint } from '@/components/volunteer/hint';
 import { MeetPlaceText } from '@/components/volunteer/meet-place';
+import { RequestSummary } from '@/components/volunteer/request-note';
 import { useStartAligned } from '@/components/volunteer/start-aligned';
-import { Colors, Fonts, Spacing } from '@/constants/theme';
+import { Colors, Face, Fonts, Spacing } from '@/constants/theme';
 import { toggleState } from '@/features/voice/announce';
 import { useDictation } from '@/features/voice/use-dictation';
+import { composerButton, useSendHold } from '@/features/volunteer/composer';
 import { formatDayTime, needsSeparator } from '@/features/volunteer/format';
 import { languageOf, useLayoutRtl, useT } from '@/i18n';
 import { formatNumber } from '@/i18n/format';
@@ -26,6 +39,9 @@ import { goBack } from '@/lib/navigation';
 
 /** Longest message the input takes, typed or dictated. */
 const MESSAGE_MAX = 1000;
+/** The input grows with a long message up to about five lines, then scrolls. */
+const INPUT_MIN = 38; // one 22pt line plus padding
+const INPUT_MAX = 126;
 
 export default function ChatScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -41,6 +57,10 @@ export default function ChatScreen() {
   // The mic dictates into the input for review; voice messages are sent as text.
   const dictation = useDictation({ onText: next => setText(next.slice(0, MESSAGE_MAX)), onNote: show });
   const [finishing, setFinishing] = useState(false);
+  // Send stays Send for a moment after sending, so a double tap can't start dictation.
+  const sendHold = useSendHold();
+  // Web: the input's height follows its text (native multiline inputs grow by themselves).
+  const [inputHeight, setInputHeight] = useState(INPUT_MIN);
   const unread = c?.unread ?? 0;
   const markRead = c?.markRead;
 
@@ -56,6 +76,7 @@ export default function ChatScreen() {
 
   async function send() {
     if (finishing) return;
+    sendHold.hold();
     let message = text;
     if (dictation.listening) {
       // Wait (briefly) for the last words; once complete() resolves nothing can refill the input.
@@ -65,8 +86,20 @@ export default function ChatScreen() {
     }
     if (!message.trim()) return;
     c?.send(message);
+    sendHold.hold();
     setText('');
+    setInputHeight(INPUT_MIN);
   }
+
+  // Web: Enter sends, Shift+Enter starts a new line (native: the return key sends).
+  function onKeyPress(e: TextInputKeyPressEvent) {
+    const key = e.nativeEvent as typeof e.nativeEvent & { shiftKey?: boolean; isComposing?: boolean };
+    if (Platform.OS !== 'web' || key.key !== 'Enter' || key.shiftKey || key.isComposing) return;
+    e.preventDefault();
+    void send();
+  }
+
+  const button = composerButton({ listening: dictation.listening, text, holding: sendHold.holding || finishing });
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -104,6 +137,8 @@ export default function ChatScreen() {
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: true })}
           accessibilityLabel={t('chat.messages')}>
+          {/* What the visitor asked for, so the volunteer doesn't have to remember it. */}
+          <RequestSummary request={c.request} visitorName={peer.firstName} />
           {messages.length === 0 ? (
             <Text style={styles.empty}>{c.side === 'visitor' ? t('chat.empty', { name: peer.firstName }) : t('chat.emptyVolunteer', { name: peer.firstName })}</Text>
           ) : (
@@ -135,12 +170,16 @@ export default function ChatScreen() {
             <FigmaIcon name="attachment" size={24} color={Colors.textFaint} />
           </Pressable>
           <View style={[styles.input, dictation.listening && styles.inputListening]}>
+            {/* Multiline, so a long message wraps instead of running off to the side. */}
             <TextInput
               value={text}
-              onChangeText={next => { setText(next); dictation.edit(next); }}
+              onChangeText={next => { setText(next); dictation.edit(next); if (!next) setInputHeight(INPUT_MIN); }}
               placeholder={dictation.listening ? tc('media.listening') : t('chat.placeholder')}
               placeholderTextColor={Colors.textFaint}
-              style={styles.inputText}
+              style={[styles.inputText, Platform.OS === 'web' && { height: inputHeight }]}
+              multiline
+              onContentSizeChange={e => setInputHeight(Math.min(Math.max(Math.ceil(e.nativeEvent.contentSize.height), INPUT_MIN), INPUT_MAX))}
+              onKeyPress={onKeyPress}
               onSubmitEditing={() => void send()}
               submitBehavior="submit"
               returnKeyType="send"
@@ -151,7 +190,7 @@ export default function ChatScreen() {
               <FigmaIcon name="stickers" size={18} color={Colors.textFaint} />
             </Pressable>
           </View>
-          {dictation.listening ? (
+          {button === 'stop' ? (
             <Pressable
               onPress={dictation.stop}
               accessibilityRole="button"
@@ -160,7 +199,7 @@ export default function ChatScreen() {
               style={[styles.barButton, styles.sendButton]}>
               <View style={styles.stop} />
             </Pressable>
-          ) : text.trim() ? (
+          ) : button === 'send' ? (
             <Pressable onPress={() => void send()} accessibilityRole="button" accessibilityLabel={tc('actions.send')} style={[styles.barButton, styles.sendButton]}>
               <Svg width={20} height={20} viewBox="0 0 24 24" aria-hidden>
                 <Path d="M12 19V5M5 12l7-7 7 7" stroke={Colors.onPrimary} strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" fill="none" />
@@ -197,12 +236,12 @@ const styles = StyleSheet.create({
   messages: { flex: 1, backgroundColor: Colors.surfaceAlt },
   messagesContent: { gap: Spacing.xl, paddingHorizontal: Spacing.gutter - 6, paddingVertical: Spacing.lg },
   empty: { fontFamily: Fonts.text, fontSize: 14, color: Colors.textMuted, textAlign: 'center', marginTop: Spacing.xl },
-  separator: { fontFamily: Fonts.textSemiBold, fontSize: 13, lineHeight: 16, color: Colors.textMuted, textAlign: 'center' },
+  separator: { ...Face.textSemiBold, fontSize: 13, lineHeight: 16, color: Colors.textMuted, textAlign: 'center' },
   // Sits under the last bubble, lined up with the incoming bubbles' text.
   typing: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 16, color: Colors.textMuted, marginTop: -Spacing.sm, paddingStart: Spacing.lg },
   bar: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end', // the buttons stay at the bottom while the input grows
     gap: 4,
     paddingTop: 8,
     paddingHorizontal: 4,
@@ -212,7 +251,7 @@ const styles = StyleSheet.create({
   },
   // "Listening… tap to stop" sits on top of the bar and takes over its top border.
   listeningLabel: {
-    fontFamily: Fonts.textSemiBold,
+    ...Face.textSemiBold,
     fontSize: 13,
     lineHeight: 16,
     color: Colors.primary,
@@ -224,13 +263,14 @@ const styles = StyleSheet.create({
   },
   barListening: { borderTopWidth: 0, paddingTop: 4 },
   barButton: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
-  sendButton: { width: 40, height: 40, borderRadius: 20, marginHorizontal: 2, backgroundColor: Colors.primary },
+  sendButton: { width: 40, height: 40, borderRadius: 20, marginHorizontal: 2, marginBottom: 2, backgroundColor: Colors.primary },
   stop: { width: 14, height: 14, borderRadius: 3, backgroundColor: Colors.onPrimary },
   input: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     minHeight: 40,
+    marginBottom: 1, // centred on the 44pt buttons beside it while it's one line
     borderRadius: 20,
     borderWidth: 1,
     borderColor: Colors.controlBorder,
@@ -239,6 +279,17 @@ const styles = StyleSheet.create({
   },
   inputListening: { borderColor: Colors.primary, borderWidth: 2, paddingStart: 13 }, // the thicker border doesn't shift the text
   // outlineStyle 'none' is web-only: native accepts only solid | dotted | dashed.
-  inputText: { flex: 1, fontFamily: Fonts.text, fontSize: 17, color: Colors.text, paddingVertical: 8, ...Platform.select({ web: { outlineStyle: 'none' } as object }) },
+  inputText: {
+    flex: 1,
+    fontFamily: Fonts.text,
+    fontSize: 17,
+    lineHeight: 22,
+    color: Colors.text,
+    minHeight: INPUT_MIN,
+    maxHeight: INPUT_MAX,
+    paddingTop: 8,
+    paddingBottom: 8,
+    ...Platform.select({ web: { outlineStyle: 'none', resize: 'none' } as object }),
+  },
   sticker: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
 });

@@ -4,7 +4,7 @@ import { facilitiesFor } from '@/features/venue/mock';
 import { localStub } from '@/features/translate/local';
 import i18n from '@/i18n';
 
-import { meetPlaceLine, meetPointFrom, meetSpotLabel, restoreMeetPoint, spotChoices } from '../meet-point';
+import { meetPlaceLine, meetPointFrom, meetSpotLabel, meetSpotsFor, restoreMeetPoint, spotChoices } from '../meet-point';
 import { greetingFrom, MOCK_VOLUNTEERS, mockIncoming } from '../mock';
 
 // current.ts (the venue store) keeps the spot in AsyncStorage, which has no native module under jest.
@@ -56,6 +56,14 @@ describe('spot choices', () => {
     expect(spotChoices(sofi, 'sensory', 'info', tv('es')).map(f => f.id)).toEqual(['guest-services-ne', 'guest-services-sw']);
     expect(spotChoices(sofi, 'entrada 1', 'gate', tv('es')).map(f => f.id)).toEqual(['entry-10', 'entry-11']);
     expect(spotChoices(sofi, 'zzz', null, tv('en'))).toEqual([]);
+  });
+
+  it('leaves out spots the venue doesn’t publish (no one could find you there)', () => {
+    const intuit = meetSpotsFor('intuit-dome');
+    expect(intuit.map(f => f.id)).toEqual(facilitiesFor('intuit-dome').filter(f => !f.approximate).map(f => f.id));
+    expect(intuit.some(f => f.id === 'elevators' || f.id === 'sensory-room')).toBe(false);
+    expect(spotChoices(intuit, 'elevator', null, tv('en'))).toEqual([]);
+    expect(meetSpotsFor('sofi')).toEqual(sofi);
   });
 });
 

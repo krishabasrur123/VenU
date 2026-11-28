@@ -15,13 +15,14 @@
     "help": "Aide et avis",
     "terms": "Conditions d'utilisation",
     "signOutFailed": "Impossible de se déconnecter. {{reason}}",
-    "deleteWarning": "Votre profil et votre photo seront supprimés définitivement. Vous pourrez en créer un nouveau plus tard.",
+    "deleteWarning": "Votre compte, votre profil et votre photo seront supprimés définitivement. Vous ne pourrez plus vous connecter avec ce compte.",
     "deleteFailed": "Impossible de supprimer toutes vos données. {{reason}}",
     "deleteData": "Supprimer mes données"
   },
   "edit": {
     "title": "Modifier le profil",
     "subtitle": "Les changements s'appliquent à votre prochaine demande d'aide.",
+    "subtitleVolunteer": "Les visiteurs verront ces changements la prochaine fois que vous aiderez.",
     "submit": "Enregistrer",
     "discardTitle": "Quitter sans enregistrer ? Vos modifications seront perdues.",
     "keepEditing": "Continuer à modifier",
@@ -207,7 +208,8 @@
     "placeholder": "p. ex. La carte était difficile à lire au soleil",
     "feedbackLabel": "Votre avis",
     "send": "Envoyer l'avis",
-    "empty": "Écrivez d'abord quelques mots."
+    "empty": "Écrivez d'abord quelques mots.",
+    "sendFailed": "Impossible d’envoyer votre avis. {{reason}}"
   },
   "notifications": {
     "title": "Notifications",
@@ -216,7 +218,9 @@
     "options": {
       "volunteer": {
         "label": "Nouvelles du bénévole",
-        "hint": "p. ex. Daniel a accepté et arrive"
+        "hint": "p. ex. Daniel a accepté et arrive",
+        "labelVolunteer": "Demandes d’aide",
+        "hintVolunteer": "p. ex. Un visiteur près de vous a besoin d’aide"
       },
       "chat": {
         "label": "Messages du chat",

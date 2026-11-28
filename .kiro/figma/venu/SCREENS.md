@@ -70,3 +70,14 @@ Also: Logo 482:31930, Flags 492:3440 (country flag set for the language search l
 Volunteer section: Find a Volunteer revised again, 492:8829: location card, the help-type grid inside a tinted card,
 "Add a note (optional)", Add picture / Or hold to speak buttons under the note, Send Request, red "Emergency? Call 911 now" card.
 Ignored: "Section 1" 463:31577 is a mood board of other apps; 473:31590 is an empty frame.
+
+## Update 2026-11-18 (file lastModified 2026-11-18T10:45Z), renders in update-2026-11-18/ (named by node id)
+| Screen | Node |
+|---|---|
+| Find a Volunteer v3: location card, help types as a single-choice list (radio, icon, label: Physical Assistance, Directions, Find a facility, Translation, Something else), "Add a note (optional)" field with camera + mic icons, Send Request, Emergency card, new tab bar (heart logo on Volunteer tab) | 506:9816, 506:9697 |
+| Find a Volunteer v3, note open: text box, "Add picture" and "Or hold to speak" buttons under it | 506:9412 |
+| "Add a note (optional)" field, default and pressed | 506:9530 (component set "Volunteer Cards") |
+| Volunteer preferences (visitor setup): Gender No preference/Male/Female, Age Any age/20-30/30-40/40+, needs chips with Other + "Describe here", Finish Setup; frosted cards on the blue gradient | 506:10114 |
+| Role choice with the new heart logo, "VenU", I am a visitor / or / I am a volunteer, Continue, blue gradient background | 530:10212 |
+| Storyboard (Rosa's story, 10 panels: venue map, reports, stuck at ramp, request, matched with Daniel, rate) | 61:9 |
+Also new: "Logo • drawn-stroke reveal" 541:3687 (logo animation), iPhone mockup 536:4009 (mockups page). No new volunteer-side (helper) screens yet.

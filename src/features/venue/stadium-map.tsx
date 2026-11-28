@@ -5,7 +5,7 @@
  */
 import Svg, { Circle, Ellipse, G, Line, Path, Rect, Text as SvgText } from 'react-native-svg';
 
-import { Colors, Fonts } from '@/constants/theme';
+import { Colors, Face, Fonts } from '@/constants/theme';
 import { useT } from '@/i18n';
 
 import type { VenueShape } from './types';
@@ -88,7 +88,7 @@ export function VenueDrawing({ shape, width, height }: { shape: VenueShape; widt
       {shape === 'bowl' ? <Bowl /> : <Arena />}
       <G>
         <Path d="M26 16 L32 30 L26 26 L20 30 Z" fill={Colors.textMuted} />
-        <SvgText x={26} y={44} fontSize={11} fontFamily={Fonts.textBold} fill={Colors.textMuted} textAnchor="middle">{t('map.north')}</SvgText>
+        <SvgText x={26} y={44} fontSize={11} fontFamily={Fonts.textBold} fontWeight={Face.textBold.fontWeight} fill={Colors.textMuted} textAnchor="middle">{t('map.north')}</SvgText>
       </G>
     </Svg>
   );

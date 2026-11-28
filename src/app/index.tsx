@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/button';
+import { LoadingScreen } from '@/components/loading-screen';
 import { LogoMark } from '@/components/wordmark';
 import { Colors, Fonts, Spacing, Type } from '@/constants/theme';
 import { useProfile } from '@/features/profile/profile-context';
@@ -18,7 +19,7 @@ export default function Index() {
   const t = useT('onboarding');
   const tc = useT('common');
 
-  if (status === 'loading') return null;
+  if (status === 'loading') return <LoadingScreen />;
   if (status === 'signedOut') return <Redirect href="/welcome" />;
   if (status === 'error') {
     // Worded here, at render, so it follows the language once LanguageSync applies it.

@@ -1,6 +1,10 @@
 /**
- * Sheet content: one facility (name, distance and wait, tags, Directions, I'm here) and its reports.
- * Directions is the venue's one way to a facility: it draws the route on the map and shows the walk here.
+ * Sheet content: one facility (name, Directions, I'm here, description, distance and wait, tags) and
+ * its reports. Directions is the venue's one way to a facility: it draws the route on the map and
+ * shows the walk here. A spot the venue doesn't publish gets a note instead, and no "I'm here"
+ * (nobody could find you there; see isMeetSpot).
+ * A sponsored stand adds its offer (labelled "Sponsored") and has no "I'm here" (an ad is never a
+ * meeting spot for a volunteer) and no reports (community reports never sit under a paid listing).
  */
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, type ComponentRef } from 'react';
@@ -14,16 +18,18 @@ import { formatNumber } from '@/i18n/format';
 import { goBack } from '@/lib/navigation';
 
 import { Notification, ReportCard } from './cards';
-import { setCurrentSpot, setCurrentVenue, useWhereAmI } from './current';
+import { isMeetSpot, setCurrentSpot, setCurrentVenue, useWhereAmI } from './current';
 import { DirectionsPanel } from './directions-panel';
 import { facilityDescription, facilityLocation, facilityMeta, facilityName, tagLabel } from './labels';
 import { useFacilityReports } from './reports';
+import { SponsorOffer } from './sponsor-ui';
+import { isSponsored, takesReports } from './sponsors';
 import { SheetScroll, useVenueScreen } from './venue-map-screen';
 import { BackArrow, TagRow, venueText } from './ui';
 
 export function FacilityDetail() {
   const t = useT('venue');
-  const { venue, facilities, snap, setSnap, freshReport, setFreshReport, route, setRouteTo } = useVenueScreen();
+  const { venue, map, facilities, snap, setSnap, freshReport, setFreshReport, route, setRouteTo, walkTo } = useVenueScreen();
   const { facilityId, submitted } = useLocalSearchParams<{ facilityId: string; submitted?: string }>();
   const facility = facilities.find(f => f.id === facilityId);
   const reports = useFacilityReports(venue.id, facilityId);
@@ -70,6 +76,7 @@ export function FacilityDetail() {
   const location = facilityLocation(facility, t);
   const name = facilityName(facility, t);
   const isMySpot = where.venueId === venue.id && where.facilityId === facility.id;
+  const sponsored = isSponsored(facility);
 
   const addReport = () => {
     setSnap('up');
@@ -91,74 +98,86 @@ export function FacilityDetail() {
           ) : null}
         </View>
 
-        <View style={styles.heading}>
-          <Text style={venueText.title} accessibilityRole="header">{name}</Text>
-          <Text style={venueText.caption}>{facilityDescription(facility, t)}</Text>
-          <View style={styles.meta}>
-            <FigmaIcon name="clock" size={16} color={Colors.textMuted} />
-            <Text style={styles.metaText}>{`${facilityMeta(facility, t)} · ${location}`}</Text>
-          </View>
-        </View>
+        <Text style={[venueText.title, styles.title]} accessibilityRole="header" accessibilityLabel={sponsored ? t('sponsor.heading', { name }) : undefined}>{name}</Text>
 
-        {/* Up top, so it shows above the fold while the map shows the route. */}
-        {route ? (
-          <View onLayout={onRouteLayout}>
-            <DirectionsPanel route={route} onEnd={() => setRouteTo(null)} />
-          </View>
-        ) : null}
-
-        <TagRow tags={facility.tags.map(tag => ({ label: tagLabel(tag, t), tone: tag.tone }))} />
-
+        {/* Right under the name, so the main action shows on the half-open sheet, above the tab bar. */}
         <View style={styles.directions}>
-          <Button
-            label={t('facility.directions')}
-            variant="dark"
-            size="lg"
-            icon={<FigmaIcon name="icon-28465a" size={24} color={Colors.onPrimary} />}
-            onPress={() => {
-              scrollToRoute.current = true;
-              setRouteTo(facility.id);
-              // Room for both: the route on the map above, the walk in the sheet.
-              setSnap('mid');
-            }}
-            style={styles.directionsButton}
-          />
+          {facility.approximate ? (
+            <Text style={styles.noRoute}>{t('facility.noRoute')}</Text>
+          ) : (
+            <Button
+              label={t('facility.directions')}
+              variant="dark"
+              size="lg"
+              icon={<FigmaIcon name="icon-28465a" size={24} color={Colors.onPrimary} />}
+              onPress={() => {
+                scrollToRoute.current = true;
+                setRouteTo(facility.id);
+                // Room for both: the route on the map above, the walk in the sheet.
+                setSnap('mid');
+              }}
+              style={styles.directionsButton}
+            />
+          )}
           {/* Sets the spot the help request uses ("Near Entry 4"); shows a check once it's yours. */}
-          <Button
+          {!isMeetSpot(facility) ? null : <Button
             label={isMySpot ? t('facility.isHere') : t('facility.imHere')}
             variant="outline"
             icon={<FigmaIcon name={isMySpot ? 'check-circle' : 'location-on'} size={22} color={Colors.primary} />}
             onPress={() => { setCurrentVenue(venue.id); setCurrentSpot(facility.id); }}
             accessibilityHint={isMySpot ? undefined : t('facility.imHereHint')}
             style={styles.directionsButton}
-          />
+          />}
         </View>
 
-        <View style={styles.reportsHead}>
-          <Text style={venueText.title} accessibilityRole="header">{t('facility.reports')}</Text>
-          <Text style={venueText.caption}>{reports ? t('facility.results', { count: reports.length, number: formatNumber(reports.length, undefined, languageOf(t)) }) : ''}</Text>
+        <View style={styles.heading}>
+          <Text style={venueText.caption}>{facilityDescription(facility, t)}</Text>
+          <View style={styles.meta}>
+            <FigmaIcon name="clock" size={16} color={Colors.textMuted} />
+            <Text style={styles.metaText}>{`${facilityMeta(facility, t, walkTo(facility))} · ${location}`}</Text>
+          </View>
         </View>
-        <View style={styles.reports}>
-          {reports?.map(r => (
-            <ReportCard
-              key={r.id}
-              report={r}
-              fresh={r.id === freshId}
-              onPress={() => {
-                setSnap('up');
-                router.push({ pathname: '/venue/[venueId]/[facilityId]/reports/[reportId]', params: { venueId: venue.id, facilityId: facility.id, reportId: r.id } });
-              }}
-            />
-          ))}
-          {reports && !reports.length ? <Text style={styles.empty}>{t('facility.noReports')}</Text> : null}
-          <Button
-            label={t('facility.addReport')}
-            variant="neutral"
-            icon={<FigmaIcon name="add-circle" size={24} color={Colors.ink} />}
-            onPress={addReport}
-            style={styles.addButton}
-          />
-        </View>
+
+        {sponsored ? <SponsorOffer stand={facility} /> : null}
+
+        {route ? (
+          <View onLayout={onRouteLayout}>
+            <DirectionsPanel route={route} plainArrival={!!map.arrivalNamedMain} onEnd={() => setRouteTo(null)} />
+          </View>
+        ) : null}
+
+        <TagRow tags={facility.tags.map(tag => ({ label: tagLabel(tag, t), tone: tag.tone }))} />
+
+        {/* A paid listing never carries community reports. */}
+        {takesReports(facility) ? (
+          <>
+            <View style={styles.reportsHead}>
+              <Text style={venueText.title} accessibilityRole="header">{t('facility.reports')}</Text>
+              <Text style={venueText.caption}>{reports ? t('facility.reportCount', { count: reports.length, number: formatNumber(reports.length, undefined, languageOf(t)) }) : ''}</Text>
+            </View>
+            <View style={styles.reports}>
+              {reports?.map(r => (
+                <ReportCard
+                  key={r.id}
+                  report={r}
+                  fresh={r.id === freshId}
+                  onPress={() => {
+                    setSnap('up');
+                    router.push({ pathname: '/venue/[venueId]/[facilityId]/reports/[reportId]', params: { venueId: venue.id, facilityId: facility.id, reportId: r.id } });
+                  }}
+                />
+              ))}
+              {reports && !reports.length ? <Text style={styles.empty}>{t('facility.noReports')}</Text> : null}
+              <Button
+                label={t('facility.addReport')}
+                variant="neutral"
+                icon={<FigmaIcon name="add-circle" size={24} color={Colors.ink} />}
+                onPress={addReport}
+                style={styles.addButton}
+              />
+            </View>
+          </>
+        ) : null}
       </SheetScroll>
 
       {submitted ? (
@@ -181,11 +200,13 @@ const styles = StyleSheet.create({
   content: { gap: Spacing.lg },
   topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   accessBadge: { width: 88, height: 49, borderRadius: Radius.md, backgroundColor: Colors.primary, alignItems: 'center', justifyContent: 'center' },
-  heading: { gap: 6, marginTop: -4 },
+  title: { marginTop: -4 },
+  heading: { gap: 6 },
   meta: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 2 },
   metaText: { ...venueText.caption, color: Colors.textMuted, flex: 1 },
   directions: { alignItems: 'center', gap: Spacing.sm, marginTop: Spacing.xs },
   directionsButton: { minWidth: 202, minHeight: 60, borderRadius: Radius.sm },
+  noRoute: { ...venueText.caption, color: Colors.textMuted, textAlign: 'center' },
   reportsHead: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: Spacing.md },
   reports: { gap: 20 },
   empty: { ...venueText.caption, color: Colors.textMuted },

@@ -1,6 +1,7 @@
 /**
  * The request a volunteer accepted, on their Volunteer tab in place of "Incoming requests": who,
- * what they need, where, then Message (with a dot for unread) and End chat (asks first).
+ * what they need, where, then Message (with a dot for unread), End chat (the help is done) and
+ * Can't make it (hands it back to other volunteers). Both ask first, inline.
  */
 import { router } from 'expo-router';
 import { useState } from 'react';
@@ -16,13 +17,26 @@ import { useT } from '@/i18n';
 import { HelpIcon } from './help-icon';
 import { MeetPlaceText } from './meet-place';
 import { MessageButton } from './message-button';
+import { RequestNote } from './request-note';
 
 export function ActiveRequest({ assignment: a, unread }: { assignment: Assignment; unread: number }) {
   const t = useT('volunteer');
   const tp = useT('profile');
-  const [confirming, setConfirming] = useState(false);
+  const [confirming, setConfirming] = useState<'end' | 'handBack' | null>(null);
+  const [handingBack, setHandingBack] = useState(false);
+  const [handBackFailed, setHandBackFailed] = useState(false);
   const openChat = () => router.push({ pathname: '/chat/[id]', params: { id: a.id } });
   const help = a.helpTypes.map(h => t(`helpTypes.${h}`)).join(' · ');
+
+  async function handBack() {
+    setHandingBack(true);
+    setHandBackFailed(false);
+    // On success the card goes away (the desk drops the assignment), so only a failure needs state.
+    if (!(await volunteerDesk.handBack())) {
+      setHandingBack(false);
+      setHandBackFailed(true);
+    }
+  }
 
   return (
     <View style={styles.card}>
@@ -42,21 +56,39 @@ export function ActiveRequest({ assignment: a, unread }: { assignment: Assignmen
           <Text style={Type.bodyStrong}>{help}</Text>
           <MeetPlaceText point={a.location} style={styles.line} />
           <Text style={styles.line}>{t('helpIn', { language: uiLanguageName(a.language, tp) })}</Text>
-          {a.note ? <Text style={styles.line}>{t('quoted', { text: a.note })}</Text> : null}
+          {a.note ? <RequestNote requestId={a.id} note={a.note} lang={a.language} style={styles.line} /> : null}
         </View>
       </View>
 
       <Button label={t('chat.messageTo', { name: a.visitorName })} onPress={openChat} />
-      {confirming ? (
+      {confirming === 'end' ? (
         <View style={styles.confirm} accessibilityLiveRegion="polite">
           <Text style={Type.body}>{t('active.confirmEnd', { name: a.visitorName })}</Text>
           <View style={styles.buttons}>
-            <Button label={t('match.notYet')} variant="neutral" onPress={() => setConfirming(false)} style={styles.flex} />
+            <Button label={t('match.notYet')} variant="neutral" onPress={() => setConfirming(null)} style={styles.flex} />
             <Button label={t('active.yesEnd')} onPress={volunteerDesk.endChat} style={styles.flex} />
           </View>
         </View>
       ) : (
-        <Button label={t('active.end')} variant="outline" onPress={() => setConfirming(true)} accessibilityHint={t('active.endHint', { name: a.visitorName })} />
+        <Button label={t('active.end')} variant="outline" onPress={() => setConfirming('end')} accessibilityHint={t('active.endHint', { name: a.visitorName })} />
+      )}
+      {confirming === 'handBack' ? (
+        <View style={styles.confirmBack} accessibilityLiveRegion="polite">
+          <Text style={Type.body}>{t('active.confirmHandBack', { name: a.visitorName })}</Text>
+          {handBackFailed ? <Text style={styles.error}>{t('active.handBackFailed')}</Text> : null}
+          <View style={styles.buttons}>
+            <Button label={t('active.keepHelping')} variant="neutral" onPress={() => { setConfirming(null); setHandBackFailed(false); }} style={styles.flex} />
+            <Button label={t('active.yesHandBack')} variant="danger" onPress={() => void handBack()} loading={handingBack} style={styles.flex} />
+          </View>
+        </View>
+      ) : (
+        <Button
+          label={t('active.handBack')}
+          variant="link"
+          onPress={() => setConfirming('handBack')}
+          accessibilityHint={t('active.handBackHint', { name: a.visitorName })}
+          style={styles.link}
+        />
       )}
     </View>
   );
@@ -81,6 +113,9 @@ const styles = StyleSheet.create({
   text: { flex: 1, gap: 2 },
   line: { ...Type.caption, color: Colors.text },
   confirm: { gap: Spacing.md, padding: Spacing.lg, borderRadius: Radius.md, backgroundColor: Colors.primarySoft },
+  confirmBack: { gap: Spacing.md, padding: Spacing.lg, borderRadius: Radius.md, backgroundColor: Colors.dangerSoft },
+  error: { ...Type.caption, color: Colors.danger },
+  link: { alignSelf: 'center' },
   buttons: { flexDirection: 'row', gap: Spacing.md },
   flex: { flex: 1 },
 });

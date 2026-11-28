@@ -26,6 +26,11 @@ export const Colors = {
   gradientTop: '#FBF7F3', // PageGradient: cream at the top…
   gradientMid: '#E9EDF3',
   gradientBottom: '#BAD3F9', // …light blue at the bottom
+  gradientShape: '#9DBFF3', // the soft blurred shapes on the onboarding gradient (Figma 530:10212)
+  frost: 'rgba(196,207,224,0.3)', // frosted cards on the onboarding gradient (Figma 506:10114)…
+  frostBorder: 'rgba(255,255,255,0.75)', // …and their white rim
+  logoLight: '#86B4F4',   // the heart logo's gradient (Figma 482:31930): light blue at the top…
+  logoDeep: '#173B7A',    // …navy at the point
   surface: '#FFFFFF',     // inputs, raised cards
   surfaceAlt: '#F5F5F5',  // tiles and info cards on a white page
   controlBorder: '#8C8C8C', // input and chip outlines (>= 3:1 on white)
@@ -37,7 +42,11 @@ export const Colors = {
   onPrimary: '#FFFFFF',
 } as const;
 
-/** Font family names, as loaded in src/app/_layout.tsx. Set `fontFamily`, not `fontWeight`: each name is one weight. */
+/**
+ * Font family names, as loaded in src/app/_layout.tsx. Each name is one weight: for a medium, semibold
+ * or bold face, spread `Face.<name>` instead of setting `fontFamily: Fonts.<name>`, so web also gets
+ * the matching fontWeight (see Face).
+ */
 export const Fonts = {
   display: withFallback('Alexandria_400Regular'),      // titles, body copy, buttons
   displayMedium: withFallback('Alexandria_500Medium'),
@@ -57,6 +66,44 @@ function withFallback<F extends string>(family: F): F {
   return (Platform.OS === 'web' ? `${family}, system-ui, sans-serif` : family) as F;
 }
 
+/** The CSS weight of each face; _layout.tsx declares it on the web @font-face too. */
+export const FontWeights = {
+  display: 400,
+  displayMedium: 500,
+  displaySemiBold: 600,
+  text: 400,
+  textMedium: 500,
+  textSemiBold: 600,
+  textBold: 700,
+} as const satisfies Record<keyof typeof Fonts, number>;
+
+type FaceName = keyof typeof Fonts;
+type FaceStyle<K extends FaceName> = { fontFamily: (typeof Fonts)[K]; fontWeight?: `${(typeof FontWeights)[K]}` };
+
+/**
+ * `fontFamily` plus, on web, the face's `fontWeight`. Scripts the app fonts lack (Cyrillic, Armenian,
+ * CJK…) fall back to system-ui, which draws at the element's weight: without it a semibold heading in
+ * Russian came out regular. Latin is unchanged, as each face's @font-face declares its weight and web
+ * never fakes bold (+html.tsx). Native leaves fontWeight out: a weight beside a custom family can make
+ * Android pick another font.
+ * e.g. title: { ...Face.displaySemiBold, fontSize: 25 }
+ */
+export const Face = {
+  display: face('display'),
+  displayMedium: face('displayMedium'),
+  displaySemiBold: face('displaySemiBold'),
+  text: face('text'),
+  textMedium: face('textMedium'),
+  textSemiBold: face('textSemiBold'),
+  textBold: face('textBold'),
+} as const;
+
+function face<K extends FaceName>(name: K): FaceStyle<K> {
+  const style: FaceStyle<K> = { fontFamily: Fonts[name] };
+  if (Platform.OS === 'web') style.fontWeight = String(FontWeights[name]) as FaceStyle<K>['fontWeight'];
+  return style;
+}
+
 export const Spacing = { xs: 4, sm: 8, md: 12, lg: 16, gutter: 20, xl: 24, xxl: 32 } as const;
 
 /** Figma uses 10 for buttons, inputs and cards, 8 for chips. */
@@ -64,15 +111,15 @@ export const Radius = { sm: 8, md: 10, lg: 16, pill: 999 } as const;
 
 export const Type = {
   title: { fontFamily: Fonts.display, fontSize: 24, lineHeight: 30, color: Colors.text },
-  heading: { fontFamily: Fonts.displayMedium, fontSize: 18, lineHeight: 24, color: Colors.text },
+  heading: { ...Face.displayMedium, fontSize: 18, lineHeight: 24, color: Colors.text },
   body: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20, color: Colors.text },
-  bodyStrong: { fontFamily: Fonts.displayMedium, fontSize: 15, lineHeight: 20, color: Colors.text },
-  label: { fontFamily: Fonts.textBold, fontSize: 13, lineHeight: 16, color: Colors.text },
+  bodyStrong: { ...Face.displayMedium, fontSize: 15, lineHeight: 20, color: Colors.text },
+  label: { ...Face.textBold, fontSize: 13, lineHeight: 16, color: Colors.text },
   caption: { fontFamily: Fonts.text, fontSize: 13, lineHeight: 17, color: Colors.textMuted },
   input: { fontFamily: Fonts.text, fontSize: 15, lineHeight: 20, color: Colors.text },
   button: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 20 },
   buttonLarge: { fontFamily: Fonts.display, fontSize: 20, lineHeight: 26 },
-  overline: { fontFamily: Fonts.textBold, fontSize: 11, color: Colors.textMuted, letterSpacing: 0.8, textTransform: 'uppercase' },
+  overline: { ...Face.textBold, fontSize: 11, color: Colors.textMuted, letterSpacing: 0.8, textTransform: 'uppercase' },
 } as const;
 
 /** Figma drop shadows. Spread into a style: `{ ...Shadow.card }`. */

@@ -1,4 +1,4 @@
-import { Redirect, useLocalSearchParams } from 'expo-router';
+import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useRef, useState, type ComponentRef } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
@@ -12,14 +12,13 @@ import { resendConfirmation } from '@/lib/auth';
 
 /** Figma Sign In (Onboarding 2.0, 482:32247). The "Username" field takes a username or an email. */
 export default function SignInScreen() {
-  // Set by Create Account when Supabase wants the email confirmed first.
-  const params = useLocalSearchParams<{ confirm?: string; email?: string }>();
+  // confirm: set by Create Account when Supabase wants the email confirmed first. reset: New Password saved one.
+  const params = useLocalSearchParams<{ confirm?: string; email?: string; reset?: string }>();
   const signedInHref = useSignedInHref();
   const t = useT('onboarding');
   const { busy, error, errorFor, submit } = useAuthForm('signin');
   const [email, setEmail] = useState(params.email ?? '');
   const [password, setPassword] = useState('');
-  const [forgotNote, setForgotNote] = useState(false);
   const [resendState, setResendState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [showConfirm, setShowConfirm] = useState(params.confirm === '1');
   const passwordRef = useRef<ComponentRef<typeof TextInput>>(null);
@@ -27,7 +26,9 @@ export default function SignInScreen() {
   // Signed in (just now, in another tab, or by opening /sign-in while signed in): move on.
   if (signedInHref) return <Redirect href={signedInHref} />;
 
-  const notice = showConfirm && !error ? t('signIn.confirmNotice') : null;
+  // The resend link is for the confirm notice only, never under "Password changed".
+  const confirmNotice = showConfirm && !error && params.reset !== '1';
+  const notice = error ? null : params.reset === '1' ? t('signIn.resetNotice') : showConfirm ? t('signIn.confirmNotice') : null;
 
   const go = async () => {
     const result = await submit({ email, password });
@@ -74,34 +75,36 @@ export default function SignInScreen() {
           onSubmitEditing={go}
         />
         <View style={styles.forgotRow}>
-          <Pressable onPress={() => setForgotNote(true)} style={styles.linkTarget} accessibilityRole="link">
+          <Pressable
+            onPress={() => router.push({ pathname: '/forgot-password', params: email.trim() ? { identifier: email.trim() } : {} })}
+            style={styles.linkTarget}
+            accessibilityRole="link">
             <Text style={styles.link}>{t('signIn.forgot')}</Text>
           </Pressable>
         </View>
-        {forgotNote && (
-          <Text style={Type.caption} accessibilityLiveRegion="polite">{t('signIn.forgotSoon')}</Text>
-        )}
       </View>
 
       {error?.field === null && <Text style={styles.error} accessibilityLiveRegion="polite">{error.message}</Text>}
       {notice && (
         <View style={styles.confirmBox}>
           <Text style={styles.notice} accessibilityLiveRegion="polite">{notice}</Text>
-          <Pressable
-            onPress={handleResend}
-            disabled={resendState === 'sending' || resendState === 'sent'}
-            style={styles.resendBtn}
-            accessibilityRole="button">
-            <Text style={[styles.resendLabel, resendState === 'sent' && styles.resendLabelSent]}>
-              {resendState === 'sending'
-                ? '...'
-                : resendState === 'sent'
-                ? t('signIn.resendSent')
-                : resendState === 'error'
-                ? t('signIn.resendError')
-                : t('signIn.resend')}
-            </Text>
-          </Pressable>
+          {confirmNotice && (
+            <Pressable
+              onPress={handleResend}
+              disabled={resendState === 'sending' || resendState === 'sent'}
+              style={styles.resendBtn}
+              accessibilityRole="button">
+              <Text style={[styles.resendLabel, resendState === 'sent' && styles.resendLabelSent]}>
+                {resendState === 'sending'
+                  ? '...'
+                  : resendState === 'sent'
+                  ? t('signIn.resendSent')
+                  : resendState === 'error'
+                  ? t('signIn.resendError')
+                  : t('signIn.resend')}
+              </Text>
+            </Pressable>
+          )}
         </View>
       )}
 

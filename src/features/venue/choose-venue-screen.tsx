@@ -1,5 +1,5 @@
 /**
- * "Choose Your Venue": search LA28 venues, ask for a volunteer, or open a venue's map.
+ * "Choose Your Venue": search LA28 venues, ask for a volunteer (volunteers: see requests), or open a venue's map.
  * The language pill switches the app now and saves it as the profile's appLanguage (through
  * <LanguageSync />, which retries if offline), offering only translated languages.
  */
@@ -31,7 +31,9 @@ export function ChooseVenueScreen() {
   // English), and an unsaved pick shows over the profile's.
   const { language } = useUiLanguage();
   const pending = usePendingLanguage();
-  const { userId } = useProfile();
+  const { userId, profile } = useProfile();
+  // Volunteers get the same shortcut to their Volunteer tab, worded for them (they don't ask for help).
+  const volunteer = profile?.role === 'volunteer';
   const [query, setQuery] = useState('');
   const [picking, setPicking] = useState(false);
   const venues = searchVenues(query, undefined, t);
@@ -73,11 +75,11 @@ export function ChooseVenueScreen() {
           onPress={() => router.replace('/volunteer')}
           style={({ pressed }) => [styles.assist, pressed && styles.pressed]}
           accessibilityRole="button"
-          accessibilityLabel={t('choose.assistLabel')}>
+          accessibilityLabel={volunteer ? t('choose.assistLabelVolunteer') : t('choose.assistLabel')}>
           <FigmaIcon name="volunteer" size={50} color={Colors.primary} />
           <View style={styles.assistText}>
-            <Text style={venueText.label}>{t('choose.assistTitle')}</Text>
-            <Text style={venueText.caption}>{t('choose.assistBody')}</Text>
+            <Text style={venueText.label}>{volunteer ? t('choose.assistTitleVolunteer') : t('choose.assistTitle')}</Text>
+            <Text style={venueText.caption}>{volunteer ? t('choose.assistBodyVolunteer') : t('choose.assistBody')}</Text>
           </View>
           <View style={rtl && styles.flip}>
             <FigmaIcon name="group-2-7ecb6b" size={34} color={Colors.primary} />

@@ -9,15 +9,17 @@ import { WelcomeLanguagePill } from './auth-ui';
 import { OnboardingScreen } from './onboarding-screen';
 
 /**
- * Sign In / Create Account (Figma 482:32247 / 482:32140): centred title, the form and its button,
+ * Sign In / Create Account (Figma 482:32247 / 482:32140), and Forgot / New Password in the same
+ * style: centred title (and an optional line under it), the form and its button,
  * and a footer prompt pinned to the bottom ("Don't have an account? Sign Up").
  */
-export function AuthScreen({ title, children, footer }: { title: string; children: ReactNode; footer: ReactNode }) {
+export function AuthScreen({ title, subtitle, children, footer }: { title: string; subtitle?: string; children: ReactNode; footer: ReactNode }) {
   const t = useT('onboarding');
   return (
     <OnboardingScreen
       pill={<WelcomeLanguagePill />}
       title={title}
+      subtitle={subtitle}
       centered
       actions={
         <>

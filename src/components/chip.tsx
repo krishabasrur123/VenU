@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { Colors, Fonts, Radius, Spacing } from '@/constants/theme';
+import { Colors, Face, Radius, Spacing } from '@/constants/theme';
 import { useT } from '@/i18n';
 
 interface ChipProps {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   labelFill: { textAlign: 'center' },
   // Follows the UI direction (an Arabic label reads right to left, ✓ first); wrap a name from the
   // other direction in isolatedLanguageName() so it doesn't reorder the label.
-  label: { fontFamily: Fonts.textSemiBold, fontSize: 14, lineHeight: 20, color: Colors.text },
+  label: { ...Face.textSemiBold, fontSize: 14, lineHeight: 20, color: Colors.text },
   labelSelected: { color: Colors.primary },
   // 28px box (WCAG 2.2 asks >= 24) that tucks into the chip's end padding (right, or left in RTL).
   removeTarget: { minWidth: 28, minHeight: 28, marginEnd: -8, alignItems: 'center', justifyContent: 'center' },

@@ -15,13 +15,14 @@
     "help": "Trợ giúp & góp ý",
     "terms": "Điều khoản sử dụng",
     "signOutFailed": "Không thể đăng xuất. {{reason}}",
-    "deleteWarning": "Thao tác này xóa vĩnh viễn hồ sơ và ảnh của bạn. Bạn có thể tạo hồ sơ mới sau.",
+    "deleteWarning": "Thao tác này xóa vĩnh viễn tài khoản, hồ sơ và ảnh của bạn. Bạn sẽ không thể đăng nhập bằng tài khoản này nữa.",
     "deleteFailed": "Không xóa hết được dữ liệu của bạn. {{reason}}",
     "deleteData": "Xóa dữ liệu của tôi"
   },
   "edit": {
     "title": "Sửa hồ sơ",
     "subtitle": "Thay đổi sẽ áp dụng cho lần nhờ trợ giúp tiếp theo.",
+    "subtitleVolunteer": "Khách tham quan sẽ thấy các thay đổi này vào lần tới bạn giúp đỡ.",
     "submit": "Lưu thay đổi",
     "discardTitle": "Thoát mà không lưu? Các thay đổi sẽ bị mất.",
     "keepEditing": "Tiếp tục chỉnh sửa",
@@ -207,7 +208,8 @@
     "placeholder": "vd. Bản đồ khó đọc dưới nắng",
     "feedbackLabel": "Góp ý của bạn",
     "send": "Gửi góp ý",
-    "empty": "Hãy viết vài chữ trước."
+    "empty": "Hãy viết vài chữ trước.",
+    "sendFailed": "Không gửi được góp ý. {{reason}}"
   },
   "notifications": {
     "title": "Thông báo",
@@ -216,7 +218,9 @@
     "options": {
       "volunteer": {
         "label": "Cập nhật từ tình nguyện viên",
-        "hint": "vd. Daniel đã nhận và đang đến"
+        "hint": "vd. Daniel đã nhận và đang đến",
+        "labelVolunteer": "Yêu cầu trợ giúp",
+        "hintVolunteer": "vd. Một khách tham quan gần bạn cần giúp đỡ"
       },
       "chat": {
         "label": "Tin nhắn trò chuyện",

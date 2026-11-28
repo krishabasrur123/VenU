@@ -1,11 +1,15 @@
-/** "Your status": Free / Busy / Off as a radio group, with a line saying what the choice does. */
+/**
+ * "Your status": Free / Busy / Off as a radio group, with a line saying what the choice does. While
+ * helping someone (`helping`: their name) the line says so instead: no new requests come in then,
+ * whatever the stored status.
+ */
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
 import { FigmaIcon } from '@/components/icons/figma-icon';
 import { useWidestWord } from '@/components/widest-word';
-import { Colors, Fonts, Radius, Shadow, Spacing, Type } from '@/constants/theme';
+import { Colors, Face, Fonts, Radius, Shadow, Spacing, Type } from '@/constants/theme';
 import { AVAILABILITIES, type Availability } from '@/features/volunteer/availability';
 import { useT } from '@/i18n';
 
@@ -63,7 +67,7 @@ export function statusLabelFit(rowWidth: number, widestWord: number | null): { s
   return { size: Math.max(MIN_SIZE, Math.min(LABEL_SIZE, Math.floor((LABEL_SIZE * textWidth(padding)) / widestWord))), padding };
 }
 
-export function StatusCard({ status, onChange }: { status: Availability; onChange: (next: Availability) => void }) {
+export function StatusCard({ status, onChange, helping }: { status: Availability; onChange: (next: Availability) => void; helping?: string | null }) {
   const t = useT('volunteer');
   const [rowWidth, setRowWidth] = useState(0);
   // Measured in the chosen tile's (wider) weight, so choosing one never splits its word.
@@ -98,7 +102,9 @@ export function StatusCard({ status, onChange }: { status: Availability; onChang
           );
         })}
       </View>
-      <Text style={styles.line} accessibilityLiveRegion="polite">{t(`home.statusLine.${status}`)}</Text>
+      <Text style={styles.line} accessibilityLiveRegion="polite">
+        {helping != null ? t('home.statusLine.helping', { name: helping }) : t(`home.statusLine.${status}`)}
+      </Text>
     </View>
   );
 }
@@ -122,8 +128,8 @@ const styles = StyleSheet.create({
   selected: { backgroundColor: Colors.primarySoft, borderColor: Colors.primary },
   pressed: { opacity: 0.8 },
   label: { fontFamily: Fonts.display, fontSize: 15, lineHeight: 19, color: Colors.text },
-  labelSelected: { fontFamily: Fonts.displayMedium, color: Colors.primary },
-  labelMeasure: { fontFamily: Fonts.displayMedium, fontSize: LABEL_SIZE, lineHeight: 19 },
+  labelSelected: { ...Face.displayMedium, color: Colors.primary },
+  labelMeasure: { ...Face.displayMedium, fontSize: LABEL_SIZE, lineHeight: 19 },
   // A row, not absolute: react-native-web ignores `end`, and a row flips in RTL on its own.
   tileTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
   tick: {
